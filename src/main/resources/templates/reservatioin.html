@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>reservation</title>
+</head>
+<body>
+    <div class="container">
+        <h1>예약 정보</h1>
+        <form method="POST">
+            <div>
+                <label th:for="petName">펫이름</label>
+                <input type="text" name="petName" placeholder="펫이름 입력">
+            </div>
+            <div>
+                <label th:for="startDate">시작 날짜</label>
+                <input type="date" name="startDate">
+            </div>
+            <div>
+                <label th:for="endDate">종료 날짜</label>
+                <input type="date" name="endDate">
+            </div>
+            <div>
+                <label th:for="fee">요금</label>
+                <input type="text" name="username" th:value="${fee}">
+            </div>
+            <button type="submit">예약 확정</button>
+        </form>
+    </div>
+</body>
+</html>
