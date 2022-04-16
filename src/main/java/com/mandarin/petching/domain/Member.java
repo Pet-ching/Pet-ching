@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @Setter
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn
+@Getter @Setter
 public class Member {
 
     @Id
