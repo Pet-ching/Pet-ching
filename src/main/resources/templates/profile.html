@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            width: 90%;
+            margin: 100px auto;
+        }
+        .wrapper {
+            display: flex;
+        }
+        .text_box {
+            width: 50%;
+        }
+        @id{
+            border: 1px solid black;
+        }
+    </style>
+
+</head>
+<body>
+<div class="wrapper">
+    <div>
+        <!-- image -->
+        <p>서울 강남구 압구정동 이** 님</p>
+        <strong>이** 펫시터님을 소개합니다</strong>
+        <button type="submit" th:action="@{/matching/reservation}" method="post">예약하러가기</button>
+        <div class="text_box">
+            우연한 기회에 펫시터에 대해 알게 되었고 제가 너무 좋아하고 잘할 수 있는 일이라 생각되어 시작하게 되었습니다..
+            활동을 하다보니 역시나 저에게 너무 잘 맞았고 일이라는 생각이 전혀 안 들 정도로 아이들과 교감하는 것이 행복했습니다.
+            집에 오는 아가들이 잘 따르고 편안해 할 때와 너무 만족해 하시며 고마워 하시는 견주님들을 볼 때 너무 보람있고 행복한 일이라고 느끼고 있습니다.
+            앞으로도 처음 그 마음처럼 사랑과 정성으로 아이들을 돌보겠습니다~~^^
+        </div>
+        <strong>자격증 보유 내역</strong>
+        <p>자격증 그냥 빼면 어떨까요</p>
+        <strong>이용 가능 서비스</strong>
+        <div>
+            <p>퍼피 케어</p>
+            <p>노견 케어</p>
+            <p>장기 예약</p>
+            <p>실내 놀이</p>
+            <p>매일 산책</p>
+        </div>
+    </div>
+    <div>
+        <strong>이용 요금</strong>
+        <p>소형견 50,0000원</p>
+        <p>중형견 50,0000원</p>
+        <p>대형견 50,0000원</p>
+        <strong>예약 가능 날짜</strong>
+        <p>2022-04-14</p>
+        <strong>예약 가능 지역</strong>
+        <a th:href="@{/matching/map}">map</a>
+    </div>
+</div>
+</body>
+</html>
