@@ -6,8 +6,13 @@
 </head>
 <body>
 <a th:href="@{/member/login}">member</a>
+<a th:href="@{/member/join}">join</a>
 <a th:href="@{/matching/list}">matching</a>
 <a th:href="@{/board}">board</a>
-<a th:href="@{/qna}">qna</a>
+<a th:href="@{/qna}">qna</a><br>
+<a th:href="@{/profile}">test for profile</a>
+<div th:onclick="|location.href='@{/member/login}'|">
+    <h1>헤이~</h1>
+</div>
 </body>
 </html>

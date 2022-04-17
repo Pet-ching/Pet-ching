@@ -1,9 +1,14 @@
 package com.mandarin.petching.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Getter
+@Setter
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn
 public class Member {
