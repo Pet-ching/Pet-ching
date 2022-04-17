@@ -1,0 +1,27 @@
+<!--test code by. hyeok-->
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div th:if="${search==true}">
+        <div th:if="${currentpage<totalpage}">
+            <form action="search">
+                <input type="hidden" name="title" th:value="${title}">
+                <input type="hidden" name="page" th:value="${currentpage+1}">
+                <input type="submit" value="다음">
+            </form>
+        </div>
+        <div th:if="${currentpage>1}">
+            <form action="search">
+                <input type="hidden" name="title" th:value="${title}">
+                <input type="hidden" name="page" th:value="${currentpage-1}">
+                <input type="submit" value="이전">
+            </form>
+        </div>
+        <div>[[${currentpage}]]/[[${totalpage}]]</div>
+    </div>
+</body>
+</html>
