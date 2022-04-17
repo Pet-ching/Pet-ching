@@ -1,8 +1,12 @@
 package com.mandarin.petching.domain;
 
+
+import lombok.Getter;
+
 import javax.persistence.*;
 
 @Entity
+@Getter
 public class PetSitter extends Member {
 
     @Id
