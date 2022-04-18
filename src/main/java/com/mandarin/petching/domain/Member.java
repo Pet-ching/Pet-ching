@@ -7,8 +7,6 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Getter
-@Setter
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn
 @Getter @Setter
