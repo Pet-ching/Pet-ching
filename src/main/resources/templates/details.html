@@ -61,7 +61,7 @@
         <div th:text="*{workingArea}"></div>
     </div>
     <div class="test">
-        <strong>자격증 보유 내역을 나눠줘!</strong>
+        <strong>이용 가능 서비스를 나눠줘!</strong>
         <ol>
             <li th:each="able : *{#strings.arraySplit(ableService,' ')}">
                 <p th:text="${able}">
