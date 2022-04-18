@@ -20,7 +20,6 @@ public class ProfileController {
     public String viewProfile(@PathVariable Long petSitterId, Model model) {
         PetSitter petSitter = profileService.findPetSitter(petSitterId);
         model.addAttribute("petSitter", petSitter);
-
         return "profile"; //profile.html 호출
     }
 
