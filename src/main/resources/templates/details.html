@@ -41,8 +41,15 @@
     <div>
         <!-- image -->
         <div th:text="*{workingArea}"></div>
+<<<<<<< HEAD
         <div th:text="*{userName}">님을 소개합니다.</div>
         <button type="button" th:onclick="|location.href='@{/matching/profile/${sitter_id}/reservation}'|">예약하러가기</button>
+=======
+        <strong>자격증 보유 내역</strong>
+        <div th:text="*{certificate}"></div>
+        <div th:text="*{userName}">님을 소개합니다.</div>
+        <button type="button" th:onclick="|location.href='@{/matching/profile/reservation}'|">예약하러가기</button>
+>>>>>>> c49aca315fc72cb2b8a605b3e40fa1f9a0fa5a93
         <div class="text_box" th:text="*{selfIntroduction}"></div>
         <strong>자격증 보유 내역</strong>
         <div th:text="*{certificate}"></div>
