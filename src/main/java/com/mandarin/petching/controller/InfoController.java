@@ -11,6 +11,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
 @Controller
 public class InfoController {
 
@@ -18,11 +19,11 @@ public class InfoController {
     private InfoService infoService;
 
     @GetMapping("/matching/list")
-    public String list(Model model, @PageableDefault(page = 0, size=2, sort="workingArea", direction = Sort.Direction.ASC) Pageable pageable, String searchKeyword) {
+    public String list(Model model, @PageableDefault(page = 0, size = 2, sort = "workingArea", direction = Sort.Direction.ASC) Pageable pageable, String searchKeyword) {
 
         Page<PetSitter> list = null;
 
-        if(searchKeyword == null) {
+        if (searchKeyword == null) {
             list = infoService.sitterList(pageable);
         } else {
             list = infoService.sitterSearchList(searchKeyword, pageable);
@@ -41,8 +42,14 @@ public class InfoController {
 
     @GetMapping("/matching/details")
     public String search(Model model, Long id) {
-        model.addAttribute("area", infoService.workingArea(id));
+        model.addAttribute("petSitter", infoService.findById(id));
+
         return "details";
+    }
+
+    @GetMapping(value = {"/map"})
+    public String map() {
+        return "map";
     }
 
 

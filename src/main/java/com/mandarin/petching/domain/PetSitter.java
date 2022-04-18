@@ -29,6 +29,4 @@ public class PetSitter extends Member {
     private String workingTime;
 
     private String ableService;
-
-
 }
