@@ -32,7 +32,6 @@
         .test{
             border: 1px solid black;
         }
-
     </style>
 
 </head>
@@ -43,7 +42,9 @@
         <div th:text="*{workingArea}"></div>
 
         <div th:text="*{userName}">님을 소개합니다.</div>
-        <button type="button" th:onclick="|location.href='@{/matching/profile/reservation/{sitter_id}(sitter_id=*{id})}'|">예약하러가기</button>
+        <button type="button"
+                th:onclick="|location.href='@{/matching/profile/reservation/{sitter_id}(sitter_id=*{id})}'|">예약하러가기
+        </button>
 
         <div class="text_box" th:text="*{selfIntroduction}"></div>
         <strong>자격증 보유 내역</strong>
@@ -58,6 +59,14 @@
         <div th:text="*{workingTime}"></div>
         <strong>예약 가능 지역</strong>
         <div th:text="*{workingArea}"></div>
+    </div>
+    <div class="test">
+        <strong>자격증 보유 내역을 나눠줘!</strong>
+        <ol>
+            <li th:each="able : *{#strings.arraySplit(ableService,' ')}">
+                <p th:text="${able}">
+            </li>
+        </ol>
     </div>
 </div>
 </body>
