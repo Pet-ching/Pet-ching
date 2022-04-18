@@ -21,7 +21,7 @@ public class ProfileController {
         PetSitter petSitter = profileService.findPetSitter(petSitterId);
         model.addAttribute("petSitter", petSitter);
 
-        return "profile";
+        return "profile"; //profile.html 호출
     }
 
     @GetMapping(value = {"/map"})
