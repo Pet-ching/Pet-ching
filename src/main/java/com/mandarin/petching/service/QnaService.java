@@ -23,6 +23,7 @@ public class QnaService {
 
     public Board findBoardById(Long id) {
         return (Board)this.boardRepository.findById(id).orElse(new Board());
+
     }
 
     public Board saveAndUpdateBoard(Board board) {

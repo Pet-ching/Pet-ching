@@ -14,16 +14,13 @@ import javax.persistence.ManyToOne;
 import org.springframework.data.annotation.CreatedDate;
 
 
+
 @Getter
 @Entity
 public class Board {
     @Id
-    @Column(
-            name = "board_id"
-    )
-    @GeneratedValue(
-            strategy = GenerationType.IDENTITY
-    )
+    @Column(name = "board_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     private Member member;

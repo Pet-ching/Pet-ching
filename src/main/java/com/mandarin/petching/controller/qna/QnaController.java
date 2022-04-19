@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping({"/qna"})
+@RequestMapping("/qna")
 public class QnaController {
+
     private final QnaService qnaService;
 
     public QnaController(QnaService qnaService) {
@@ -20,7 +21,7 @@ public class QnaController {
 
     @GetMapping({"", "/"})
     public String choice() {
-        System.out.println("Access");
+
         return "/qna/choice";
     }
 
@@ -40,4 +41,5 @@ public class QnaController {
         model.addAttribute("board", this.qnaService.findBoardById(id));
         return "/qna/form";
     }
+
 }
