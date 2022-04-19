@@ -10,12 +10,16 @@ import javax.persistence.*;
 @Entity
 @Getter @Setter
 
-public class PetSitter extends Member {
+public class PetSitter {
 
     @Id
     @Column(name = "sitter_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
 
     @Lob
     private String selfIntroduction;

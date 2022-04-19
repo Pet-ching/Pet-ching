@@ -1,16 +1,3 @@
-<!--&lt;!&ndash;code by. hyeok&ndash;&gt;-->
-<!--<!DOCTYPE html>-->
-<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>펫시터 개인 페이지</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<h1 th:text="${area.selfIntroduction}"> 펫시터 개인 페이지</h1>-->
-
-<!--</body>-->
-<!--</html>-->
-
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -20,54 +7,126 @@
     <title>Document</title>
     <style>
         * {
-            width: 90%;
-            margin: 100px auto;
+            margin: 0;
+            padding: 0;
+            font-family: "Noto Sans KR", sans-serif;
         }
-        .wrapper {
-            display: flex;
+        li {
+            list-style-type: none;
         }
-        .text_box {
-            width: 50%;
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 250px;
+            width: 800px;
+            margin: 0 auto;
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+        .item {
+            border : 1px solid black;
         }
         .test{
-            border: 1px solid black;
+            border: 1px solid red;
         }
+        .images {
+            grid-column: 1 / 3;
+            grid-row: 1;
+        }
+        .petsitter_name {
+            grid-column: 1 / 2;
+            grid-row: 2;
+        }
+        .introduce{
+            grid-column: 1 / 2;
+            grid-row: 3 / 5;
+        }
+        .certifi{
+            grid-column: 1 / 2;
+            grid-row: 5;
+        }
+        .services{
+            grid-column: 1 / 2;
+            grid-row: 6;
+        }
+        .buttonBox{
+            grid-column: 2 / 3;
+            grid-row: 2;
+        }
+        .feeList{
+            grid-column: 2 / 3;
+            grid-row: 3;
+        }
+        .workingTime{
+            grid-column: 2 / 3;
+            grid-row: 4;
+        }
+        .workingArea{
+            grid-column: 2 / 3;
+            grid-row: 5 / 7;
+        }
+
     </style>
+
 
 </head>
 <body>
-<div class="wrapper" th:object="${petSitter}">
-    <div>
+<div class="container" th:object="${petSitter}">
+    <div class="item images">
         <!-- image -->
-        <div th:text="*{workingArea}"></div>
+        이미지가 들어가요
+    </div>
+    <div class="item petsitter_name">
+        <div th:text="*{workingArea}">어디시 어디구 어디동 무서기</div>
 
-        <div th:text="*{userName}">님을 소개합니다.</div>
+        <div th:text="*{userName}">~~ 님을 소개합니다.</div>
+    </div>
+    <div class="item introduce">
+        <div class="text_box" th:text="*{selfIntroduction}">여기는 자기소개~</div>
+    </div>
+    <div class="item certifi">
+        <strong>자격증 보유 내역</strong>
+        <ul>
+            <li th:each="certificate : *{#strings.arraySplit(certificate,' ')}">
+                <p th:text="${certificate}">여기에 자격증 나와요~
+            </li>
+        </ul>
+    </div>
+    <div class="item services">
+        <strong>이용 가능 서비스</strong>
+        <ul>
+            <li th:each="ableService : *{#strings.arraySplit(ableService,' ')}">
+                <p th:text="${ableService}"> 여기는 이용가능 서비스
+            </li>
+        </ul>
+    </div>
+    <div class="item buttonBox">
         <button type="button"
                 th:onclick="|location.href='@{/matching/profile/reservation/{sitter_id}(sitter_id=*{id})}'|">예약하러가기
         </button>
-
-        <div class="text_box" th:text="*{selfIntroduction}"></div>
-        <strong>자격증 보유 내역</strong>
-        <div th:text="*{certificate}"></div>
-        <strong>이용 가능 서비스</strong>
-        <div th:text="*{ableService}"></div>
+        </br>
+        <button type="button"
+                th:onclick="|location.href='@{/matching/profile/reservation/{sitter_id}(sitter_id=*{id})}'|">채팅하기
+        </button>
     </div>
-    <div>
+    <div class="item feeList">
         <strong>이용 요금</strong>
         <div th:text="*{fee}"></div>
+    </div>
+    <div class="item workingTime">
         <strong>예약 가능 날짜</strong>
         <div th:text="*{workingTime}"></div>
+    </div>
+    <div class="item workingArea">
         <strong>예약 가능 지역</strong>
         <div th:text="*{workingArea}"></div>
+        <div class="item maps">
+            <div id="map" style="width:250px;height:200px;"> 맵보여주는곳</div>
+        </div>
     </div>
-    <div class="test">
-        <strong>이용 가능 서비스를 나눠줘!</strong>
-        <ol>
-            <li th:each="able : *{#strings.arraySplit(ableService,' ')}">
-                <p th:text="${able}">
-            </li>
-        </ol>
-    </div>
+
 </div>
+<script type="text/javascript"
+        th:src="@{//dapi.kakao.com/v2/maps/sdk.js?appkey=}+#{appkey}+@{&libraries=services}"></script>
+<script th:inline="javascript" th:src="@{/js/details.js}"></script>
 </body>
 </html>

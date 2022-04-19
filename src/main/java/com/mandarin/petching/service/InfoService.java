@@ -37,4 +37,6 @@ public class InfoService {
     public Page<PetSitter> findBySearchKeywordAndAbleServiceContaining(String searchKeyword, String ableService, Pageable pageable) {
         return infoRepository.findByWorkingAreaAndAbleServiceContaining(searchKeyword, ableService, pageable);
     }
+
+
 }
