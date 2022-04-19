@@ -43,13 +43,7 @@ public class InfoController {
     @GetMapping("/matching/details")
     public String search(Model model, Long id) {
         model.addAttribute("petSitter", infoService.findById(id));
-
         return "details";
-    }
-
-    @GetMapping(value = {"/map"})
-    public String map() {
-        return "map";
     }
 
 
