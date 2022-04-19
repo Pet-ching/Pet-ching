@@ -13,4 +13,7 @@ import java.util.Optional;
 public interface InfoRepository extends JpaRepository<PetSitter, Long> {
 
     Page<PetSitter>  findByWorkingAreaContaining(String searchKeyword, Pageable pageable);
+
+    Page<PetSitter>  findByWorkingAreaAndAbleServiceContaining(String searchKeyword, String ableService, Pageable pageable);
+    Page<PetSitter> findByAbleServiceContaining(String ableService, Pageable pageable);
 }
