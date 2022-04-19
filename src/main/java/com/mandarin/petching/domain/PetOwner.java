@@ -44,5 +44,24 @@ public class PetOwner {
 
     private String note;
 
-    private String vaccination;
+    private String vaccination; // TODO
+
+    public static PetOwner createPetOwner(Member member, PetOwnerDTO petOwnerDto) {
+        PetOwner petOwner = new PetOwner();
+
+        petOwner.member = member;
+
+        petOwner.petName = petOwnerDto.getPetName();
+        petOwner.petGender = petOwnerDto.getPetGender();
+        petOwner.petType = petOwnerDto.getPetType();
+        petOwner.petBth = petOwnerDto.getPetBth();
+        petOwner.weight = petOwnerDto.getWeight();
+        petOwner.neutralization = petOwnerDto.isNeutralization();
+        petOwner.hospitalName = petOwnerDto.getHospitalName();
+        petOwner.hospitalTel = petOwnerDto.getHospitalTel();
+        petOwner.hospitalAdr = petOwnerDto.getHospitalAdr();
+        petOwner.note = petOwnerDto.getNote();
+
+        return petOwner;
+    }
 }
