@@ -34,6 +34,7 @@
         }
     </style>
 
+
 </head>
 <body>
 <div class="wrapper" th:object="${petSitter}">
@@ -44,6 +45,9 @@
         <div th:text="*{userName}">님을 소개합니다.</div>
         <button type="button"
                 th:onclick="|location.href='@{/matching/profile/reservation/{sitter_id}(sitter_id=*{id})}'|">예약하러가기
+        </button>
+        <button type="button"
+                th:onclick="|location.href='@{/matching/profile/reservation/{sitter_id}(sitter_id=*{id})}'|">채팅하기
         </button>
 
         <div class="text_box" th:text="*{selfIntroduction}"></div>
@@ -68,6 +72,8 @@
             </li>
         </ol>
     </div>
+    <div id="map" style="width:500px;height:400px;"></div>
 </div>
-</body>
+<script type="text/javascript" th:src="@{//dapi.kakao.com/v2/maps/sdk.js?appkey=}+#{appkey}+@{&libraries=services}"></script>
+<script type="text/javascript" th:src="@{/js/details.js}"></script></body>
 </html>
