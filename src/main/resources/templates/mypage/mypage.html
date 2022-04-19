@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a th:href="@{/mypage/{memberId}/petowner(memberId = ${memberId})}">반려동물 등록</a>
+<a th:href="@{/mypage/{memberId}/petsitter(memberId = ${memberId})}">돌봄환경 등록</a>
+<a th:href="@{/mypage/{memberId}/reservation(memberId = ${memberId})}">예약현황 조회</a>
+</body>
+</html>
