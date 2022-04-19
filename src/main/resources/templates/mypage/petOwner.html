@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div th:object="${petOwner}">
+        <div>
+            <div>반려동물 이름</div>
+            <div th:text="*{petName}"></div>
+        </div>
+        <div>
+            <div>반려동물 성별</div>
+            <div th:text="*{petGender}"></div>
+        </div>
+        <div>
+            <div>반려동물 종류</div>
+            <div th:text="*{petType}"></div>
+        </div>
+        <div>
+            <div>반려동물 생일</div>
+            <div th:text="*{petBth}"></div>
+        </div>
+        <div>
+            <div>반려동물 몸무게</div>
+            <div th:text="*{weight}"></div>
+        </div>
+        <div>
+            <div>중성화 여부</div>
+            <div th:text="*{neutralization}"></div>
+        </div>
+        <div>
+            <div>동물병원 이름</div>
+            <div th:text="*{hospitalName}"></div>
+        </div>
+        <div>
+            <div>동물병원 전화번호</div>
+            <div th:text="*{hospitalTel}"></div>
+        </div>
+        <div>
+            <div>동물병원 주소</div>
+            <div th:text="*{hospitalAdr}"></div>
+        </div>
+        <div>
+            <div>기타 사항</div>
+            <div th:text="*{note}"></div>
+        </div>
+    </div>
+    <a th:href="@{/mypage/{memberId}/petowner/edit(memberId = ${memberId})}">수정하기</a>
+</body>
+</html>
