@@ -7,12 +7,11 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn
 @Getter @Setter
 public class Member {
 
     @Id
+    @Column(name = "member_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -20,6 +19,12 @@ public class Member {
     private String userId;
     private String userPwd;
     private String userName;
+
+    @OneToOne(mappedBy = "member")
+    private PetOwner petOwner;
+
+    @OneToOne(mappedBy = "member")
+    private PetOwner petSitter;
 
     private LocalDate userBth;
 
