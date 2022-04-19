@@ -29,4 +29,12 @@ public class InfoService {
         return infoRepository.findByWorkingAreaContaining(searchKeyword, pageable);
     }
 
+
+    public Page<PetSitter> findByAbleService(String ableService, Pageable pageable) {
+        return infoRepository.findByAbleServiceContaining(ableService, pageable);
+    }
+
+    public Page<PetSitter> findBySearchKeywordAndAbleServiceContaining(String searchKeyword, String ableService, Pageable pageable) {
+        return infoRepository.findByWorkingAreaAndAbleServiceContaining(searchKeyword, ableService, pageable);
+    }
 }
