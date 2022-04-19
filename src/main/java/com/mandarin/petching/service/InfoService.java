@@ -29,4 +29,6 @@ public class InfoService {
         return infoRepository.findByWorkingAreaContaining(searchKeyword, pageable);
     }
 
+
+
 }
