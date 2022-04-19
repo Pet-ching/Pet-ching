@@ -24,6 +24,6 @@ public class ReservationController {
     @PostMapping(value = {"/profile/reservation/match"})
     public String reservationMatch(Reservation reservation) {
         reservationService.createReservation(reservation);
-        return "index";
+        return "redirect:/";
     }
 }
