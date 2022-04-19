@@ -4,7 +4,13 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
+<<<<<<< HEAD
+
 application-db.properties
+messages.properties
+=======
+application-db.properties
+>>>>>>> e7bef47c394b8eb4c917d5f1c29029ed9e56e40c
 
 ### STS ###
 .apt_generated
