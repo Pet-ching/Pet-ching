@@ -24,7 +24,7 @@ public class ChatRoom {
         ChatRoom chatRoom = new ChatRoom();
 
         chatRoom.setBuyerId(buyerId);
-        chatRoom.setBuyerId(sellerId);
+        chatRoom.setSellerId(sellerId);
 
         return chatRoom;
     }

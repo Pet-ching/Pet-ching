@@ -8,33 +8,33 @@
 </head>
 <body>
 <form action="" method="post">
-    <input type="text" th:field="${petOwner.petName}" placeholder="반려동물 이름">
+    <input type="text" th:field="${pet.petName}" placeholder="반려동물 이름">
     <div th:each="type : ${genderTypes}">
-        <input type="radio" th:field="${petOwner.petGender}" th:value="${type}">
+        <input type="radio" th:field="${pet.petGender}" th:value="${type}">
         <label th:text="${type}">NULL</label>
     </div>
-    <select th:field="${petOwner.petType}">
+    <select th:field="${pet.petType}">
         <option value="">==펫타입==</option>
         <option th:each="type : ${petTypes}" th:value="${type}" th:text="${type}">NULL</option>
     </select>
 <!--    <div>-->
 <!--        <label>펫생일</label>-->
-<!--        <input type="datetime-local" th:field="${petOwner.petBth}">-->
+<!--        <input type="datetime-local" th:field="${pet.petBth}">-->
 <!--    </div>-->
     <div>
         <label>몸무게</label>
-        <input type="number" th:field="${petOwner.weight}">
+        <input type="number" th:field="${pet.weight}">
     </div>
     <div>
-        <input type="checkbox" th:field="${petOwner.neutralization}">
+        <input type="checkbox" th:field="${pet.neutralization}">
         <label>중성화 여부</label>
     </div>
     <div>
-        <input type="text" th:field="${petOwner.hospitalName}" placeholder="동물병원 이름">
-        <input type="text" th:field="${petOwner.hospitalTel}" placeholder="동물병원 전화번호" maxlength="11">
-        <input type="text" th:field="${petOwner.hospitalAdr}" placeholder="동물병원 주소">
+        <input type="text" th:field="${pet.hospitalName}" placeholder="동물병원 이름">
+        <input type="text" th:field="${pet.hospitalTel}" placeholder="동물병원 전화번호" maxlength="11">
+        <input type="text" th:field="${pet.hospitalAdr}" placeholder="동물병원 주소">
     </div>
-    <input type="text" th:field="${petOwner.note}" placeholder="기타 사항 입력">
+    <input type="text" th:field="${pet.note}" placeholder="기타 사항 입력">
     <input type="submit">
 </form>
 </body>

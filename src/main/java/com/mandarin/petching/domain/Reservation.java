@@ -17,13 +17,13 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "pet_owner")
-    private PetOwner petOwner;
+    private String petOwner;
+
+    private String petSitter;
 
     @ManyToOne
-    @JoinColumn(name = "pet_sitter")
-    private PetSitter petSitter;
+    @JoinColumn(name = "pet_id")
+    private Pet pet;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime startDate;
