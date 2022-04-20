@@ -11,22 +11,32 @@ import org.springframework.stereotype.Service;
 @Service
 public class InfoService {
 
-        @Autowired
-        private InfoRepository infoRepository;
+    @Autowired
+    private InfoRepository infoRepository;
 
-        public Page<PetSitter> sitterList(Pageable pageable) {
-            return infoRepository.findAll(pageable);
-        }
+    public InfoService() {
+    }
 
-        public PetSitter workingArea(Long id) {
-            return infoRepository.findById(id).get();
-        }
+    public Page<PetSitter> sitterList(Pageable pageable) {
+        return infoRepository.findAll(pageable);
+    }
 
-        public Page<PetSitter> sitterSearchList(String searchKeyword, Pageable pageable) {
-            return infoRepository.findByWorkingAreaContaining(searchKeyword, pageable);
-        }
+    public PetSitter findById(Long id) {
+        return infoRepository.findById(id).get();
+    }
 
-//        public PetSitter area(PetSitter petSitter) {
-//            return infoRepository.findByWorkingArea(petSitter.getWorkingArea());
-//        }
+    public Page<PetSitter> sitterSearchList(String searchKeyword, Pageable pageable) {
+        return infoRepository.findByWorkingAreaContaining(searchKeyword, pageable);
+    }
+
+
+    public Page<PetSitter> findByAbleService(String ableService, Pageable pageable) {
+        return infoRepository.findByAbleServiceContaining(ableService, pageable);
+    }
+
+    public Page<PetSitter> findBySearchKeywordAndAbleServiceContaining(String searchKeyword, String ableService, Pageable pageable) {
+        return infoRepository.findByWorkingAreaAndAbleServiceContaining(searchKeyword, ableService, pageable);
+    }
+
+
 }

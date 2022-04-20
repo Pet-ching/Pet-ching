@@ -16,16 +16,14 @@ public class ReservationController {
 
     private final ReservationService reservationService;
 
-    @GetMapping("/profile/reservation")
+    @GetMapping("/profile/reservation/{petSitterId}")
     public String reservationForm() {
         return "reservation";
     }
 
-    @PostMapping(value = {"/profile/reservationMatch"})
+    @PostMapping(value = {"/profile/reservation/match"})
     public String reservationMatch(Reservation reservation) {
-
-        System.out.println(reservation.getFee());
         reservationService.createReservation(reservation);
-        return "";
+        return "redirect:/";
     }
 }

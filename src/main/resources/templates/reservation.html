@@ -4,13 +4,20 @@
     <meta charset="UTF-8">
     <title>reservation</title>
 </head>
+<script>
+    function submitSuc(){
+        alert("예약이 성공적으로 완료되었습니다");
+    }
+</script>
 <body>
     <div class="container">
         <h1>예약 정보</h1>
-        <form th:action="@{/matching/profile/reservationMatch}" method="POST">
+        <form th:action="@{/matching/profile/reservation/match}" method="POST" onsubmit="submitSuc();">
             <div>
-                <label >펫이름</label>
-<!--                ToDo : db와 연결된 펫 이름 -->
+                <label >펫 이름</label>
+                <label >펫시터 이름</label>
+<!--                ToDo : db와 연결된 이름 -->
+
             </div>
             <div>
                 <label>시작 날짜</label>

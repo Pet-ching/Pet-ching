@@ -6,7 +6,7 @@ build/
 !**/src/test/**/build/
 
 application-db.properties
-map.html
+messages.properties
 
 ### STS ###
 .apt_generated
@@ -38,3 +38,5 @@ out/
 
 ### VS Code ###
 .vscode/
+
+application-db.properties
