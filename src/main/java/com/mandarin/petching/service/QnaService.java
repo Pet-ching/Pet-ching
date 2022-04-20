@@ -22,8 +22,8 @@ public class QnaService {
     }
 
     public Board findBoardById(Long id) {
-        return boardRepository.getById(id);
-                //.orElse(new Board());
+        return (Board)this.boardRepository.findById(id).orElse(new Board());
+
     }
 
     public Board saveAndUpdateBoard(Board board) {
