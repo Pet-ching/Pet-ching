@@ -12,7 +12,6 @@ import java.util.List;
 
 @Entity
 @Getter @Setter
-@DiscriminatorColumn
 public class Member {
 
     @Id
@@ -43,6 +42,8 @@ public class Member {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+//    private String userTel;
 
     
     public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder){
