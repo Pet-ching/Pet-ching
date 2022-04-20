@@ -5,6 +5,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter @Setter
@@ -40,4 +42,7 @@ public class Member {
     private String imageUrl;
 
     private String chatUrl;
+
+    @OneToMany(mappedBy = "member")
+    private List<Board> board = new ArrayList<Board>();
 }

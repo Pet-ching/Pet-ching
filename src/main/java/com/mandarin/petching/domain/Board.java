@@ -11,10 +11,12 @@ import java.time.LocalDateTime;
 public class Board {
 
     @Id
+    @Column(name = "board_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "member_id")
     private Member member;
 
     private Integer hits;

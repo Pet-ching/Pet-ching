@@ -61,7 +61,7 @@
                     <!-- <th scope="row">1</th> -->
                     <td th:text="${board.id}">번호</td>
                     <td><a th:text="${board.title}" th:href="@{/board/read(id=${board.id})}">제목</a></td>
-                    <td th:text="${board.member}">작성자아이디</td>
+                    <td th:text="${board.member_id}">작성자아이디</td>
                     <td th:text="${board.regDate}">작성일자</td>
                 </tr>
             </tbody>
