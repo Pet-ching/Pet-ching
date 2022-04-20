@@ -5,6 +5,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter @Setter
@@ -20,11 +22,11 @@ public class Member {
     private String userPwd;
     private String userName;
 
-    @OneToOne(mappedBy = "member")
-    private PetOwner petOwner;
+    @OneToMany(mappedBy = "member")
+    private List<Pet> petList = new ArrayList<>();
 
     @OneToOne(mappedBy = "member")
-    private PetOwner petSitter;
+    private PetSitter petSitter;
 
     private LocalDate userBth;
 
