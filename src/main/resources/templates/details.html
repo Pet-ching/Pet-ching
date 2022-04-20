@@ -76,6 +76,9 @@
         이미지가 들어가요
     </div>
     <div class="item petsitter_name">
+        <div th:each = "area : *{#strings.arraySplit(workingArea,'로 ')}">
+            <div th:text="${area}"></div>
+        </div>
         <div th:text="*{workingArea}">어디시 어디구 어디동 무서기</div>
 
         <div th:text="*{userName}">~~ 님을 소개합니다.</div>
@@ -125,8 +128,11 @@
     </div>
 
 </div>
-<script type="text/javascript"
-        th:src="@{//dapi.kakao.com/v2/maps/sdk.js?appkey=}+#{appkey}+@{&libraries=services}"></script>
+<script th:inline="javascript" th:src="@{//dapi.kakao.com/v2/maps/sdk.js?appkey=}+#{appkey}+@{&libraries=services}"></script>
 <script th:inline="javascript" th:src="@{/js/details.js}"></script>
+<script>
+var hey = [[${petSitter.workingArea}]];
+alert(hey + "이것도");
+</script>
 </body>
 </html>

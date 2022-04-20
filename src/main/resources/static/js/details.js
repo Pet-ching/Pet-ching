@@ -21,10 +21,13 @@ var map = new kakao.maps.Map(container, options);
 
 var geocoder = new kakao.maps.services.Geocoder();
 
-var address = "서울특별시 강남구 언주로 508";
-//var address = [[${petSitter.workingArea}]];
+//var address = "서울특별시 강남구 언주로 508";
+///*<![CDATA[*/
+var address = [[${petSitter.workingArea}]];
+///*]]>*/
+//alert(address);
 
-geocoder.addressSearch(address, function(result, status) {
+geocoder.addressSearch("address", function(result, status) {
 
      if (status === kakao.maps.services.Status.OK) {
 
@@ -41,12 +44,6 @@ geocoder.addressSearch(address, function(result, status) {
             fillOpacity: 0.7
         });
         circle.setMap(map);
-
-        var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
-        });
-
-
         map.setCenter(coords);
     } else {
         var marker = new kakao.maps.Marker({
