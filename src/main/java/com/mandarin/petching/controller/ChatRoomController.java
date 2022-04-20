@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Slf4j
@@ -31,7 +33,7 @@ public class ChatRoomController {
      * @RequestParam으로 사용자 이름 받아옴 -> 현재 로그인한 사용자 정보 받아오기
      */
     @GetMapping("/chat/room/{roomId}")
-    public String enterRoom(@PathVariable Long roomId, @RequestParam(required = false) String username, Model model) {
+    public String enterRoom(@PathVariable Long roomId, @RequestParam(required = false) String username, Model model, HttpServletRequest request) {
 
         List<ChatMessage> chatList = chatService.findAllChatByRoomId(roomId);
 
@@ -40,6 +42,16 @@ public class ChatRoomController {
 
         // TODO 로그인 기능 구현 후 수정
         model.addAttribute("username", username);
+
+        if (username != null) {
+            HttpSession session = request.getSession();
+
+            if (session.getAttribute(username) == null) {
+                session.setAttribute(username, roomId);
+            } else {
+                return "chatTemp";
+            }
+        }
 
         return "chat/room";
     }
