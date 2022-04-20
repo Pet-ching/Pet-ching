@@ -7,7 +7,7 @@
 <body>
 <div th:if="${type == 'petowner'}">
     <button th:onclick="|location.href='@{/mypage(type='petsitter')}'|">펫시터 모드로 변경</button>
-    <a th:href="@{/mypage/{memberId}/petowner(memberId = ${memberId})}">반려동물 조회</a>
+    <a th:href="@{/mypage/{memberId}/pet(memberId = ${memberId})}">반려동물 조회</a>
     <a th:href="@{/mypage/{memberId}/petowner/reservation(memberId = ${memberId})}">예약현황 조회</a>
 </div>
 
