@@ -7,6 +7,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter @Setter
@@ -20,6 +22,17 @@ public class Member {
 
     private String userId;
     private String userName;
+
+    @OneToMany(mappedBy = "member")
+    private List<Pet> petList = new ArrayList<>();
+
+    @OneToOne(mappedBy = "member")
+    private PetSitter petSitter;
+
+    private LocalDate userBth;
+
+    @Enumerated(EnumType.STRING)
+    private GenderType userGender;
 
     @Column(unique = true)
     private String userEmail;
