@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    ID : <span sec:authentication="name"></span> 환영이요 ~ <br>
+    소유 권한 : <span sec:authentication="authorities"></span> <br>
+</div>
+<div>
+    <a href="/members/logout">로그아웃</a>
+    <a href="/">메인</a>
+</div>
+</body>
+</html>
