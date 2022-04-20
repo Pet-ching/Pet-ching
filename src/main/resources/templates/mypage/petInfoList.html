@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .temp_wrapper {
+            display: flex;
+            border: solid;
+        }
+    </style>
+</head>
+<body>
+    <div th:if="${petListEmpty}">
+        <h1>아직 입력된 정보가 없어요!</h1>
+        <a th:href="@{/mypage/{memberId}/pet/create(memberId = ${memberId})}">등록할래요?</a>
+    </div>
+    <div th:unless="${petListEmpty}" th:each="pet : ${petList}">
+        <h1>등록된 반려동물 정보</h1>
+        <div class="temp_wrapper">
+            <a th:href="@{/mypage/{memberId}/pet/{petId}(memberId = ${memberId}, petId = ${pet.id})}" th:text="${pet.petName}"></a>
+            <div th:text="${pet.petGender}"></div>
+            <div th:text="${pet.petType}"></div>
+        </div>
+    </div>
+    <a href="/">홈으로</a>
+</body>
+</html>
