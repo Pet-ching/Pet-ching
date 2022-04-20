@@ -46,7 +46,9 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<Board> board = new ArrayList<>();
 
-//    private String userTel;
+    private String userTel;
+
+    private String imgUrl;
 
     public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder){
         Member member = new Member();
@@ -56,7 +58,8 @@ public class Member {
         member.setAddress(memberFormDto.getAddress());
         String password = passwordEncoder.encode(memberFormDto.getUserPwd());
         member.setUserPwd(password);
-        member.setRole(Role.admin);
+        member.setRole(Role.USER);
         return member;
     }
+
 }
