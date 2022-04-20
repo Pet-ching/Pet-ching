@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Board Form</title>
+    <title>1:1 고객센터</title>
     <link rel="stylesheet" th:href="@{/css/base.css}" />
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
 </head>
@@ -15,27 +15,29 @@
         <h1>게시글 목록</h1>
     </div>
     <div class="pull-right" style="width:100px;margin:10px 0;">
-        <a href="/board" class="btn btn-primary btn-block">등록</a>
+        <a href="/qna/form" class="btn btn-primary btn-block">등록</a>
     </div>
     <br/><br/><br/>
     <div id="mainHide">
         <table class="table table-hover">
             <thead>
             <tr>
-                <th class="col-md-1">#</th>
+                <th class="col-md-1">번호</th>
                 <th class="col-md-2">서비스 분류</th>
+                <th class="col-md-2">답변 상태</th>
                 <th class="col-md-5">제목</th>
                 <th class="col-md-2">작성 날짜</th>
-                <th class="col-md-2">수정 날짜</th>
+<!--                <th class="col-md-2">수정 날짜</th>-->
             </tr>
             </thead>
             <tbody>
             <tr th:each="board : ${boardList}">
-                <td th:text="${board.idx}"></td>
-                <td th:text="${board.boardType.value}"></td>
-                <td><a th:href="'/board?idx='+${board.idx}" th:text="${board.title}"></a></td>
-                <td th:text="${#temporals.format(board.createdDate,'yyyy-MM-dd HH:mm')}"></td>
-                <td th:text="${#temporals.format(board.updatedDate,'yyyy-MM-dd HH:mm')}"></td>
+                <td th:text="${board.id}"></td>
+                <td th:text="${board.boardType}"></td>
+                <td th:text="|답변&nbsp ${board.answerType}|"></td>
+                <td><a th:href="'/qna/form?id='+${board.id}" th:text="${board.title}"></a></td>
+                <td th:text="${#temporals.format(board.regDate,'yyyy-MM-dd HH:mm')}"></td>
+<!--                <td th:text="${#temporals.format(board.updatedDate,'yyyy-MM-dd HH:mm')}"></td>  수정날짜 상의할 것?-->
             </tr>
             </tbody>
         </table>
@@ -44,19 +46,17 @@
     <!-- Pagination -->
     <nav aria-label="Page navigation" style="text-align:center;">
         <ul class="pagination" th:with="startNumber=${T(java.lang.Math).floor(boardList.number/10)}*10+1, endNumber=(${boardList.totalPages} > ${startNumber}+9) ? ${startNumber}+9 : ${boardList.totalPages}">
-            <li><a aria-label="Previous" href="/board/list?page=1">&laquo;</a></li>
+            <li><a aria-label="Previous" href="/qna/ask?page=1">&laquo;</a></li>
             <li th:style="${boardList.first} ? 'display:none'">
-                <a th:href="@{/board/list(page=${boardList.number})}">&lsaquo;</a>
+                <a th:href="@{/qna/ask(page=${boardList.number})}">&lsaquo;</a>
             </li>
-
             <li th:each="page :${#numbers.sequence(startNumber, endNumber)}" th:class="(${page} == ${boardList.number}+1) ? 'active'">
-                <a th:href="@{/board/list(page=${page})}" th:text="${page}"><span class="sr-only"></span></a>
+                <a th:href="@{/qna/ask(page=${page})}" th:text="${page}"><span class="sr-only"></span></a>
             </li>
-
             <li th:style="${boardList.last} ? 'display:none'">
-                <a th:href="@{/board/list(page=${boardList.number}+2)}">&rsaquo;</a>
+                <a th:href="@{/qna/ask(page=${boardList.number}+2)}">&rsaquo;</a>
             </li>
-            <li><a aria-label="Next" th:href="@{/board/list(page=${boardList.totalPages})}">&raquo;</a></li>
+            <li><a aria-label="Next" th:href="@{/board/ask(page=${boardList.totalPages})}">&raquo;</a></li>
         </ul>
     </nav>
     <!-- /Pagination -->

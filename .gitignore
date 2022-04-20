@@ -8,6 +8,7 @@ build/
 application-db.properties
 messages.properties
 
+
 ### STS ###
 .apt_generated
 .classpath

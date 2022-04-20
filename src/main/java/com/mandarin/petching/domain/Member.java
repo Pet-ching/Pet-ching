@@ -13,13 +13,13 @@ import java.util.List;
 @Entity
 @Getter @Setter
 public class Member {
-
     @Id
     @Column(name = "member_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String userId;
+
     private String userName;
 
     @OneToMany(mappedBy = "member")
@@ -44,7 +44,7 @@ public class Member {
     private Role role;
 
     @OneToMany(mappedBy = "member")
-    private List<Board> board = new ArrayList<Board>();
+    private List<Board> board = new ArrayList<>();
 
 //    private String userTel;
 
