@@ -15,13 +15,14 @@
         <h1>아직 입력된 정보가 없어요!</h1>
         <a th:href="@{/mypage/{memberId}/pet/create(memberId = ${memberId})}">등록할래요?</a>
     </div>
-    <div th:unless="${petListEmpty}" th:each="pet : ${petList}">
+    <div th:unless="${petListEmpty}">
         <h1>등록된 반려동물 정보</h1>
-        <div class="temp_wrapper">
+        <div th:each="pet : ${petList}" class="temp_wrapper">
             <a th:href="@{/mypage/{memberId}/pet/{petId}(memberId = ${memberId}, petId = ${pet.id})}" th:text="${pet.petName}"></a>
             <div th:text="${pet.petGender}"></div>
             <div th:text="${pet.petType}"></div>
         </div>
+        <a th:href="@{/mypage/{memberId}/pet/create(memberId = ${memberId})}">반려동물 정보 추가</a>
     </div>
     <a href="/">홈으로</a>
 </body>
