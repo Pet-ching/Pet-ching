@@ -1,7 +1,7 @@
-package com.mandarin.petching.controller;
+package com.mandarin.petching.controller.mypage;
 
 import com.mandarin.petching.domain.*;
-import com.mandarin.petching.repository.PetOwnerRepository;
+import com.mandarin.petching.repository.PetRepository;
 import com.mandarin.petching.service.MyPageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,26 +10,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
-import javax.persistence.Persistence;
-import java.util.Optional;
 
 @Slf4j
 @Controller
 @RequestMapping("/mypage")
 @RequiredArgsConstructor
-public class MyPageController {
+public class PetInfoController {
 
     private final MyPageService myPageService;
-    private final PetOwnerRepository petOwnerRepository;
-
-    @GetMapping
-    public String mypage(Model model) {
-
-        // TODO 로그인 유저 정보
-        model.addAttribute("memberId", 1L);
-
-        return "mypage/mypage";
-    }
+    private final PetRepository petRepository;
 
     @GetMapping("/{memberId}/petowner")
     public String petOwnerView(@PathVariable Long memberId, Model model) {
@@ -37,13 +26,13 @@ public class MyPageController {
         Member member = myPageService.findMemberById(memberId);
 
         try {
-            PetOwner petOwner = member.getPetOwner();
+            Pet pet = member.getPetList().get(1);
 
-            if (petOwner == null) {
+            if (pet == null) {
                 return "myPage/temp";
             }
 
-            model.addAttribute("petOwner", petOwner);
+            model.addAttribute("petOwner", pet);
             model.addAttribute("memberId", 1L);
 
             return "mypage/petOwner";
@@ -58,16 +47,16 @@ public class MyPageController {
         Member member = myPageService.findMemberById(memberId);
 
         try {
-            PetOwner petOwner = member.getPetOwner();
+            Pet pet = member.getPetList().get(1);
 
-            if (petOwner == null) {
-                model.addAttribute("petOwner", new PetOwner());
+            if (pet == null) {
+                model.addAttribute("pet", new Pet());
             } else {
-                model.addAttribute("petOwner", petOwner);
+                model.addAttribute("pet", pet);
             }
 
         } catch (EntityNotFoundException e) {
-            model.addAttribute("petOwner", new PetOwner());
+            model.addAttribute("pet", new Pet());
         }
 
         GenderType[] genderTypes = GenderType.values();
@@ -84,7 +73,7 @@ public class MyPageController {
 
         // TODO Bean Validation
 
-        myPageService.savePetOwner(memberId, petOwnerDto);
+        myPageService.savePet(memberId, petOwnerDto);
 
         return "redirect:/mypage/" + memberId + "/petowner";
     }
