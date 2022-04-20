@@ -1,4 +1,4 @@
-
+package com.mandarin.petching.domain;
 
 import com.mandarin.petching.dto.MemberFormDto;
 import lombok.Getter;
@@ -11,9 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn
-@Entity
 @Getter @Setter
 public class Member {
     @Id
@@ -22,7 +19,7 @@ public class Member {
     private Long id;
 
     private String userId;
-    
+
     private String userName;
 
     @OneToMany(mappedBy = "member")
@@ -30,9 +27,9 @@ public class Member {
 
     @OneToOne(mappedBy = "member")
     private PetSitter petSitter;
-    
+
     private LocalDate userBth;
-    
+
     @Enumerated(EnumType.STRING)
     private GenderType userGender;
 
@@ -47,7 +44,7 @@ public class Member {
     private Role role;
 
     @OneToMany(mappedBy = "member")
-    private List<Board> board = new ArrayList<Board>();
+    private List<Board> board = new ArrayList<>();
 
 //    private String userTel;
 

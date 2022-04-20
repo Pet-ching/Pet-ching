@@ -7,15 +7,7 @@ import org.springframework.data.annotation.CreatedDate;
 
 
 import java.time.LocalDateTime;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 import org.springframework.data.annotation.CreatedDate;
 
@@ -33,18 +25,23 @@ public class Board {
     @Column(name = "board_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
+
     private Integer hits;
+
     @CreatedDate
     private LocalDateTime regDate;
     @Column(
             length = 20
     )
     private String title;
+
     @Lob
     private String content;
+
     @Enumerated(EnumType.STRING)
     private BoardType boardType;
 
