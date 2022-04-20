@@ -1,5 +1,6 @@
 package com.mandarin.petching.domain;
 
+import com.mandarin.petching.dto.PetDto;
 import lombok.Getter;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter
+@Getter 
 public class Pet {
 
     @Id
@@ -49,22 +50,35 @@ public class Pet {
     @OneToMany(mappedBy = "pet")
     private List<Reservation> reservationList = new ArrayList<>();
 
-    public static Pet createPetOwner(Member member, PetOwnerDTO petOwnerDto) {
+    public static Pet createPet(Member member, PetDto petDto) {
         Pet pet = new Pet();
 
         pet.member = member;
 
-        pet.petName = petOwnerDto.getPetName();
-        pet.petGender = petOwnerDto.getPetGender();
-        pet.petType = petOwnerDto.getPetType();
-        pet.petBth = petOwnerDto.getPetBth();
-        pet.weight = petOwnerDto.getWeight();
-        pet.neutralization = petOwnerDto.isNeutralization();
-        pet.hospitalName = petOwnerDto.getHospitalName();
-        pet.hospitalTel = petOwnerDto.getHospitalTel();
-        pet.hospitalAdr = petOwnerDto.getHospitalAdr();
-        pet.note = petOwnerDto.getNote();
+        pet.petName = petDto.getPetName();
+        pet.petGender = petDto.getPetGender();
+        pet.petType = petDto.getPetType();
+        pet.petBth = petDto.getPetBth();
+        pet.weight = petDto.getWeight();
+        pet.neutralization = petDto.isNeutralization();
+        pet.hospitalName = petDto.getHospitalName();
+        pet.hospitalTel = petDto.getHospitalTel();
+        pet.hospitalAdr = petDto.getHospitalAdr();
+        pet.note = petDto.getNote();
 
         return pet;
+    }
+
+    public void updatePet(PetDto petDto) {
+        this.petName = petDto.getPetName();
+        this.petGender = petDto.getPetGender();
+        this.petType = petDto.getPetType();
+        this.petBth = petDto.getPetBth();
+        this.weight = petDto.getWeight();
+        this.neutralization = petDto.isNeutralization();
+        this.hospitalName = petDto.getHospitalName();
+        this.hospitalTel = petDto.getHospitalTel();
+        this.hospitalAdr = petDto.getHospitalAdr();
+        this.note = petDto.getNote();
     }
 }
