@@ -20,14 +20,4 @@ public class PetchingApplication {
 		SpringApplication.run(PetchingApplication.class, args);
 	}
 
-
-	@Bean
-	public CommandLineRunner runner(UserRepository userRepository, BoardRepository boardRepository) {
-		return (args) -> {
-			Member member = (Member)userRepository.save(Member.builder().userId("김귀영 추가합니다 ㅋ").userPwd("1234").build());
-			IntStream.rangeClosed(1, 10).forEach((index) -> {
-				boardRepository.save(Board.builder().title("게시글" + index).content("컨텐츠").boardType(BoardType.QnA).regDate(LocalDateTime.now()).member(member).answerType(AnswerType.대기).build());
-			});
-		};
-	}
 }
