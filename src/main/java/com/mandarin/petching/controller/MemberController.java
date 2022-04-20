@@ -1,5 +1,6 @@
 package com.mandarin.petching.controller;
 
+import com.mandarin.petching.domain.Member;
 import com.mandarin.petching.dto.MemberFormDto;
 import com.mandarin.petching.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.mandarin.petching.domain.Member;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 

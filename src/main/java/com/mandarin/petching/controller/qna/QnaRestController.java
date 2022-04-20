@@ -2,7 +2,6 @@ package com.mandarin.petching.controller.qna;
 
 import com.mandarin.petching.domain.AnswerType;
 import com.mandarin.petching.domain.Board;
-import com.mandarin.petching.domain.Member;
 import com.mandarin.petching.repository.BoardRepository;
 import com.mandarin.petching.service.QnaService;
 import lombok.RequiredArgsConstructor;
