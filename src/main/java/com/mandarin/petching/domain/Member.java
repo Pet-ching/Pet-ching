@@ -41,16 +41,10 @@ public class Member {
 
     private String address;
 
-<<<<<<< HEAD
-    private String chatUrl;
-
-    @OneToMany(mappedBy = "member")
-    private List<Board> board = new ArrayList<Board>();
-=======
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    
+
     public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder){
         Member member = new Member();
         member.setUserId(memberFormDto.getUserId());
@@ -62,5 +56,4 @@ public class Member {
         member.setRole(Role.admin);
         return member;
     }
->>>>>>> 12ac8b9c295e6290d159d34cb15514847d26ae59
 }
