@@ -1,17 +1,16 @@
 package com.mandarin.petching.domain;
 
-import lombok.Getter;
+import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Getter
+@Data
 @Entity
 public class Board {
 
     @Id
-    @Column(name = "board_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
