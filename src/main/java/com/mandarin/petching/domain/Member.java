@@ -45,7 +45,6 @@ public class Member {
 
 //    private String userTel;
 
-    
     public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder){
         Member member = new Member();
         member.setUserId(memberFormDto.getUserId());
