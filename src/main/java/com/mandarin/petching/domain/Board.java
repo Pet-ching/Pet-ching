@@ -1,6 +1,10 @@
 package com.mandarin.petching.domain;
 
+
 import lombok.*;
+
+import org.springframework.data.annotation.CreatedDate;
+
 
 import java.time.LocalDateTime;
 import javax.persistence.Column;
@@ -17,8 +21,10 @@ import org.springframework.data.annotation.CreatedDate;
 
 
 
+
 @Getter
 @Setter
+@Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,6 +34,7 @@ public class Board {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
+    @JoinColumn(name = "member_id")
     private Member member;
     private Integer hits;
     @CreatedDate

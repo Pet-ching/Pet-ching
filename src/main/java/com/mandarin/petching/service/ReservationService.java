@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ReservationService {
@@ -14,5 +16,9 @@ public class ReservationService {
 
     public void createReservation(Reservation reservation) {
         reservationRepository.save(reservation);
+    }
+
+    public Reservation findReservationById(Long reservationId) {
+        return reservationRepository.findById(reservationId).get();
     }
 }
