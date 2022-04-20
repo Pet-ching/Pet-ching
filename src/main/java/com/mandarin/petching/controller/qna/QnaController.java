@@ -1,6 +1,7 @@
 package com.mandarin.petching.controller.qna;
 
 import com.mandarin.petching.service.QnaService;
+import lombok.NoArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -41,5 +42,7 @@ public class QnaController {
         model.addAttribute("board", this.qnaService.findBoardById(id));
         return "/qna/form";
     }
+
+
 
 }

@@ -35,7 +35,7 @@
                 <td th:text="${board.id}"></td>
                 <td th:text="${board.boardType}"></td>
                 <td th:text="|답변&nbsp ${board.answerType}|"></td>
-                <td><a th:href="'/qna/ask?id='+${board.id}" th:text="${board.title}"></a></td>
+                <td><a th:href="'/qna/form?id='+${board.id}" th:text="${board.title}"></a></td>
                 <td th:text="${#temporals.format(board.regDate,'yyyy-MM-dd HH:mm')}"></td>
 <!--                <td th:text="${#temporals.format(board.updatedDate,'yyyy-MM-dd HH:mm')}"></td>  수정날짜 상의할 것?-->
             </tr>

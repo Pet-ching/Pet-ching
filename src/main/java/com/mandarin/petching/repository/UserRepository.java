@@ -1,12 +1,14 @@
 package com.mandarin.petching.repository;
 
+import com.mandarin.petching.domain.Member;
 import org.apache.catalina.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-// extends JpaRepository<User, Long>
+
 @Repository
-public interface UserRepository  {}
+public interface UserRepository extends JpaRepository<Member, Long> {
+}
 
 
 
