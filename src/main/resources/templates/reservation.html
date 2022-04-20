@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>reservation</title>
+</head>
+<script>
+    function submitSuc(){
+        alert("예약이 성공적으로 완료되었습니다");
+    }
+</script>
+<body>
+    <div class="container">
+        <h1>예약 정보</h1>
+        <form th:action="@{/matching/profile/reservation/match}" method="POST" onsubmit="submitSuc();">
+            <div>
+                <label >펫 이름</label>
+                <label >펫시터 이름</label>
+<!--                ToDo : db와 연결된 이름 -->
+
+            </div>
+            <div>
+                <label>시작 날짜</label>
+                <input type="datetime-local" name="startDate">
+            </div>
+            <div>
+                <label> 종료 날짜 </label>
+                <input type="datetime-local" name="endDate">
+            </div>
+            <div>
+                <label>요금</label>
+                <input type="number" name="fee">원
+            </div>
+            <button type="submit">예약 확정</button>
+        </form>
+    </div>
+</body>
+</html>
