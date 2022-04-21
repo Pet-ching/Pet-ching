@@ -28,7 +28,7 @@ public class Member {
     @OneToOne(mappedBy = "member")
     private PetSitter petSitter;
 
-    private LocalDate userBth;
+    private String userBth;
 
     @Enumerated(EnumType.STRING)
     private GenderType userGender;
@@ -56,9 +56,13 @@ public class Member {
         member.setUserName(memberFormDto.getUserName());
         member.setUserEmail(memberFormDto.getUserEmail());
         member.setAddress(memberFormDto.getAddress());
+        member.setUserBth(memberFormDto.getUserBth());
+        member.setUserTel(memberFormDto.getUserTel());
+        member.setUserGender(memberFormDto.getUserGender());
         String password = passwordEncoder.encode(memberFormDto.getUserPwd());
         member.setUserPwd(password);
         member.setRole(Role.USER);
+
         return member;
     }
 

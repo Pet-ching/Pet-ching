@@ -47,7 +47,7 @@ public class MemberController {
             return "member/memberForm";
         }
 
-        return "redirect:/";
+        return "/index";
     }
 
     @GetMapping(value = "/login")
@@ -72,5 +72,9 @@ public class MemberController {
     public String logout(){
         System.out.println("유저 로그아웃 성공");
         return "/member/logout";
+    }
+    @GetMapping({"", "/"})
+    public String choice() {
+        return "/index";
     }
 }
