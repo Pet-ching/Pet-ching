@@ -3,12 +3,15 @@ package com.mandarin.petching.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter @Setter
+@ToString
 public class PetSitter {
 
     @Id
@@ -20,31 +23,26 @@ public class PetSitter {
     @JoinColumn(name = "member_id", unique = true)
     private Member member;
 
-    @Lob
-    private String selfIntroduction;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fee_list", unique = true)
+    private FeeList feeList;
 
-    private String fee;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "working_id")
+    private WorkingDayAndTime workingDayAndTime;
 
-    private String certificate;
+    @ElementCollection
+    @CollectionTable(name = "certificate",
+            joinColumns = @JoinColumn(name = "sitter_id"))
+    private List<String> certificate;
+
+    @ElementCollection
+    @CollectionTable(name = "certificate",
+            joinColumns = @JoinColumn(name = "sitter_id"))
+    private List<String> ableService;
 
     private String workingArea;
 
-    private String workingTime;
-
-    private String ableService;
-
-    public static PetSitter createPetSitter(Member member, PetSitter petSitterTemp) {
-        PetSitter petSitter = new PetSitter();
-
-        petSitter.setMember(member);
-
-        petSitter.setWorkingTime(petSitterTemp.workingTime);
-        petSitter.setWorkingArea(petSitterTemp.getWorkingArea());
-        petSitter.setFee(petSitterTemp.getFee());
-        petSitter.setCertificate(petSitterTemp.getCertificate());
-        petSitter.setSelfIntroduction(petSitterTemp.getSelfIntroduction());
-        petSitter.setAbleService(petSitterTemp.getAbleService());
-
-        return petSitter;
-    }
+    @Lob
+    private String selfIntroduction;
 }
