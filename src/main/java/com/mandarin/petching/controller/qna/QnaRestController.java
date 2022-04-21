@@ -72,11 +72,6 @@ public class QnaRestController {
     @PostMapping//생성
     public ResponseEntity<?> postBoard(@RequestBody Board board) {
         System.out.println("Post Access");
-        //valid 체크
-//        board.setCreatedDateNow();
-//        Board newBoard = board.builder()
-//                .regDate(LocalDateTime.now())
-//                .build();
         board.setAnswerType(AnswerType.대기);
         board.setRegDate(LocalDateTime.now());
         boardRepository.save(board);

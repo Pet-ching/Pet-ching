@@ -10,8 +10,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-
-@DiscriminatorColumn
 @Entity
 @Getter @Setter
 public class Member {
@@ -46,7 +44,7 @@ public class Member {
     private Role role;
 
     @OneToMany(mappedBy = "member")
-    private List<Board> board = new ArrayList<Board>();
+    private List<Board> board = new ArrayList<>();
 
 //    private String userTel;
 
