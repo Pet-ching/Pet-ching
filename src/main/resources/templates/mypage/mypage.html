@@ -7,14 +7,14 @@
 <body>
 <div th:if="${type == 'petowner'}">
     <button th:onclick="|location.href='@{/mypage(type='petsitter')}'|">펫시터 모드로 변경</button>
-    <a th:href="@{/mypage/{memberId}/petowner(memberId = ${memberId})}">반려동물 조회</a>
-    <a th:href="@{/mypage/{memberId}/petowner/reservation(memberId = ${memberId})}">예약현황 조회</a>
+    <a th:href="@{/mypage/pet}">반려동물 조회</a>
+    <a th:href="@{/mypage/petowner/reservation}">예약현황 조회</a>
 </div>
 
 <div th:if="${type == 'petsitter'}">
     <button th:onclick="|location.href='@{/mypage(type='petowner')}'|">보호자 모드로 변경</button>
-    <a th:href="@{/mypage/{memberId}/petsitter(memberId = ${memberId})}">돌봄환경 조회</a>
-    <a th:href="@{/mypage/{memberId}/petsitter/reservation(memberId = ${memberId})}">예약현황 조회</a>
+    <a th:href="@{/mypage/petsitter}">돌봄환경 조회</a>
+    <a th:href="@{/mypage/petsitter/reservation}">예약현황 조회</a>
 </div>
 </body>
 </html>

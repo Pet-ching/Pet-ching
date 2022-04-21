@@ -46,6 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
         ;
 
+        http.csrf().disable();
     }
 
     @Bean

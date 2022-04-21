@@ -1,15 +1,17 @@
 package com.mandarin.petching.controller.mypage;
 
 import com.mandarin.petching.domain.*;
-import com.mandarin.petching.repository.PetRepository;
+import com.mandarin.petching.dto.PetDto;
+import com.mandarin.petching.repository.MemberRepository;
 import com.mandarin.petching.service.MyPageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -18,63 +20,78 @@ import javax.persistence.EntityNotFoundException;
 public class PetInfoController {
 
     private final MyPageService myPageService;
-    private final PetRepository petRepository;
+    private final MemberRepository memberRepository;
 
-    @GetMapping("/{memberId}/petowner")
-    public String petOwnerView(@PathVariable Long memberId, Model model) {
+    @GetMapping("/pet")
+    public String petListView(Authentication authentication, Model model) {
 
-        Member member = myPageService.findMemberById(memberId);
+        String userName = authentication.getName();
+        Member member = memberRepository.findByUserEmail(userName);
 
-        try {
-            Pet pet = member.getPetList().get(1);
+        List<Pet> petList = member.getPetList();
 
-            if (pet == null) {
-                return "myPage/temp";
-            }
+        model.addAttribute("petListEmpty", petList.isEmpty());
+        model.addAttribute("petList", petList);
 
-            model.addAttribute("petOwner", pet);
-            model.addAttribute("memberId", 1L);
-
-            return "mypage/petOwner";
-        } catch (EntityNotFoundException e) {
-            return "myPage/temp";
-        }
+        return "mypage/petInfoList";
     }
 
-    @GetMapping("/{memberId}/petowner/edit")
-    public String petOwnerEditForm(@PathVariable Long memberId, Model model) {
-
-        Member member = myPageService.findMemberById(memberId);
-
-        try {
-            Pet pet = member.getPetList().get(1);
-
-            if (pet == null) {
-                model.addAttribute("pet", new Pet());
-            } else {
-                model.addAttribute("pet", pet);
-            }
-
-        } catch (EntityNotFoundException e) {
-            model.addAttribute("pet", new Pet());
-        }
+    @GetMapping("/pet/create")
+    public String createPetForm(Model model) {
 
         GenderType[] genderTypes = GenderType.values();
         PetType[] petTypes = PetType.values();
 
         model.addAttribute("genderTypes", genderTypes);
         model.addAttribute("petTypes", petTypes);
+        model.addAttribute("pet", new Pet());
 
-        return "mypage/petOwnerEdit";
+        return "mypage/petInfoWrite";
     }
 
-    @PostMapping("/{memberId}/petowner/edit")
-    public String petOwnerEdit(@PathVariable Long memberId, PetOwnerDTO petOwnerDto, Model model) {
+    @PostMapping("/pet/create")
+    public String createPet(Authentication authentication, PetDto petDto) {
+
+        String userName = authentication.getName();
+        Member member = memberRepository.findByUserEmail(userName);
+
+        myPageService.createPet(member, petDto);
+
+        return "redirect:/mypage/pet";
+    }
+
+    @GetMapping("/pet/{petId}")
+    public String petView(@PathVariable Long petId, Model model) {
+
+        Pet pet = myPageService.getPetById(petId);
+
+        model.addAttribute("pet", pet);
+
+        return "mypage/petInfoView";
+    }
+
+    @GetMapping("pet/edit/{petId}")
+    public String editPetForm(@PathVariable Long petId, Model model) {
+
+        Pet pet = myPageService.getPetById(petId);
+
+        GenderType[] genderTypes = GenderType.values();
+        PetType[] petTypes = PetType.values();
+
+        model.addAttribute("pet", pet);
+        model.addAttribute("genderTypes", genderTypes);
+        model.addAttribute("petTypes", petTypes);
+
+        return "mypage/petInfoEdit";
+    }
+
+    @PostMapping("/pet/edit/{petId}")
+    public String editPet(@PathVariable Long petId, PetDto petDto, Model model) {
 
         // TODO Bean Validation
 
-        myPageService.savePet(memberId, petOwnerDto);
+        myPageService.updatePet(petId, petDto);
 
-        return "redirect:/mypage/" + memberId + "/petowner";
+        return "redirect:/mypage/pet";
     }
 }
