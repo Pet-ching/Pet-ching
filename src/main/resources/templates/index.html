@@ -5,11 +5,18 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+<style>
+    span {
+        color : green;
+    }
+</style>
 <body>
 
 <p sec:authorize="isAnonymous()">Click <a th:href="@{/members/join}">회원가입</a> to see a greeting.</p>
 <p sec:authorize="isAnonymous()">Click <a th:href="@{/members/login}">로그인</a> to see a greeting.</p>
-
+<p sec:authorize="isAuthenticated()">
+    어서오세요 <span th:text="${member.userName}" ></span>님
+</p>
 <!--로그아웃은 POST방식으로 처리를 해야하기 때문에 a태그를 사용하면 안된다.-->
 <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="POST">
 <!--    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
