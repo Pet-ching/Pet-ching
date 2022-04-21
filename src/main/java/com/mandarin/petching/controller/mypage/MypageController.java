@@ -15,11 +15,7 @@ public class MypageController {
     @GetMapping
     public String mypage(Model model, @RequestParam String type) {
 
-        // TODO 로그인 유저 정보
-        model.addAttribute("memberId", 1L);
-
         model.addAttribute("type", type);
-
         return "mypage/mypage";
     }
 }

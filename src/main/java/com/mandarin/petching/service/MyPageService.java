@@ -25,8 +25,7 @@ public class MyPageService {
     }
 
     @Transactional
-    public void createPet(Long memberId, PetDto petDto) {
-        Member member = userRepository.findById(memberId).get();
+    public void createPet(Member member, PetDto petDto) {
 
         Pet pet = Pet.createPet(member, petDto);
         petRepository.save(pet);
