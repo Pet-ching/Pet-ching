@@ -54,6 +54,7 @@
                     <th scope="col">제목</th>
                     <th scope="col">작성자</th>
                     <th scope="col">날짜</th>
+                    <th scope="col">조회수</th>
                 </tr>
             </thead>
             <tbody>
@@ -61,8 +62,9 @@
                     <!-- <th scope="row">1</th> -->
                     <td th:text="${board.id}">번호</td>
                     <td><a th:text="${board.title}" th:href="@{/board/read(id=${board.id})}">제목</a></td>
-                    <td th:text="${board.member.user_name}">작성자아이디</td>
-                    <td th:text="${board.regDate}">작성일자</td>
+                    <td th:text="${board.member.userName}">작성자아이디</td>
+                    <td th:text="${#temporals.format(board.regDate, 'yyyy-MM-dd HH:mm')}">작성일자</td>
+                    <td th:text="${board.hits}">조회수</td>
                 </tr>
             </tbody>
         </table>

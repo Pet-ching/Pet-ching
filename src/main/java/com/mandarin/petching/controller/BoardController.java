@@ -1,19 +1,22 @@
 package com.mandarin.petching.controller;
 
 import com.mandarin.petching.domain.Board;
+import com.mandarin.petching.domain.Member;
 import com.mandarin.petching.repository.BoardRepository;
+import com.mandarin.petching.repository.MemberRepository;
+import com.mandarin.petching.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Controller
 @RequestMapping("/board")
@@ -21,6 +24,12 @@ public class BoardController {
 
     @Autowired
     private BoardRepository boardRepository;
+
+    @Autowired
+    private BoardService boardService;
+
+    @Autowired
+    private MemberRepository memberRepository;
 
     @GetMapping("/list")
     public String list(Model model, @PageableDefault(size = 10) Pageable pageable,
@@ -36,13 +45,17 @@ public class BoardController {
     }
 
     @GetMapping("/read")
-    public String read(Model model, @RequestParam(required = false) Long id ) {
+    public String read(Model model, @RequestParam(required = false) Long id , Authentication authentication) {
         if (id == null) {
             model.addAttribute("board", new Board());
         } else {
             Board board = boardRepository.findById(id).orElse(null);
             model.addAttribute("board", board);
+            String userName = authentication.getName();
+            Member member = memberRepository.findByUserEmail(userName);
+            model.addAttribute("writer", member.getId() == board.getMember().getId());
         }
+
 
         return "board/read";
     }
@@ -51,6 +64,7 @@ public class BoardController {
     public String form(Model model, @RequestParam(required = false) Long id ) {
         if (id == null) {
             model.addAttribute("board", new Board());
+            model.addAttribute("localDateTime", LocalDateTime.now());
         } else {
             Board board = boardRepository.findById(id).orElse(null);
             model.addAttribute("board", board);
@@ -60,11 +74,15 @@ public class BoardController {
     }
 
     @PostMapping("/form")
-    public String greetingSubmit(@Valid Board board, BindingResult bindingResult) {
+    public String greetingSubmit(@Valid Board board, BindingResult bindingResult, Authentication authentication) {
         if (bindingResult.hasErrors()) {
             return "board/form";
         }
-        boardRepository.save(board);
+
+        String userName = authentication.getName();
+//        Member member = memberRepository.findByUserEmail(userName);
+        boardService.save(userName, board);
+        //boardRepository.save(board);
         return "redirect:/board/list";
     }
 }
