@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -71,10 +72,13 @@ public class InfoController {
     }
 
     @GetMapping("/matching/details")
-    public String search(Model model, Long id) {
-        Member member= memberRepository.findById(id).get();
-        model.addAttribute("member", member);
-        model.addAttribute("petSitter", member.getPetSitter());
+    public String search(Authentication authentication, Model model, Long id) {
+        String userEmail = authentication.getName();
+        Member loginMember = memberRepository.findByUserEmail(userEmail);
+        Member petSitterMember= memberRepository.findById(id).get();
+        model.addAttribute("petSitterMember", petSitterMember);
+        model.addAttribute("petSitter", petSitterMember.getPetSitter());
+        model.addAttribute("loginMember", loginMember);
         return "details";
     }
 

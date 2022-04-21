@@ -79,7 +79,7 @@
 <!--        주소-->
         <div id="address01"></div>
 
-        <div th:text="${member.userName}">~~ 님을 소개합니다.</div>
+        <div th:text="${petSitterMember.userName}">~~ 님을 소개합니다.</div>
     </div>
     <div class="item introduce">
         <div class="text_box" th:text="*{selfIntroduction}">여기는 자기소개~</div>
@@ -101,13 +101,18 @@
         </ul>
     </div>
     <div class="item buttonBox">
-        <button type="button"
-                th:onclick="|location.href='@{/matching/profile/reservation/{sitter_id}(sitter_id=*{id})}'|">예약하러가기
-        </button>
-        </br>
-        <button type="button"
-                th:onclick="|location.href='@{/chat/1/1}'|">채팅하기
-        </button>
+        <div th:if="(${petSitterMember.id}==${loginMember.id})">
+            <button type="button" th:onclick="|location.href='@{/mypage/petsitter/edit}'|">수정하기</button>
+        </div>
+        <div th:unless="(${petSitterMember.id}==${loginMember.id})">
+            <button type="button"
+                    th:onclick="|location.href='@{/matching/profile/reservation/{petSitterMember_id}(petSitterMember_id=${petSitterMember.id})}'|">예약하러가기
+            </button>
+            </br>
+            <button type="button"
+                    th:onclick="|location.href='@{/chat/1/1}'|">채팅하기
+            </button>
+        </div>
     </div>
     <div class="item feeList">
         <strong>이용 요금</strong>
