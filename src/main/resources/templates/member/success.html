@@ -11,7 +11,12 @@
     소유 권한 : <span sec:authentication="authorities"></span> <br>
 </div>
 <div>
-    <p sec:authorize="isAuthenticated()"><a th:href="@{/logout}">로그아웃</a></p>
+<!--    <p sec:authorize="isAuthenticated()"><a th:href="@{/logout}">로그아웃</a></p>-->
+<!--    <a href="/">메인</a>-->
+    <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="POST">
+<!--        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
+        <button type="submit">LOGOUT</button>
+    </form>
     <a href="/">메인</a>
 </div>
 </body>
