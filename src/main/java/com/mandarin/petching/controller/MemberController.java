@@ -73,4 +73,10 @@ public class MemberController {
         System.out.println("유저 로그아웃 성공");
         return "/member/logout";
     }
+    @GetMapping({"", "/"})
+    public String choice() {
+
+        return "redirect:/";
+    }
+
 }
