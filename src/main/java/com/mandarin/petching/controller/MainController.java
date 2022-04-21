@@ -17,10 +17,13 @@ public class MainController {
 
     @GetMapping(value = "/")
     public String main(Authentication authentication, Model model){
-        String userName = authentication.getName();
-        Member member = memberRepository.findByUserEmail(userName);
-        model.addAttribute("member", member);
-
+        if(authentication == null){
+            return "index";
+        } else {
+            String userName = authentication.getName();
+            Member member = memberRepository.findByUserEmail(userName);
+            model.addAttribute("member", member);
+        }
         return "index";
     }
 }
