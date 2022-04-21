@@ -3,13 +3,12 @@ package com.mandarin.petching.domain;
 
 import lombok.*;
 
-import org.springframework.data.annotation.CreatedDate;
+import org.hibernate.annotations.CreationTimestamp;
 
 
 import java.time.LocalDateTime;
 import javax.persistence.*;
 
-import org.springframework.data.annotation.CreatedDate;
 
 
 
@@ -30,13 +29,13 @@ public class Board {
     @JoinColumn(name = "member_id")
     private Member member;
 
+    @Column(columnDefinition = "integer default 0", nullable = false)
     private Integer hits;
 
-    @CreatedDate
+    @Column(name = "reg_date", updatable = false)
+    @CreationTimestamp
     private LocalDateTime regDate;
-    @Column(
-            length = 20
-    )
+    @Column(length = 20)
     private String title;
 
     @Lob
