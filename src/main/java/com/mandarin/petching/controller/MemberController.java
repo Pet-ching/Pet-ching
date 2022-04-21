@@ -47,7 +47,7 @@ public class MemberController {
             return "member/memberForm";
         }
 
-        return "redirect:/";
+        return "/index";
     }
 
     @GetMapping(value = "/login")
@@ -75,8 +75,6 @@ public class MemberController {
     }
     @GetMapping({"", "/"})
     public String choice() {
-
-        return "redirect:/";
+        return "/index";
     }
-
 }
