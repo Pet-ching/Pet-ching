@@ -1,8 +1,11 @@
 // code by. hyeok
 package com.mandarin.petching.controller;
 
+import com.mandarin.petching.domain.Member;
 import com.mandarin.petching.domain.PetSitter;
+import com.mandarin.petching.repository.MemberRepository;
 import com.mandarin.petching.service.InfoService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,10 +17,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
+@RequiredArgsConstructor
 public class InfoController {
 
     @Autowired
     private InfoService infoService;
+
+    private final MemberRepository memberRepository;
+
 
     @GetMapping("/matching/list")
     public String list(Model model, @PageableDefault(page = 0, size = 10, sort = "workingArea", direction = Sort.Direction.ASC) Pageable pageable, String searchKeyword, String ableService) {
@@ -65,7 +72,9 @@ public class InfoController {
 
     @GetMapping("/matching/details")
     public String search(Model model, Long id) {
-        model.addAttribute("petSitter", infoService.findById(id));
+        Member member= memberRepository.findById(id).get();
+        model.addAttribute("member", member);
+        model.addAttribute("petSitter", member.getPetSitter());
         return "details";
     }
 
