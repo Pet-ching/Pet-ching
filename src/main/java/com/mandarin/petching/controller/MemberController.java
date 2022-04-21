@@ -26,13 +26,13 @@ public class MemberController {
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
 
-    @GetMapping(value = "/new")
+    @GetMapping(value = "/join")
     public String memberForm(Model model){
         model.addAttribute("memberFormDto", new MemberFormDto());
         return "member/memberForm";
     }
 
-    @PostMapping(value = "/new")
+    @PostMapping(value = "/join")
     public String newMember(@Valid MemberFormDto memberFormDto, BindingResult bindingResult, Model model){
 
         if(bindingResult.hasErrors()){

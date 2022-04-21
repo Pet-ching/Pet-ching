@@ -1,6 +1,7 @@
 package com.mandarin.petching.controller.mypage;
 
 import com.mandarin.petching.domain.*;
+import com.mandarin.petching.dto.PetDto;
 import com.mandarin.petching.repository.PetRepository;
 import com.mandarin.petching.service.MyPageService;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -20,61 +21,74 @@ public class PetInfoController {
     private final MyPageService myPageService;
     private final PetRepository petRepository;
 
-    @GetMapping("/{memberId}/petowner")
-    public String petOwnerView(@PathVariable Long memberId, Model model) {
+    @GetMapping("/{memberId}/pet")
+    public String petListView(@PathVariable Long memberId, Model model) {
 
         Member member = myPageService.findMemberById(memberId);
 
-        try {
-            Pet pet = member.getPetList().get(1);
+        List<Pet> petList = member.getPetList();
 
-            if (pet == null) {
-                return "myPage/temp";
-            }
+        model.addAttribute("petListEmpty", petList.isEmpty());
+        model.addAttribute("petList", petList);
+        model.addAttribute("memberId", memberId);
 
-            model.addAttribute("petOwner", pet);
-            model.addAttribute("memberId", 1L);
-
-            return "mypage/petOwner";
-        } catch (EntityNotFoundException e) {
-            return "myPage/temp";
-        }
+        return "mypage/petInfoList";
     }
 
-    @GetMapping("/{memberId}/petowner/edit")
-    public String petOwnerEditForm(@PathVariable Long memberId, Model model) {
-
-        Member member = myPageService.findMemberById(memberId);
-
-        try {
-            Pet pet = member.getPetList().get(1);
-
-            if (pet == null) {
-                model.addAttribute("pet", new Pet());
-            } else {
-                model.addAttribute("pet", pet);
-            }
-
-        } catch (EntityNotFoundException e) {
-            model.addAttribute("pet", new Pet());
-        }
+    @GetMapping("{memberId}/pet/create")
+    public String createPetForm(@PathVariable Long memberId, Model model) {
 
         GenderType[] genderTypes = GenderType.values();
         PetType[] petTypes = PetType.values();
 
         model.addAttribute("genderTypes", genderTypes);
         model.addAttribute("petTypes", petTypes);
+        model.addAttribute("pet", new Pet());
 
-        return "mypage/petOwnerEdit";
+        return "mypage/petInfoWrite";
     }
 
-    @PostMapping("/{memberId}/petowner/edit")
-    public String petOwnerEdit(@PathVariable Long memberId, PetOwnerDTO petOwnerDto, Model model) {
+    @PostMapping("{memberId}/pet/create")
+    public String createPet(@PathVariable Long memberId, PetDto petDto) {
+
+        myPageService.createPet(memberId, petDto);
+
+        return "redirect:/mypage/" + memberId + "/pet";
+    }
+
+    @GetMapping("/{memberId}/pet/{petId}")
+    public String petView(@PathVariable Long memberId, @PathVariable Long petId, Model model) {
+
+        Pet pet = myPageService.getPetById(petId);
+
+        model.addAttribute("pet", pet);
+        model.addAttribute("memberId", memberId);
+
+        return "mypage/petInfoView";
+    }
+
+    @GetMapping("/{memberId}/pet/edit/{petId}")
+    public String editPetForm(@PathVariable Long memberId, @PathVariable Long petId, Model model) {
+
+        Pet pet = myPageService.getPetById(petId);
+
+        GenderType[] genderTypes = GenderType.values();
+        PetType[] petTypes = PetType.values();
+
+        model.addAttribute("pet", pet);
+        model.addAttribute("genderTypes", genderTypes);
+        model.addAttribute("petTypes", petTypes);
+
+        return "mypage/petInfoEdit";
+    }
+
+    @PostMapping("/{memberId}/pet/edit/{petId}")
+    public String editPet(@PathVariable Long memberId, @PathVariable Long petId, PetDto petDto, Model model) {
 
         // TODO Bean Validation
 
-        myPageService.savePet(memberId, petOwnerDto);
+        myPageService.updatePet(petId, petDto);
 
-        return "redirect:/mypage/" + memberId + "/petowner";
+        return "redirect:/mypage/" + memberId + "/pet";
     }
 }

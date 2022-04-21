@@ -1,5 +1,7 @@
-package com.mandarin.petching.domain;
+package com.mandarin.petching.dto;
 
+import com.mandarin.petching.domain.GenderType;
+import com.mandarin.petching.domain.PetType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -10,7 +12,7 @@ import java.time.LocalDate;
 
 @Getter @Setter
 @ToString
-public class PetOwnerDTO {
+public class PetDto {
 
     private String petName;
 

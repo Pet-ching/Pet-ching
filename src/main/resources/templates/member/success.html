@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -11,7 +11,7 @@
     소유 권한 : <span sec:authentication="authorities"></span> <br>
 </div>
 <div>
-    <a href="/members/logout">로그아웃</a>
+    <p sec:authorize="isAuthenticated()"><a th:href="@{/logout}">로그아웃</a></p>
     <a href="/">메인</a>
 </div>
 </body>
