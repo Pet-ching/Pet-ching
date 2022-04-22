@@ -86,19 +86,19 @@
     </div>
     <div class="item certifi">
         <strong>자격증 보유 내역</strong>
-        <ul>
-            <li th:each="certificate : *{#strings.arraySplit(certificate,' ')}">
-                <p th:text="${certificate}">여기에 자격증 나와요~
-            </li>
-        </ul>
+<!--        <ul>-->
+<!--            <li th:each="certificate : *{#strings.arraySplit(certificate,' ')}">-->
+<!--                <p th:text="${certificate}">여기에 자격증 나와요~-->
+<!--            </li>-->
+<!--        </ul>-->
     </div>
     <div class="item services">
         <strong>이용 가능 서비스</strong>
-        <ul>
-            <li th:each="ableService : *{#strings.arraySplit(ableService,' ')}">
-                <p th:text="${ableService}"> 여기는 이용가능 서비스
-            </li>
-        </ul>
+<!--        <ul>-->
+<!--            <li th:each="ableService : *{#strings.arraySplit(ableService,' ')}">-->
+<!--                <p th:text="${ableService}"> 여기는 이용가능 서비스-->
+<!--            </li>-->
+<!--        </ul>-->
     </div>
     <div class="item buttonBox">
         <div th:if="(${petSitterMember.id}==${loginMember.id})">
@@ -116,11 +116,11 @@
     </div>
     <div class="item feeList">
         <strong>이용 요금</strong>
-        <div th:text="*{fee}"></div>
+<!--        <div th:text="*{fee}"></div>-->
     </div>
     <div class="item workingTime">
         <strong>예약 가능 날짜</strong>
-        <div th:text="*{workingTime}"></div>
+<!--        <div th:text="*{workingTime}"></div>-->
     </div>
     <div class="item workingArea">
         <strong>예약 가능 지역</strong>
