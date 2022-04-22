@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="kor" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Board Form</title>
+    <title>고객 센터</title>
     <link rel="stylesheet" th:href="@{/css/base.css}" />
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
     <style>
@@ -28,7 +28,7 @@
 </head>
 <body>
     <!--header-->
-    <div th:replace="fragments/header.html::header"></div>
+    <div th:replace="qna/layout/header.html::header"></div>
     <!--/header-->
 
     <!--body-->
@@ -62,7 +62,7 @@
     <!--body-->
 
     <!--footer-->
-    <div th:replace="fragments/footer.html::footer"></div>
+    <div th:replace="qna/layout/footer::footer"></div>
     <!--/footer-->
 </body>
 </html>
