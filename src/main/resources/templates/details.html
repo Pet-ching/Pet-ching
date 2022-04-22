@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Board Form</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+
     <title>Document</title>
     <style>
         * {
@@ -70,6 +74,7 @@
 
 </head>
 <body>
+<div th:replace="fragments/header.html::header"></div>
 <div class="container" th:object="${petSitter}">
     <div class="item images">
         <!-- image -->
@@ -128,6 +133,7 @@
     </div>
 
 </div>
+<div th:replace="fragments/footer.html::footer"></div>
 <script th:inline="javascript" th:src="@{//dapi.kakao.com/v2/maps/sdk.js?appkey=}+#{appkey}+@{&libraries=services}"></script>
 <script th:inline="javascript" th:src="@{/js/details.js}"></script>
 <script>

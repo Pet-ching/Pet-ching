@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Board Form</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
 </head>
-<body>
+<div th:replace="fragments/header.html::header"></div>
+<div class="container">
 로그아웃 완료<br>
-<a href="/members/login">로그인</a><br>
-<a href="/">메인</a><br>
+</div>
+<div th:replace="fragments/footer.html::footer"></div>
 </body>
 </html>

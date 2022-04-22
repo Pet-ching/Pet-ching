@@ -1,5 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Board Form</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+</head>
 <!--header-->
 <div th:fragment="header">
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -22,26 +29,26 @@
                     <li class="nav-item" th:classappend="${menu} == 'home'? 'active'">
                         <a class="nav-link" href="#" th:href="@{/}">홈</a>
                     </li>
-                    <li class="nav-item" th:classappend="${menu} == 'join'? 'active'">
+                    <li class="nav-item" sec:authorize="isAnonymous()">
                         <a class="nav-link" th:href="@{/members/join}">회원가입</a>
                     </li>
-                    <li class="nav-item" th:classappend="${menu} == 'login'? 'active'">
-                        <a class="nav-link" href="@{/members/login}">로그인</a>
+                    <li class="nav-item" sec:authorize="isAnonymous()">
+                        <a class="nav-link" th:href="@{/members/login}">로그인</a>
                     </li>
-                    <li class="nav-item" th:classappend="${menu} == 'matching'? 'active'">
+                    <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_USER')">
                         <a class="nav-link" th:href="@{/matching/list}">matching</a>
                     </li>
-                    <li class="nav-item" th:classappend="${menu} == 'board'? 'active'">
+                    <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_USER')">
                         <a class="nav-link"th:href="@{/board/list}">게시판</a>
                     </li>
-                    <li class="nav-item" th:classappend="${menu} == 'qna'? 'active'">
+                    <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_USER')">
                         <a class="nav-link"th:href="@{/qna}">QnA</a>
                     </li>
-                    <li class="nav-item" th:classappend="${menu} == 'mypage'? 'active'">
+                    <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_USER')">
                         <a class="nav-link"th:href="@{/mypage(type='petowner')}">mypage</a>
                     </li>
-                    <li>
-                        <a href="/logout">LOGOUT</a>
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <a class="nav-link"th:href="@{/logout}">logout</a>
                     </li>
                 </ul>
             </div>

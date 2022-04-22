@@ -1,38 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/layout1}">
-<haed>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-</haed>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-<!-- 사용자 CSS 추가 -->
-<th:block layout:fragment="css">
-    <style>
-        .fieldError {
-            color: #bd2130;
-        }
-    </style>
-</th:block>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Board Form</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+</head>
 
-<!-- 사용자 스크립트 추가 -->
-<th:block layout:fragment="script">
+<body>
+<div th:replace="fragments/header.html::header"></div>
+<div class="container">
 
-    <script th:inline="javascript">
-        $(document).ready(function(){
-            var errorMessage = [[${errorMessage}]];
-            if(errorMessage != null){
-                alert(errorMessage);
-            }
-        });
-    </script>
-
-</th:block>
-
-<div layout:fragment="content">
-
-    <form action="/members/new" role="form" method="post"  th:object="${memberFormDto}">
+    <form action="/members/join" role="form" method="post"  th:object="${memberFormDto}">
         <div class="form-group">
             <label th:for="userId">ID</label>
             <input type="text" th:field="*{userId}" class="form-control" placeholder="이름을 입력해주세요">
@@ -60,6 +39,7 @@
             <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
             <div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
         </div>
+        <div th:replace="fragments/footer.html::footer"></div>
         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
         <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c8d6a3a882a6de0bcb6eb3035bb14608"></script>
         <script>

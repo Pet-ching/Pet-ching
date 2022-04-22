@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Board Form</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+
     <title>Document</title>
 </head>
 <body>
+<div th:replace="fragments/header.html::header"></div>
+<div class="container">
 <form action="" method="post">
     <input type="text" th:field="${pet.petName}" placeholder="반려동물 이름">
     <div th:each="type : ${genderTypes}">
@@ -37,5 +43,7 @@
     <input type="text" th:field="${pet.note}" placeholder="기타 사항 입력">
     <input type="submit">
 </form>
+</div>
+<div th:replace="fragments/footer.html::footer"></div>
 </body>
 </html>
