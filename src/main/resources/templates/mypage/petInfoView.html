@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        <div>반려동물 이름</div>
+        <div th:text="${pet.petName}"></div>
+    </div>
+    <div>
+        <div>반려동물 성별</div>
+        <div th:text="${pet.petGender}"></div>
+    </div>
+    <div>
+        <div>반려동물 종류</div>
+        <div th:text="${pet.petType}"></div>
+    </div>
+<!--    <div>-->
+<!--        <div>반려동물 생일</div>-->
+<!--        <div th:text="${pet.petBth}"></div>-->
+<!--    </div>-->
+    <div>
+        <div>반려동물 몸무게</div>
+        <div th:text="${pet.weight}"></div>
+    </div>
+    <div>
+        <div>중성화 여부</div>
+        <div th:text="${pet.neutralization}"></div>
+    </div>
+    <div>
+        <div>동물병원 이름</div>
+        <div th:text="${pet.hospitalName}"></div>
+    </div>
+    <div>
+        <div>동물병원 전화번호</div>
+        <div th:text="${pet.hospitalTel}"></div>
+    </div>
+    <div>
+        <div>동물병원 주소</div>
+        <div th:text="${pet.hospitalAdr}"></div>
+    </div>
+    <div>
+        <div>기타 사항</div>
+        <div th:text="${pet.note}"></div>
+    </div>
+    <a th:href="@{/mypage/{memberId}/pet/edit/{petId}(memberId = ${memberId}, petId = ${pet.id})}">수정하기</a>
+</body>
+</html>

@@ -8,6 +8,9 @@ import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.CreatedDate;
 
@@ -37,11 +40,15 @@ public class Board {
     @Column(
             length = 20
     )
+
+    @NotBlank(message = "제목을 입력해 주세요!")
     private String title;
 
     @Lob
+    @NotBlank(message = "제목을 입력해 주세요!")
     private String content;
 
+    @NotNull(message = "보드 타입을 선택해 주세요!")
     @Enumerated(EnumType.STRING)
     private BoardType boardType;
 

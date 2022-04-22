@@ -2,7 +2,7 @@ package com.mandarin.petching.service;
 
 import com.mandarin.petching.domain.Member;
 import com.mandarin.petching.domain.Pet;
-import com.mandarin.petching.domain.PetOwnerDTO;
+import com.mandarin.petching.dto.PetDto;
 import com.mandarin.petching.domain.PetSitter;
 import com.mandarin.petching.repository.PetSitterRepository;
 import com.mandarin.petching.repository.UserRepository;
@@ -25,11 +25,21 @@ public class MyPageService {
     }
 
     @Transactional
-    public void savePet(Long memberId, PetOwnerDTO petOwnerDto) {
+    public void createPet(Long memberId, PetDto petDto) {
         Member member = userRepository.findById(memberId).get();
 
-        Pet pet = Pet.createPetOwner(member, petOwnerDto);
+        Pet pet = Pet.createPet(member, petDto);
         petRepository.save(pet);
+    }
+
+    public Pet getPetById(Long petId) {
+        return petRepository.findById(petId).get();
+    }
+
+    @Transactional
+    public void updatePet(Long petId, PetDto petDto) {
+        Pet pet = petRepository.findById(petId).get();
+        pet.updatePet(petDto);
     }
 
     @Transactional

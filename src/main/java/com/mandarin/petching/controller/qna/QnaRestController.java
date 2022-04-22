@@ -2,6 +2,7 @@ package com.mandarin.petching.controller.qna;
 
 import com.mandarin.petching.domain.AnswerType;
 import com.mandarin.petching.domain.Board;
+import com.mandarin.petching.domain.BoardType;
 import com.mandarin.petching.repository.BoardRepository;
 import com.mandarin.petching.service.QnaService;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +29,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDateTime;
 
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
+
+import javax.transaction.Transactional;
 
 //import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 //import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
@@ -100,5 +104,14 @@ public class QnaRestController {
         //valid 체크
         boardRepository.deleteById(id);
         return new ResponseEntity<>("{}", HttpStatus.OK);
+    }
+
+    @GetMapping("/removeAll")
+    @DeleteMapping("/deleteAll")
+    @Transactional
+    public ResponseEntity<?> delete(@PageableDefault Pageable pageable) {
+        System.out.println("delete Access");
+        boardRepository.deleteByBoardTypeOrBoardTypeOrBoardType(BoardType.QnA문의1, BoardType.QnA문의2, BoardType.QnA문의3, pageable);
+        return new ResponseEntity<>("{}", HttpStatus.OK); //ResponseEntity는 HttpEntity를 상속받음으로써 HttpHeader와 body를 가질 수 있다.
     }
 }

@@ -1,12 +1,18 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<sec:authorize access="isAuthenticated()">
+    <sec:authentication property="principal" var="principal"/>
+</sec:authorize>
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<a th:href="@{/members/login}">login</a>
-<a th:href="@{/members/new}">join</a>
+
+<p sec:authorize="isAnonymous()">Click <a th:href="@{/members/join}">회원가입</a> to see a greeting.</p>
+<p sec:authorize="isAnonymous()">Click <a th:href="@{/members/login}">로그인</a> to see a greeting.</p>
+<p sec:authorize="isAuthenticated()">Click <a th:href="@{/logout}">로그아웃</a> to see a greeting.</p>
 <a th:href="@{/matching/list}">matching</a>
 <a th:href="@{/board/list}">board</a>
 <!--<a th:href="@{/qna}">qna</a><br>-->

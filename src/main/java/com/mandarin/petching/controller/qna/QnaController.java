@@ -33,7 +33,7 @@ public class QnaController {
 
     @GetMapping({"/ask"})
     public String list(@PageableDefault Pageable pageable, Model model) {
-        model.addAttribute("boardList", this.qnaService.findBoardList(pageable));
+        model.addAttribute("boardList", this.qnaService.findQnaAllList(pageable));
         return "/qna/list";
     }
 
@@ -44,5 +44,7 @@ public class QnaController {
     }
 
 
+
+    //Querydsl 처리
 
 }

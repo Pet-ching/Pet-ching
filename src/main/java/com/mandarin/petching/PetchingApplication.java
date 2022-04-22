@@ -7,6 +7,7 @@ import com.mandarin.petching.domain.Member;
 import com.mandarin.petching.repository.BoardRepository;
 import com.mandarin.petching.repository.UserRepository;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.stream.IntStream;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
