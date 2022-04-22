@@ -15,14 +15,14 @@ import java.util.List;
 
 @Slf4j
 @Controller
-@RequestMapping("/mypage")
+@RequestMapping("/mypage/pet")
 @RequiredArgsConstructor
 public class PetInfoController {
 
     private final MyPageService myPageService;
     private final MemberRepository memberRepository;
 
-    @GetMapping("/pet")
+    @GetMapping
     public String petListView(Authentication authentication, Model model) {
 
         String userName = authentication.getName();
@@ -36,7 +36,7 @@ public class PetInfoController {
         return "mypage/petInfoList";
     }
 
-    @GetMapping("/pet/create")
+    @GetMapping("/create")
     public String createPetForm(Model model) {
 
         GenderType[] genderTypes = GenderType.values();
@@ -49,7 +49,7 @@ public class PetInfoController {
         return "mypage/petInfoWrite";
     }
 
-    @PostMapping("/pet/create")
+    @PostMapping("/create")
     public String createPet(Authentication authentication, PetDto petDto) {
 
         String userName = authentication.getName();
@@ -60,7 +60,7 @@ public class PetInfoController {
         return "redirect:/mypage/pet";
     }
 
-    @GetMapping("/pet/{petId}")
+    @GetMapping("/{petId}")
     public String petView(@PathVariable Long petId, Model model) {
 
         Pet pet = myPageService.getPetById(petId);
@@ -70,7 +70,7 @@ public class PetInfoController {
         return "mypage/petInfoView";
     }
 
-    @GetMapping("pet/edit/{petId}")
+    @GetMapping("/edit/{petId}")
     public String editPetForm(@PathVariable Long petId, Model model) {
 
         Pet pet = myPageService.getPetById(petId);
@@ -85,7 +85,7 @@ public class PetInfoController {
         return "mypage/petInfoEdit";
     }
 
-    @PostMapping("/pet/edit/{petId}")
+    @PostMapping("/edit/{petId}")
     public String editPet(@PathVariable Long petId, PetDto petDto, Model model) {
 
         // TODO Bean Validation
