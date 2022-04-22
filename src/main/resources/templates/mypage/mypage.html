@@ -23,29 +23,4 @@
 </div>
 <div th:replace="fragments/footer.html::footer"></div>
 </body>
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Board Form</title>
-    <link rel="stylesheet" th:href="@{/css/base.css}"/>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
-</head>
-<body>
-<div th:replace="fragments/header.html::header"></div>
-<div class="container">
-    <div th:if="${type == 'petowner'}">
-        <button th:onclick="|location.href='@{/mypage(type='petsitter')}'|">펫시터 모드로 변경</button>
-        <a th:href="@{/mypage/pet}">반려동물 조회</a>
-        <a th:href="@{/mypage/petowner/reservation}">예약현황 조회</a>
-    </div>
-
-    <div th:if="${type == 'petsitter'}">
-        <button th:onclick="|location.href='@{/mypage(type='petowner')}'|">보호자 모드로 변경</button>
-        <a th:href="@{/mypage/petsitter}">돌봄환경 조회</a>
-        <a th:href="@{/mypage/petsitter/reservation}">예약현황 조회</a>
-    </div>
-</div>
-<div th:replace="fragments/footer.html::footer"></div>
-</body>
 </html>
