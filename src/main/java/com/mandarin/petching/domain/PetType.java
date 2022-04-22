@@ -1,5 +1,5 @@
 package com.mandarin.petching.domain;
 
 public enum PetType {
-    DOG, CAT, ETC
+    SMALL_DOG, MIDDLE_DOG, LARGE_DOG, CAT, ETC
 }

@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -43,6 +45,10 @@ public class MemberService implements UserDetailsService {
                 .password(member.getUserPwd())
                 .roles(member.getRole().toString())
                 .build();
+    }
+
+    public void deleteMember(Long id){
+        memberRepository.deleteById(id);
     }
 
 }
