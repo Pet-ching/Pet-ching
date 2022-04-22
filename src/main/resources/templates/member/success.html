@@ -1,23 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
 </head>
 <body>
-<div>
+<div th:replace="fragments/header.html::header"></div>
+<div class="container">
     ID : <span sec:authentication="name"></span> 환영이요 ~ <br>
     소유 권한 : <span sec:authentication="authorities"></span> <br>
 </div>
-<div>
-<!--    <p sec:authorize="isAuthenticated()"><a th:href="@{/logout}">로그아웃</a></p>-->
-<!--    <a href="/">메인</a>-->
-    <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="POST">
-<!--        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
-        <button type="submit">LOGOUT</button>
-    </form>
-    <a href="/">메인</a>
-</div>
+
+<div th:replace="fragments/footer.html::footer"></div>
 </body>
 </html>
