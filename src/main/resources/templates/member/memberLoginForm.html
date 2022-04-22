@@ -1,18 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/layout1}">
-
-<!-- 사용자 CSS 추가 -->
-<th:block layout:fragment="css">
-  <style>
-        .error {
-            color: #bd2130;
-        }
-    </style>
-</th:block>
-
-<div layout:fragment="content">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Board Form</title>
+  <link rel="stylesheet" th:href="@{/css/base.css}" />
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+<div th:replace="fragments/header.html::header"></div>
+<div class="container">
 
   <form role="form" method="post" action="/members/login">
     <div class="form-group">
@@ -31,4 +27,6 @@
 
 </div>
 
+<div th:replace="fragments/footer.html::footer"></div>
+</body>
 </html>
