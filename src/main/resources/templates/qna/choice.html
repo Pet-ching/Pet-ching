@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="kor" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>고객 센터</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <style>
+        table
+        {
+            margin-top : 40px;
+            margin-left:auto;
+            margin-right:auto;
+        }
+        td
+        {
+           margin-top : 30px;
+           text-align: center;
+        }
+        .away
+        {
+            margin-top : 40px;
+            margin-left:  30px;
+            margin-right: 30px;
+
+        }
+    </style>
+</head>
+<body>
+    <!--header-->
+    <div th:replace="qna/layout/header.html::header"></div>
+    <!--/header-->
+
+    <!--body-->
+    <div class="container">
+        <div class="page-header">
+            <h1>어떻게 도와드릴까요?</h1>
+        </div>
+
+        <table width="60%">
+            <tr>
+                <td>
+                    <a href="/qna/famous">
+                        <img src="https://images.all-free-download.com/images/graphicwebp/black_question_mark_icon_vector_281130.webp" alt="위의 이미지를 누르면 연결됩니다."  width="200" height="200">
+<!--                        <p>자주 찾는 질문</p>-->
+                        <div class="away">자주 찾는 질문</div>
+                    </a>
+                </td>
+                <td>
+                    <a href="/qna/ask">
+                        <img src="https://cdn-icons-png.flaticon.com/512/32/32368.png" alt="위의 이미지를 누르면 연결됩니다." width="200" height="200">
+                        <div class="away">1:1 문의</div>
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
+
+
+    <!--body-->
+
+    <!--footer-->
+    <div th:replace="qna/layout/footer::footer"></div>
+    <!--/footer-->
+</body>
+</html>

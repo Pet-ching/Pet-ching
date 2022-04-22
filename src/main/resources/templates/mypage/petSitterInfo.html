@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .temp_wrapper {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+<div th:if="${petSitterEmpty}">
+    <h1>아직 입력된 정보가 없어요!</h1>
+    <a th:href="@{/mypage/petsitter/create}">등록할래요?</a>
+</div>
+<div th:unless="${petSitterEmpty}" th:object="${petSitter}">
+    <h1>돌봄환경 정보</h1>
+    <div class="temp_wrapper">
+        <div>자기소개</div>
+        <div th:text="*{selfIntroduction}"></div>
+    </div>
+    <div class="temp_wrapper">
+        <div>소형견 이용 요금</div>
+        <div th:text="*{feeList.smallDogFee}"></div>
+    </div>
+    <div class="temp_wrapper">
+        <div>중형견 이용 요금</div>
+        <div th:text="*{feeList.middleDogFee}"></div>
+    </div>
+    <div class="temp_wrapper">
+        <div>대형견 이용 요금</div>
+        <div th:text="*{feeList.largeDogFee}"></div>
+    </div>
+    <div class="temp_wrapper">
+        <div>고양이 이용 요금</div>
+        <div th:text="*{feeList.catFee}"></div>
+    </div>
+    <div class="temp_wrapper">
+        <div>기타 동물 이용 요금</div>
+        <div th:text="*{feeList.etcFee}"></div>
+    </div>
+    <div>
+        <div>근무지</div>
+        <div th:text="*{workingArea}"></div>
+    </div>
+    <div class="temp_wrapper">
+        <div>월요일 시작시간</div>
+        <div th:text="*{workingDayAndTime.monStartTime}"></div>
+    </div>
+    <div class="temp_wrapper">
+        <div>월요일 종료시간</div>
+        <div th:text="*{workingDayAndTime.monFinishTime}"></div>
+    </div>
+    <div class="temp_wrapper">
+        <div>화요일 시작시간</div>
+        <div th:text="*{workingDayAndTime.tueStartTime}"></div>
+    </div>
+    <div class="temp_wrapper">
+        <div>화요일 종료시간</div>
+        <div th:text="*{workingDayAndTime.tueFinishTime}"></div>
+    </div>
+    <div class="temp_wrapper">
+        <div>수요일 시작시간</div>
+        <div th:text="*{workingDayAndTime.wedStartTime}"></div>
+    </div>
+    <div class="temp_wrapper">
+        <div>수요일 종료시간</div>
+        <div th:text="*{workingDayAndTime.wedFinishTime}"></div>
+    </div>
+    <div class="temp_wrapper">
+        <div>목요일 시작시간</div>
+        <div th:text="*{workingDayAndTime.thuStartTime}"></div>
+    </div>
+    <div class="temp_wrapper">
+        <div>목요일 종료시간</div>
+        <div th:text="*{workingDayAndTime.thuFinishTime}"></div>
+    </div>
+    <div class="temp_wrapper">
+        <div>금요일 시작시간</div>
+        <div th:text="*{workingDayAndTime.friStartTime}"></div>
+    </div>
+    <div class="temp_wrapper">
+        <div>금요일 종료시간</div>
+        <div th:text="*{workingDayAndTime.friFinishTime}"></div>
+    </div>
+    <div class="temp_wrapper">
+        <div>토요일 시작시간</div>
+        <div th:text="*{workingDayAndTime.satStartTime}"></div>
+    </div>
+    <div class="temp_wrapper">
+        <div>토요일 종료시간</div>
+        <div th:text="*{workingDayAndTime.satFinishTime}"></div>
+    </div>
+    <div class="temp_wrapper">
+        <div>일요일 시작시간</div>
+        <div th:text="*{workingDayAndTime.sunStartTime}"></div>
+    </div>
+    <div class="temp_wrapper">
+        <div>일요일 종료시간</div>
+        <div th:text="*{workingDayAndTime.sunFinishTime}"></div>
+    </div>
+    <div>
+        <div>자격증 목록</div>
+        <div th:each="c : *{certificate}" th:text="${c}"></div>
+    </div>
+    <div>
+        <div>이용 가능 서비스</div>
+        <div th:each="a : *{ableService}" th:text="${a}"></div>
+    </div>
+    <a th:href="@{/mypage/petsitter/edit}">수정하기</a>
+</div>
+<a href="/">홈으로</a>
+</body>
+</html>

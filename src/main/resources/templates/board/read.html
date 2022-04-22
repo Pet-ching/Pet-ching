@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Board Form</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+</head>
+
+<body>
+<div th:replace="fragments/header.html::header"></div>
+<div class="container">
+        <form action="#" th:action="@{/board/read}" th:object="${board}" method="post">
+            <input type="hidden" th:field="*{id}">
+            <div class="form-group">
+                <label for="member_id">작성자</label><br>
+                <td th:text="${board.member.userName}" id="member_id">작성자</td>
+            </div>
+            <div class="form-group">
+                <label for="title">제목</label><br>
+                <td th:text="${board.title}" id="title">제목</td>
+            </div>
+            <div class="form-group">
+                <label for="content">내용</label><br>
+                <td th:text="${board.content}" id="content">내용</td>
+            </div>
+            <div class="text-right">
+                <a type="button" class="btn btn-info" th:href="@{/board/form(id=${board.id})}" th:if="${writer}">수정</a>
+                <a type="button" class="btn btn-danger" 
+                th:onclick="|deleteBoard(*{id})|" th:if="${writer}">삭제</a>
+                <a type="button" class="btn btn-primary" th:href="@{/board/list}">목록</a>
+            </div>
+        </form>
+    </div>
+    <div th:replace="fragments/footer.html::footer"></div>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+        crossorigin="anonymous"></script>
+        <script>
+            function deleteBoard(id) {
+                //DELETE /api/boards/{id}
+                $.ajax({
+                    url: '/api/boards/' + id,
+                    type: 'DELETE',
+                    success: function (result) {
+                        console.log('result', result);
+                        alert('삭제완료.');
+                        window.location.href = '/board/list'
+                    }
+                });
+            }
+        </script>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<sec:authorize access="isAuthenticated()">
+    <sec:authentication property="principal" var="principal"/>
+</sec:authorize>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}" /> <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+<div th:replace="fragments/header::header"></div>
+<div class="container">
+
+</div>
+
+
+<div th:replace="fragments/footer::footer"></div>
+</body>
+</html>
+
+<!--<form sec:authorize="isAuthenticated()" th:action="@{/members/withdrawal}" th:method="get">-->
+<!--    &lt;!&ndash;    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />&ndash;&gt;-->
+<!--    <button type="submit">탈퇴하기</button>-->
+<!--</form>-->

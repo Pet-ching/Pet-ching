@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="" method="post" th:object="${petSitter}">
+    <input type="text" th:field="*{selfIntroduction}" placeholder="자기소개">
+
+    <input type="number" th:field="${feeList.smallDogFee}" placeholder="소형견 요금">
+    <input type="number" th:field="${feeList.middleDogFee}" placeholder="중형견 요금">
+    <input type="number" th:field="${feeList.largeDogFee}" placeholder="대형견 요금">
+    <input type="number" th:field="${feeList.catFee}" placeholder="고양이 요금">
+    <input type="number" th:field="${feeList.etcFee}" placeholder="기타 동물 요금">
+
+    <div>
+        <input type="time" th:field="${workingDayAndTime.monStartTime}">
+        <label>월요일 시작시간</label>
+    </div>
+    <div>
+        <input type="time" th:field="${workingDayAndTime.monFinishTime}">
+        <label>월요일 종료시간</label>
+    </div>
+    <div>
+        <input type="time" th:field="${workingDayAndTime.tueStartTime}">
+        <label>화요일 시작시간</label>
+    </div>
+    <div>
+        <input type="time" th:field="${workingDayAndTime.tueFinishTime}">
+        <label>화요일 종료시간</label>
+    </div>
+    <div>
+        <input type="time" th:field="${workingDayAndTime.wedStartTime}">
+        <label>수요일 시작시간</label>
+    </div>
+    <div>
+        <input type="time" th:field="${workingDayAndTime.wedFinishTime}">
+        <label>수요일 종료시간</label>
+    </div>
+    <div>
+        <input type="time" th:field="${workingDayAndTime.thuStartTime}">
+        <label>목요일 시작시간</label>
+    </div>
+    <div>
+        <input type="time" th:field="${workingDayAndTime.thuFinishTime}">
+        <label>목요일 종료시간</label>
+    </div>
+    <div>
+        <input type="time" th:field="${workingDayAndTime.friStartTime}">
+        <label>금요일 시작시간</label>
+    </div>
+    <div>
+        <input type="time" th:field="${workingDayAndTime.friFinishTime}">
+        <label>금요일 종료시간</label>
+    </div>
+    <div>
+        <input type="time" th:field="${workingDayAndTime.satStartTime}">
+        <label>토요일 시작시간</label>
+    </div>
+    <div>
+        <input type="time" th:field="${workingDayAndTime.satFinishTime}">
+        <label>토요일 종료시간</label>
+    </div>
+    <div>
+        <input type="time" th:field="${workingDayAndTime.sunStartTime}">
+        <label>일요일 시작시간</label>
+    </div>
+    <div>
+        <input type="time" th:field="${workingDayAndTime.sunFinishTime}">
+        <label>일요일 종료시간</label>
+    </div>
+    <div>
+        <div>자격증 선택(다중 선택 가능)</div>
+        <div th:each="certificate : ${certificateList}">
+            <input type="checkbox" th:field="*{certificate}" th:value="${certificate}">
+            <label th:for="${#ids.prev('certificate')}" th:text="${certificate}"></label>
+        </div>
+    </div>
+    <div>
+        <div>이용 가능 서비스 선택(다중 선택 가능)</div>
+        <div th:each="ableService : ${ableServiceList}">
+            <input type="checkbox" th:field="*{ableService}" th:value="${ableService}">
+            <label th:for="${#ids.prev('ableService')}" th:text="${ableService}"></label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label th:for="address">주소검색</label>
+        <input type="text" id="sample5_address" th:field="*{workingArea}" placeholder="주소검색">
+        <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
+        <div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
+    </div>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c8d6a3a882a6de0bcb6eb3035bb14608"></script>
+    <script>
+        var mapContainer = document.getElementById('map'),
+            mapOption = {
+                center: new daum.maps.LatLng(37.537187, 127.005476),
+                level: 5
+            };
+
+        var map = new daum.maps.Map(mapContainer, mapOption);
+        var geocoder = new daum.maps.services.Geocoder();
+        var marker = new daum.maps.Marker({
+            position: new daum.maps.LatLng(37.537187, 127.005476),
+            map: map
+        });
+
+
+        function sample5_execDaumPostcode() {
+            new daum.Postcode({
+                oncomplete: function(data) {
+                    var addr = data.address;
+
+                    document.getElementById("sample5_address").value = addr;
+                    geocoder.addressSearch(data.address, function(results, status) {
+                        if (status === daum.maps.services.Status.OK) {
+
+                            var result = results[0];
+
+                            var coords = new daum.maps.LatLng(result.y, result.x);
+                            mapContainer.style.display = "block";
+                            map.relayout();
+                            map.setCenter(coords);
+                            marker.setPosition(coords)
+                        }
+                    });
+                }
+            }).open();
+        }
+    </script>
+    <input type="submit">
+</form>
+</body>
+</html>
