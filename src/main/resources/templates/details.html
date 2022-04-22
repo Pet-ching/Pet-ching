@@ -12,10 +12,28 @@
 <div class="container" th:object="${petSitter}">
     <div class="item images">
         <!-- image -->
-        이미지가 들어가요
+        <div class="slider">
+            <input type="radio" name="slide" id="slide1" checked>
+            <input type="radio" name="slide" id="slide2">
+            <input type="radio" name="slide" id="slide3">
+            <input type="radio" name="slide" id="slide4">
+            <ul id="imgholder" class="imgs">
+                <li><img th:src="./images/memberImages/2/pet/pt_2_00.jpg"></li>
+                <li><img th:src="./images/memberImages/2/petSitter/ps_2_00.jpg"></li>
+                <li><img th:src="./images/memberImages/2/petSitter/ps_2_01.jpg"></li>
+                <li><img th:src="./images/memberImages/2/petSitter/ps_2_02.jpg"></li>
+                <li><img th:src="./images/memberImages/2/petSitter/ps_2_00.jpg"></li>
+            </ul>
+            <div class="bullets">
+                <label for="slide1">&nbsp;</label>
+                <label for="slide2">&nbsp;</label>
+                <label for="slide3">&nbsp;</label>
+                <label for="slide4">&nbsp;</label>
+            </div>
+        </div>
     </div>
     <div class="item petsitter_name">
-<!--        주소-->
+        <!--        주소-->
         <div id="address01"></div>
 
         <div th:text="${petSitterMember.userName}">~~ 님을 소개합니다.</div>
@@ -45,7 +63,8 @@
         </div>
         <div th:unless="(${petSitterMember.id}==${loginMember.id})">
             <button type="button"
-                    th:onclick="|location.href='@{/matching/profile/reservation/{petSitterMember_id}(petSitterMember_id=${petSitterMember.id})}'|">예약하러가기
+                    th:onclick="|location.href='@{/matching/profile/reservation/{petSitterMember_id}(petSitterMember_id=${petSitterMember.id})}'|">
+                예약하러가기
             </button>
             </br>
             <button type="button"
@@ -71,13 +90,15 @@
 </div>
 
 
-<script th:inline="javascript" th:src="@{//dapi.kakao.com/v2/maps/sdk.js?appkey=}+#{appkey}+@{&libraries=services}"></script>
+<script th:inline="javascript"
+        th:src="@{//dapi.kakao.com/v2/maps/sdk.js?appkey=}+#{appkey}+@{&libraries=services}"></script>
 <script th:inline="javascript" th:src="@{/js/details.js}"></script>
 <script>
         let address = "[[${petSitter.workingArea}]]";
         showMap(address, 20);
         document.getElementById('address01').innerHTML = splitAddress(address);
         document.getElementById('address02').innerHTML = splitAddress(address);
+
 </script>
 </body>
 </html>

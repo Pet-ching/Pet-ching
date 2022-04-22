@@ -57,3 +57,55 @@ li {
     grid-row: 5 / 7;
 }
 
+<!-- 이미지 부분 -->
+
+.slider{
+    width: 640px;
+    height: 480px;
+    position: relative;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.slider input[type=radio]{
+    display: none;
+}
+ul.imgs{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+ul.imgs li{
+    position: absolute;
+    left: 640px;
+    transition-delay: 1s;
+
+    padding: 0;
+    margin: 0;
+}
+.bullets{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20px;
+    z-index: 2;
+}
+.bullets label{
+    display: inline-block;
+    border-radius: 50%;
+    background-color: rgba(0,0,0,0.55);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+.slider input[type=radio]:nth-child(1):checked~.bullets>label:nth-child(1){
+    background-color: #fff;
+}
+.slider input[type=radio]:nth-child(2):checked~.bullets>label:nth-child(2){
+    background-color: #fff;
+}
+.slider input[type=radio]:nth-child(3):checked~.bullets>label:nth-child(3){
+    background-color: #fff;
+}
+.slider input[type=radio]:nth-child(4):checked~.bullets>label:nth-child(4){
+    background-color: #fff;
+}
