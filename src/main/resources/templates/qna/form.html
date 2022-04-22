@@ -6,9 +6,7 @@
     <link rel="stylesheet" th:href="@{/css/base.css}" />
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
 </head>
-<body>
-<!--header-->
-<div th:replace="qna/layout/header::header"></div>
+<div th:replace="fragments/header.html::header"></div>
 <!--/header-->
 
 <div class="container">
@@ -66,7 +64,7 @@
 <!--/body-->
 
 <!--footer-->
-<div th:replace="qna/layout/footer::footer"></div>
+<div th:replace="fragments/footer.html::footer"></div>
 <!--/footer-->
 
 <!--<script th:src="@{/js/jquery.min.js}"></script>-->

@@ -14,40 +14,29 @@
 <body>
 <div th:replace="fragments/header.html::header"></div>
     <div class="container">
-        <div th:if="${petListEmpty}">
-            <h1>펫을 먼저 등록하셔야 합니다!</h1>
-            <button onclick="history.back()">뒤로가기</button>
-            <button th:onclick="|location.href='@{/mypage/pet/create}'|">펫 등록하러 가기!</button>
-        </div>
-        <div th:unless="${petListEmpty}">
-            <h1>예약 정보</h1>
-            <form th:action="@{/matching/profile/reservation/match}" method="POST" onsubmit="submitSuc();">
-                <div>
-                    <label >보호자 이름</label>
-                    <input th:placeholder="${petOwner.userName}" th:value="${petOwner.userName}" name="petOwner" readonly/>
-                    <label>펫 이름</label>
-                    <div th:each="pet : ${petList}">
-                        <input type="radio" th:value="${pet.id}" name="pet"> <span th:text="${pet.petName}"></span>
-                    </div>
-                    <label >펫시터 이름</label>
-                    <input th:placeholder="${petSitter.userName}" th:value="${petSitter.userName}" name="petSitter" readonly/>
+        <h1>예약 정보</h1>
+        <form th:action="@{/matching/profile/reservation/match}" method="POST" onsubmit="submitSuc();">
+            <div>
+                <label >펫 이름</label>
+                <label >펫시터 이름</label>
+<!--                ToDo : db와 연결된 이름 -->
 
-                </div>
-                <div>
-                    <label>시작 날짜</label>
-                    <input type="datetime-local" name="startDate">
-                </div>
-                <div>
-                    <label> 종료 날짜 </label>
-                    <input type="datetime-local" name="endDate">
-                </div>
-                <div>
-                    <label>요금</label>
-                    <input type="number" name="fee">원
-                </div>
-                <button type="submit">예약 확정</button>
-            </form>
-        </div></div>
-        <div th:replace="fragments/footer.html::footer"></div>
+            </div>
+            <div>
+                <label>시작 날짜</label>
+                <input type="datetime-local" name="startDate">
+            </div>
+            <div>
+                <label> 종료 날짜 </label>
+                <input type="datetime-local" name="endDate">
+            </div>
+            <div>
+                <label>요금</label>
+                <input type="number" name="fee">원
+            </div>
+            <button type="submit">예약 확정</button>
+        </form>
+    </div>
+<div th:replace="fragments/footer.html::footer"></div>
 </body>
 </html>
