@@ -1,9 +1,12 @@
 package com.mandarin.petching.controller;
 
 import com.mandarin.petching.domain.ChatMessage;
+import com.mandarin.petching.domain.Member;
+import com.mandarin.petching.repository.MemberRepository;
 import com.mandarin.petching.service.ChatService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,18 +23,19 @@ import java.util.List;
 public class ChatRoomController {
 
     private final ChatService chatService;
+    private final MemberRepository memberRepository;
 
-    @GetMapping("/chat/{buyerId}/{sellerId}")
-    public String createRoom(@PathVariable Long buyerId, @PathVariable Long sellerId) {
+    @GetMapping("/chat/{sellerId}")
+    public String createRoom(Authentication authentication, @PathVariable Long sellerId) {
+
+        String userName = authentication.getName();
+        Member member = memberRepository.findByUserEmail(userName);
+        Long buyerId = member.getId();
+
         Long roomId = chatService.createRoom(buyerId, sellerId);
-        log.info("roomId = {}", roomId);
         return "redirect:/chat/room/" + roomId;
     }
 
-    /**
-     * 로그인 기능 구현 후 수정 필요
-     * @RequestParam으로 사용자 이름 받아옴 -> 현재 로그인한 사용자 정보 받아오기
-     */
     @GetMapping("/chat/room/{roomId}")
     public String enterRoom(@PathVariable Long roomId, @RequestParam(required = false) String username, Model model, HttpServletRequest request) {
 
@@ -39,19 +43,6 @@ public class ChatRoomController {
 
         model.addAttribute("roomId", roomId);
         model.addAttribute("chatList", chatList);
-
-        // TODO 로그인 기능 구현 후 수정
-        model.addAttribute("username", username);
-
-        if (username != null) {
-            HttpSession session = request.getSession();
-
-            if (session.getAttribute(username) == null) {
-                session.setAttribute(username, roomId);
-            } else {
-                return "chatTemp";
-            }
-        }
 
         return "chat/room";
     }

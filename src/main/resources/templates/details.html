@@ -5,35 +5,78 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link th:href="@{/css/detail.css}" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "Noto Sans KR", sans-serif;
+        }
+        li {
+            list-style-type: none;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 250px;
+            width: 800px;
+            margin: 0 auto;
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+        .item {
+            border : 1px solid black;
+        }
+        .test{
+            border: 1px solid red;
+        }
+        .images {
+            grid-column: 1 / 3;
+            grid-row: 1;
+        }
+        .petsitter_name {
+            grid-column: 1 / 2;
+            grid-row: 2;
+        }
+        .introduce{
+            grid-column: 1 / 2;
+            grid-row: 3 / 5;
+        }
+        .certifi{
+            grid-column: 1 / 2;
+            grid-row: 5;
+        }
+        .services{
+            grid-column: 1 / 2;
+            grid-row: 6;
+        }
+        .buttonBox{
+            grid-column: 2 / 3;
+            grid-row: 2;
+        }
+        .feeList{
+            grid-column: 2 / 3;
+            grid-row: 3;
+        }
+        .workingTime{
+            grid-column: 2 / 3;
+            grid-row: 4;
+        }
+        .workingArea{
+            grid-column: 2 / 3;
+            grid-row: 5 / 7;
+        }
+
+    </style>
+
 
 </head>
 <body>
 <div class="container" th:object="${petSitter}">
     <div class="item images">
         <!-- image -->
-        <div class="slider">
-            <input type="radio" name="slide" id="slide1" checked>
-            <input type="radio" name="slide" id="slide2">
-            <input type="radio" name="slide" id="slide3">
-            <input type="radio" name="slide" id="slide4">
-            <ul id="imgholder" class="imgs">
-                <li><img th:src="./images/memberImages/2/pet/pt_2_00.jpg"></li>
-                <li><img th:src="./images/memberImages/2/petSitter/ps_2_00.jpg"></li>
-                <li><img th:src="./images/memberImages/2/petSitter/ps_2_01.jpg"></li>
-                <li><img th:src="./images/memberImages/2/petSitter/ps_2_02.jpg"></li>
-                <li><img th:src="./images/memberImages/2/petSitter/ps_2_00.jpg"></li>
-            </ul>
-            <div class="bullets">
-                <label for="slide1">&nbsp;</label>
-                <label for="slide2">&nbsp;</label>
-                <label for="slide3">&nbsp;</label>
-                <label for="slide4">&nbsp;</label>
-            </div>
-        </div>
+        이미지가 들어가요
     </div>
     <div class="item petsitter_name">
-        <!--        주소-->
+<!--        주소-->
         <div id="address01"></div>
 
         <div th:text="${petSitterMember.userName}">~~ 님을 소개합니다.</div>
@@ -63,12 +106,11 @@
         </div>
         <div th:unless="(${petSitterMember.id}==${loginMember.id})">
             <button type="button"
-                    th:onclick="|location.href='@{/matching/profile/reservation/{petSitterMember_id}(petSitterMember_id=${petSitterMember.id})}'|">
-                예약하러가기
+                    th:onclick="|location.href='@{/matching/profile/reservation/{petSitterMember_id}(petSitterMember_id=${petSitterMember.id})}'|">예약하러가기
             </button>
             </br>
             <button type="button"
-                    th:onclick="|location.href='@{/chat/1/1}'|">채팅하기
+                    th:onclick="|location.href='@{/chat/{petSitterId}(petSitterId = ${petSitter.id})}'|">채팅하기
             </button>
         </div>
     </div>
@@ -87,19 +129,15 @@
             <div id="map" style="width:250px;height:200px;"> 맵보여주는곳</div>
         </div>
     </div>
+
 </div>
-
-
-<script th:inline="javascript"
-        th:src="@{//dapi.kakao.com/v2/maps/sdk.js?appkey=}+#{appkey}+@{&libraries=services}"></script>
+<script th:inline="javascript" th:src="@{//dapi.kakao.com/v2/maps/sdk.js?appkey=}+#{appkey}+@{&libraries=services}"></script>
 <script th:inline="javascript" th:src="@{/js/details.js}"></script>
 <script>
         let address = "[[${petSitter.workingArea}]]";
         showMap(address, 20);
         document.getElementById('address01').innerHTML = splitAddress(address);
         document.getElementById('address02').innerHTML = splitAddress(address);
-
 </script>
 </body>
-
 </html>

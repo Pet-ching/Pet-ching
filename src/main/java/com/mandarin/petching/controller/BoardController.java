@@ -33,7 +33,7 @@ public class BoardController {
     private MemberRepository memberRepository;
 
     @GetMapping("/list")
-    public String list(Model model, @PageableDefault(size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
+    public String list(Model model, @PageableDefault(size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable pageable,
                        @RequestParam(required = false, defaultValue = "") String searchText) {
         //Page<Board> boards = boardRepository.findAll(pageable);
         Page<Board> boards = boardRepository.findByTitleContainingOrContentContaining(searchText, searchText, pageable);
