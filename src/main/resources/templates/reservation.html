@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>reservation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Board Form</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
 </head>
 <script>
     function submitSuc(){
         alert("예약이 성공적으로 완료되었습니다");
     }
 </script>
-<style></style>
 <body>
+<div th:replace="fragments/header.html::header"></div>
     <div class="container">
         <div th:if="${petListEmpty}">
             <h1>펫을 먼저 등록하셔야 합니다!</h1>
@@ -45,7 +47,7 @@
                 </div>
                 <button type="submit">예약 확정</button>
             </form>
-        </div>
-    </div>
+        </div></div>
+        <div th:replace="fragments/footer.html::footer"></div>
 </body>
 </html>
