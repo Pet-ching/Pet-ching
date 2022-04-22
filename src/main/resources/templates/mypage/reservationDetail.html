@@ -74,4 +74,33 @@
     </div>
 
 </body>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>예약 상세 보기</h1>
+    <div>
+        <div>보호자 이름</div>
+        <div th:text="${}"></div>
+    </div>
+    <div>
+        <div>펫시터 이름</div>
+        <div th:text="${}"></div>
+    </div>
+    <div>
+        <div>예약 시작 일자</div>
+        <div th:text="${}"></div>
+    </div>
+    <div>
+        <div>예약 종료 일자</div>
+        <div th:text="${}"></div>
+    </div>
+    <div>
+        <div>요금</div>
+        <div th:text="${}"></div>
+    </div>
+</body>
 </html>
