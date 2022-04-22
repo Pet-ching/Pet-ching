@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -7,18 +6,16 @@
     <link rel="stylesheet" th:href="@{/css/base.css}" />
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
 </head>
-<<<<<<< HEAD
 <script>
     function submitSuc(){
         alert("예약이 성공적으로 완료되었습니다");
     }
 </script>
-<body>
-<div th:replace="fragments/header.html::header"></div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script th:inline="javascript" th:src="@{/js/reservation.js}"></script>
 <link th:href="@{/css/reservation.css}" rel="stylesheet">
     <body>
+    <div th:replace="fragments/header.html::header"></div>
     <div class="container">
         <div th:if="${petListEmpty}">
             <h1>펫을 먼저 등록하셔야 합니다!</h1>
@@ -56,14 +53,7 @@
                 </div>
                 <button type="submit">예약 확정</button>
             </form>
-<<<<<<< HEAD
         </div></div>
-        <div th:replace="fragments/footer.html::footer"></div>
-</body>
-=======
-        </div>
-    </div>
+    <div th:replace="fragments/footer.html::footer"></div>
     </body>
-
->>>>>>> 8f8f2cac4228f07db19d00b544009196f3c47f7e
 </html>

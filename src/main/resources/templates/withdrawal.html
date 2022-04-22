@@ -30,37 +30,4 @@
 </div>
     <div th:replace="fragments/footer.html::footer"></div>
 </body>
-=======
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>탈퇴 페이지</title>
-    <link rel="stylesheet" th:href="@{/css/base.css}" />
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
-</head>
-<body>
-<div th:replace="fragments/header.html::header"></div>
-<div class="container">
-
-
-<p>탈퇴 안내
-    회원탈퇴를 신청하기 전에 안내 사항을 꼭 확인해주세요.
-
-    사용하고 계신 아이디(<span th:text="${member.userEmail}" style="font-weight:bold; color:gray; text-decoration:underline"></span>)는 <b style="color:red">탈퇴할 경우 재사용 및 복구가 불가능</b>합니다.</p>
-
-<p>탈퇴 후에도 게시판형 서비스에 등록한 게시물은 그대로 남아 있습니다.
-    뉴스, 카페, 지식iN 등에 올린 게시글 및 댓글은 탈퇴 시 자동 삭제되지 않고 그대로 남아 있습니다.
-    삭제를 원하는 게시글이 있다면 반드시 탈퇴 전 비공개 처리하거나 삭제하시기 바랍니다.
-    탈퇴 후에는 회원정보가 삭제되어 본인 여부를 확인할 수 있는 방법이 없어, 게시글을 임의로 삭제해드릴 수 없습니다.
-    게시판형 서비스 중 "그라폴리오"의 댓글은 삭제됩니다.</p>
-
-<!--TODO: 현재 권한이 있는 상태, 따라서 탈퇴하고 submit으로 넘길 때 권한을 kill 해야함-->
-<form action="/members/withdrawaldo" role="form" method="post">
-    <button type="submit">탈퇴하기</button>
-</form>
-<!--<a href="members/with">탈퇴하기</a>-->
-</div>
-    <div th:replace="fragments/footer.html::footer"></div>
-</body>
 </html>
