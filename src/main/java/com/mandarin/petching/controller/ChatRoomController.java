@@ -37,7 +37,7 @@ public class ChatRoomController {
     }
 
     @GetMapping("/chat/room/{roomId}")
-    public String enterRoom(@PathVariable Long roomId, @RequestParam(required = false) String username, Model model, HttpServletRequest request) {
+    public String enterRoom(@PathVariable Long roomId, Model model) {
 
         List<ChatMessage> chatList = chatService.findAllChatByRoomId(roomId);
 

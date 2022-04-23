@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -23,9 +25,18 @@ public class MyPageService {
     }
 
     @Transactional
-    public void createPet(Member member, Pet pet) {
+    public boolean createPet(Member member, Pet pet) {
+
+        List<Pet> petList = member.getPetList();
+        for (Pet p : petList) {
+            if (p.getPetName() == pet.getPetName()) {
+                return false;
+            }
+        }
+
         pet.setMember(member);
         petRepository.save(pet);
+        return true;
     }
 
     public Pet getPetById(Long petId) {
