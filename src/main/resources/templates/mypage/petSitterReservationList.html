@@ -33,7 +33,12 @@
             <div th:text="${reservation.fee}"></div>
         </a>
         <div th:unless="${reservation.refusal}">
-                <a th:unless="${reservation.approval}" th:href="@{/mypage/reservation/cancel/{reservationId}(reservationId = ${reservation.id})}">예약 취소</a>
+            <div th:unless="${reservation.approval}">
+                <a th:href="@{/mypage/reservation/approval/{reservationId}(reservationId = ${reservation.id})}">예약 승인</a>
+            </div>
+            <div th:unless="${reservation.approval}">
+                <a th:href="@{/mypage/reservation/refuse/{reservationId}(reservationId = ${reservation.id})}">예약 거절</a>
+            </div>
         </div>
     </div>
 </div>
