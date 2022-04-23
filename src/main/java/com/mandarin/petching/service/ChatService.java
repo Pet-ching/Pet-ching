@@ -3,6 +3,7 @@ package com.mandarin.petching.service;
 import com.mandarin.petching.domain.ChatMessage;
 import com.mandarin.petching.domain.ChatRoom;
 import com.mandarin.petching.repository.ChatRepository;
+import com.mandarin.petching.repository.MemberRepository;
 import com.mandarin.petching.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,13 +18,17 @@ public class ChatService {
 
     private final ChatRepository chatRepository;
     private final RoomRepository roomRepository;
+    private final MemberRepository memberRepository;
 
-    public Long createRoom(Long buyerId, Long sellerId) {
+    public Long createRoom(Long petOwnerId, Long petSitterId) {
 
-        ChatRoom findChatRoom = roomRepository.findByBuyerIdAndSellerId(buyerId, sellerId);
+        ChatRoom findChatRoom = roomRepository.findByPetOwnerIdAndPetSitterId(petOwnerId, petSitterId);
+
+        String petOwnerName = memberRepository.getById(petOwnerId).getUserName();
+        String petSitterName = memberRepository.getById(petSitterId).getUserName();
 
         if (findChatRoom == null) {
-            ChatRoom chatRoom = ChatRoom.createRoom(buyerId, sellerId);
+            ChatRoom chatRoom = ChatRoom.createRoom(petOwnerId, petSitterId, petOwnerName, petSitterName);
             roomRepository.save(chatRoom);
             return chatRoom.getId();
         }

@@ -25,14 +25,14 @@ public class ChatRoomController {
     private final ChatService chatService;
     private final MemberRepository memberRepository;
 
-    @GetMapping("/chat/{sellerId}")
-    public String createRoom(Authentication authentication, @PathVariable Long sellerId) {
+    @GetMapping("/chat/{petSitterId}")
+    public String createRoom(Authentication authentication, @PathVariable Long petSitterId) {
 
         String userName = authentication.getName();
         Member member = memberRepository.findByUserEmail(userName);
-        Long buyerId = member.getId();
+        Long petOwnerId = member.getId();
 
-        Long roomId = chatService.createRoom(buyerId, sellerId);
+        Long roomId = chatService.createRoom(petOwnerId, petSitterId);
         return "redirect:/chat/room/" + roomId;
     }
 
