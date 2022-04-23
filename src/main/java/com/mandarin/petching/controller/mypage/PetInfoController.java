@@ -86,7 +86,7 @@ public class PetInfoController {
     }
 
     @PostMapping("/edit/{petId}")
-    public String editPet(Authentication authentication, @PathVariable Long petId, Pet pet, Model model) {
+    public String editPet(Authentication authentication, @PathVariable Long petId, Pet pet) {
 
         // TODO Bean Validation
 
@@ -94,6 +94,14 @@ public class PetInfoController {
         Member member = memberRepository.findByUserEmail(userName);
 
         myPageService.updatePet(petId, pet, member);
+
+        return "redirect:/mypage/pet";
+    }
+
+    @PostMapping("/delete/{petId}")
+    public String deletePet(@PathVariable Long petId) {
+
+        myPageService.deletePet(petId);
 
         return "redirect:/mypage/pet";
     }

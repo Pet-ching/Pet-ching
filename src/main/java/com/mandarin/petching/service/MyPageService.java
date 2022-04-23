@@ -44,6 +44,11 @@ public class MyPageService {
     }
 
     @Transactional
+    public void deletePet(Long petId) {
+        petRepository.deleteById(petId);
+    }
+
+    @Transactional
     public void savePetSitter(Member member,
                               PetSitter petSitter,
                               FeeList feeList,
