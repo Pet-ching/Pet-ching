@@ -4,7 +4,6 @@ import com.mandarin.petching.domain.Reservation;
 import com.mandarin.petching.repository.ReservationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import java.util.List;
 
@@ -20,5 +19,13 @@ public class ReservationService {
 
     public Reservation findReservationById(Long reservationId) {
         return reservationRepository.findById(reservationId).get();
+    }
+
+    public List<Reservation> findByPetOwner(Long petOwnerId) {
+        return reservationRepository.findByPetOwnerId(petOwnerId);
+    }
+
+    public List<Reservation> findByPetSitter(Long petSitterId) {
+        return reservationRepository.findByPetSitterId(petSitterId);
     }
 }

@@ -17,9 +17,9 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String petOwner;
+    private Long petOwnerId;
 
-    private String petSitter;
+    private Long petSitterId;
 
     @ManyToOne
     @JoinColumn(name = "pet_id")

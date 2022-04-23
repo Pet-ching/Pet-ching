@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>펫시터</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
     <style>
         .temp_wrapper {
             display: flex;
@@ -10,6 +12,8 @@
     </style>
 </head>
 <body>
+<div th:replace="fragments/header.html::header"></div>
+<div class="container">
 <div th:if="${petSitterEmpty}">
     <h1>아직 입력된 정보가 없어요!</h1>
     <a th:href="@{/mypage/petsitter/create}">등록할래요?</a>
@@ -111,5 +115,7 @@
     <a th:href="@{/mypage/petsitter/edit}">수정하기</a>
 </div>
 <a href="/">홈으로</a>
+</div>
+<div th:replace="fragments/footer.html::footer"></div>
 </body>
 </html>

@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>펫시터</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
 </head>
 <body>
+<div th:replace="fragments/header.html::header"></div>
+<div class="container">
 <form action="" method="post" th:object="${petSitter}">
     <input type="text" th:field="*{selfIntroduction}" placeholder="자기소개">
 
@@ -131,5 +135,7 @@
     </script>
     <input type="submit">
 </form>
+</div>
+<div th:replace="fragments/footer.html::footer"></div>
 </body>
 </html>
