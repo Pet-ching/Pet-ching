@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/mypage")
@@ -31,33 +32,36 @@ public class MyReservationController {
         String userName = authentication.getName();
         Member member = memberRepository.findByUserEmail(userName);
 
-        List<Reservation> reservationList = new ArrayList<>();
-
-        List<Pet> petList = member.getPetList();
-        for (Pet pet : petList) {
-            for (Reservation reservation : pet.getReservationList()) {
-                reservationList.add(reservation);
-            }
-        }
+        List<Reservation> reservationList = reservationService.findByPetOwner(member.getId());
 
         model.addAttribute("reservationList", reservationList);
 
-        return "mypage/petReservation";
+        return "mypage/reservationList";
     }
 
     @GetMapping("/petsitter/reservation")
-    public String PetSitterReservationList(@PathVariable Long memberId, Model model) {
+    public String PetSitterReservationList(Authentication authentication, Model model) {
 
-        // petSitter 예약 현황 조회
-        return "mypage/reservation";
+        String userName = authentication.getName();
+        Member member = memberRepository.findByUserEmail(userName);
+
+        List<Reservation> reservationList = reservationService.findByPetSitter(member.getId());
+
+        model.addAttribute("reservationList", reservationList);
+
+        return "mypage/reservationList";
     }
 
     @GetMapping("/reservation/{reservationId}")
-    public String reservationView(@PathVariable Long memberId, @PathVariable Long reservationId, Model model) {
+    public String reservationView(@PathVariable Long reservationId, Model model) {
 
-        // 해당 예약 현황 가져와서 모델에 담아주기
         Reservation reservation = reservationService.findReservationById(reservationId);
-        model.addAttribute(reservation);
+        Member petSitter = memberRepository.findById(reservation.getPetSitterId()).get();
+        Member petOwner = memberRepository.findById(reservation.getPetOwnerId()).get();
+
+        model.addAttribute("reservation", reservation);
+        model.addAttribute("petSitterName", petSitter.getUserName());
+        model.addAttribute("petOwnerName", petOwner.getUserName());
 
         return "mypage/reservationDetail";
     }
