@@ -4,10 +4,12 @@ import com.mandarin.petching.domain.Reservation;
 import com.mandarin.petching.repository.ReservationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class ReservationService {
 
@@ -27,5 +29,22 @@ public class ReservationService {
 
     public List<Reservation> findByPetSitter(Long petSitterId) {
         return reservationRepository.findByPetSitterId(petSitterId);
+    }
+
+    @Transactional
+    public void approveReservation(Long reservationId) {
+        Reservation reservation = findReservationById(reservationId);
+        reservation.setApproval(true);
+    }
+
+    @Transactional
+    public void refuseReservation(Long reservationId) {
+        Reservation reservation = findReservationById(reservationId);
+        reservation.setRefusal(true);
+    }
+
+    @Transactional
+    public void cancelReservation(Long reservationId) {
+        reservationRepository.deleteById(reservationId);
     }
 }

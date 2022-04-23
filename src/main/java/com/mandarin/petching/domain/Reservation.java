@@ -33,5 +33,7 @@ public class Reservation {
 
     private boolean approval;
 
+    private boolean refusal;
+
     private Integer fee;
 }

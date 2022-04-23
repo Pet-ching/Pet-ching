@@ -35,6 +35,7 @@ public class MyReservationController {
         List<Reservation> reservationList = reservationService.findByPetOwner(member.getId());
 
         model.addAttribute("reservationList", reservationList);
+        model.addAttribute("reservationEmpty", reservationList.isEmpty());
 
         return "mypage/reservationList";
     }
@@ -48,8 +49,9 @@ public class MyReservationController {
         List<Reservation> reservationList = reservationService.findByPetSitter(member.getId());
 
         model.addAttribute("reservationList", reservationList);
+        model.addAttribute("reservationEmpty", reservationList.isEmpty());
 
-        return "mypage/reservationList";
+        return "mypage/petSitterReservationList";
     }
 
     @GetMapping("/reservation/{reservationId}")
@@ -64,5 +66,29 @@ public class MyReservationController {
         model.addAttribute("petOwnerName", petOwner.getUserName());
 
         return "mypage/reservationDetail";
+    }
+
+    @GetMapping("/reservation/approval/{reservationId}")
+    public String approvReservation(@PathVariable Long reservationId) {
+
+        reservationService.approveReservation(reservationId);
+
+        return "redirect:/mypage/petsitter/reservation";
+    }
+
+    @GetMapping("/reservation/refuse/{reservationId}")
+    public String refuseReservation(@PathVariable Long reservationId) {
+
+        reservationService.refuseReservation(reservationId);
+
+        return "redirect:/mypage/petsitter/reservation";
+    }
+
+    @GetMapping("/reservation/cancel/{reservationId}")
+    public String cancelReservation(@PathVariable Long reservationId) {
+
+       reservationService.cancelReservation(reservationId);
+
+       return "redirect:/mypage/pet/reservation";
     }
 }
