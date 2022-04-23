@@ -37,12 +37,17 @@ public class ChatRoomController {
     }
 
     @GetMapping("/chat/room/{roomId}")
-    public String enterRoom(@PathVariable Long roomId, @RequestParam(required = false) String username, Model model, HttpServletRequest request) {
+    public String enterRoom(Authentication authentication, @PathVariable Long roomId, Model model) {
 
         List<ChatMessage> chatList = chatService.findAllChatByRoomId(roomId);
 
+        String userName = authentication.getName();
+        Member member = memberRepository.findByUserEmail(userName);
+        String username = member.getUserName();
+
         model.addAttribute("roomId", roomId);
         model.addAttribute("chatList", chatList);
+        model.addAttribute("username", username);
 
         return "chat/room";
     }
