@@ -15,7 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+
 
 @Controller
 @RequiredArgsConstructor
@@ -26,33 +26,32 @@ public class InfoController {
 
     private final MemberRepository memberRepository;
 
-
     @GetMapping("/matching/list")
-    public String list(Model model, @PageableDefault(page = 0, size = 10, sort = "workingArea", direction = Sort.Direction.ASC) Pageable pageable, String searchKeyword, String ableService) {
+    public String list(Model model, @PageableDefault(page = 0, size = 10, sort = "workingArea", direction = Sort.Direction.ASC) Pageable pageable,
+                       String searchKeyword, String ableService) {
 
         Page<PetSitter> list = null;
-        Page<PetSitter> list2 = null;
 
         if (searchKeyword == null && ableService == null) {
             System.out.println("1. 초기 단계 일때");
             list = infoService.sitterList(pageable);
         } else if (ableService != null && searchKeyword == "") {
             System.out.println("2. 이용가능 서비스만 적용");
-            list = infoService.findByAbleService(ableService.replace(",", " "), pageable);
-            System.out.println(ableService.replace(",", " "));
+            list = infoService.findByAbleService(ableService, pageable);
+            System.out.println(ableService);
             System.out.println(pageable);
         } else if (searchKeyword != "" && ableService == null) {
             System.out.println("3. 근무지역만 적용");
             list = infoService.sitterSearchList(searchKeyword, pageable);
         } else if (searchKeyword != "" && ableService != null) {
             System.out.println("4. 둘다 적용");
-            list = infoService.findBySearchKeywordAndAbleServiceContaining(searchKeyword, ableService.replace(",", " "), pageable);
+            list = infoService.findBySearchKeywordAndAbleServiceContaining(searchKeyword, ableService, pageable);
             System.out.println(list.getTotalElements());
 //            list = infoService.sitterSearchList(searchKeyword, pageable);
 //            list2 = infoService.findByAbleService(ableService, pageable);
             System.out.println("==============================================");
             System.out.println(searchKeyword);
-            System.out.println(ableService.replace(",", " "));
+            System.out.println(ableService);
             System.out.println("==============================================");
 
         }   else if (searchKeyword == "" && ableService == null) {
@@ -64,7 +63,6 @@ public class InfoController {
         int endPage = Math.min(nowPage + 5, list.getTotalPages());
 
         model.addAttribute("list", list);
-        model.addAttribute("list2", list2);
         model.addAttribute("nowPage", nowPage);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
