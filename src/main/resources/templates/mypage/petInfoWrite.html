@@ -16,13 +16,12 @@
             <label th:text="${type}">NULL</label>
         </div>
         <select th:field="${pet.petType}">
-            <option value="">==펫타입==</option>
             <option th:each="type : ${petTypes}" th:value="${type}" th:text="${type}">NULL</option>
         </select>
-        <!--    <div>-->
-        <!--        <label>펫생일</label>-->
-        <!--        <input type="datetime-local" th:field="${pet.petBth}">-->
-        <!--    </div>-->
+            <div>
+                <label>반려동물 나이</label>
+                <input type="number" th:field="${pet.petAge}">
+            </div>
         <div>
             <label>몸무게</label>
             <input type="number" th:field="${pet.weight}">

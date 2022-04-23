@@ -21,10 +21,10 @@
         <div>반려동물 종류</div>
         <div th:text="${pet.petType}"></div>
     </div>
-<!--    <div>-->
-<!--        <div>반려동물 생일</div>-->
-<!--        <div th:text="${pet.petBth}"></div>-->
-<!--    </div>-->
+    <div>
+        <div>반려동물 나이</div>
+        <div th:text="${pet.petAge}"></div>
+    </div>
     <div>
         <div>반려동물 몸무게</div>
         <div th:text="${pet.weight}"></div>
@@ -49,7 +49,10 @@
         <div>기타 사항</div>
         <div th:text="${pet.note}"></div>
     </div>
-    <a th:href="@{/mypage/pet/edit/{petId}(petId = ${pet.id})}">수정하기</a>
+    <button type="button" th:onclick="|location.href='@{/mypage/pet/edit/{petId}(petId = ${pet.id})}'|">수정하기</button>
+    <form th:action="@{/mypage/pet/delete/{petId}(petId = ${pet.id})}" method="post">
+        <button type="submit">삭제하기</button>
+    </form>
 </div>
 <div th:replace="fragments/footer.html::footer"></div>
 </body>
