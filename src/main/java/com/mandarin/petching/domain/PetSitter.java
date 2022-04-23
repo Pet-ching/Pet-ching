@@ -47,4 +47,5 @@ public class PetSitter {
     @Lob
     private String selfIntroduction;
 
+    private String title;
 }
