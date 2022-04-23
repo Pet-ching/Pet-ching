@@ -38,11 +38,10 @@ public class PetSitter {
     private List<String> certificate;
 
     @ElementCollection
-    @CollectionTable(name = "certificate",
+    @CollectionTable(name = "ableService",
             joinColumns = @JoinColumn(name = "sitter_id"))
     private List<String> ableService;
-
-    @NotBlank
+    
     private String workingArea;
 
     @Lob
