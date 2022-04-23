@@ -19,8 +19,16 @@ public class ChatService {
     private final RoomRepository roomRepository;
 
     public Long createRoom(Long buyerId, Long sellerId) {
-        ChatRoom chatRoom = roomRepository.saveChatRoom(buyerId, sellerId);
-        return chatRoom.getId();
+
+        ChatRoom findChatRoom = roomRepository.findByBuyerIdAndSellerId(buyerId, sellerId);
+
+        if (findChatRoom == null) {
+            ChatRoom chatRoom = ChatRoom.createRoom(buyerId, sellerId);
+            roomRepository.save(chatRoom);
+            return chatRoom.getId();
+        }
+
+        return findChatRoom.getId();
     }
 
     public List<ChatMessage> findAllChatByRoomId(Long roomId) {
@@ -28,7 +36,8 @@ public class ChatService {
     }
 
     public ChatMessage createChat(Long roomId, String sender, String message) {
-        ChatRoom room = roomRepository.findChatRoomById(roomId);
-        return chatRepository.save(ChatMessage.createChatMessage(room, sender, message));
+
+        ChatRoom chatRoom = roomRepository.findById(roomId).get();
+        return chatRepository.save(ChatMessage.createChatMessage(chatRoom, sender, message));
     }
 }
