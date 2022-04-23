@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>예약 현황</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div th:replace="fragments/header.html::header"></div>
+<div class="container">
+    <h1>예약 현황 조회</h1>
+    <div th:each="reservation : ${reservationList}">
+        <div>승인 </div>
+        <div th:text="${reservation.approval}"></div>
+        <div>펫이름 </div>
+        <a th:href="@{/mypage/reservation/{reservationId}(reservationId = ${reservation.id})}" th:text="${reservation.pet.petName}"></a>
+        <div>시작 일자 </div>
+        <div th:text="${reservation.startDate}"></div>
+        <div>종료 일자 </div>
+        <div th:text="${reservation.endDate}"></div>
+        <div>비용 </div>
+        <div th:text="${reservation.fee}"></div>
+    </div>
+</div>
+<div th:replace="fragments/footer.html::footer"></div>
+</body>
+</html>

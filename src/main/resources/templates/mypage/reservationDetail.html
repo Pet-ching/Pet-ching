@@ -1,106 +1,82 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>예약 조회</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
 </head>
 <body>
+<div th:replace="fragments/header.html::header"></div>
+<div class="container">
     <h1>예약 상세 보기</h1>
     <div>
         <div>보호자 이름</div>
-        <div th:text="${}"></div>
+        <div th:text="${petOwnerName}"></div>
     </div>
     <div>
         <div>펫시터 이름</div>
-        <div th:text="${}"></div>
+        <div th:text="${petSitterName}"></div>
     </div>
     <div>
         <div>펫 이름</div>
-        <div th:text="${}"></div>
+        <div th:text="${reservation.pet.petName}"></div>
     </div>
     <div>
         <div>예약 시작 일자</div>
-        <div th:text="${}"></div>
+        <div th:text="${reservation.startDate}"></div>
     </div>
     <div>
         <div>예약 종료 일자</div>
-        <div th:text="${}"></div>
+        <div th:text="${reservation.endDate}"></div>
     </div>
     <div>
         <div>요금</div>
-        <div th:text="${}"></div>
+        <div th:text="${reservation.fee}"></div>
     </div>
 
     <h3>반려동물 정보</h3>
     <div>
         <div>성별</div>
-        <div th:text="${}"></div>
+        <div th:text="${reservation.pet.petGender}"></div>
     </div>
     <div>
         <div>종류</div>
-        <div th:text="${}"></div>
+        <div th:text="${reservation.pet.petType}"></div>
     </div>
     <div>
         <div>나이</div>
-        <div th:text="${}"></div>
+        <div th:text="${reservation.pet.petBth}"></div>
     </div>
     <div>
         <div>몸무게</div>
-        <div th:text="${}"></div>
+        <div th:text="${reservation.pet.weight}"></div>
     </div>
     <div>
         <div>중성화 여부</div>
-        <div th:text="${}"></div>
+        <div th:text="${reservation.pet.neutralization}"></div>
     </div>
     <div>
         <div>병원 이름</div>
-        <div th:text="${}"></div>
+        <div th:text="${reservation.pet.hospitalName}"></div>
     </div>
     <div>
         <div>병원 전화번호</div>
-        <div th:text="${}"></div>
+        <div th:text="${reservation.pet.hospitalTel}"></div>
     </div>
     <div>
         <div>병원 주소</div>
-        <div th:text="${}"></div>
+        <div th:text="${reservation.pet.hospitalAdr}"></div>
     </div>
     <div>
         <div>예방접종</div>
-        <div th:text="${}"></div>
+        <div th:text="${reservation.pet.vaccination}"></div>
     </div>
     <div>
         <div>기타 사항</div>
-        <div th:text="${}"></div>
+        <div th:text="${reservation.pet.note}"></div>
     </div>
-
-</body>
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <h1>예약 상세 보기</h1>
-    <div>
-        <div>보호자 이름</div>
-        <div th:text="${}"></div>
-    </div>
-    <div>
-        <div>펫시터 이름</div>
-        <div th:text="${}"></div>
-    </div>
-    <div>
-        <div>예약 시작 일자</div>
-        <div th:text="${}"></div>
-    </div>
-    <div>
-        <div>예약 종료 일자</div>
-        <div th:text="${}"></div>
-    </div>
-    <div>
-        <div>요금</div>
-        <div th:text="${}"></div>
-    </div>
+</div>
+<div th:replace="fragments/footer.html::footer"></div>
 </body>
 </html>
