@@ -50,12 +50,12 @@ public class PetInfoController {
     }
 
     @PostMapping("/create")
-    public String createPet(Authentication authentication, PetDto petDto) {
+    public String createPet(Authentication authentication, Pet pet) {
 
         String userName = authentication.getName();
         Member member = memberRepository.findByUserEmail(userName);
 
-        myPageService.createPet(member, petDto);
+        myPageService.createPet(member, pet);
 
         return "redirect:/mypage/pet";
     }
@@ -86,11 +86,14 @@ public class PetInfoController {
     }
 
     @PostMapping("/edit/{petId}")
-    public String editPet(@PathVariable Long petId, PetDto petDto, Model model) {
+    public String editPet(Authentication authentication, @PathVariable Long petId, Pet pet, Model model) {
 
         // TODO Bean Validation
 
-        myPageService.updatePet(petId, petDto);
+        String userName = authentication.getName();
+        Member member = memberRepository.findByUserEmail(userName);
+
+        myPageService.updatePet(petId, pet, member);
 
         return "redirect:/mypage/pet";
     }

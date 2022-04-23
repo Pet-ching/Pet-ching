@@ -23,9 +23,8 @@ public class MyPageService {
     }
 
     @Transactional
-    public void createPet(Member member, PetDto petDto) {
-
-        Pet pet = Pet.createPet(member, petDto);
+    public void createPet(Member member, Pet pet) {
+        pet.setMember(member);
         petRepository.save(pet);
     }
 
@@ -34,9 +33,14 @@ public class MyPageService {
     }
 
     @Transactional
-    public void updatePet(Long petId, PetDto petDto) {
-        Pet pet = petRepository.findById(petId).get();
-        pet.updatePet(petDto);
+    public void updatePet(Long petId, Pet pet, Member member) {
+
+        Pet findPet = petRepository.findById(petId).get();
+        petRepository.delete(findPet);
+
+        petRepository.flush();
+
+        createPet(member, pet);
     }
 
     @Transactional
@@ -57,6 +61,7 @@ public class MyPageService {
                                 PetSitter petSitter,
                                 FeeList feeList,
                                 WorkingDayAndTime workingDayAndTime) {
+
         PetSitter findPetSitter = member.getPetSitter();
         petSitterRepository.delete(findPetSitter);
 
