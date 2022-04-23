@@ -10,6 +10,7 @@
 <div th:replace="fragments/header.html::header"></div>
 <div class="container">
 <form action="" method="post" th:object="${petSitter}">
+    <input type="text" th:field="*{title}" placeholder="자기소개 제목">
     <input type="text" th:field="*{selfIntroduction}" placeholder="자기소개">
 
     <input type="number" th:field="${feeList.smallDogFee}" placeholder="소형견 요금">
