@@ -57,6 +57,9 @@
         <a th:href="@{/mypage/petsitter}">돌봄환경 조회</a>
         <a th:href="@{/mypage/petsitter/reservation}">예약현황 조회</a>
     </div>
+    <div class="temp_wrapper">
+        <a th:href="@{/mypage/chats}">채팅창 조회</a>
+    </div>
     <div th:if="${type == 'petowner'}" class="temp_wrapper">
         <button th:onclick="|location.href='@{/mypage(type='petsitter')}'|">펫시터 모드로 변경</button>
     </div>

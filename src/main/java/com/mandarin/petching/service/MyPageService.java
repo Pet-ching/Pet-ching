@@ -3,12 +3,14 @@ package com.mandarin.petching.service;
 import com.mandarin.petching.domain.*;
 import com.mandarin.petching.dto.PetDto;
 import com.mandarin.petching.repository.PetSitterRepository;
+import com.mandarin.petching.repository.RoomRepository;
 import com.mandarin.petching.repository.UserRepository;
 import com.mandarin.petching.repository.PetRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,6 +21,7 @@ public class MyPageService {
     private final UserRepository userRepository;
     private final PetRepository petRepository;
     private final PetSitterRepository petSitterRepository;
+    private final RoomRepository roomRepository;
 
     public Member findMemberById(Long memberId) {
         return userRepository.getById(memberId);
@@ -84,5 +87,17 @@ public class MyPageService {
         petSitterRepository.flush();
 
         savePetSitter(member, petSitter, feeList, workingDayAndTime);
+    }
+
+    public List<ChatRoom> getChatList(Long memberId) {
+
+        List<ChatRoom> chatRoomList = new ArrayList<>();
+        List<ChatRoom> buyerChatRooms = roomRepository.findByPetOwnerId(memberId);
+        List<ChatRoom> sellerChatRooms = roomRepository.findByPetSitterId(memberId);
+
+        chatRoomList.addAll(buyerChatRooms);
+        chatRoomList.addAll(sellerChatRooms);
+
+        return chatRoomList;
     }
 }

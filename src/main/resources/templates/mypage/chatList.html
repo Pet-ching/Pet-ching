@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>채팅 리스트</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <style>
+        .temp_wrapper {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="fragments/header.html::header"></div>
+<div class="container">
+    <h1>채팅 리스트</h1>
+    <div th:each="chatRoom : ${chatRoomList}">
+        <a th:href="@{/chat/room/{roomId}(roomId = ${chatRoom.id})}" class="temp_wrapper">
+            <p>반려동물 보호자: </p>
+            <div th:text="${chatRoom.petOwnerName}"></div>
+            <p>/반려동물 돌보미: </p>
+            <div th:text="${chatRoom.petSitterName}"></div>
+        </a>
+    </div>
+</div>
+<div th:replace="fragments/footer.html::footer"></div>
+</body>
+</html>
