@@ -5,13 +5,21 @@
     <title>펫시터</title>
     <link rel="stylesheet" th:href="@{/css/base.css}"/>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <style>
+        .field-error {
+            border-color: #dc3545;
+            color: #dc3545;
+        }
+    </style>
 </head>
 <body>
 <div th:replace="fragments/header.html::header"></div>
 <div class="container">
 <form action="" method="post" th:object="${petSitter}">
     <input type="text" th:field="*{title}" placeholder="자기소개 제목">
+    <div class="field-error" th:errors="${petSitter.title}">error</div>
     <input type="text" th:field="*{selfIntroduction}" placeholder="자기소개">
+    <div class="field-error" th:errors="${petSitter.selfIntroduction}">error</div>
 
     <input type="number" th:field="${feeList.smallDogFee}" placeholder="소형견 요금">
     <input type="number" th:field="${feeList.middleDogFee}" placeholder="중형견 요금">
@@ -92,6 +100,7 @@
     <div class="form-group">
         <label th:for="address">주소검색</label>
         <input type="text" id="sample5_address" th:field="*{workingArea}" placeholder="주소검색">
+        <div class="field-error" th:errors="${petSitter.workingArea}">error</div>
         <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
         <div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
     </div>

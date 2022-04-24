@@ -5,26 +5,36 @@
     <title>펫정보</title>
     <link rel="stylesheet" th:href="@{/css/base.css}"/>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <style>
+        .field-error {
+            border-color: #dc3545;
+            color: #dc3545;
+        }
+    </style>
 </head>
 <body>
 <div th:replace="fragments/header.html::header"></div>
 <div class="container">
     <form action="" method="post">
         <input type="text" th:field="${pet.petName}" placeholder="반려동물 이름">
+        <div class="field-error" th:errors="${pet.petName}">error</div>
         <div th:each="type : ${genderTypes}">
-            <input type="radio" th:field="${pet.petGender}" th:value="${type}">
+            <input type="radio" th:field="${pet.petGender}" th:value="${type}" required>
             <label th:text="${type.description}">NULL</label>
         </div>
-        <select th:field="${pet.petType}">
+        <select th:field="${pet.petType}" required>
+            <option value="">선택되지 않음</option>
             <option th:each="type : ${petTypes}" th:value="${type}" th:text="${type.description}">NULL</option>
         </select>
             <div>
                 <label>반려동물 나이</label>
                 <input type="number" th:field="${pet.petAge}">
+                <div class="field-error" th:errors="${pet.petAge}">error</div>
             </div>
         <div>
             <label>몸무게</label>
             <input type="number" th:field="${pet.weight}">
+            <div class="field-error" th:errors="${pet.weight}">error</div>
         </div>
         <div>
             <input type="checkbox" th:field="${pet.neutralization}">
@@ -87,6 +97,7 @@
             }
         </script>
         <input type="text" th:field="${pet.note}" placeholder="기타 사항 입력">
+        <div class="field-error" th:errors="${pet.note}">error</div>
         <input type="submit">
     </form>
 </div>

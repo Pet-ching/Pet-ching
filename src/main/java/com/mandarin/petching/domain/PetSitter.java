@@ -41,11 +41,14 @@ public class PetSitter {
     @CollectionTable(name = "ableService",
             joinColumns = @JoinColumn(name = "sitter_id"))
     private List<String> ableService;
-    
+
+    @NotBlank
     private String workingArea;
 
     @Lob
+    @NotBlank
     private String selfIntroduction;
 
+    @NotBlank
     private String title;
 }
