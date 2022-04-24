@@ -1,26 +1,30 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>펫정보</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
 </head>
 <body>
+<div th:replace="fragments/header.html::header"></div>
+<div class="container">
     <div>
         <div>반려동물 이름</div>
         <div th:text="${pet.petName}"></div>
     </div>
     <div>
         <div>반려동물 성별</div>
-        <div th:text="${pet.petGender}"></div>
+        <div th:text="${pet.petGender.description}"></div>
     </div>
     <div>
         <div>반려동물 종류</div>
-        <div th:text="${pet.petType}"></div>
+        <div th:text="${pet.petType.description}"></div>
     </div>
-<!--    <div>-->
-<!--        <div>반려동물 생일</div>-->
-<!--        <div th:text="${pet.petBth}"></div>-->
-<!--    </div>-->
+    <div>
+        <div>반려동물 나이</div>
+        <div th:text="${pet.petAge}"></div>
+    </div>
     <div>
         <div>반려동물 몸무게</div>
         <div th:text="${pet.weight}"></div>
@@ -45,6 +49,11 @@
         <div>기타 사항</div>
         <div th:text="${pet.note}"></div>
     </div>
-    <a th:href="@{/mypage/pet/edit/{petId}(petId = ${pet.id})}">수정하기</a>
+    <button type="button" th:onclick="|location.href='@{/mypage/pet/edit/{petId}(petId = ${pet.id})}'|">수정하기</button>
+    <form th:action="@{/mypage/pet/delete/{petId}(petId = ${pet.id})}" method="post">
+        <button type="submit">삭제하기</button>
+    </form>
+</div>
+<div th:replace="fragments/footer.html::footer"></div>
 </body>
 </html>

@@ -15,16 +15,23 @@ public class ChatRoom {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long buyerId;
+    private Long petOwnerId;
+    private String petOwnerName;
 
-    private Long sellerId;
+    private Long petSitterId;
+    private String petSitterName;
 
-    public static ChatRoom createRoom(Long buyerId, Long sellerId) {
+    public static ChatRoom createRoom(Long petOwnerId,
+                                      Long petSitterId,
+                                      String petOwnerName,
+                                      String petSitterName) {
 
         ChatRoom chatRoom = new ChatRoom();
 
-        chatRoom.setBuyerId(buyerId);
-        chatRoom.setSellerId(sellerId);
+        chatRoom.setPetOwnerId(petOwnerId);
+        chatRoom.setPetSitterId(petSitterId);
+        chatRoom.setPetOwnerName(petOwnerName);
+        chatRoom.setPetSitterName(petSitterName);
 
         return chatRoom;
     }
