@@ -14,9 +14,10 @@
 <body>
 <div th:replace="fragments/header.html::header"></div>
 <div class="container">
-    <h1>예약 현황 조회</h1>
-    <div th:if="${reservationEmpty}">예약 정보가 없어요!</div>
-    <div th:each="reservation : ${reservationList}" class="temp_wrapper">
+    <div class="page-header">
+        <h1>예약 현황 조회</h1>
+    </div>
+    <!-- <div th:each="reservation : ${reservationList}" class="temp_wrapper">
         <div th:if="${reservation.refusal}">예약 거절</div>
         <div th:unless="${reservation.refusal}">
             <div th:if="${reservation.approval}">예약 확정</div>
@@ -40,6 +41,53 @@
                 <a th:href="@{/mypage/reservation/refuse/{reservationId}(reservationId = ${reservation.id})}">예약 거절</a>
             </div>
         </div>
+    </div> -->
+    <div id="mainHide">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th class="col-md-1">예약 현황</th>
+                <th class="col-md-1">반려동물 이름</th>
+                <th class="col-md-1">시작일</th>
+                <th class="col-md-1">종료일</th>
+                <th class="col-md-1">요금</th>
+                <th class="col-md-1"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="reservation : ${reservationList}">
+                <td>
+                    <div th:if="${reservation.refusal}">예약 거절</div>
+                    <div th:unless="${reservation.refusal}">
+                        <div th:if="${reservation.approval}">예약 확정</div>
+                        <div th:unless="${reservation.approval}">예약 대기</div>
+                    </div>
+                </td>
+                <td th:onclick="|location.href='@{/mypage/reservation/{reservationId}(reservationId = ${reservation.id})}'|">
+                    <p th:text="${reservation.pet.petName}"></p>
+                </td>
+                <td th:onclick="|location.href='@{/mypage/reservation/{reservationId}(reservationId = ${reservation.id})}'|">
+                    <p th:text="${reservation.startDate}"></p>
+                </td>
+                <td th:onclick="|location.href='@{/mypage/reservation/{reservationId}(reservationId = ${reservation.id})}'|">
+                    <p th:text="${reservation.endDate}"></p>
+                </td>
+                <td th:onclick="|location.href='@{/mypage/reservation/{reservationId}(reservationId = ${reservation.id})}'|">
+                    <p th:text="${reservation.fee} + 원"></p>
+                </td>
+                <td>
+                    <div th:unless="${reservation.refusal}">
+                        <div th:unless="${reservation.approval}">
+                            <a th:href="@{/mypage/reservation/approval/{reservationId}(reservationId = ${reservation.id})}">예약 승인</a>
+                        </div>
+                        <div th:unless="${reservation.approval}">
+                            <a th:href="@{/mypage/reservation/refuse/{reservationId}(reservationId = ${reservation.id})}">예약 거절</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 <div th:replace="fragments/footer.html::footer"></div>

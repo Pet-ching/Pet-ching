@@ -15,6 +15,7 @@ public class ReservationService {
 
     private final ReservationRepository reservationRepository;
 
+    @Transactional
     public void createReservation(Reservation reservation) {
         reservationRepository.save(reservation);
     }

@@ -14,27 +14,50 @@
 <body>
 <div th:replace="fragments/header.html::header"></div>
 <div class="container">
-    <h1>예약 현황 조회</h1>
-    <div th:if="${reservationEmpty}">예약 정보가 없어요!</div>
-    <div th:each="reservation : ${reservationList}" class="temp_wrapper">
-        <div th:if="${reservation.refusal}">예약 거절</div>
-        <div th:unless="${reservation.refusal}">
-            <div th:if="${reservation.approval}">예약 확정</div>
-            <div th:unless="${reservation.approval}">예약 대기</div>
-        </div>
-        <a th:href="@{/mypage/reservation/{reservationId}(reservationId = ${reservation.id})}">
-            <div>펫이름 </div>
-            <div th:text="${reservation.pet.petName}"></div>
-            <div>시작 일자 </div>
-            <div th:text="${reservation.startDate}"></div>
-            <div>종료 일자 </div>
-            <div th:text="${reservation.endDate}"></div>
-            <div>비용 </div>
-            <div th:text="${reservation.fee}"></div>
-        </a>
-        <div th:unless="${reservation.refusal}">
-                <a th:unless="${reservation.approval}" th:href="@{/mypage/reservation/cancel/{reservationId}(reservationId = ${reservation.id})}">예약 취소</a>
-        </div>
+    <div class="page-header">
+        <h1>예약 현황 조회</h1>
+    </div>
+    <div id="mainHide">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th class="col-md-1">예약 현황</th>
+                <th class="col-md-1">반려동물 이름</th>
+                <th class="col-md-1">시작일</th>
+                <th class="col-md-1">종료일</th>
+                <th class="col-md-1">요금</th>
+                <th class="col-md-1"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="reservation : ${reservationList}">
+                <td>
+                    <div th:if="${reservation.refusal}">예약 거절</div>
+                    <div th:unless="${reservation.refusal}">
+                        <div th:if="${reservation.approval}">예약 확정</div>
+                        <div th:unless="${reservation.approval}">예약 대기</div>
+                    </div>
+                </td>
+                <td th:onclick="|location.href='@{/mypage/reservation/{reservationId}(reservationId = ${reservation.id})}'|">
+                        <p th:text="${reservation.pet.petName}"></p>
+                </td>
+                <td th:onclick="|location.href='@{/mypage/reservation/{reservationId}(reservationId = ${reservation.id})}'|">
+                    <p th:text="${reservation.startDate}"></p>
+                </td>
+                <td th:onclick="|location.href='@{/mypage/reservation/{reservationId}(reservationId = ${reservation.id})}'|">
+                    <p th:text="${reservation.endDate}"></p>
+                </td>
+                <td th:onclick="|location.href='@{/mypage/reservation/{reservationId}(reservationId = ${reservation.id})}'|">
+                    <p th:text="${reservation.fee}"></p>
+                </td>
+                <td>
+                    <div th:unless="${reservation.refusal}">
+                        <a th:unless="${reservation.approval}" th:href="@{/mypage/reservation/cancel/{reservationId}(reservationId = ${reservation.id})}">예약 취소</a>
+                </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 <div th:replace="fragments/footer.html::footer"></div>
