@@ -24,8 +24,8 @@
         <h1>등록된 반려동물 정보</h1>
         <div th:each="pet : ${petList}" class="temp_wrapper">
             <a th:href="@{/mypage/pet/{petId}(petId = ${pet.id})}" th:text="${pet.petName}"></a>
-            <div th:text="${pet.petGender}"></div>
-            <div th:text="${pet.petType}"></div>
+            <div th:text="${pet.petGender.description}"></div>
+            <div th:text="${pet.petType.description}"></div>
         </div>
         <a th:href="@{/mypage/pet/create}">반려동물 정보 추가</a>
     </div>

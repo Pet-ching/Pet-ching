@@ -13,10 +13,11 @@
     <input type="text" th:field="${pet.petName}" placeholder="반려동물 이름">
     <div th:each="type : ${genderTypes}">
         <input type="radio" th:field="${pet.petGender}" th:value="${type}">
-        <label th:text="${type}">NULL</label>
+        <label th:text="${type.description}">NULL</label>
     </div>
     <select th:field="${pet.petType}">
-        <option th:each="type : ${petTypes}" th:value="${type}" th:text="${type}">NULL</option>
+        <option value="">반려동물 종류</option>
+        <option th:each="type : ${petTypes}" th:value="${type}" th:text="${type.description}">NULL</option>
     </select>
     <div>
         <label>나이</label>
