@@ -6,6 +6,8 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +25,7 @@ public class Pet {
     @JoinColumn(name = "member_id")
     private Member member;
 
+    @NotBlank
     private String petName;
 
     @Enumerated(EnumType.STRING)
@@ -31,8 +34,10 @@ public class Pet {
     @Enumerated(EnumType.STRING)
     private PetType petType;
 
+    @Min(value = 0)
     private Integer petAge;
 
+    @Min(value = 0)
     private Integer weight;
 
     private boolean neutralization;
@@ -43,6 +48,7 @@ public class Pet {
 
     private String hospitalAdr;
 
+    @NotBlank
     private String note;
 
     @OneToMany(mappedBy = "pet")

@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -50,7 +52,18 @@ public class PetInfoController {
     }
 
     @PostMapping("/create")
-    public String createPet(Authentication authentication, Pet pet) {
+    public String createPet(Authentication authentication, @Validated Pet pet, BindingResult bindingResult, Model model) {
+
+        if (bindingResult.hasErrors()) {
+
+            GenderType[] genderTypes = GenderType.values();
+            PetType[] petTypes = PetType.values();
+
+            model.addAttribute("genderTypes", genderTypes);
+            model.addAttribute("petTypes", petTypes);
+
+            return "mypage/petInfoWrite";
+        }
 
         String userName = authentication.getName();
         Member member = memberRepository.findByUserEmail(userName);
@@ -86,9 +99,22 @@ public class PetInfoController {
     }
 
     @PostMapping("/edit/{petId}")
-    public String editPet(Authentication authentication, @PathVariable Long petId, Pet pet) {
+    public String editPet(Authentication authentication,
+                          @PathVariable Long petId,
+                          @Validated Pet pet,
+                          BindingResult bindingResult,
+                          Model model) {
 
-        // TODO Bean Validation
+        if (bindingResult.hasErrors()) {
+
+            GenderType[] genderTypes = GenderType.values();
+            PetType[] petTypes = PetType.values();
+
+            model.addAttribute("genderTypes", genderTypes);
+            model.addAttribute("petTypes", petTypes);
+
+            return "mypage/petInfoEdit";
+        }
 
         String userName = authentication.getName();
         Member member = memberRepository.findByUserEmail(userName);
