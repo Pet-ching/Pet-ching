@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>펫시터 상세 정보</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/details.css}">
+    <script src="/js/details.js" th:src="@{/js/details}"></script>
+
+<!--    로컬 테스트용-->
+        <link href="../static/css/details.css" rel="stylesheet">
+        <script type="text/javascript" src="../static/js/details.js"></script>
+
+</head>
+<body>
+<div th:replace="fragments/header.html::header"></div>
+<div class="content" th:object="${petSitter}">
+    <div class="item images">
+<!--        이미지-->
+<!--        <div class="slider">-->
+<!--            <input type="radio" name="slide" id="slide1" checked>-->
+<!--            <input type="radio" name="slide" id="slide2">-->
+<!--            <input type="radio" name="slide" id="slide3">-->
+<!--            <input type="radio" name="slide" id="slide4">-->
+<!--            <ul id="imgholder" class="imgs">-->
+<!--                <li><img src="/images/memberImages/2/pet/pt_2_00.jpg"></li>-->
+<!--                <li><img src="/images/memberImages/2/petSitter/ps_2_00.jpg"></li>-->
+<!--                <li><img src="/images/memberImages/2/petSitter/ps_2_01.jpg"></li>-->
+<!--                <li><img src="/images/memberImages/2/petSitter/ps_2_02.jpg"></li>-->
+<!--                <li><img class="imageDisplay" src="../static/images/memberImages/2/pet/pt_2_00.jpg"></li>-->
+<!--                <li><img src="../static/images/memberImages/2/petSitter/ps_2_00.jpg"></li>-->
+<!--                <li><img src="../static/images/memberImages/2/petSitter/ps_2_01.jpg"></li>-->
+<!--                <li><img src="../static/images/memberImages/2/petSitter/ps_2_02.jpg"></li>-->
+<!--            </ul>-->
+<!--            <div class="bullets">-->
+<!--                <label for="slide1">&nbsp;</label>-->
+<!--                <label for="slide2">&nbsp;</label>-->
+<!--                <label for="slide3">&nbsp;</label>-->
+<!--                <label for="slide4">&nbsp;</label>-->
+<!--            </div>-->
+<!--        </div>-->
+        <div class="section">
+            <input type="radio" name="slide" id="slide01" checked>
+            <input type="radio" name="slide" id="slide02">
+            <input type="radio" name="slide" id="slide03">
+            <div class="slidewrap">
+
+                <ul class="slidelist">
+                    <!-- 슬라이드 영역 -->
+                    <li class="slideitem">
+                        <a>
+                            <img src="../static/images/memberImages/2/petSitter/ps_2_00.jpg">
+                        </a>
+                    </li>
+                    <li class="slideitem">
+                        <a>
+                            <img src="../static/images/memberImages/2/petSitter/ps_2_01.jpg">
+                        </a>
+                    </li>
+                    <li class="slideitem">
+                        <a>
+                            <img src="../static/images/memberImages/2/petSitter/ps_2_02.jpg">
+                        </a>
+                    </li>
+
+                    <!-- 좌,우 슬라이드 버튼 -->
+                    <div class="slide-control">
+                        <div>
+                            <label for="slide03" class="left"></label>
+                            <label for="slide02" class="right"></label>
+                        </div>
+                        <div>
+                            <label for="slide01" class="left"></label>
+                            <label for="slide03" class="right"></label>
+                        </div>
+                        <div>
+                            <label for="slide02" class="left"></label>
+                            <label for="slide01" class="right"></label>
+                        </div>
+                    </div>
+
+                </ul>
+                <!-- 페이징 -->
+                <ul class="slide-pagelist">
+                    <li><label for="slide01"></label></li>
+                    <li><label for="slide02"></label></li>
+                    <li><label for="slide03"></label></li>
+                </ul>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="item petsitter_name">
+<!--        주소-->
+        <div id="address01"></div>
+
+        <div th:text="${petSitterMember.userName}">~~ 님을 소개합니다.</div>
+    </div>
+    <div class="item introduce">
+        <strong th:text="*{title}">여기는 제목~</strong></br>
+        <div class="text_box" th:text="*{selfIntroduction}">여기는 자기소개~</div>
+    </div>
+    <div class="item certifi">
+        <strong>자격증 보유 내역</strong>
+        <ul>
+            <li th:each="certifi : *{certificate}">
+                <p th:text="${certifi}">여기에 자격증 나와요~
+            </li>
+        </ul>
+    </div>
+    <div class="item services">
+        <strong>이용 가능 서비스</strong>
+        <ul>
+            <li th:each="ableService : *{ableService}">
+                <p th:text="${ableService}"> 여기는 이용가능 서비스
+            </li>
+        </ul>
+    </div>
+    <div class="item buttonBox">
+        <div th:if="(${petSitterMember.id}==${loginMember.id})">
+            <button type="button" th:onclick="|location.href='@{/mypage/petsitter/edit}'|">수정하기</button>
+        </div>
+        <div th:unless="(${petSitterMember.id}==${loginMember.id})">
+            <button type="button"
+                    th:onclick="|location.href='@{/matching/profile/reservation/{petSitterMember_id}(petSitterMember_id=${petSitterMember.id})}'|">예약하러가기
+            </button>
+            </br>
+            <button type="button"
+                    th:onclick="|location.href='@{/chat/{petSitterId}(petSitterId = ${petSitterMember.id})}'|">채팅하기
+            </button>
+        </div>
+    </div>
+    <div class="item feeList">
+        <strong>이용 요금</strong>
+        <table class="feeListTable">
+            <th>분류</th>
+            <th>가격</th>
+            <tr>
+                <td class="feeListKey">🐶 소형견</td>
+                <td class="feeListValue" th:if="*{feeList.smallDogFee==null}" th:text="이용불가" bgcolor="lightgray"></td>
+                <td class="feeListValue" th:unless="*{feeList.smallDogFee==null}" th:text="*{feeList.smallDogFee}+'원'"></td>
+            </tr>
+            <tr>
+                <td class="feeListKey">🐶 중형견</td>
+                <td class="feeListValue" th:if="*{feeList.middleDogFee==null}" th:text="이용불가" bgcolor="lightgray"></td>
+                <td class="feeListValue" th:unless="*{feeList.middleDogFee==null}" th:text="*{feeList.middleDogFee}+'원'"></td>
+            </tr>
+            <tr>
+                <td class="feeListKey">🐶 대형견</td>
+                <td class="feeListValue" th:if="*{feeList.largeDogFee==null}" th:text="이용불가" bgcolor="lightgray"></td>
+                <td class="feeListValue" th:unless="*{feeList.largeDogFee==null}" th:text="*{feeList.largeDogFee}+'원'"></td>
+            </tr>
+            <tr>
+                <td class="feeListKey">🐱 반려묘</td>
+                <td class="feeListValue" th:if="*{feeList.catFee==null}" th:text="이용불가" bgcolor="lightgray"></td>
+                <td class="feeListValue" th:unless="*{feeList.catFee==null}" th:text="*{feeList.catFee}+'원'"></td>
+            </tr>
+            <tr>
+                <td class="feeListKey">🐹 기타동물</td>
+                <td class="feeListValue" th:if="*{feeList.etcFee==null}" th:text="이용불가" bgcolor="lightgray"></td>
+                <td class="feeListValue" th:unless="*{feeList.etcFee==null}" th:text="*{feeList.etcFee}+'원'"></td>
+            </tr>
+        </table>
+        자세한 요금은 채팅을 통해 문의해주세요!
+    </div>
+    <div class="item workingTime">
+        <strong>예약 가능 날짜</strong>
+        <table class="workingTimeTable">
+            <th>요일</th>
+            <th>시작시간</th>
+            <th>종료시간</th>
+            <tr>
+                <td class="workingTimeKey">월요일</td>
+                <td class="workingTimeValue" th:if="*{workingDayAndTime.monStartTime==null}" th:text="이용불가" bgcolor="lightgray"></td>
+                <td class="workingTimeValue" th:unless="*{workingDayAndTime.monStartTime==null}" th:text="*{workingDayAndTime.monStartTime}"></td>
+                <td class="workingTimeValue" th:if="*{workingDayAndTime.monFinishTime==null}" th:text="이용불가" bgcolor="lightgray"></td>
+                <td class="workingTimeValue" th:unless="*{workingDayAndTime.monFinishTime==null}" th:text="*{workingDayAndTime.monFinishTime}"></td>
+            </tr>
+            <tr>
+                <td class="workingTimeKey">화요일</td>
+                <td class="workingTimeValue" th:if="*{workingDayAndTime.tueStartTime==null}" th:text="이용불가" bgcolor="lightgray"></td>
+                <td class="workingTimeValue" th:unless="*{workingDayAndTime.tueStartTime==null}" th:text="*{workingDayAndTime.tueStartTime}"></td>
+                <td class="workingTimeValue" th:if="*{workingDayAndTime.tueFinishTime==null}" th:text="이용불가" bgcolor="lightgray"></td>
+                <td class="workingTimeValue" th:unless="*{workingDayAndTime.tueFinishTime==null}" th:text="*{workingDayAndTime.tueFinishTime}"></td>
+            </tr>
+            <tr>
+                <td class="workingTimeKey">수요일</td>
+                <td class="workingTimeValue" th:if="*{workingDayAndTime.wedStartTime==null}" th:text="이용불가" bgcolor="lightgray"></td>
+                <td class="workingTimeValue" th:unless="*{workingDayAndTime.wedStartTime==null}" th:text="*{workingDayAndTime.wedStartTime}"></td>
+                <td class="workingTimeValue" th:if="*{workingDayAndTime.wedFinishTime==null}" th:text="이용불가" bgcolor="lightgray"></td>
+                <td class="workingTimeValue" th:unless="*{workingDayAndTime.wedFinishTime==null}" th:text="*{workingDayAndTime.wedFinishTime}"></td>
+            </tr>
+            <tr>
+                <td class="workingTimeKey">목요일</td>
+                <td class="workingTimeValue" th:if="*{workingDayAndTime.thuStartTime==null}" th:text="이용불가" bgcolor="lightgray"></td>
+                <td class="workingTimeValue" th:unless="*{workingDayAndTime.thuStartTime==null}" th:text="*{workingDayAndTime.thuStartTime}"></td>
+                <td class="workingTimeValue" th:if="*{workingDayAndTime.thuFinishTime==null}" th:text="이용불가" bgcolor="lightgray"></td>
+                <td class="workingTimeValue" th:unless="*{workingDayAndTime.thuFinishTime==null}" th:text="*{workingDayAndTime.thuFinishTime}"></td>
+            </tr>
+            <tr>
+                <td class="workingTimeKey">금요일</td>
+                <td class="workingTimeValue" th:if="*{workingDayAndTime.friStartTime==null}" th:text="이용불가" bgcolor="lightgray"></td>
+                <td class="workingTimeValue" th:unless="*{workingDayAndTime.friStartTime==null}" th:text="*{workingDayAndTime.friStartTime}"></td>
+                <td class="workingTimeValue" th:if="*{workingDayAndTime.friFinishTime==null}" th:text="이용불가" bgcolor="lightgray"></td>
+                <td class="workingTimeValue" th:unless="*{workingDayAndTime.friFinishTime==null}" th:text="*{workingDayAndTime.friFinishTime}"></td>
+            </tr>
+            <tr>
+                <td class="workingTimeKey">토요일</td>
+                <td class="workingTimeValue" th:if="*{workingDayAndTime.satStartTime==null}" th:text="이용불가" bgcolor="lightgray"></td>
+                <td class="workingTimeValue" th:unless="*{workingDayAndTime.satStartTime==null}" th:text="*{workingDayAndTime.satStartTime}"></td>
+                <td class="workingTimeValue" th:if="*{workingDayAndTime.satFinishTime==null}" th:text="이용불가" bgcolor="lightgray"></td>
+                <td class="workingTimeValue" th:unless="*{workingDayAndTime.satFinishTime==null}" th:text="*{workingDayAndTime.satFinishTime}"></td>
+            </tr>
+            <tr>
+                <td class="workingTimeKey">일요일</td>
+                <td class="workingTimeValue" th:if="*{workingDayAndTime.sunStartTime==null}" th:text="이용불가" bgcolor="lightgray"></td>
+                <td class="workingTimeValue" th:unless="*{workingDayAndTime.sunStartTime==null}" th:text="*{workingDayAndTime.sunStartTime}"></td>
+                <td class="workingTimeValue" th:if="*{workingDayAndTime.sunFinishTime==null}" th:text="이용불가" bgcolor="lightgray"></td>
+                <td class="workingTimeValue" th:unless="*{workingDayAndTime.sunFinishTime==null}" th:text="*{workingDayAndTime.sunFinishTime}"></td>
+            </tr>
+        </table>
+    </div>
+    <div class="item workingArea">
+        <strong>예약 가능 지역</strong>
+        <div id="address02">지이이역</div>
+        <div class="item maps">
+            <div id="map" style="width:250px;height:200px;"> 맵보여주는곳</div>
+        </div>
+    </div>
+
+</div>
+<script th:inline="javascript" th:src="@{//dapi.kakao.com/v2/maps/sdk.js?appkey=}+#{appkey}+@{&libraries=services}"></script>
+<script th:inline="javascript" th:src="@{/js/details.js}"></script>
+<script>
+        let address = "[[${petSitter.workingArea}]]";
+        showMap(address, 20);
+        document.getElementById('address01').innerHTML = splitAddress(address);
+        document.getElementById('address02').innerHTML = splitAddress(address);
+</script>
+<div th:replace="fragments/footer.html::footer"></div>
+</body>
+</html>
