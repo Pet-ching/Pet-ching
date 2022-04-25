@@ -25,9 +25,15 @@
                 <td th:text="${board.content}" id="content">내용</td>
             </div>
             <div class="text-right">
-                <a type="button" class="btn btn-info" th:href="@{/board/form(id=${board.id})}" th:if="${writer}">수정</a>
+                <a type="button" class="btn btn-info" th:href="@{/board/form(id=${board.id})}" th:if="${writer}" sec:authorize="hasRole('USER')">수정</a>
                 <a type="button" class="btn btn-danger" 
-                th:onclick="|deleteBoard(*{id})|" th:if="${writer}">삭제</a>
+                th:onclick="|deleteBoard(*{id})|" th:if="${writer}" sec:authorize="hasRole('USER')">삭제</a>
+
+                <a type="button" class="btn btn-info" th:href="@{/board/form(id=${board.id})}" th:if="${writer}" sec:authorize="hasRole('ADMIN')">수정</a>
+                <a type="button" class="btn btn-danger" 
+                th:onclick="|deleteBoard(*{id})|" th:if="${writer}" sec:authorize="hasRole('ADMIN')">삭제</a>
+
+
                 <a type="button" class="btn btn-primary" th:href="@{/board/list}">목록</a>
             </div>
         </form>
