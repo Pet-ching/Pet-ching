@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Board Form</title>
-    <link rel="stylesheet" th:href="@{/css/base.css}" />
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
 </head>
 <style>
     .layout {
@@ -12,19 +12,10 @@
         margin: 0 auto;
         margin-top: 40px;
     }
+
 </style>
 <body>
 <div th:replace="fragments/header.html::header"></div>
-
-<!--<div class="cont" th:style="${dataVo.type == '01' ? 'display:block' : 'display:none'}">-->
-<!-- ToDo : 보호자가 예약하고자 하는 시간에 맞추어 필터링 조건 걸기 -->
-<!--<div class="search">-->
-<!--    <form th:action="@{/matching/list}" type="get">-->
-<!--        <input type="text" name="searchKeyword" placeholder="지역을 입력하세요">-->
-<!--        <button type="submit">검색</button>-->
-<!--    </form>-->
-<!--</div>-->
-
 <!--Todo : 원하는 서비스 조건 선택 필터링-->
 <div style="display: flex; flex-direction: column; margin-top: 70px; width: 1024px;"><p
         style="font-size: 15px; font-weight: 600; color: rgb(57, 60, 71); margin-bottom: 27px; margin-left: 3px;">원하시는
@@ -34,50 +25,42 @@
         <div style="display: flex; justify-content: space-between;">
             <div style="display: flex; justify-content: space-between; width: 712px;">
                 <div style="width: 150px; height: 55px; display: flex; align-items: center; justify-content: center; border: 1.5px solid rgb(223, 227, 234); border-radius: 28px; box-shadow: rgba(0, 0, 0, 0.03) 0px 2px 3px 0px; cursor: pointer;">
-                    <input type="radio" name="ableService" value="꼬리"
-                           style="font-size: 15px; font-weight: 600; color: rgb(187, 193, 204);">꼬리(반려동물 없음)</input></div>
+                    <input type="radio" name="ableService" value="퍼피"
+                           style="font-size: 15px; font-weight: 600; color: rgb(187, 193, 204);">퍼피 케어</input>
+                </div>
                 <div style="width: 122px; height: 55px; display: flex; align-items: center; justify-content: center; border: 1.5px solid rgb(223, 227, 234); border-radius: 28px; box-shadow: rgba(0, 0, 0, 0.03) 0px 2px 3px 0px; cursor: pointer;">
-                    <input type="radio" name="ableService" value="픽업"
-                           style="font-size: 15px; font-weight: 600; color: rgb(187, 193, 204);">픽업 가능</input></div>
+                    <input type="radio" name="ableService" value="실내"
+                           style="font-size: 15px; font-weight: 600; color: rgb(187, 193, 204);">실내 놀이</input></div>
                 <div style="width: 136px; height: 55px; display: flex; align-items: center; justify-content: center; border: 1.5px solid rgb(223, 227, 234); border-radius: 28px; box-shadow: rgba(0, 0, 0, 0.03) 0px 2px 3px 0px; cursor: pointer;">
-                    <input type="radio" name="ableService" value="대형견"
-                           style="font-size: 15px; font-weight: 600; color: rgb(187, 193, 204);">대형견 가능</input></div>
-                <div style="width: 122px; height: 55px; display: flex; align-items: center; justify-content: center; border: 1.5px solid rgb(223, 227, 234); border-radius: 28px; box-shadow: rgba(0, 0, 0, 0.03) 0px 2px 3px 0px; cursor: pointer;">
-                    <input type="radio" name="ableService" value="마당"
-                           style="font-size: 15px; font-weight: 600; color: rgb(187, 193, 204);">마당 있음</input></div>
+                    <input type="radio" name="ableService" value="응급"
+                           style="font-size: 15px; font-weight: 600; color: rgb(187, 193, 204);">응급 처치</input></div>
                 <div style="width: 122px; height: 55px; display: flex; align-items: center; justify-content: center; border: 1.5px solid rgb(223, 227, 234); border-radius: 28px; box-shadow: rgba(0, 0, 0, 0.03) 0px 2px 3px 0px; cursor: pointer;">
                     <input type="radio" name="ableService" value="노견"
                            style="font-size: 15px; font-weight: 600; color: rgb(187, 193, 204);">노견 케어</input></div>
+                <div style="width: 122px; height: 55px; display: flex; align-items: center; justify-content: center; border: 1.5px solid rgb(223, 227, 234); border-radius: 28px; box-shadow: rgba(0, 0, 0, 0.03) 0px 2px 3px 0px; cursor: pointer;">
+                    <input type="radio" name="ableService" value="픽업"
+                           style="font-size: 15px; font-weight: 600; color: rgb(187, 193, 204);">집압 픽업</input></div>
+                <div style="width: 122px; height: 55px; display: flex; align-items: center; justify-content: center; border: 1.5px solid rgb(223, 227, 234); border-radius: 28px; box-shadow: rgba(0, 0, 0, 0.03) 0px 2px 3px 0px; cursor: pointer;">
+                    <input type="radio" name="ableService" value="산책"
+                           style="font-size: 15px; font-weight: 600; color: rgb(187, 193, 204);">매일 산책</input></div>
+                <div style="width: 122px; height: 55px; display: flex; align-items: center; justify-content: center; border: 1.5px solid rgb(223, 227, 234); border-radius: 28px; box-shadow: rgba(0, 0, 0, 0.03) 0px 2px 3px 0px; cursor: pointer;">
+                    <input type="radio" name="ableService" value="약물"
+                           style="font-size: 15px; font-weight: 600; color: rgb(187, 193, 204);">약물 복용</input></div>
+                <div style="width: 122px; height: 55px; display: flex; align-items: center; justify-content: center; border: 1.5px solid rgb(223, 227, 234); border-radius: 28px; box-shadow: rgba(0, 0, 0, 0.03) 0px 2px 3px 0px; cursor: pointer;">
+                    <input type="radio" name="ableService" value="장기"
+                           style="font-size: 15px; font-weight: 600; color: rgb(187, 193, 204);">장기 예약</input></div>
+                <div style="width: 122px; height: 55px; display: flex; align-items: center; justify-content: center; border: 1.5px solid rgb(223, 227, 234); border-radius: 28px; box-shadow: rgba(0, 0, 0, 0.03) 0px 2px 3px 0px; cursor: pointer;">
+                    <input type="radio" name="ableService" value="목욕"
+                           style="font-size: 15px; font-weight: 600; color: rgb(187, 193, 204);">목욕 가능</input></div>
+                <div style="width: 122px; height: 55px; display: flex; align-items: center; justify-content: center; border: 1.5px solid rgb(223, 227, 234); border-radius: 28px; box-shadow: rgba(0, 0, 0, 0.03) 0px 2px 3px 0px; cursor: pointer;">
+                    <input type="radio" name="ableService" value="모발"
+                           style="font-size: 15px; font-weight: 600; color: rgb(187, 193, 204);">모발 관리</input></div>
             </div>
         </div>
         <input type="text" name="searchKeyword" placeholder="지역을 입력하세요">
         <button type="submit">검색</button>
     </form>
 </div>
-
-<div class="container">
-    <h1>예약 정보</h1>
-    <form th:action="@{/matching/profile/reservationMatch}" method="POST">
-        <div>
-            <label>펫이름</label>
-            <!--                ToDo : db와 연결된 펫 이름 -->
-        </div>
-        <div>
-            <label>시작 날짜</label>
-            <input type="datetime-local" name="startDate">
-        </div>
-        <div>
-            <label> 종료 날짜 </label>
-            <input type="datetime-local" name="endDate">
-        </div>
-        <div>
-            <label>요금</label>
-            <input type="number" name="fee">원
-        </div>
-        <button type="submit">예약 확정</button>
-    </form>
-</div>
-
 
 <!--전체 펫시터 출력하기 : 검색을 할 경우 안 보이게 표시-->
 <div class="layout">
@@ -86,11 +69,8 @@
         <tr>
             <th>id</th>
             <th>자기소개</th>
-            <th>요금</th>
-            <th>자격증</th>
             <th>근무지</th>
-            <th>근무시간</th>
-            <th>이용서비스</th>
+            <th>이용가능 서비스</th>
         </tr>
         </thead>
         <tbody>
@@ -100,38 +80,25 @@
                 상세페이지 이동
                 <td th:text="${sitter.id}">1</td>
                 <td th:text="${sitter.selfIntroduction}">자기소개.</td>
-                <td th:text="${sitter.fee}">요금</td>
-                <td th:text="${sitter.certificate}">자격증</td>
                 <td th:text="${sitter.workingArea}">근무지</td>
-                <td th:text="${sitter.workingTime}">근무시간</td>
                 <td th:text="${sitter.ableService}">이용서비스</td>
+                <!--                <td th:text="${sitter.fee}">요금</td>-->
+                <!--                <td th:text="${sitter.certificate}">자격증</td>-->
+                <!--                <td th:text="${sitter.workingTime}">근무시간</td>-->
+
+                <!--                <span th:each="i : ${sitter.ableService}">-->
+                <!--                <td th:text="|${i}|">이용서비스</td>-->
+                <!--                </span>-->
             </div>
         </tr>
-
-
-<!--        <div th:with="list=${list}, list2=${list2}"-->
-<!--                th:if="list.id==list2.id" th:style="display:none">-->
-<!--        <tr th:each="sitter : ${list2}">-->
-<!--            &lt;!&ndash;                <a th:href="@{/matching/details(id=${sitter.id})}">&ndash;&gt;-->
-<!--            <div th:onclick="|location.href='@{/matching/details(id=${sitter.id})}'|">-->
-<!--                상세페이지 이동-->
-<!--                <td th:text="${sitter.id}">1</td>-->
-<!--                <td th:text="${sitter.selfIntroduction}">자기소개.</td>-->
-<!--                <td th:text="${sitter.fee}">요금</td>-->
-<!--                <td th:text="${sitter.certificate}">자격증</td>-->
-<!--                <td th:text="${sitter.workingArea}">근무지</td>-->
-<!--                <td th:text="${sitter.workingTime}">근무시간</td>-->
-<!--                <td th:text="${sitter.ableService}">이용서비스</td>-->
-<!--            </div>-->
-<!--        </tr>-->
-<!--        </div>-->
         </tbody>
     </table>
 
     <!--페이징 처리-->
     <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
         <a th:if="${page != nowPage}"
-           th:href="@{/matching/list(page = ${page -1}, searchKeyword = ${param.searchKeyword}, ableService = ${param.ableService})}" th:text="${page}"></a>
+           th:href="@{/matching/list(page = ${page -1}, searchKeyword = ${param.searchKeyword}, ableService = ${param.ableService})}"
+           th:text="${page}"></a>
         <strong th:if="${page == nowPage}" th:text="${page}" style="color:red"></strong>
     </th:block>
 </div>

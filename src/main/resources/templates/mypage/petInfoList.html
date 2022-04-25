@@ -1,29 +1,46 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>펫정보</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
     <style>
         .temp_wrapper {
             display: flex;
-            border: solid;
+            justify-content: space-around;
         }
     </style>
 </head>
 <body>
-    <div th:if="${petListEmpty}">
-        <h1>아직 입력된 정보가 없어요!</h1>
-        <a th:href="@{/mypage/pet/create}">등록할래요?</a>
+<div th:replace="fragments/header.html::header"></div>
+<div class="container">
+    <div class="page-header">
+        <h1>반려동물 정보</h1>
     </div>
-    <div th:unless="${petListEmpty}">
-        <h1>등록된 반려동물 정보</h1>
-        <div th:each="pet : ${petList}" class="temp_wrapper">
-            <a th:href="@{/mypage/pet/{petId}(petId = ${pet.id})}" th:text="${pet.petName}"></a>
-            <div th:text="${pet.petGender}"></div>
-            <div th:text="${pet.petType}"></div>
-        </div>
-        <a th:href="@{/mypage/pet/create}">반려동물 정보 추가</a>
+    <div id="mainHide">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th class="col-md-1">이름</th>
+                <th class="col-md-1">성별</th>
+                <th class="col-md-1">종류</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr th:each="pet : ${petList}" th:onclick="|location.href='@{/mypage/pet/{petId}(petId = ${pet.id})}'|">
+                    <td th:text="${pet.petName}"></td>
+                    <td th:text="${pet.petGender?.description}"></td>
+                    <td th:text="${pet.petType?.description}"></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    <a href="/">홈으로</a>
+    <div class="text-right">
+        <a type="button" th:href="@{/mypage/pet/create}" class="btn btn-info">반려동물 추가</a>
+    </div>
+</div>
+<div th:replace="fragments/footer.html::footer"></div>
 </body>
 </html>

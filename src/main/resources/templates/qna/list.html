@@ -8,7 +8,7 @@
 </head>
 <body>
 <!--header-->
-<div th:replace="qna/layout/header::header"></div>
+<div th:replace="fragments/header.html::header"></div>
 <!--body-->
 <div class="container">
     <div class="page-header">
@@ -104,7 +104,7 @@
                 <input type="submit" class="pull right btn btn-sm btn-primary" value="검색">
             </div>
         </form>
-
+        <div style="height:100px;"></div>
     </nav>
     <!-- /Pagination -->
 </div>
@@ -129,7 +129,7 @@
 
 </div>
 <!--footer-->
-<div th:replace="qna/layout/footer::footer"></div>
+<div th:replace="fragments/footer::footer"></div>
 <!--/footer-->
 <div style="height:100px;"></div>
 </body>

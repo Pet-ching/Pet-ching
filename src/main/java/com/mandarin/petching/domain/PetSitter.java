@@ -7,6 +7,7 @@ import lombok.ToString;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Entity
@@ -37,12 +38,17 @@ public class PetSitter {
     private List<String> certificate;
 
     @ElementCollection
-    @CollectionTable(name = "certificate",
+    @CollectionTable(name = "ableService",
             joinColumns = @JoinColumn(name = "sitter_id"))
     private List<String> ableService;
 
+    @NotBlank
     private String workingArea;
 
     @Lob
+    @NotBlank
     private String selfIntroduction;
+
+    @NotBlank
+    private String title;
 }

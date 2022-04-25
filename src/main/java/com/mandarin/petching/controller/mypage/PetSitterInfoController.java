@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,9 +51,21 @@ public class PetSitterInfoController {
 
     @PostMapping("/create")
     public String createPet(Authentication authentication,
-                            PetSitter petSitter,
+                            @Validated PetSitter petSitter,
+                            BindingResult bindingResult,
                             FeeList feeList,
-                            WorkingDayAndTime workingDayAndTime) {
+                            WorkingDayAndTime workingDayAndTime,
+                            Model model) {
+
+        if (bindingResult.hasErrors()) {
+
+            model.addAttribute("feeList", new FeeList());
+            model.addAttribute("workingDayAndTime", new WorkingDayAndTime());
+            model.addAttribute("certificateList", CertificateType.getCertificateList());
+            model.addAttribute("ableServiceList", AbleServiceType.getAbleServiceList());
+
+            return "mypage/petSitterInfoWrite";
+        }
 
         String userName = authentication.getName();
         Member member = memberRepository.findByUserEmail(userName);
@@ -61,7 +75,6 @@ public class PetSitterInfoController {
         return "redirect:/mypage/petsitter";
     }
 
-    // 사용자 체크
     @GetMapping("/edit")
     public String editPetSitterForm(Authentication authentication, Model model) {
 
@@ -83,9 +96,21 @@ public class PetSitterInfoController {
 
     @PostMapping("/edit")
     public String editPetSitter(Authentication authentication,
-                                PetSitter petSitter,
+                                @Validated PetSitter petSitter,
+                                BindingResult bindingResult,
                                 FeeList feeList,
-                                WorkingDayAndTime workingDayAndTime) {
+                                WorkingDayAndTime workingDayAndTime,
+                                Model model) {
+
+        if (bindingResult.hasErrors()) {
+
+            model.addAttribute("feeList", new FeeList());
+            model.addAttribute("workingDayAndTime", new WorkingDayAndTime());
+            model.addAttribute("certificateList", CertificateType.getCertificateList());
+            model.addAttribute("ableServiceList", AbleServiceType.getAbleServiceList());
+
+            return "mypage/petSitterInfoWrite";
+        }
 
         String userName = authentication.getName();
         Member member = memberRepository.findByUserEmail(userName);
