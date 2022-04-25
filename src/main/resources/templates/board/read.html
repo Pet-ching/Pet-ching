@@ -3,6 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Board Form</title>
+    
     <link rel="stylesheet" th:href="@{/css/base.css}" />
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
 </head>
@@ -31,6 +32,30 @@
                 <a type="button" class="btn btn-primary" th:href="@{/board/list}">목록</a>
             </div>
         </form>
+        <br><br><br>
+        <div class="form-group">
+            <!-- 댓글 -->
+            <div>
+                <label for="reply">댓글</label><br>
+                <div><textarea class="form-control" rows="1" id="reply"></textarea></div>
+                <div><button class="btn btn-success">등록</button></div>
+            </div>
+            <!-- 댓글 리스트 -->
+            <br><div class="form-group">
+                <div>댓글 리스트</div>
+                <ul class="list-group">
+                    <li class="list-group-item d-flex">
+                        <div>댓글 내용 들어갈 자리</div>
+                        <div>
+                            <div>작성자 &nbsp;</div>
+                            <button class="btn btn-danger">삭제</button>
+                        </div>
+                    </li>
+                  </ul>
+            </div>
+        </div>
+
+
     </div>
     <div th:replace="fragments/footer.html::footer"></div>
 
