@@ -59,16 +59,16 @@ public class QnaRestController {
 //    }
 
     // 버전 2 uri 제공
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)//반환값 json
-    public ResponseEntity<PagedModel<EntityModel<Board>>> getBoards(@PageableDefault Pageable pageable, PagedResourcesAssembler<Board> assembler) {
-        System.out.println("GET Access");
-
-        Page<Board> boards = boardRepository.findAll(pageable);
-
-        //링크 추가
-        PagedModel<EntityModel<Board>> entityModels = assembler.toModel(boards);
-        return ResponseEntity.ok(entityModels);
-    }
+//    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)//반환값 json
+//    public ResponseEntity<PagedModel<EntityModel<Board>>> getBoards(@PageableDefault Pageable pageable, PagedResourcesAssembler<Board> assembler) {
+//        System.out.println("GET Access");
+//
+//        Page<Board> boards = boardRepository.findAll(pageable);
+//
+//        //링크 추가
+//        PagedModel<EntityModel<Board>> entityModels = assembler.toModel(boards);
+//        return ResponseEntity.ok(entityModels);
+//    }
 
     @PostMapping//생성
     public ResponseEntity<?> postBoard(@RequestBody Board board) {

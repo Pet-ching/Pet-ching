@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>펫정보</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <style>
+        .field-error {
+            border-color: #dc3545;
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="fragments/header.html::header"></div>
+<div class="container">
+<form action="" method="post">
+    <input type="text" th:field="${pet.petName}" placeholder="반려동물 이름">
+    <div class="field-error" th:errors="${pet.petName}">error</div>
+    <div th:each="type : ${genderTypes}">
+        <input type="radio" th:field="${pet.petGender}" th:value="${type}">
+        <label th:text="${type.description}">NULL</label>
+    </div>
+    <select th:field="${pet.petType}">
+        <option value="">반려동물 종류</option>
+        <option th:each="type : ${petTypes}" th:value="${type}" th:text="${type.description}">NULL</option>
+    </select>
+    <div>
+        <label>나이</label>
+        <input type="number" th:field="${pet.petAge}">
+        <div class="field-error" th:errors="${pet.petAge}">error</div>
+    </div>
+    <div>
+        <label>몸무게</label>
+        <input type="number" th:field="${pet.weight}">
+        <div class="field-error" th:errors="${pet.weight}">error</div>
+    </div>
+    <div>
+        <input type="checkbox" th:field="${pet.neutralization}">
+        <label>중성화 여부</label>
+    </div>
+    <div>
+        <input type="text" th:field="${pet.hospitalName}" placeholder="동물병원 이름">
+        <input type="text" th:field="${pet.hospitalTel}" placeholder="동물병원 전화번호" oninput="autoHyphen2(this)" maxlength="13">
+        <script type="text/javascript">
+                const autoHyphen2 = (target) => {
+                 target.value = target.value
+                   .replace(/[^0-9]/g, '')
+                  .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+                }
+        </script>
+        <div class="form-group">
+            <label th:for="address">주소검색</label>
+            <input type="text" id="sample5_address" th:field="${pet.hospitalAdr}" placeholder="주소검색">
+            <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
+            <div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
+        </div>
+        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+        <script src="@{//dapi.kakao.com/v2/maps/sdk.js?appkey=}+#{hwakey}"></script>
+        <script>
+            var mapContainer = document.getElementById('map'),
+                mapOption = {
+                    center: new daum.maps.LatLng(37.537187, 127.005476),
+                    level: 5
+                };
+
+            var map = new daum.maps.Map(mapContainer, mapOption);
+            var geocoder = new daum.maps.services.Geocoder();
+            var marker = new daum.maps.Marker({
+                position: new daum.maps.LatLng(37.537187, 127.005476),
+                map: map
+            });
+
+
+            function sample5_execDaumPostcode() {
+                new daum.Postcode({
+                    oncomplete: function(data) {
+                        var addr = data.address;
+
+                        document.getElementById("sample5_address").value = addr;
+                        geocoder.addressSearch(data.address, function(results, status) {
+                            if (status === daum.maps.services.Status.OK) {
+
+                                var result = results[0];
+
+                                var coords = new daum.maps.LatLng(result.y, result.x);
+                                mapContainer.style.display = "block";
+                                map.relayout();
+                                map.setCenter(coords);
+                                marker.setPosition(coords)
+                            }
+                        });
+                    }
+                }).open();
+            }
+        </script>
+    </div>
+    <input type="text" th:field="${pet.note}" placeholder="기타 사항 입력">
+    <div class="field-error" th:errors="${pet.note}">error</div>
+    <input type="submit">
+</form>
+</div>
+    <div th:replace="fragments/footer.html::footer"></div>
+</body>
+</html>

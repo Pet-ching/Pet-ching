@@ -6,7 +6,6 @@ import lombok.Setter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +27,7 @@ public class Member {
     @OneToOne(mappedBy = "member")
     private PetSitter petSitter;
 
-    private LocalDate userBth;
+    private String userBth;
 
     @Enumerated(EnumType.STRING)
     private GenderType userGender;
@@ -43,10 +42,12 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Board> board = new ArrayList<>();
 
-//    private String userTel;
+    private String userTel;
+
+    private String imgUrl;
 
     public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder){
         Member member = new Member();
@@ -54,9 +55,14 @@ public class Member {
         member.setUserName(memberFormDto.getUserName());
         member.setUserEmail(memberFormDto.getUserEmail());
         member.setAddress(memberFormDto.getAddress());
+        member.setUserBth(memberFormDto.getUserBth());
+        member.setUserTel(memberFormDto.getUserTel());
+        member.setUserGender(memberFormDto.getUserGender());
         String password = passwordEncoder.encode(memberFormDto.getUserPwd());
         member.setUserPwd(password);
-        member.setRole(Role.admin);
+        member.setRole(Role.USER);
+
         return member;
     }
+
 }

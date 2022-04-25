@@ -1,15 +1,86 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="../css/style.css"/>
 </head>
 <body>
-<a th:href="@{/members/login}">login</a>
-<a th:href="@{/members/new}">join</a>
-<a th:href="@{/matching/list}">matching</a>
-<a th:href="@{/board/list}">board</a>
-<a th:href="@{/qna}">qna</a><br>
-<a th:href="@{/mypage(type='petowner')}">mypage</a>
+<div th:replace="fragments/header::header"></div>
+<div class="container-fluid">
+    <div id="header"><!--index 웹퍼블리싱 김혜리, 김선화 -->
+        <div id="sns">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <input type="checkbox" id="searchtab" checked>
+            <label for="searchtab" class="tab"></label>
+            <input type="text" id="search" placeholder="검색하기..">
+            <label for="search" class="searchbox"></label>
+        </div>
+        <div id="mainview">
+            <h1 class="maintxt">Trust, faith, love..<br>
+                Meet the Petsitter</h1>
+            <div class="viewtab">
+                <a href="#"><p>만나러 가기</p></a>
+            </div>
+            <img src="/img/first.jpg">
+        </div>
+
+    </div>
+    <section>
+        <div id="menu-1">
+            <div class="coldbrew">
+            </div>
+            <div class="handdrip"></div>
+            <div class="coldbrewtxt">
+                <h2>I take care of her every day</h2>
+                <p>Don't worry about your work being late</p>
+                <div class="viewtab">
+                    <a href="#"><p>보러가기</p></a>
+                </div>
+            </div>
+        </div>
+
+        <div id="identity">
+            <div class="identitytxt">
+                <h2>originality</h2>
+                <p class="smalltxt">펫칭은 정직함과 신뢰를 중시합니다</p>
+                <p class="engtxt">“You, my precious family,
+                    The heart that always trusts and waits for me,
+                    I want to protect you with responsibility.
+                    I know how you feel. petchig"</p>
+                <div class="viewtab">
+                    <a href="#"><p>보러가기</p></a></div>
+            </div>
+            <div class="bigtxt">
+            </div>
+        </div>
+
+
+        <div id="cafe">
+            <div class="cafeimg">
+                <img src="/img/sponsor.jpg">
+            </div>
+            <div class="cafetxt">
+                <h2>Please support abandoned animals</h2>
+                <p>유기 동물을 후원해 주세요.</p>
+                <div class="viewtab">
+                    <a href="https://www.animals.or.kr"><p>후원하기</p></a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<!--<form sec:authorize="isAuthenticated()" th:action="@{/members/withdrawal}" th:method="get">-->
+<!--    &lt;!&ndash;    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />&ndash;&gt;-->
+<!--    <button type="submit">탈퇴하기</button>-->
+<!--</form>-->
+
+<div th:replace="fragments/footer::footer"></div>
 </body>
 </html>
+

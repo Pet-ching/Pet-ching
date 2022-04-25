@@ -28,7 +28,8 @@ dependencies {
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 
 	implementation 'org.springframework.boot:spring-boot-devtools'
-	compileOnly 'org.projectlombok:lombok'
+    implementation 'org.jetbrains:annotations:20.1.0'
+    compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -39,16 +40,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-hateoas:2.6.6'
 	implementation 'org.springframework:spring-webmvc:5.3.19'
 
-
-	//websocket
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
-	implementation 'org.webjars:sockjs-client:1.5.1'
-	implementation 'org.webjars:stomp-websocket:2.3.4'
-
-	//view
-	implementation 'org.webjars:webjars-locator-core'
-	implementation 'org.webjars:jquery:3.6.0'
-	implementation 'org.webjars.bower:axios:0.21.1'
 	implementation 'com.google.code.gson:gson:2.9.0'
 }
 

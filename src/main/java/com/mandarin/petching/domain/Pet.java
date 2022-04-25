@@ -1,15 +1,19 @@
 package com.mandarin.petching.domain;
 
+import com.mandarin.petching.dto.PetDto;
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter
+@Getter @Setter
 public class Pet {
 
     @Id
@@ -21,17 +25,19 @@ public class Pet {
     @JoinColumn(name = "member_id")
     private Member member;
 
+    @NotBlank
     private String petName;
 
     @Enumerated(EnumType.STRING)
     private GenderType petGender;
 
     @Enumerated(EnumType.STRING)
-    private PetType petType; // TODO
+    private PetType petType;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-    private LocalDate petBth; // TODO
+    @Min(value = 0)
+    private Integer petAge;
 
+    @Min(value = 0)
     private Integer weight;
 
     private boolean neutralization;
@@ -42,29 +48,9 @@ public class Pet {
 
     private String hospitalAdr;
 
+    @NotBlank
     private String note;
-
-    private String vaccination; // TODO
 
     @OneToMany(mappedBy = "pet")
     private List<Reservation> reservationList = new ArrayList<>();
-
-    public static Pet createPetOwner(Member member, PetOwnerDTO petOwnerDto) {
-        Pet pet = new Pet();
-
-        pet.member = member;
-
-        pet.petName = petOwnerDto.getPetName();
-        pet.petGender = petOwnerDto.getPetGender();
-        pet.petType = petOwnerDto.getPetType();
-        pet.petBth = petOwnerDto.getPetBth();
-        pet.weight = petOwnerDto.getWeight();
-        pet.neutralization = petOwnerDto.isNeutralization();
-        pet.hospitalName = petOwnerDto.getHospitalName();
-        pet.hospitalTel = petOwnerDto.getHospitalTel();
-        pet.hospitalAdr = petOwnerDto.getHospitalAdr();
-        pet.note = petOwnerDto.getNote();
-
-        return pet;
-    }
 }

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>채팅 리스트</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <style>
+        .temp_wrapper {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="fragments/header.html::header"></div>
+<div class="container">
+    <div class="page-header">
+        <h1>나의 채팅 리스트</h1>
+    </div>
+    <!-- <div th:each="chatRoom : ${chatRoomList}">
+        <a th:href="@{/chat/room/{roomId}(roomId = ${chatRoom.id})}" class="temp_wrapper">
+            <p>반려동물 보호자: </p>
+            <div th:text="${chatRoom.petOwnerName}">보호자</div>
+            <p>반려동물 돌보미: </p>
+            <div th:text="${chatRoom.petSitterName}">돌보미</div>
+        </a>
+    </div> -->
+    <div id="mainHide">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="col-md-1">번호</th>
+                    <th class="col-md-1">보호자</th>
+                    <th class="col-md-1">펫시터</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="chatRoom : ${chatRoomList}" th:onclick="|location.href='@{/chat/room/{roomId}(roomId = ${chatRoom.id})}'|">
+                    <td>1</td>
+                    <td th:text="${chatRoom.petOwnerName}"></td>
+                    <td th:text="${chatRoom.petSitterName}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div th:replace="fragments/footer.html::footer"></div>
+</body>
+</html>

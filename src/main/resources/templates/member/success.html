@@ -4,15 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
 </head>
 <body>
-<div>
+<div th:replace="fragments/header.html::header"></div>
+<div class="container">
     ID : <span sec:authentication="name"></span> 환영이요 ~ <br>
     소유 권한 : <span sec:authentication="authorities"></span> <br>
 </div>
-<div>
-    <a href="/members/logout">로그아웃</a>
-    <a href="/">메인</a>
-</div>
+
+<div th:replace="fragments/footer.html::footer"></div>
 </body>
 </html>
