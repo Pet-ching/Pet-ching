@@ -4,7 +4,9 @@ import java.util.List;
 
 import com.mandarin.petching.domain.Board;
 import com.mandarin.petching.repository.BoardRepository;
+import com.mandarin.petching.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.util.StringUtils;
 
@@ -15,6 +17,9 @@ class BoardApiController {
 
     @Autowired
     private BoardRepository repository;
+
+    @Autowired
+    private BoardService service;
 
     BoardApiController(BoardRepository repository) {
         this.repository = repository;
@@ -41,7 +46,7 @@ class BoardApiController {
     // Single item
 
     @GetMapping("/boards/{id}")
-    Board one(@PathVariable Long id) {
+    Board one(@PathVariable Long id, Model model) {
 
         return repository.findById(id).orElse(null);
     }
@@ -65,4 +70,6 @@ class BoardApiController {
     void deleteBoard(@PathVariable Long id) {
         repository.deleteById(id);
     }
+
+
 }
