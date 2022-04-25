@@ -1,9 +1,10 @@
-<!--code by. hyeok-->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>펫시터 정보 출력 페이징</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Board Form</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
 </head>
 <style>
     .layout {
@@ -11,13 +12,9 @@
         margin: 0 auto;
         margin-top: 40px;
     }
-
-
-
-
-
 </style>
 <body>
+<div th:replace="fragments/header.html::header"></div>
 
 <!--<div class="cont" th:style="${dataVo.type == '01' ? 'display:block' : 'display:none'}">-->
 <!-- ToDo : 보호자가 예약하고자 하는 시간에 맞추어 필터링 조건 걸기 -->
@@ -138,43 +135,6 @@
         <strong th:if="${page == nowPage}" th:text="${page}" style="color:red"></strong>
     </th:block>
 </div>
-
-
-<!--<div class="cont" th:style="${dataVo.type == '01' ? 'display:block' : 'display:none'}">-->
-<!--<div th:if="${/*검색에서 입력한 지역 값이 펫시터 db에 저장된 지역인 경우*/}">-->
-<!--<div class="search">-->
-<!--    <form action="/matching/list/search" type="post">-->
-<!--        <input type="text" name="area" placeholder="지역을 입력하세요">-->
-<!--        <button type="submit">검색</button>-->
-<!--    </form>-->
-<!--</div>-->
-<!--<div class="layout">-->
-<!--    <table>-->
-<!--        <thead>-->
-<!--        <tr>-->
-<!--            <th>id</th>-->
-<!--            <th>자기소개</th>-->
-<!--            <th>요금</th>-->
-<!--            <th>자격증</th>-->
-<!--            <th>근무지</th>-->
-<!--            <th>근무시간</th>-->
-<!--            <th>이용서비스</th>-->
-<!--        </tr>-->
-<!--        </thead>-->
-<!--        <tbody>-->
-<!--        <tr th:each="sitter : ${list}">-->
-<!--            <td th:text="${sitter.id}">1</td>-->
-<!--            <td th:text="${sitter.selfIntroduction}">자기소개.</td>-->
-<!--            <td th:text="${sitter.fee}">요금</td>-->
-<!--            <td th:text="${sitter.certificate}">자격증</td>-->
-<!--            <td th:text="${sitter.workingArea}">근무지</td>-->
-<!--            <td th:text="${sitter.workingTime}">근무시간</td>-->
-<!--            <td th:text="${sitter.ableService}">이용서비스</td>-->
-<!--        </tr>-->
-<!--        </tbody>-->
-
-<!--    </table>-->
-<!--</div>-->
-<!--</div>-->
+<div th:replace="fragments/footer.html::footer"></div>
 </body>
 </html>

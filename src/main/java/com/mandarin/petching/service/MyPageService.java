@@ -1,9 +1,7 @@
 package com.mandarin.petching.service;
 
-import com.mandarin.petching.domain.Member;
-import com.mandarin.petching.domain.Pet;
+import com.mandarin.petching.domain.*;
 import com.mandarin.petching.dto.PetDto;
-import com.mandarin.petching.domain.PetSitter;
 import com.mandarin.petching.repository.PetSitterRepository;
 import com.mandarin.petching.repository.UserRepository;
 import com.mandarin.petching.repository.PetRepository;
@@ -25,8 +23,7 @@ public class MyPageService {
     }
 
     @Transactional
-    public void createPet(Long memberId, PetDto petDto) {
-        Member member = userRepository.findById(memberId).get();
+    public void createPet(Member member, PetDto petDto) {
 
         Pet pet = Pet.createPet(member, petDto);
         petRepository.save(pet);
@@ -43,10 +40,28 @@ public class MyPageService {
     }
 
     @Transactional
-    public void savePetSitter(Long memberId, PetSitter petSitterDto) {
-        Member member = userRepository.findById(memberId).get();
+    public void savePetSitter(Member member,
+                              PetSitter petSitter,
+                              FeeList feeList,
+                              WorkingDayAndTime workingDayAndTime) {
 
-        PetSitter petSitter = PetSitter.createPetSitter(member, petSitterDto);
+        petSitter.setMember(member);
+        petSitter.setFeeList(feeList);
+        petSitter.setWorkingDayAndTime(workingDayAndTime);
+
         petSitterRepository.save(petSitter);
+    }
+
+    @Transactional
+    public void updatePetSitter(Member member,
+                                PetSitter petSitter,
+                                FeeList feeList,
+                                WorkingDayAndTime workingDayAndTime) {
+        PetSitter findPetSitter = member.getPetSitter();
+        petSitterRepository.delete(findPetSitter);
+
+        petSitterRepository.flush();
+
+        savePetSitter(member, petSitter, feeList, workingDayAndTime);
     }
 }

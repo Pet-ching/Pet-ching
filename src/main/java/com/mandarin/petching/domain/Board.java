@@ -3,7 +3,7 @@ package com.mandarin.petching.domain;
 
 import lombok.*;
 
-import org.springframework.data.annotation.CreatedDate;
+import org.hibernate.annotations.CreationTimestamp;
 
 
 import java.time.LocalDateTime;
@@ -12,7 +12,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import org.springframework.data.annotation.CreatedDate;
 
 
 
@@ -30,17 +29,18 @@ public class Board {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "member_id", referencedColumnName = "member_id")
     private Member member;
 
+
+    @Column(columnDefinition = "integer default 0")
     private Integer hits;
 
-    @CreatedDate
+    @Column(name = "reg_date", updatable = false)
+    @CreationTimestamp
     private LocalDateTime regDate;
-    @Column(
-            length = 20
-    )
 
+    @Column(length = 20 )
     @NotBlank(message = "제목을 입력해 주세요!")
     private String title;
 

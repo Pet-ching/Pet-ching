@@ -1,12 +1,16 @@
 package com.mandarin.petching.dto;
 
+import com.mandarin.petching.domain.GenderType;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import java.time.LocalDate;
 
 @Getter @Setter
 public class MemberFormDto {
@@ -27,4 +31,13 @@ public class MemberFormDto {
 
     @NotEmpty(message = "주소는 필수 입력 값입니다.")
     private String address;
+
+    @NotEmpty(message = "생년월일 8자리를 입력해주세요.")
+    private String userBth;
+
+    @NotEmpty(message = "전화번호를 입력해주세요.")
+    private String userTel;
+
+    @Enumerated(EnumType.STRING)
+    private GenderType userGender;
 }

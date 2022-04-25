@@ -45,6 +45,6 @@
         <div>기타 사항</div>
         <div th:text="${pet.note}"></div>
     </div>
-    <a th:href="@{/mypage/{memberId}/pet/edit/{petId}(memberId = ${memberId}, petId = ${pet.id})}">수정하기</a>
+    <a th:href="@{/mypage/pet/edit/{petId}(petId = ${pet.id})}">수정하기</a>
 </body>
 </html>

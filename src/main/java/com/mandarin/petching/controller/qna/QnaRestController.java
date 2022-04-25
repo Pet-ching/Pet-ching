@@ -17,16 +17,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
@@ -62,20 +56,20 @@ public class QnaRestController {
 //    }
 
     // 버전 2 uri 제공
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)//반환값 json
-    public ResponseEntity<PagedModel<EntityModel<Board>>> getBoards(@PageableDefault Pageable pageable, PagedResourcesAssembler<Board> assembler) {
-        System.out.println("GET Access");
+//    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)//반환값 json
+//    public ResponseEntity<PagedModel<EntityModel<Board>>> getBoards(@PageableDefault Pageable pageable, PagedResourcesAssembler<Board> assembler) {
+//        System.out.println("GET Access");
+//
+//        Page<Board> boards = boardRepository.findAll(pageable);
+//
+//        //링크 추가
+//        PagedModel<EntityModel<Board>> entityModels = assembler.toModel(boards);
+//        return ResponseEntity.ok(entityModels);
+//    }
 
-        Page<Board> boards = boardRepository.findAll(pageable);
-
-        //링크 추가
-        PagedModel<EntityModel<Board>> entityModels = assembler.toModel(boards);
-        return ResponseEntity.ok(entityModels);
-    }
 
     @PostMapping//생성
     public ResponseEntity<?> postBoard(@RequestBody Board board) {
-        System.out.println("Post Access");
         board.setAnswerType(AnswerType.대기);
         board.setRegDate(LocalDateTime.now());
         boardRepository.save(board);
@@ -106,12 +100,21 @@ public class QnaRestController {
         return new ResponseEntity<>("{}", HttpStatus.OK);
     }
 
-    @GetMapping("/removeAll")
     @DeleteMapping("/deleteAll")
     @Transactional
-    public ResponseEntity<?> delete(@PageableDefault Pageable pageable) {
-        System.out.println("delete Access");
-        boardRepository.deleteByBoardTypeOrBoardTypeOrBoardType(BoardType.QnA문의1, BoardType.QnA문의2, BoardType.QnA문의3, pageable);
-        return new ResponseEntity<>("{}", HttpStatus.OK); //ResponseEntity는 HttpEntity를 상속받음으로써 HttpHeader와 body를 가질 수 있다.
+    public ResponseEntity<?> delete(@PageableDefault Pageable pageable, Model model) {
+        qnaService.deleteQnaAll(BoardType.QnA문의1,BoardType.QnA문의2,BoardType.QnA문의3);
+//        boardRepository.deleteByBoardTypeOrBoardTypeOrBoardType(BoardType.QnA문의1,BoardType.QnA문의2,BoardType.QnA문의3);
+
+        return new ResponseEntity<>("{}", HttpStatus.OK);
     }
+
+//    @DeleteMapping("/deleteAll")
+//    @Transactional
+//    public ResponseEntity<?> delete(@PageableDefault Pageable pageable, Model model) {
+//        System.out.println("delete Access");
+//        boardRepository.deleteByBoardTypeOrBoardTypeOrBoardType(BoardType.QnA문의1,BoardType.QnA문의2,BoardType.QnA문의3);
+//
+//        return new ResponseEntity<>("{}", HttpStatus.OK);
+//    }
 }

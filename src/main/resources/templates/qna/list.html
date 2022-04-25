@@ -56,7 +56,13 @@
 
     <br/>
     <!-- Pagination -->
-    <nav  aria-label="Page navigation" style="text-align:center;" >
+
+<!--    <nav  aria-label="Page navigation" style="text-align:center;" >-->
+    <nav  aria-label="Page navigation" class="text-center" >
+        <div class="pull-left">
+            <a href="/qna/ask" class="btn btn-default">목록으로</a>
+        </div>
+        <br><br>
         <ul class="pagination" th:with="startNumber=${T(java.lang.Math).floor(boardList.number/10)}*10+1,
         endNumber=(${boardList.totalPages} > ${startNumber}+9) ? ${startNumber}+9 : ${boardList.totalPages},
         endNumber=(${endNumber} < ${startNumber}) ? ${startNumber} : ${endNumber}">
@@ -74,22 +80,32 @@
         </ul>
 
 <!--        검색-->
+
+
+
         <br><br>
-        <div class="w300" style="padding-right: 10px; display: inline-block;  width : 40%; text-align: left;">
-            <input type="text" class="form-control form-control-sm"
-                   name="keyword" id="keyword" placeholder="검색어를 입력해주세요">
 
-        </div>
-        <div style="display: inline-block;">
-            <button class="pull right btn btn-sm btn-primary" name="btnSearch"
-                    id="btnSearch">검색</button>
-        </div>
-<!--        -->
+        <form method="get" action="/qna/search">
+            <div style="display: inline-block; left:30%;">
+                <select class="form-control" id="searchType" name="searchType">
+                    <option th:each="searchTypeValue : ${T(com.mandarin.petching.domain.SearchType).values()}"
+                            th:value="${searchTypeValue.name()}"
+                            th:text="${searchTypeValue.getKorName()}"
+                            th:selected="${searchTypeValue.name()} ==  ${search.getType().name()}">
+                    </option>
+                </select>
+             </div>
+
+            <div class="w300" style="padding-right: 10px; display: inline-block;  width : 40%; text-align: left;">
+                <input type="text" class="form-control form-control-sm" name="keyword" id="keyword" placeholder="검색어를 입력해주세요" th:value="${search.getKeyword()}">
+            </div>
+
+            <div style="display: inline-block;">
+                <input type="submit" class="pull right btn btn-sm btn-primary" value="검색">
+            </div>
+        </form>
+
     </nav>
-<!--    th:each="${board?.id}"-->
-
-
-
     <!-- /Pagination -->
 </div>
 <!--/body-->

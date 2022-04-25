@@ -7,16 +7,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}" /> <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
 </head>
 <body>
+<div th:replace="fragments/header::header"></div>
+<div class="container">
 
 <p sec:authorize="isAnonymous()">Click <a th:href="@{/members/join}">회원가입</a> to see a greeting.</p>
 <p sec:authorize="isAnonymous()">Click <a th:href="@{/members/login}">로그인</a> to see a greeting.</p>
 <p sec:authorize="isAuthenticated()">Click <a th:href="@{/logout}">로그아웃</a> to see a greeting.</p>
 <a th:href="@{/matching/list}">matching</a>
 <a th:href="@{/board/list}">board</a>
-<!--<a th:href="@{/qna}">qna</a><br>-->
-<a href="/qna">qna</a>
+<a th:href="@{/qna}">qna</a><br>
 <a th:href="@{/mypage(type='petowner')}">mypage</a>
+</div>
+
+<div th:replace="fragments/footer::footer"></div>
+
 </body>
 </html>
+
+<!--<form sec:authorize="isAuthenticated()" th:action="@{/members/withdrawal}" th:method="get">-->
+<!--    &lt;!&ndash;    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />&ndash;&gt;-->
+<!--    <button type="submit">탈퇴하기</button>-->
+<!--</form>-->
