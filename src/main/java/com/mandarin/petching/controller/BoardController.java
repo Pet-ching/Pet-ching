@@ -61,6 +61,8 @@ public class BoardController {
         return "board/read";
     }
 
+
+
     @GetMapping("/form")
     public String form(Model model, @RequestParam(required = false) Long id ) {
         if (id == null) {
@@ -85,5 +87,13 @@ public class BoardController {
         boardService.save(userName, board);
         //boardRepository.save(board);
         return "redirect:/board/list";
+    }
+
+    @GetMapping("/read/{id}")
+    public String hits(@PathVariable Long id, Model model) {
+        model.addAttribute("board", boardService.updateHits(id));
+        boardService.updateHits(id);
+
+        return "/board/read";
     }
 }
