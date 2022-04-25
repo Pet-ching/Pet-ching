@@ -13,36 +13,87 @@
     <script src="/js/details.js" th:src="@{/js/details}"></script>
 
 <!--    로컬 테스트용-->
-<!--        <link href="../static/css/details.css" rel="stylesheet">-->
-<!--        <script type="text/javascript" src="../static/js/details.js"></script>-->
+        <link href="../static/css/details.css" rel="stylesheet">
+        <script type="text/javascript" src="../static/js/details.js"></script>
 
 </head>
 <body>
 <div th:replace="fragments/header.html::header"></div>
-<div class="container" th:object="${petSitter}">
+<div class="content" th:object="${petSitter}">
     <div class="item images">
-        이미지
-        <div class="slider">
-            <input type="radio" name="slide" id="slide1" checked>
-            <input type="radio" name="slide" id="slide2">
-            <input type="radio" name="slide" id="slide3">
-            <input type="radio" name="slide" id="slide4">
-            <ul id="imgholder" class="imgs">
-                <li><img src="/images/memberImages/2/pet/pt_2_00.jpg"></li>
-                <li><img src="/images/memberImages/2/petSitter/ps_2_00.jpg"></li>
-                <li><img src="/images/memberImages/2/petSitter/ps_2_01.jpg"></li>
-                <li><img src="/images/memberImages/2/petSitter/ps_2_02.jpg"></li>
-<!--                <li><img src="../static/images/memberImages/2/pet/pt_2_00.jpg"></li>-->
+<!--        이미지-->
+<!--        <div class="slider">-->
+<!--            <input type="radio" name="slide" id="slide1" checked>-->
+<!--            <input type="radio" name="slide" id="slide2">-->
+<!--            <input type="radio" name="slide" id="slide3">-->
+<!--            <input type="radio" name="slide" id="slide4">-->
+<!--            <ul id="imgholder" class="imgs">-->
+<!--                <li><img src="/images/memberImages/2/pet/pt_2_00.jpg"></li>-->
+<!--                <li><img src="/images/memberImages/2/petSitter/ps_2_00.jpg"></li>-->
+<!--                <li><img src="/images/memberImages/2/petSitter/ps_2_01.jpg"></li>-->
+<!--                <li><img src="/images/memberImages/2/petSitter/ps_2_02.jpg"></li>-->
+<!--                <li><img class="imageDisplay" src="../static/images/memberImages/2/pet/pt_2_00.jpg"></li>-->
 <!--                <li><img src="../static/images/memberImages/2/petSitter/ps_2_00.jpg"></li>-->
 <!--                <li><img src="../static/images/memberImages/2/petSitter/ps_2_01.jpg"></li>-->
 <!--                <li><img src="../static/images/memberImages/2/petSitter/ps_2_02.jpg"></li>-->
-            </ul>
-            <div class="bullets">
-                <label for="slide1">&nbsp;</label>
-                <label for="slide2">&nbsp;</label>
-                <label for="slide3">&nbsp;</label>
-                <label for="slide4">&nbsp;</label>
+<!--            </ul>-->
+<!--            <div class="bullets">-->
+<!--                <label for="slide1">&nbsp;</label>-->
+<!--                <label for="slide2">&nbsp;</label>-->
+<!--                <label for="slide3">&nbsp;</label>-->
+<!--                <label for="slide4">&nbsp;</label>-->
+<!--            </div>-->
+<!--        </div>-->
+        <div class="section">
+            <input type="radio" name="slide" id="slide01" checked>
+            <input type="radio" name="slide" id="slide02">
+            <input type="radio" name="slide" id="slide03">
+            <div class="slidewrap">
+
+                <ul class="slidelist">
+                    <!-- 슬라이드 영역 -->
+                    <li class="slideitem">
+                        <a>
+                            <img src="../static/images/memberImages/2/petSitter/ps_2_00.jpg">
+                        </a>
+                    </li>
+                    <li class="slideitem">
+                        <a>
+                            <img src="../static/images/memberImages/2/petSitter/ps_2_01.jpg">
+                        </a>
+                    </li>
+                    <li class="slideitem">
+                        <a>
+                            <img src="../static/images/memberImages/2/petSitter/ps_2_02.jpg">
+                        </a>
+                    </li>
+
+                    <!-- 좌,우 슬라이드 버튼 -->
+                    <div class="slide-control">
+                        <div>
+                            <label for="slide03" class="left"></label>
+                            <label for="slide02" class="right"></label>
+                        </div>
+                        <div>
+                            <label for="slide01" class="left"></label>
+                            <label for="slide03" class="right"></label>
+                        </div>
+                        <div>
+                            <label for="slide02" class="left"></label>
+                            <label for="slide01" class="right"></label>
+                        </div>
+                    </div>
+
+                </ul>
+                <!-- 페이징 -->
+                <ul class="slide-pagelist">
+                    <li><label for="slide01"></label></li>
+                    <li><label for="slide02"></label></li>
+                    <li><label for="slide03"></label></li>
+                </ul>
             </div>
+
+
         </div>
     </div>
     <div class="item petsitter_name">
@@ -177,7 +228,7 @@
     </div>
     <div class="item workingArea">
         <strong>예약 가능 지역</strong>
-        <div id="address02"></div>
+        <div id="address02">지이이역</div>
         <div class="item maps">
             <div id="map" style="width:250px;height:200px;"> 맵보여주는곳</div>
         </div>
