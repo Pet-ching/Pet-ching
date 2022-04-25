@@ -1,13 +1,17 @@
 package com.mandarin.petching.domain;
 
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@NoArgsConstructor
 @Getter
+@Setter
 @Entity
 public class Reply {
 
@@ -17,7 +21,7 @@ public class Reply {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="board_id")
+    @JoinColumn(name="board_id", referencedColumnName = "board_id")
     private Board board;
 
     private String reContent;

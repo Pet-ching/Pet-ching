@@ -1,36 +1,47 @@
 package com.mandarin.petching.service;
 
-import com.mandarin.petching.domain.BoardType;
-import com.mandarin.petching.domain.Search;
-import com.mandarin.petching.domain.SearchType;
+import com.mandarin.petching.domain.*;
 import com.mandarin.petching.repository.BoardRepository;
-import com.mandarin.petching.domain.Board;
+import com.mandarin.petching.repository.ReplyRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class QnaService {
 
     private final BoardRepository boardRepository;
+    private final ReplyRepository replyRepository;
 
-    public QnaService(BoardRepository boardRepository) {
-        this.boardRepository = boardRepository;
-    }
 
-    @Transactional
-    public Page<Board> findQnaAllList(Pageable pageable) {
+
+    public Page<Board> findQnaAllList(Member member, Pageable pageable) {
+
+
         pageable = PageRequest.of(pageable.getPageNumber() <= 0 ? 0 : pageable.getPageNumber() - 1, pageable.getPageSize());
-        return this.boardRepository.findByBoardTypeOrBoardTypeOrBoardType(BoardType.QnA문의1, BoardType.QnA문의2, BoardType.QnA문의3, pageable);
-//        return boardRepository.findAll(pageable);
+        return this.boardRepository.findByBoardTypeBetweenAndMemberLike(BoardType.QnA문의1,BoardType.QnA문의3, member,pageable);
+
     }
 
-    @Transactional
-    public Board findBoardById(Long id) {
-        return (Board)this.boardRepository.findById(id).orElse(new Board());
+
+    public Board findBoardById(Long id, Member member) {
+
+        if(!this.boardRepository.findById(id).isEmpty())
+        {
+            return this.boardRepository.getById(id);
+        }
+        else
+        {
+            Board board = new Board();
+            board.setMember(member);
+            return board;
+        }
     }
 
     @Transactional
@@ -38,51 +49,40 @@ public class QnaService {
         return boardRepository.save(board);
     }
 
+
+//    전부삭제
     @Transactional
-    public List<Board> deleteQnaAll(BoardType b1, BoardType b2, BoardType b3)
+    public List<Board> deleteQnaAll(BoardType start, BoardType last, Member member)
     {
-        List<Board> deletedList = boardRepository.deleteByBoardTypeOrBoardTypeOrBoardType(b1,b2,b3);
+        List<Board> deletedList = boardRepository.deleteByBoardTypeBetweenAndMemberLike(start, last, member);
         return deletedList;
     }
 
-    public Page<Board> search(Search st, Pageable pageable)
+
+//    검색
+    public Page<Board> search(Search st, Member member,  Pageable pageable)
     {
         if(SearchType.title.equals(st.getType())) {
-            return boardRepository.findByBoardTypeBetweenAndTitleContaining(BoardType.QnA문의1, BoardType.QnA문의3,st.getKeyword(), pageable);
+            return boardRepository.findByBoardTypeBetweenAndTitleContainingAndMemberLike(BoardType.QnA문의1, BoardType.QnA문의3,st.getKeyword(), member,pageable);
         }
         else if(SearchType.content.equals(st.getType()))
         {
-            return boardRepository.findByBoardTypeBetweenAndContentContaining(BoardType.QnA문의1, BoardType.QnA문의3,st.getKeyword(), pageable);
+            return boardRepository.findByBoardTypeBetweenAndContentContainingAndMemberLike(BoardType.QnA문의1, BoardType.QnA문의3,st.getKeyword(), member, pageable);
         }
         else if(SearchType.titleOrContent.equals(st.getType()))
         {
-            return boardRepository.findByBoardTypeBetweenAndTitleContainingOrContentContaining(BoardType.QnA문의1, BoardType.QnA문의3,st.getKeyword(), st.getKeyword(), pageable);
+            return boardRepository.findByBoardTypeBetweenAndTitleContainingOrContentContainingAndMemberLike(BoardType.QnA문의1, BoardType.QnA문의3,st.getKeyword(), st.getKeyword(), member,pageable);
         }
-//        SearchType.type.values()
-        return this.boardRepository.findByBoardTypeOrBoardTypeOrBoardType(BoardType.QnA문의1, BoardType.QnA문의2, BoardType.QnA문의3, pageable); //실패 시 전부 검색
+        return this.boardRepository.findByBoardTypeBetweenAndMemberLike(BoardType.QnA문의1,BoardType.QnA문의3, member ,pageable);
+    }
+
+    //답변
+    public Reply reply(Board board)
+    {
+        return replyRepository.findByBoard(board);
     }
 
 
 
-//    @Transactional
-//    public Page<Board> deleteAll(BoardType boardType1, BoardType boardType2, BoardType boardType3, Pageable pageable)
-//    {
-//        return this.boardRepository.deleteByBoardTypeOrBoardTypeOrBoardType(boardType1, boardType2, boardType3,pageable);
-//    }
-//    @Transactional
-//    public Page<Board> deleteAll(String boardType1, String boardType2, String boardType3, Pageable pageable)
-//    {
-//        return this.boardRepository.deleteByBoardTypeOrBoardTypeOrBoardType(boardType1, boardType2, boardType3,pageable);
-//    }
-////    @Transactional
-//    public Page<Board> deleteQnaAll(Pageable pageable)
-//    {
-//        return this.boardRepository.deleteByBoardTypeOrBoardTypeOrBoardType(BoardType.QnA문의1, BoardType.QnA문의2, BoardType.QnA문의3, pageable);
-//    }
-
-//    public Page<Board>
-
-
-    //전부삭제
 
 }

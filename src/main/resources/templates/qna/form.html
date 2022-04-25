@@ -83,7 +83,7 @@
     </div>
     <div class="pull-right">
         <button onclick="Check()" th:if="!${board?.id}" type="button" class="btn btn-primary" id="insert">저장</button>
-        <button onclick="Check()" th:if="${board?.id}" type="button" class="btn btn-info" id="update">수정</button>
+        <button onclick="Check()" th:if="${board?.id} " type="button" class="btn btn-info" id="update">수정</button>
         <button th:if="${board?.id}" type="button" class="btn btn-danger" id="delete">삭제</button>
     </div>
 </div>
@@ -114,9 +114,6 @@
                                alert('저장 성공!');
                                location.href = '/qna/ask';
                        },
-                       error: function () {
-<!--                           alert('저장 실패!');-->
-                       }
                    });
         });
     </script>

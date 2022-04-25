@@ -18,9 +18,14 @@ configurations {
 
 repositories {
 	mavenCentral()
+	//Caused by: java.lang.ClassNotFoundException: com.mandarin.petching.service.QnaService
+	maven { url "https://www.datanucleus.org/downloads/maven2/"}
 }
 
 dependencies {
+
+
+
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'

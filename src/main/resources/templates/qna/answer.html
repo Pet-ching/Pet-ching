@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>고객센터 답변</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+<!--header-->
+<div th:replace="fragments/header.html::header"></div>
+<!--/header-->
+
+<div class="container">
+    <div class="page-header">
+        <h1>게시글 답변 보기</h1>
+    </div>
+    <br/>
+    <table class="table">
+        <tr>
+            <th style="padding:13px 0 0 15px">게시판 선택</th>
+            <td>
+                <div class="pull-left">
+                    <b  th:text="${board?.getBoardType()}"></b>
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <th style="padding:13px 0 0 15px;">제목</th>
+            <td><b th:text="${board?.getTitle()}"></b></td>
+        </tr>
+
+        <tr>
+            <th style="padding:13px 0 0 15px;">내용</th>
+            <td><b th:text="${board?.getContent()}"></b>
+                <span class="help-block"></span>
+            </td>
+        </tr>
+
+
+        <tr>
+            <th style="padding:13px 0 0 15px;">답변이</th>
+            <td><b th:text="${reply?.getMember()?.getUserName()}"></b>
+            </td>
+        </tr>
+        <tr>
+            <th style="padding:13px 0 0 15px;">답변 날짜</th>
+            <td><b th:text="${reply?.getReRegDate()}"></b></td>
+        </tr>
+
+        <tr>
+            <th style="padding:13px 0 0 15px;">답변 내용</th>
+            <td><b th:text="${reply?.getReContent()}"></b></td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    <div class="pull-left">
+        <a href="/qna/ask" class="btn btn-default">목록으로</a>
+    </div>
+    <div class="pull-right">
+        <button th:if="${board?.id}" type="button" class="btn btn-danger" id="delete">삭제</button>
+    </div>
+</div>
+<!--/body-->
+
+<!--footer-->
+<div th:replace="fragments/footer::footer"></div>
+<!--/footer-->
+
+</body>
+</html>
