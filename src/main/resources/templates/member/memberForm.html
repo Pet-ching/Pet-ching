@@ -15,30 +15,31 @@
 <div class="container">
 
     <form action="/members/join" role="form" method="post" th:object="${memberFormDto}">
-        <div class="form-group">
-            <label th:for="userId">ID</label>
-            <input type="text" th:field="*{userId}" class="form-control" placeholder="아이디를 입력해주세요">
-            <p th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" class="fieldError">Incorrect data</p>
-        </div>
+<!--        <div class="form-group">-->
+<!--            <label th:for="userId">ID</label>-->
+<!--            <input type="text" th:field="*{userId}" class="form-control" placeholder="아이디를 입력해주세요">-->
+<!--            <p th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" class="fieldError">Incorrect data</p>-->
+<!--        </div>-->
         <div class="form-group">
             <label th:for="userName">이름</label>
             <input type="text" th:field="*{userName}" class="form-control" placeholder="이름을 입력해주세요">
-            <p th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" class="fieldError">Incorrect data</p>
+            <p th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" class="fieldError" style="color:red">Incorrect data</p>
         </div>
         <div class="form-group">
             <label th:for="userEmail">이메일주소</label>
             <input type="email" th:field="*{userEmail}" class="form-control" placeholder="이메일을 입력해주세요">
-            <p th:if="${#fields.hasErrors('userEmail')}" th:errors="*{userEmail}" class="fieldError">Incorrect data</p>
+            <p th:if="${#fields.hasErrors('userEmail')}" th:errors="*{userEmail}" class="fieldError" style="color:red">Incorrect data</p>
+            <p th:text="${errorMessage}" style="color:red"></p>
         </div>
         <div class="form-group">
             <label th:for="userPwd">비밀번호</label>
             <input type="password" th:field="*{userPwd}" class="form-control" placeholder="비밀번호 입력">
-            <p th:if="${#fields.hasErrors('userPwd')}" th:errors="*{userPwd}" class="fieldError">Incorrect data</p>
+            <p th:if="${#fields.hasErrors('userPwd')}" th:errors="*{userPwd}" class="fieldError" style="color:red">Incorrect data</p>
         </div>
         <div class="form-group">
             <label th:for="userEmail">전화번호</label>
             <input type="text" oninput="autoHyphen2(this)" th:field="*{userTel}" class="form-control" placeholder="전화번호를 입력해주세요" maxlength="13">
-            <p th:if="${#fields.hasErrors('userTel')}" th:errors="*{userTel}" class="fieldError">Incorrect data</p>
+            <p th:if="${#fields.hasErrors('userTel')}" th:errors="*{userTel}" class="fieldError" style="color:red">Incorrect data</p>
         </div>
 
         <script type="text/javascript">
@@ -52,7 +53,7 @@ const autoHyphen2 = (target) => {
         <div class="form-group">
             <label th:for="userBth">생년월일</label>
             <input type="date" th:field="*{userBth}" class="form-control" placeholder="생년월일 8자리를 입력해주세요">
-            <p th:if="${#fields.hasErrors('userBth')}" th:errors="*{userBth}" class="fieldError">Incorrect data</p>
+            <p th:if="${#fields.hasErrors('userBth')}" th:errors="*{userBth}" class="fieldError" style="color:red">Incorrect data</p>
         </div>
         <div class="form-group">
             <label th:for="userGender">성별</label>
@@ -60,13 +61,15 @@ const autoHyphen2 = (target) => {
             <label for="MALE">남자</label>
             <input type="radio" id="FEMALE" th:field="*{userGender}" th:name="userGender" th:value="FEMALE">
             <label for="FEMALE">여자</label>
-            <p th:if="${#fields.hasErrors('userGender')}" th:errors="*{userGender}" class="fieldError">Incorrect
+            <p th:if="${#fields.hasErrors('userGender')}" th:errors="*{userGender}" class="fieldError" style="color:red">Incorrect
                 data</p>
         </div>
         <div class="form-group">
             <label th:for="address">주소검색</label>
             <input type="text" id="sample5_address" th:field="*{address}" class="form-control" placeholder="주소검색">
             <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
+            <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}" class="fieldError" style="color:red">Incorrect
+                data</p>
             <div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
         </div>
         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
