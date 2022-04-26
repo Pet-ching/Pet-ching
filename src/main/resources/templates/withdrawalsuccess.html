@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>탈퇴가 완료되었습니다.</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/withdrawalsuccess.css}"/>
+
+</head>
+<body>
+<div th:replace="fragments/header.html::header"></div>
+
+<div class="withdrawal-div">
+
+    <div class="title-text">
+        Mandarin Pet-ching 회원 탈퇴가 완료되었습니다.
+    </div>
+
+    <div class="content-text">
+        그동안 Mandarin Pet-ching 서비스를 아끼고 사랑해주셔서 고맙습니다.<br>
+        더욱더 노력하고 발전하는 Mandarin이 되겠습니다.
+    </div>
+    <div class="seol">
+        <a type="button" class="btn btn-primary" onClick="location.href='/'">홈으로</a>
+    </div>
+</div>
+<div th:replace="fragments/footer.html::footer"></div>
+</body>
+</html>

@@ -9,50 +9,68 @@
 <body>
 <div th:replace="fragments/header.html::header"></div>
 <div class="container">
-    <div>
-        <div>반려동물 이름</div>
-        <div th:text="${pet.petName}"></div>
+    <div class="page-header">
+        <h1>반려동물 상세정보</h1>
+    </div>
+    <div id="mainHide">
+        <table class="table table-hover">
+            <thead>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>반려동물 이름</td>
+                    <td th:text="${pet.petName}"></td>
+                </tr>
+                <tr>
+                    <td>반려동물 성별</td>
+                    <td th:text="${pet.petGender.description}"></td>
+                </tr>
+                <tr>
+                    <td>반려동물 종류</td>
+                    <td th:text="${pet.petType.description}"></td>
+                </tr>
+                <tr>
+                    <td>반려동물 나이</td>
+                    <td th:text="${pet.petAge}"></td>
+                </tr>
+                <tr>
+                    <td>반려동물 몸무게</td>
+                    <td th:text="${pet.weight}"></td>
+                </tr>
+                <tr>
+                    <td>중성화 여부</td>
+                    <td th:text="${pet.neutralization}"></td>
+                </tr>
+                <tr>
+                    <td>동물병원 이름</td>
+                    <td th:text="${pet.hospitalName}"></td>
+                </tr>
+                <tr>
+                    <td>동물병원 전화번호</td>
+                    <td th:text="${pet.hospitalTel}"></td>
+                </tr>
+                <tr>
+                    <td>동물병원 주소</td>
+                    <td th:text="${pet.hospitalAdr}"></td>
+                </tr>
+                <tr>
+                    <td>기타 사항</td>
+                    <td th:text="${pet.note}"></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <div>
-        <div>반려동물 성별</div>
-        <div th:text="${pet.petGender.description}"></div>
+    <div style="display: flex; justify-content: center;">
+        <div style="text-align: center;">
+            <button type="button" th:onclick="|location.href='@{/mypage/pet/edit/{petId}(petId = ${pet.id})}'|" class="btn btn-info" style="margin-right: 5px;">수정하기</button>
+        </div>
+        <div style="text-align: center;">
+            <form th:if="${isReserved}" th:action="@{/mypage/pet/delete/{petId}(petId = ${pet.id})}" method="post">
+                <button type="submit"  class="btn btn-info">삭제하기</button>
+            </form>
+        </div>
     </div>
-    <div>
-        <div>반려동물 종류</div>
-        <div th:text="${pet.petType.description}"></div>
-    </div>
-    <div>
-        <div>반려동물 나이</div>
-        <div th:text="${pet.petAge}"></div>
-    </div>
-    <div>
-        <div>반려동물 몸무게</div>
-        <div th:text="${pet.weight}"></div>
-    </div>
-    <div>
-        <div>중성화 여부</div>
-        <div th:text="${pet.neutralization}"></div>
-    </div>
-    <div>
-        <div>동물병원 이름</div>
-        <div th:text="${pet.hospitalName}"></div>
-    </div>
-    <div>
-        <div>동물병원 전화번호</div>
-        <div th:text="${pet.hospitalTel}"></div>
-    </div>
-    <div>
-        <div>동물병원 주소</div>
-        <div th:text="${pet.hospitalAdr}"></div>
-    </div>
-    <div>
-        <div>기타 사항</div>
-        <div th:text="${pet.note}"></div>
-    </div>
-    <button type="button" th:onclick="|location.href='@{/mypage/pet/edit/{petId}(petId = ${pet.id})}'|">수정하기</button>
-    <form th:action="@{/mypage/pet/delete/{petId}(petId = ${pet.id})}" method="post">
-        <button type="submit">삭제하기</button>
-    </form>
 </div>
 <div th:replace="fragments/footer.html::footer"></div>
 </body>

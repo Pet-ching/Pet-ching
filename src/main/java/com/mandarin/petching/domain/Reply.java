@@ -5,10 +5,12 @@ import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
-@Getter
 @Entity
+@Getter
+@Setter
 public class Reply {
 
     @Id
@@ -20,6 +22,7 @@ public class Reply {
     @JoinColumn(name="board_id")
     private Board board;
 
+    @NotBlank
     private String reContent;
 
     @CreatedDate

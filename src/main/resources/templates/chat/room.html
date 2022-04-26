@@ -3,16 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
+
+        #conversation {
+            width: 50%;
+            margin: auto;
+            /* max-width: 550px; */
+            font: 15px arial, sans-serif;
+            background-color: white;
+            /* border-style: solid; */
+            border-width: 1px;
+            padding-top: 20px;
+            padding-bottom: 25px;
+            padding-right: 25px;
+            padding-left: 25px;
+            /* box-shadow: 5px 5px 5px grey; */
+            border-radius: 15px;
+        }
+
+        #chatborder {
+            /* border-style: solid; */
+            background-color: rgb(238, 236, 236);
+            border-width: 3px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            margin-left: 20px;
+            margin-right: 20px;
+            padding-top: 10px;
+            padding-bottom: 15px;
+            padding-right: 20px;
+            padding-left: 15px;
+            border-radius: 15px;
+        }
+
+        .chat_wrapper {
+            display: flex;
+            width: 50%;
+        }
+    </style>
 </head>
 <body>
-    <form>
-        <input type="text" id="message" placeholder="메시지를 입력하세요">
-        <button id="send" type="submit">Send</button>
-    </form>
     <div id="conversation">
-        <h1>Chat</h1>
-        <div id="chatting"></div>
+        <h1>Chatting</h1>
+        <div id='chatborder'>
+            <div id="chatting"></div>
+        </div>
     </div>
+    <form class="chat_wrapper">
+        <input type="text" id="message" placeholder="메시지를 입력하세요" onfocus="placeHolder()" class="col-md-1 form-control">
+        <button id="send" type="submit" class="btn btn-info">Send</button>
+    </form>
 </body>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -79,7 +130,7 @@
 
     function showChat(chatMessage) {
         $("#chatting").append(
-            "<div>" + "[" + chatMessage.sender + "]" + chatMessage.message + "</div>"
+            "<div>" + "[" + chatMessage.sender + "] " + chatMessage.message + "</div>"
         );
     }
 
