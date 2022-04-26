@@ -92,7 +92,7 @@ public class MyPageService {
     public void updatePetSitter(Member member,
                                 PetSitter petSitter,
                                 FeeList feeList,
-                                MultipartFile file) throws Exception{
+                                List<MultipartFile> files) throws Exception{
 
         PetSitter findPetSitter = member.getPetSitter();
 
@@ -104,9 +104,10 @@ public class MyPageService {
         findPetSitter.setWorkingDay(petSitter.getWorkingDay());
         findPetSitter.setFeeList(feeList);
 
-        String fileName = getFileName(file);
-
-        findPetSitter.getImgPaths().add("/memberImages/images/" + fileName);
+        for(MultipartFile file : files) {
+            String fileName = getFileName(file);
+            findPetSitter.getImgPaths().add("/memberImages/images/" + fileName);
+        }
     }
 
     public List<ChatRoom> getChatList(Long memberId) {
