@@ -99,8 +99,7 @@ public class PetInfoController {
     }
 
     @PostMapping("/edit/{petId}")
-    public String editPet(Authentication authentication,
-                          @PathVariable Long petId,
+    public String editPet(@PathVariable Long petId,
                           @Validated Pet pet,
                           BindingResult bindingResult,
                           Model model) {
@@ -116,10 +115,7 @@ public class PetInfoController {
             return "mypage/petInfoEdit";
         }
 
-        String userName = authentication.getName();
-        Member member = memberRepository.findByUserEmail(userName);
-
-        myPageService.updatePet(petId, pet, member);
+        myPageService.updatePet(petId, pet);
 
         return "redirect:/mypage/pet";
     }
