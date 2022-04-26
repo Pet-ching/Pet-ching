@@ -42,7 +42,7 @@ public class PetSitterInfoController {
 
         model.addAttribute("petSitter", new PetSitter());
         model.addAttribute("feeList", new FeeList());
-        model.addAttribute("workingDayAndTime", new WorkingDayAndTime());
+        model.addAttribute("workingDayList", WorkingDay.getWorkingList());
         model.addAttribute("certificateList", CertificateType.getCertificateList());
         model.addAttribute("ableServiceList", AbleServiceType.getAbleServiceList());
 
@@ -54,13 +54,12 @@ public class PetSitterInfoController {
                             @Validated PetSitter petSitter,
                             BindingResult bindingResult,
                             FeeList feeList,
-                            WorkingDayAndTime workingDayAndTime,
                             Model model) {
 
         if (bindingResult.hasErrors()) {
 
             model.addAttribute("feeList", new FeeList());
-            model.addAttribute("workingDayAndTime", new WorkingDayAndTime());
+            model.addAttribute("workingDayList", WorkingDay.getWorkingList());
             model.addAttribute("certificateList", CertificateType.getCertificateList());
             model.addAttribute("ableServiceList", AbleServiceType.getAbleServiceList());
 
@@ -70,7 +69,7 @@ public class PetSitterInfoController {
         String userName = authentication.getName();
         Member member = memberRepository.findByUserEmail(userName);
 
-        myPageService.savePetSitter(member, petSitter, feeList, workingDayAndTime);
+        myPageService.savePetSitter(member, petSitter, feeList);
 
         return "redirect:/mypage/petsitter";
     }
@@ -83,11 +82,10 @@ public class PetSitterInfoController {
 
         PetSitter petSitter = member.getPetSitter();
         FeeList feeList = petSitter.getFeeList();
-        WorkingDayAndTime workingDayAndTime = petSitter.getWorkingDayAndTime();
 
         model.addAttribute("petSitter", petSitter);
         model.addAttribute("feeList", feeList);
-        model.addAttribute("workingDayAndTime", workingDayAndTime);
+        model.addAttribute("workingDayList", WorkingDay.getWorkingList());
         model.addAttribute("certificateList", CertificateType.getCertificateList());
         model.addAttribute("ableServiceList", AbleServiceType.getAbleServiceList());
 
@@ -99,13 +97,12 @@ public class PetSitterInfoController {
                                 @Validated PetSitter petSitter,
                                 BindingResult bindingResult,
                                 FeeList feeList,
-                                WorkingDayAndTime workingDayAndTime,
                                 Model model) {
 
         if (bindingResult.hasErrors()) {
 
             model.addAttribute("feeList", new FeeList());
-            model.addAttribute("workingDayAndTime", new WorkingDayAndTime());
+            model.addAttribute("workingDayList", WorkingDay.getWorkingList());
             model.addAttribute("certificateList", CertificateType.getCertificateList());
             model.addAttribute("ableServiceList", AbleServiceType.getAbleServiceList());
 
@@ -115,7 +112,7 @@ public class PetSitterInfoController {
         String userName = authentication.getName();
         Member member = memberRepository.findByUserEmail(userName);
 
-        myPageService.updatePetSitter(member, petSitter, feeList, workingDayAndTime);
+        myPageService.updatePetSitter(member, petSitter, feeList);
 
         return "redirect:/mypage/petsitter";
     }

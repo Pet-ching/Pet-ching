@@ -70,12 +70,10 @@ public class MyPageService {
     @Transactional
     public void savePetSitter(Member member,
                               PetSitter petSitter,
-                              FeeList feeList,
-                              WorkingDayAndTime workingDayAndTime) {
+                              FeeList feeList) {
 
         petSitter.setMember(member);
         petSitter.setFeeList(feeList);
-        petSitter.setWorkingDayAndTime(workingDayAndTime);
 
         petSitterRepository.save(petSitter);
     }
@@ -83,8 +81,7 @@ public class MyPageService {
     @Transactional
     public void updatePetSitter(Member member,
                                 PetSitter petSitter,
-                                FeeList feeList,
-                                WorkingDayAndTime workingDayAndTime) {
+                                FeeList feeList) {
 
         PetSitter findPetSitter = member.getPetSitter();
 
@@ -93,8 +90,8 @@ public class MyPageService {
         findPetSitter.setWorkingArea(petSitter.getWorkingArea());
         findPetSitter.setSelfIntroduction(petSitter.getSelfIntroduction());
         findPetSitter.setTitle(petSitter.getTitle());
+        findPetSitter.setWorkingDay(petSitter.getWorkingDay());
         findPetSitter.setFeeList(feeList);
-        findPetSitter.setWorkingDayAndTime(workingDayAndTime);
     }
 
     public List<ChatRoom> getChatList(Long memberId) {
