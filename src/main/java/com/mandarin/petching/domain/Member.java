@@ -17,8 +17,6 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    private String userId;
-
     private String userName;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
@@ -47,11 +45,10 @@ public class Member {
 
     private String userTel;
 
-    private String imgUrl;
+    private String imgPath;
 
     public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
         Member member = new Member();
-//        member.setUserId(memberFormDto.getUserId());
         member.setUserName(memberFormDto.getUserName());
         member.setUserEmail(memberFormDto.getUserEmail());
         member.setAddress(memberFormDto.getAddress());

@@ -162,62 +162,30 @@
             </br>
             <p>자세한 요금은 채팅을 통해 문의해주세요!</p>
         </div>
-        <div class="item workingTime">
-            <h4><strong>예약 가능 날짜</strong></h4>
+        <div class="item workingDay">
+            <h4><strong>예약 가능 요일</strong></h4>
             <div class="line"></div>
-            <table class="workingTimeTable">
-                <th class="workingTimeKey">요일</th>
-                <th class="workingTimeKey">시작시간</th>
-                <th>종료시간</th>
-                <tr>
-                    <td class="workingTimeKey">월요일</td>
-                    <td class="workingTimeValue" th:if="*{workingDayAndTime.monStartTime==null}" th:text="이용불가" bgcolor="lightgray"></td>
-                    <td class="workingTimeValue" th:unless="*{workingDayAndTime.monStartTime==null}" th:text="*{workingDayAndTime.monStartTime}"></td>
-                    <td class="workingTimeValue" th:if="*{workingDayAndTime.monFinishTime==null}" th:text="이용불가" bgcolor="lightgray"></td>
-                    <td class="workingTimeValue" th:unless="*{workingDayAndTime.monFinishTime==null}" th:text="*{workingDayAndTime.monFinishTime}"></td>
-                </tr>
-                <tr>
-                    <td class="workingTimeKey">화요일</td>
-                    <td class="workingTimeValue" th:if="*{workingDayAndTime.tueStartTime==null}" th:text="이용불가" bgcolor="lightgray"></td>
-                    <td class="workingTimeValue" th:unless="*{workingDayAndTime.tueStartTime==null}" th:text="*{workingDayAndTime.tueStartTime}"></td>
-                    <td class="workingTimeValue" th:if="*{workingDayAndTime.tueFinishTime==null}" th:text="이용불가" bgcolor="lightgray"></td>
-                    <td class="workingTimeValue" th:unless="*{workingDayAndTime.tueFinishTime==null}" th:text="*{workingDayAndTime.tueFinishTime}"></td>
-                </tr>
-                <tr>
-                    <td class="workingTimeKey">수요일</td>
-                    <td class="workingTimeValue" th:if="*{workingDayAndTime.wedStartTime==null}" th:text="이용불가" bgcolor="lightgray"></td>
-                    <td class="workingTimeValue" th:unless="*{workingDayAndTime.wedStartTime==null}" th:text="*{workingDayAndTime.wedStartTime}"></td>
-                    <td class="workingTimeValue" th:if="*{workingDayAndTime.wedFinishTime==null}" th:text="이용불가" bgcolor="lightgray"></td>
-                    <td class="workingTimeValue" th:unless="*{workingDayAndTime.wedFinishTime==null}" th:text="*{workingDayAndTime.wedFinishTime}"></td>
-                </tr>
-                <tr>
-                    <td class="workingTimeKey">목요일</td>
-                    <td class="workingTimeValue" th:if="*{workingDayAndTime.thuStartTime==null}" th:text="이용불가" bgcolor="lightgray"></td>
-                    <td class="workingTimeValue" th:unless="*{workingDayAndTime.thuStartTime==null}" th:text="*{workingDayAndTime.thuStartTime}"></td>
-                    <td class="workingTimeValue" th:if="*{workingDayAndTime.thuFinishTime==null}" th:text="이용불가" bgcolor="lightgray"></td>
-                    <td class="workingTimeValue" th:unless="*{workingDayAndTime.thuFinishTime==null}" th:text="*{workingDayAndTime.thuFinishTime}"></td>
-                </tr>
-                <tr>
-                    <td class="workingTimeKey">금요일</td>
-                    <td class="workingTimeValue" th:if="*{workingDayAndTime.friStartTime==null}" th:text="이용불가" bgcolor="lightgray"></td>
-                    <td class="workingTimeValue" th:unless="*{workingDayAndTime.friStartTime==null}" th:text="*{workingDayAndTime.friStartTime}"></td>
-                    <td class="workingTimeValue" th:if="*{workingDayAndTime.friFinishTime==null}" th:text="이용불가" bgcolor="lightgray"></td>
-                    <td class="workingTimeValue" th:unless="*{workingDayAndTime.friFinishTime==null}" th:text="*{workingDayAndTime.friFinishTime}"></td>
-                </tr>
-                <tr>
-                    <td class="workingTimeKey">토요일</td>
-                    <td class="workingTimeValue" th:if="*{workingDayAndTime.satStartTime==null}" th:text="이용불가" bgcolor="lightgray"></td>
-                    <td class="workingTimeValue" th:unless="*{workingDayAndTime.satStartTime==null}" th:text="*{workingDayAndTime.satStartTime}"></td>
-                    <td class="workingTimeValue" th:if="*{workingDayAndTime.satFinishTime==null}" th:text="이용불가" bgcolor="lightgray"></td>
-                    <td class="workingTimeValue" th:unless="*{workingDayAndTime.satFinishTime==null}" th:text="*{workingDayAndTime.satFinishTime}"></td>
-                </tr>
-                <tr>
-                    <td class="workingTimeKey">일요일</td>
-                    <td class="workingTimeValue" th:if="*{workingDayAndTime.sunStartTime==null}" th:text="이용불가" bgcolor="lightgray"></td>
-                    <td class="workingTimeValue" th:unless="*{workingDayAndTime.sunStartTime==null}" th:text="*{workingDayAndTime.sunStartTime}"></td>
-                    <td class="workingTimeValue" th:if="*{workingDayAndTime.sunFinishTime==null}" th:text="이용불가" bgcolor="lightgray"></td>
-                    <td class="workingTimeValue" th:unless="*{workingDayAndTime.sunFinishTime==null}" th:text="*{workingDayAndTime.sunFinishTime}"></td>
-                </tr>
+            <table class="workingDayTable">
+                <th class="ableDay" th:if="*{#lists.contains(workingDay,'월요일')}">월</th>
+                <th class="NotAbleDay" th:unless="*{#lists.contains(workingDay,'월요일')}">월</th>
+
+                <th class="ableDay" th:if="*{#lists.contains(workingDay,'화요일')}">화</th>
+                <th class="NotAbleDay" th:unless="*{#lists.contains(workingDay,'화요일')}">화</th>
+
+                <th class="ableDay" th:if="*{#lists.contains(workingDay,'수요일')}">수</th>
+                <th class="NotAbleDay" th:unless="*{#lists.contains(workingDay,'수요일')}">수</th>
+
+                <th class="ableDay" th:if="*{#lists.contains(workingDay,'목요일')}">목</th>
+                <th class="NotAbleDay" th:unless="*{#lists.contains(workingDay,'목요일')}">목</th>
+
+                <th class="ableDay" th:if="*{#lists.contains(workingDay,'금요일')}">금</th>
+                <th class="NotAbleDay" th:unless="*{#lists.contains(workingDay,'금요일')}">금</th>
+
+                <th class="ableDay" th:if="*{#lists.contains(workingDay,'토요일')}">토</th>
+                <th class="NotAbleDay" th:unless="*{#lists.contains(workingDay,'월요일')}">토</th>
+
+                <th class="ableDay" th:if="*{#lists.contains(workingDay,'일요일')}">일</th>
+                <th class="NotAbleDay" th:unless="*{#lists.contains(workingDay,'일요일')}">일</th>
             </table>
         </div>
         <div class="item workingArea">
