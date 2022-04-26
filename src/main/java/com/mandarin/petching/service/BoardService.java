@@ -28,6 +28,7 @@ public class BoardService {
     public Board save(String userName, Board board) {
        Member member =  memberRepository.findByUserEmail(userName);
        board.setMember(member);
+       board.setHits(0);
        return boardRepository.save(board);
     }
 
