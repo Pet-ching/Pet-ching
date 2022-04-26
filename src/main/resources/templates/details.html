@@ -78,24 +78,28 @@
         </div>
     </div>
     <div class="item introduce">
-        <h4><strong th:text="*{title}">여기는 제목~</strong></h4></br>
-        <div class="text_box" th:text="*{selfIntroduction}">여기는 자기소개~</div>
+        <h4><strong th:text="*{title}">여기는 제목~</strong></h4>
+        <div class="textBox" th:text="*{selfIntroduction}">여기는 자기소개~</div>
     </div>
     <div class="item certifi">
         <h4><strong>자격증 보유 내역</strong></h4>
-        <ul>
-            <li th:each="certifi : *{certificate}">
-                <p th:text="${certifi}">여기에 자격증 나와요~
-            </li>
-        </ul>
+        <div class="textBox">
+            <ul>
+                <li th:each="certifi : *{certificate}">
+                    <p th:text="${certifi}">여기에 자격증 나와요~
+                </li>
+            </ul>
+        </div>
     </div>
     <div class="item services">
-        <strong>이용 가능 서비스</strong>
-        <ul>
-            <li th:each="ableService : *{ableService}">
-                <p th:text="${ableService}"> 여기는 이용가능 서비스
-            </li>
-        </ul>
+        <h4><strong>이용 가능 서비스</strong></h4>
+        <div class="textBox">
+            <ul>
+                <li th:each="ableService : *{ableService}">
+                    <p th:text="${ableService}"> 여기는 이용가능 서비스
+                </li>
+            </ul>
+        </div>
     </div>
     <div class="item buttonBox">
         <div th:if="(${petSitterMember.id}==${loginMember.id})">
@@ -120,9 +124,10 @@
         </div>
     </div>
     <div class="item feeList">
-        <strong>이용 요금</strong>
+        <h4><strong>이용 요금</strong></h4>
+        <div class="line"></div>
         <table class="feeListTable">
-            <th>분류</th>
+            <th class="feeListKey">분류</th>
             <th>가격</th>
             <tr>
                 <td class="feeListKey">🐶 소형견</td>
@@ -150,13 +155,15 @@
                 <td class="feeListValue" th:unless="*{feeList.etcFee==null}" th:text="*{feeList.etcFee}+'원'"></td>
             </tr>
         </table>
-        자세한 요금은 채팅을 통해 문의해주세요!
+        </br>
+        <p>자세한 요금은 채팅을 통해 문의해주세요!</p>
     </div>
     <div class="item workingTime">
-        <strong>예약 가능 날짜</strong>
+        <h4><strong>예약 가능 날짜</strong></h4>
+        <div class="line"></div>
         <table class="workingTimeTable">
-            <th>요일</th>
-            <th>시작시간</th>
+            <th class="workingTimeKey">요일</th>
+            <th class="workingTimeKey">시작시간</th>
             <th>종료시간</th>
             <tr>
                 <td class="workingTimeKey">월요일</td>
@@ -210,8 +217,9 @@
         </table>
     </div>
     <div class="item workingArea">
-        <strong>예약 가능 지역</strong>
+        <h4><strong>예약 가능 지역</strong></h4>
         <div id="address02">지이이역</div>
+        <div class="line"></div>
         <div class="item maps">
             <div id="map" style="width:250px;height:200px;"> 맵보여주는곳</div>
         </div>
