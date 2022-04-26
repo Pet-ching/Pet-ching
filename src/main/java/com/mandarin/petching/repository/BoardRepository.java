@@ -43,13 +43,10 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     //삭제
     List<Board> deleteByBoardTypeBetween(BoardType start, BoardType last);
 //    List<Board> deleteByBoardTypeBetweenAndMemberLike(BoardType start, BoardType last, @Param("member_id")Member member);//@Pram("쿼리에서 사용할 변수명") 이거 써야 console에 오류 잘 보임
-<<<<<<< HEAD
 
     List<Board> deleteByBoardTypeBetweenAndMemberLike(BoardType start, BoardType last, Member member);
 
-=======
-List<Board> deleteByBoardTypeBetweenAndMemberLike(BoardType start, BoardType last, Member member);
->>>>>>> 94ac98135fc412b4d096ebf6fc61a5eab3732eab
+
 
     @Modifying
     @Query("update Board p set p.hits = p.hits + 1 where p.id = :id")
