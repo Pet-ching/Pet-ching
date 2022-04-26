@@ -21,10 +21,10 @@ public class Member {
 
     private String userName;
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Pet> petList = new ArrayList<>();
 
-    @OneToOne(mappedBy = "member")
+    @OneToOne(mappedBy = "member", cascade = CascadeType.REMOVE)
     private PetSitter petSitter;
 
     private String userBth;

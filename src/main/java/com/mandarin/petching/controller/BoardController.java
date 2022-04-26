@@ -2,6 +2,7 @@ package com.mandarin.petching.controller;
 
 import com.mandarin.petching.domain.Board;
 import com.mandarin.petching.domain.Member;
+import com.mandarin.petching.domain.Reply;
 import com.mandarin.petching.repository.BoardRepository;
 import com.mandarin.petching.repository.MemberRepository;
 import com.mandarin.petching.service.BoardService;
@@ -51,12 +52,15 @@ public class BoardController {
             model.addAttribute("board", new Board());
         } else {
             Board board = boardRepository.findById(id).orElse(null);
+            boardService.updateHits(board.getId());
             model.addAttribute("board", board);
+            model.addAttribute("reply", new Reply());
+            model.addAttribute("userEmail", authentication.getName());
+            model.addAttribute("replyList", board.getReplies());
             String userName = authentication.getName();
             Member member = memberRepository.findByUserEmail(userName);
             model.addAttribute("writer", member.getId() == board.getMember().getId());
         }
-
 
         return "board/read";
     }
@@ -85,5 +89,39 @@ public class BoardController {
         boardService.save(userName, board);
         //boardRepository.save(board);
         return "redirect:/board/list";
+    }
+
+    @PostMapping("/reply/create")
+    public String createReply(@Valid Reply reply, BindingResult bindingResult, Authentication authentication, @RequestParam Long boardId, Model model) {
+
+        Board board = boardRepository.getById(boardId);
+        String userEmail = authentication.getName();
+        model.addAttribute("board", board);
+        model.addAttribute("userEmail", userEmail);
+        model.addAttribute("replyList", board.getReplies());
+
+        if (bindingResult.hasErrors()) {
+            return "board/read";
+        }
+
+        model.addAttribute("reply", new Reply());
+        boardService.saveReply(reply, board, userEmail);
+
+        return "redirect:/board/read?id=" + boardId;
+    }
+
+    @PostMapping("/reply/delete")
+    public String deleteReply(@RequestParam Long replyId, @RequestParam Long boardId, Authentication authentication, Model model) {
+
+        boardService.deleteReply(replyId);
+
+        Board board = boardRepository.getById(boardId);
+        String userEmail = authentication.getName();
+        model.addAttribute("board", board);
+        model.addAttribute("userEmail", userEmail);
+        model.addAttribute("replyList", board.getReplies());
+        model.addAttribute("reply", new Reply());
+
+        return "redirect:/board/read?id=" + boardId;
     }
 }

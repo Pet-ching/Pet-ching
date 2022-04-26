@@ -107,8 +107,7 @@ public class MemberController {
             System.out.println("해당 계정의 게시물을 삭제하세요");
             e.printStackTrace();
         }
-        return "redirect:/";
+        return "withdrawalsuccess";
 //        return "/index";
     }
-
 }

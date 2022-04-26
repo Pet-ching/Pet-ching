@@ -1,0 +1,32 @@
+.withdrawal-div {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    padding: 80px 150px 80px 150px;
+    transform: translate(-50%, -50%);
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+.seol {
+    margin: 50px 20px 20px 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.content-text {
+    font-size: 20x;
+    font-weight: 600px;
+    margin: 10px;
+    text-align: center;
+}
+
+.title-text {
+    text-align: center;
+    width: 800px;
+    padding: auto;
+    font-size: 25px;
+    font-weight: 900px;
+    margin-bottom: 20px;
+}

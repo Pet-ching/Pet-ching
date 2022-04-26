@@ -5,90 +5,129 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>펫시터 상세 정보</title>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <link rel="stylesheet" th:href="@{/css/base.css}"/>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
     <link rel="stylesheet" th:href="@{/css/details.css}">
     <script src="/js/details.js" th:src="@{/js/details}"></script>
 
 <!--    로컬 테스트용-->
-<!--        <link href="../static/css/details.css" rel="stylesheet">-->
-<!--        <script type="text/javascript" src="../static/js/details.js"></script>-->
+        <link href="../static/css/details.css" rel="stylesheet">
+        <link href="../static/css/base.css" rel="stylesheet">
+        <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+        <script type="text/javascript" src="../static/js/details.js"></script>
 
 </head>
 <body>
 <div th:replace="fragments/header.html::header"></div>
-<div class="container" th:object="${petSitter}">
-    <div class="item images">
-        이미지
-        <div class="slider">
-            <input type="radio" name="slide" id="slide1" checked>
-            <input type="radio" name="slide" id="slide2">
-            <input type="radio" name="slide" id="slide3">
-            <input type="radio" name="slide" id="slide4">
-            <ul id="imgholder" class="imgs">
-                <li><img src="/images/memberImages/2/pet/pt_2_00.jpg"></li>
-                <li><img src="/images/memberImages/2/petSitter/ps_2_00.jpg"></li>
-                <li><img src="/images/memberImages/2/petSitter/ps_2_01.jpg"></li>
-                <li><img src="/images/memberImages/2/petSitter/ps_2_02.jpg"></li>
-<!--                <li><img src="../static/images/memberImages/2/pet/pt_2_00.jpg"></li>-->
-<!--                <li><img src="../static/images/memberImages/2/petSitter/ps_2_00.jpg"></li>-->
-<!--                <li><img src="../static/images/memberImages/2/petSitter/ps_2_01.jpg"></li>-->
-<!--                <li><img src="../static/images/memberImages/2/petSitter/ps_2_02.jpg"></li>-->
+<div class="content" th:object="${petSitter}">
+    <div class="item section">
+        <input type="radio" name="slide" id="slide01" checked>
+        <input type="radio" name="slide" id="slide02">
+        <input type="radio" name="slide" id="slide03">
+        <div class="slidewrap">
+            <ul class="slidelist">
+                <!-- 슬라이드 영역 -->
+                <li class="slideitem">
+                    <a>
+                        <img th:src="@{/images/memberImages/2/petSitter/ps_2_00.jpg}" src="../static/images/memberImages/2/petSitter/ps_2_00.jpg">
+                    </a>
+                </li>
+                <li class="slideitem">
+                    <a>
+                        <img th:src="@{/images/memberImages/2/petSitter/ps_2_01.jpg}" src="../static/images/memberImages/2/petSitter/ps_2_01.jpg">
+                    </a>
+                </li>
+                <li class="slideitem">
+                    <a>
+                        <img th:src="@{/images/memberImages/2/petSitter/ps_2_02.jpg}" src="../static/images/memberImages/2/petSitter/ps_2_02.jpg">
+                    </a>
+                </li>
+                <!-- 좌,우 슬라이드 버튼 -->
+                <div class="slide-control">
+                    <div>
+                        <label for="slide03" class="left"></label>
+                        <label for="slide02" class="right"></label>
+                    </div>
+                    <div>
+                        <label for="slide01" class="left"></label>
+                        <label for="slide03" class="right"></label>
+                    </div>
+                    <div>
+                        <label for="slide02" class="left"></label>
+                        <label for="slide01" class="right"></label>
+                    </div>
+                </div>
             </ul>
-            <div class="bullets">
-                <label for="slide1">&nbsp;</label>
-                <label for="slide2">&nbsp;</label>
-                <label for="slide3">&nbsp;</label>
-                <label for="slide4">&nbsp;</label>
-            </div>
+            <!-- 페이징 -->
+            <ul class="slide-pagelist">
+                <li><label for="slide01"></label></li>
+                <li><label for="slide02"></label></li>
+                <li><label for="slide03"></label></li>
+            </ul>
         </div>
     </div>
     <div class="item petsitter_name">
-<!--        주소-->
-        <div id="address01"></div>
-
-        <div th:text="${petSitterMember.userName}">~~ 님을 소개합니다.</div>
+        <div class="profileImage">
+            <img th:src="@{/images/memberImages/2/profile/pf_2_00.jpg}"
+                 src="../static/images/memberImages/2/profile/pf_2_00.jpg"
+            >
+        </div>
+        <div class="textBox" style="display: inline-block;">
+            <p class= "address" id="address01">서울시 서울구 서울동</p>
+            <p class= "name" th:text="${petSitterMember.userName}+'님을 소개합니다!!'">테스트님을 소개합니다.</p>
+        </div>
     </div>
     <div class="item introduce">
-        <strong th:text="*{title}">여기는 제목~</strong></br>
-        <div class="text_box" th:text="*{selfIntroduction}">여기는 자기소개~</div>
+        <h4><strong th:text="*{title}">여기는 제목~</strong></h4>
+        <div class="textBox" th:text="*{selfIntroduction}">여기는 자기소개~</div>
     </div>
     <div class="item certifi">
-        <strong>자격증 보유 내역</strong>
-        <ul>
-            <li th:each="certifi : *{certificate}">
-                <p th:text="${certifi}">여기에 자격증 나와요~
-            </li>
-        </ul>
+        <h4><strong>자격증 보유 내역</strong></h4>
+        <div class="textBox">
+            <ul>
+                <li th:each="certifi : *{certificate}">
+                    <p th:text="${certifi}">여기에 자격증 나와요~
+                </li>
+            </ul>
+        </div>
     </div>
     <div class="item services">
-        <strong>이용 가능 서비스</strong>
-        <ul>
-            <li th:each="ableService : *{ableService}">
-                <p th:text="${ableService}"> 여기는 이용가능 서비스
-            </li>
-        </ul>
+        <h4><strong>이용 가능 서비스</strong></h4>
+        <div class="textBox">
+            <ul>
+                <li th:each="ableService : *{ableService}">
+                    <p th:text="${ableService}"> 여기는 이용가능 서비스
+                </li>
+            </ul>
+        </div>
     </div>
     <div class="item buttonBox">
         <div th:if="(${petSitterMember.id}==${loginMember.id})">
-            <button type="button" th:onclick="|location.href='@{/mypage/petsitter/edit}'|">수정하기</button>
+            <button type="button" th:onclick="|location.href='@{/mypage/petsitter/edit}'|"
+                    class="btn btn-primary btn-block"
+                    style="width:150px;margin:10px 0;"
+            >수정하기</button>
         </div>
         <div th:unless="(${petSitterMember.id}==${loginMember.id})">
             <button type="button"
-                    th:onclick="|location.href='@{/matching/profile/reservation/{petSitterMember_id}(petSitterMember_id=${petSitterMember.id})}'|">예약하러가기
+                    th:onclick="|location.href='@{/matching/profile/reservation/{petSitterMember_id}(petSitterMember_id=${petSitterMember.id})}'|"
+                    class="btn btn-primary btn-block"
+                    style="width:150px;margin:10px 0;"
+            >예약하러가기
             </button>
-            </br>
             <button type="button"
-                    th:onclick="|location.href='@{/chat/{petSitterId}(petSitterId = ${petSitterMember.id})}'|">채팅하기
+                    th:onclick="|location.href='@{/chat/{petSitterId}(petSitterId = ${petSitterMember.id})}'|"
+                    class="btn btn-info"
+                    style="width:150px;margin:10px 0;"
+            >채팅하기
             </button>
         </div>
     </div>
     <div class="item feeList">
-        <strong>이용 요금</strong>
+        <h4><strong>이용 요금</strong></h4>
+        <div class="line"></div>
         <table class="feeListTable">
-            <th>분류</th>
+            <th class="feeListKey">분류</th>
             <th>가격</th>
             <tr>
                 <td class="feeListKey">🐶 소형견</td>
@@ -116,13 +155,15 @@
                 <td class="feeListValue" th:unless="*{feeList.etcFee==null}" th:text="*{feeList.etcFee}+'원'"></td>
             </tr>
         </table>
-        자세한 요금은 채팅을 통해 문의해주세요!
+        </br>
+        <p>자세한 요금은 채팅을 통해 문의해주세요!</p>
     </div>
     <div class="item workingTime">
-        <strong>예약 가능 날짜</strong>
+        <h4><strong>예약 가능 날짜</strong></h4>
+        <div class="line"></div>
         <table class="workingTimeTable">
-            <th>요일</th>
-            <th>시작시간</th>
+            <th class="workingTimeKey">요일</th>
+            <th class="workingTimeKey">시작시간</th>
             <th>종료시간</th>
             <tr>
                 <td class="workingTimeKey">월요일</td>
@@ -176,8 +217,9 @@
         </table>
     </div>
     <div class="item workingArea">
-        <strong>예약 가능 지역</strong>
-        <div id="address02"></div>
+        <h4><strong>예약 가능 지역</strong></h4>
+        <div id="address02">지이이역</div>
+        <div class="line"></div>
         <div class="item maps">
             <div id="map" style="width:250px;height:200px;"> 맵보여주는곳</div>
         </div>

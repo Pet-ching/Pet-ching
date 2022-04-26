@@ -9,68 +9,88 @@
 <body>
 <div th:replace="fragments/header.html::header"></div>
 <div class="container">
-    <h1>예약 상세 보기</h1>
-    <div>
-        <div>보호자 이름</div>
-        <div th:text="${petOwnerName}"></div>
+    <div class="page-header">
+        <h1>예약 상세 보기</h1>
     </div>
-    <div>
-        <div>펫시터 이름</div>
-        <div th:text="${petSitterName}"></div>
+    <div id="mainHide">
+        <table class="table table-hover">
+            <thead>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>보호자 이름</td>
+                    <td th:text="${petOwnerName}"></td>
+                </tr>
+                <tr>
+                    <td>펫시터 이름</td>
+                    <td th:text="${petSitterName}"></td>
+                </tr>
+                <tr>
+                    <td>펫 이름</td>
+                    <td th:text="${reservation.pet.petName}"></td>
+                </tr>
+                <tr>
+                    <td>예약 시작 일자</td>
+                    <td th:text="${reservation.startDate}"></td>
+                </tr>
+                <tr>
+                    <td>예약 종료 일자</td>
+                    <td th:text="${reservation.endDate}"></td>
+                </tr>
+                <tr>
+                    <td>요금</td>
+                    <td th:text="${reservation.fee}"></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    <div>
-        <div>펫 이름</div>
-        <div th:text="${reservation.pet.petName}"></div>
+    
+    <div class="page-header">
+        <h3>반려동물 상세정보</h3>
     </div>
-    <div>
-        <div>예약 시작 일자</div>
-        <div th:text="${reservation.startDate}"></div>
-    </div>
-    <div>
-        <div>예약 종료 일자</div>
-        <div th:text="${reservation.endDate}"></div>
-    </div>
-    <div>
-        <div>요금</div>
-        <div th:text="${reservation.fee}"></div>
-    </div>
-
-    <h3>반려동물 정보</h3>
-    <div>
-        <div>성별</div>
-        <div th:text="${reservation.pet.petGender}"></div>
-    </div>
-    <div>
-        <div>종류</div>
-        <div th:text="${reservation.pet.petType}"></div>
-    </div>
-    <div>
-        <div>나이</div>
-        <div th:text="${reservation.pet.petAge}"></div>
-    </div>
-    <div>
-        <div>몸무게</div>
-        <div th:text="${reservation.pet.weight}"></div>
-    </div>
-    <div>
-        <div>중성화 여부</div>
-        <div th:text="${reservation.pet.neutralization}"></div>
-    </div>
-    <div>
-        <div>병원 이름</div>
-        <div th:text="${reservation.pet.hospitalName}"></div>
-    </div>
-    <div>
-        <div>병원 전화번호</div>
-        <div th:text="${reservation.pet.hospitalTel}"></div>
-    </div>
-    <div>
-        <div>병원 주소</div>
-        <div th:text="${reservation.pet.hospitalAdr}"></div>
-    </div>
-    <div>
-        <div>기타 사항</div>
-        <div th:text="${reservation.pet.note}"></div>
+    <div id="mainHide">
+        <table class="table table-hover">
+            <thead>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>반려동물 성별</td>
+                    <td th:text="${reservation.pet.petGender.description}"></td>
+                </tr>
+                <tr>
+                    <td>반려동물 종류</td>
+                    <td th:text="${reservation.pet.petType.description}"></td>
+                </tr>
+                <tr>
+                    <td>반려동물 나이</td>
+                    <td th:text="${reservation.pet.petAge}"></td>
+                </tr>
+                <tr>
+                    <td>반려동물 몸무게</td>
+                    <td th:text="${reservation.pet.weight}"></td>
+                </tr>
+                <tr>
+                    <td>중성화 여부</td>
+                    <td th:text="${reservation.pet.neutralization}"></td>
+                </tr>
+                <tr>
+                    <td>동물병원 이름</td>
+                    <td th:text="${reservation.pet.hospitalName}"></td>
+                </tr>
+                <tr>
+                    <td>동물병원 전화번호</td>
+                    <td th:text="${reservation.pet.hospitalTel}"></td>
+                </tr>
+                <tr>
+                    <td>동물병원 주소</td>
+                    <td th:text="${reservation.pet.hospitalAdr}"></td>
+                </tr>
+                <tr>
+                    <td>기타 사항</td>
+                    <td th:text="${reservation.pet.note}"></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 <div th:replace="fragments/footer.html::footer"></div>

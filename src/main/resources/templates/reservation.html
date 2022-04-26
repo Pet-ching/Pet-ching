@@ -26,9 +26,8 @@
             <h1>예약 정보</h1>
             <form th:action="@{/matching/profile/reservation/match}" method="POST" onsubmit="submitSuc();">
                 <div>
-                    <label>보호자 이름</label>
-                    <div class="names" th:text="${petOwner.userName}"></div>
-                    <input type="hidden" th:value="${petOwner.id}" name="petOwnerId" readonly/>
+                    <label >보호자 이름</label>
+                    <input th:placeholder="${petOwner.userName}" th:value="${petOwner.userName}" name="petOwner" readonly/>
                 </div>
                 <div>
                     <label>펫 이름</label>
@@ -38,8 +37,7 @@
                 </div>
                 <div>
                     <label >펫시터 이름</label>
-                    <div class="names" th:text="${petOwner.userName}"></div>
-                    <input th:placeholder="${petSitter.userName}" th:value="${petSitter.id}" name="petSitterId" readonly/>
+                    <input th:placeholder="${petSitter.userName}" th:value="${petSitter.userName}" name="petSitter" readonly/>
                 </div>
                 <div>
                     <label>시작 날짜</label>

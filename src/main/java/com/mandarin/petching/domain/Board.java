@@ -2,27 +2,21 @@ package com.mandarin.petching.domain;
 
 
 import lombok.*;
-
 import org.hibernate.annotations.CreationTimestamp;
-
-
 import java.time.LocalDateTime;
+import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-
-
-
-
 @Getter
 @Setter
-@Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 public class Board {
+
     @Id
     @Column(name = "board_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,6 +34,7 @@ public class Board {
     @CreationTimestamp
     private LocalDateTime regDate;
 
+
     @Column(length = 20 )
     @NotBlank(message = "제목을 입력해 주세요!")
     private String title;
@@ -55,6 +50,9 @@ public class Board {
     @Enumerated(EnumType.STRING)// Enum 타입의 필드를 DB에 저장할 때 enum '이름'으로 매핑해주는 어노테이션
     private AnswerType answerType;
 
+    @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
+    private List<Reply> replies;
+
     @Builder
     public Board(String title, String content, BoardType boardType, LocalDateTime regDate, Member member, AnswerType answerType) {
         this.title = title;
@@ -64,6 +62,5 @@ public class Board {
         this.member = member;
         this.answerType = answerType;
     }
-
 }
 

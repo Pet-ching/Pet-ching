@@ -1,17 +1,23 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<sec:authorize access="isAuthenticated()">
+    <sec:authentication property="principal" var="principal"/>
+</sec:authorize>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" th:href="@{/css/base.css}"/>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PETCHING</title>
+    <link rel="stylesheet" href="https://use.typekit.net/pwu2psf.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+    <link rel="stylesheet" th:href="@{/css/base.css}" />    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
     <link rel="stylesheet" href="../css/style.css"/>
 </head>
 <body>
 <div th:replace="fragments/header::header"></div>
-<div class="container-fluid">
-    <div id="header"><!--index 웹퍼블리싱 김혜리, 김선화 -->
+<div class="container-fluid"><!-- 웹퍼블리싱 김혜리, 김선화-->
+    <div id="header">
         <div id="sns">
             <a href="#"><i class="fab fa-facebook-f"></i></a>
             <a href="#"><i class="fab fa-instagram"></i></a>
@@ -85,14 +91,10 @@
         </div>
     </section>
 </div>
-<!--<form sec:authorize="isAuthenticated()" th:action="@{/members/withdrawal}" th:method="get">-->
-<!--    &lt;!&ndash;    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />&ndash;&gt;-->
-<!--    <button type="submit">탈퇴하기</button>-->
-<!--</form>-->
+
 
 
 <div th:replace="fragments/footer::footer"></div>
 
 </body>
 </html>
-

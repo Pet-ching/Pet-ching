@@ -5,15 +5,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
-
-import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
+import javax.persistence.*;
 
 @NoArgsConstructor
+@Entity
 @Getter
 @Setter
-@Entity
 public class Reply {
 
     @Id
@@ -24,6 +25,7 @@ public class Reply {
     @ManyToOne
     @JoinColumn(name="board_id", referencedColumnName = "board_id")
     private Board board;
+
 
     @NotEmpty(message = "255자 내로 내용을 입력해주세요")
     private String reContent;
