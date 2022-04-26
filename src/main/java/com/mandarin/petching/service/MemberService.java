@@ -47,6 +47,15 @@ public class MemberService implements UserDetailsService {
                 .build();
     }
 
+    public void updateMember(Long memberId, Member member) {
+
+        Member findMember = memberRepository.findById(memberId).get();
+        findMember.setUserName(member.getUserName());
+        findMember.setUserTel(member.getUserTel());
+        findMember.setUserBth(member.getUserBth());
+        findMember.setAddress(member.getAddress());
+    }
+
     public void deleteMember(Long id){
         memberRepository.deleteById(id);
     }
