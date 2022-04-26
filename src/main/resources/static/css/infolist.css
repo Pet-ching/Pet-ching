@@ -24,17 +24,18 @@
 .batch {
 position:absolute;
 left:50%;
-top: 10%;
+top: 40%;
     margin-top: 200px;
     margin-bottom: 200px;
-    transform: translate(-50%, -10%);
+    transform: translate(-50%, -50%);
+
 }
 
 .cocomo {
     width: 600px;
     height: 150px;
     display: grid;
-    margin: 150px;
+    margin: 50px 0px 150px 0px;
 
 }
 
