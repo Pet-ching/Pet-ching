@@ -9,8 +9,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @Transactional
@@ -47,13 +50,21 @@ public class MemberService implements UserDetailsService {
                 .build();
     }
 
-    public void updateMember(Long memberId, Member member) {
+    public void updateMember(Long memberId, Member member, MultipartFile file) throws Exception{
 
         Member findMember = memberRepository.findById(memberId).get();
         findMember.setUserName(member.getUserName());
         findMember.setUserTel(member.getUserTel());
         findMember.setUserBth(member.getUserBth());
         findMember.setAddress(member.getAddress());
+
+        String filePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\images\\memberImages";
+        UUID uuid = UUID.randomUUID();
+        String fileName = uuid + "_" + file.getOriginalFilename();
+        File saveFile = new File(filePath, fileName);
+        file.transferTo(saveFile);
+
+        findMember.setImgPath("/memberImages/images/" + fileName);
     }
 
     public void deleteMember(Long id){

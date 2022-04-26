@@ -14,11 +14,15 @@
 <div th:replace="fragments/header.html::header"></div>
 <div class="container">
 
-    <form action="" role="form" method="post" th:object="${member}">
+    <form action="" role="form" method="post" th:object="${member}" enctype="multipart/form-data">
         <div class="form-group">
             <label th:for="userName">이름</label>
             <input type="text" th:field="*{userName}" class="form-control" placeholder="이름을 입력해주세요">
             <p th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" class="fieldError" style="color:red">Incorrect data</p>
+        </div>
+        <div class="form-group">
+            <label th:for="file">사진 추가</label>
+            <input type="file" name="file" multiple="multiple">
         </div>
         <div class="form-group">
             <label th:for="userEmail">이메일주소</label>

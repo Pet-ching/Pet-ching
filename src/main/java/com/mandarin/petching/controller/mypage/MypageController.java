@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.security.SecureRandom;
 import java.util.List;
@@ -63,7 +64,11 @@ public class MypageController {
     }
 
     @PostMapping("/member/edit")
-    public String editMember(@Validated Member member, BindingResult bindingResult, Authentication authentication, Model model) {
+    public String editMember(@Validated Member member,
+                             BindingResult bindingResult,
+                             MultipartFile file,
+                             Authentication authentication,
+                             Model model) throws Exception{
 
         if(bindingResult.hasErrors()) {
             return "mypage/memberEdit";
@@ -72,7 +77,7 @@ public class MypageController {
         String userName = authentication.getName();
         Member findMember = memberRepository.findByUserEmail(userName);
 
-        memberService.updateMember(findMember.getId(), member);
+        memberService.updateMember(findMember.getId(), member, file);
 
         return "redirect:/mypage?type=petowner";
     }
