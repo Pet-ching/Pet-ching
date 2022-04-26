@@ -43,9 +43,11 @@
                     </div>
                     <div class="item">
                         <h4><label>펫 이름</label></h4>
-                        <div th:each="pet : ${petList}">
-                            <input type="radio" th:value="${pet.id}" name="pet"> <span th:text="${pet.petName}"></span>
-                        </div>
+                        <select class="form-control" name="pet">
+                            <div th:each="pet : ${petList}">
+                                <option th:value="${pet.id}"><span th:text="${pet.petName}"></span></option>
+                            </div>
+                        </select>
                     </div>
                     <div class="item">
                         <h4><label >펫시터 이름</label></h4>
