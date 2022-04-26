@@ -3,6 +3,7 @@ package com.mandarin.petching.controller;
 import com.mandarin.petching.domain.ChatMessage;
 import com.mandarin.petching.domain.Member;
 import com.mandarin.petching.repository.MemberRepository;
+import com.mandarin.petching.repository.RoomRepository;
 import com.mandarin.petching.service.ChatService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
