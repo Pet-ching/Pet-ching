@@ -28,7 +28,7 @@ public class PetSitter {
     @JoinColumn(name = "fee_list", unique = true)
     private FeeList feeList;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "working_id")
     private WorkingDayAndTime workingDayAndTime;
 
