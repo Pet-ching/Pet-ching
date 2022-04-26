@@ -73,13 +73,12 @@
     /* 텍스트 */
     .feeList p{color:gray;}
 /* 가능 시간 */
-    .content .workingTime{grid-column: 2 / 3;grid-row: 4;margin-top: 30px;}
-    .workingTime{width: 300px; border-radius: 8px; border: 1px solid rgb(223, 227, 234); box-shadow: rgba(0, 0, 0, 0.07) 1px 3px 7px; padding: 15px; display: flex; align-items: center; flex-direction: column;justify-content: center;}
-    .workingTime table{padding:10px;}
-    .workingTime th{text-align:center;}
-    .workingTime td{border:10px solid white; text-align:center;}
-    .workingTime tr{border:5px solid white;}
-    .workingTime .workingTimeKey{padding-right:10px;}
+    .content .workingDay{grid-column: 2 / 3;grid-row: 4;margin-top: 30px;}
+    .workingDay{width: 300px; border-radius: 8px; border: 1px solid rgb(223, 227, 234); box-shadow: rgba(0, 0, 0, 0.07) 1px 3px 7px; padding: 15px; display: flex; align-items: center; flex-direction: column;justify-content: center;}
+    .workingDay table{padding:10px; border-spacing: 5px; border-collapse: separate;}
+    .workingDay th{border-radius:6px; text-align:center; border: 1px solid #0A6ECD; padding:10px; margin:10px;}
+    .workingDay .ableDay{background-color: #0A6ECD; color:white;}
+    .workingDay .NotAbleDay{color:lightgray;}
 /* 지역 */
     .content .workingArea{grid-column: 2 / 3;grid-row: 5 / 7; margin-top: 30px;}
     .workingArea {width: 300px; border-radius: 8px; border: 1px solid rgb(223, 227, 234); box-shadow: rgba(0, 0, 0, 0.07) 1px 3px 7px; padding: 10px; display: flex; align-items: center; flex-direction: column;justify-content: center;}
