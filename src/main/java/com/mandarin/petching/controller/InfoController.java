@@ -61,12 +61,20 @@ public class InfoController {
             list = infoService.sitterList(pageable);
         }
         int nowPage = list.getPageable().getPageNumber() + 1;
-        int startPage = Math.max(nowPage - 4, 1);
-        int endPage = Math.min(nowPage + 5, list.getTotalPages());
+        int startPage = Math.max(nowPage - 2, 1);
+        int endPage = Math.min(startPage+2, list.getTotalPages());
+//        double startPage2 = Math.floor(list.getNumber())*10+1;
+//        double endPage2;
+//        double endPage3;
+//        endPage = list.getTotalPages() > startPage+9 ? startPage+9 : list.getTotalPages();
+//        endPage3 = endPage < startPage ? startPage : endPage;
+
+//        int endPage = Math.min(nowPage + 5, list.getTotalPages());
         model.addAttribute("list", list);
         model.addAttribute("nowPage", nowPage);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
+
         return "infolist";
     }
 
