@@ -52,7 +52,7 @@ public class Board {
     @Enumerated(EnumType.STRING)
     private BoardType boardType;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)// Enum 타입의 필드를 DB에 저장할 때 enum '이름'으로 매핑해주는 어노테이션
     private AnswerType answerType;
 
     @Builder

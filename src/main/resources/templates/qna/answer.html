@@ -18,7 +18,7 @@
     <br/>
     <table class="table">
         <tr>
-            <th style="padding:13px 0 0 15px">게시판 선택</th>
+            <th>서비스 분류</th>
             <td>
                 <div class="pull-left">
                     <b  th:text="${board?.getBoardType()}"></b>
@@ -27,50 +27,128 @@
         </tr>
 
         <tr>
-            <th style="padding:13px 0 0 15px;">제목</th>
+            <th >번호</th>
+            <td><b th:text="${board?.getId()}"></b></td>
+        </tr>
+
+        <tr>
+            <th >작성 날짜</th>
+            <td><b th:text="${#temporals.format(board.regDate,'yyyy-MM-dd HH:mm')}"></b></td>
+        </tr>
+
+        <tr>
+            <th >작성자</th>
+            <td><b th:text="${board?.getMember().getUserName()}"></b></td>
+        </tr>
+
+        <tr>
+            <th>제목</th>
             <td><b th:text="${board?.getTitle()}"></b></td>
         </tr>
 
         <tr>
-            <th style="padding:13px 0 0 15px;">내용</th>
-            <td><b th:text="${board?.getContent()}"></b>
-                <span class="help-block"></span>
-            </td>
+            <th>내용</th>
+            <td><b th:text="${board?.getContent()}"></b></td>
         </tr>
 
 
-        <tr>
-            <th style="padding:13px 0 0 15px;">답변이</th>
-            <td><b th:text="${reply?.getMember()?.getUserName()}"></b>
-            </td>
-        </tr>
-        <tr>
-            <th style="padding:13px 0 0 15px;">답변 날짜</th>
-            <td><b th:text="${reply?.getReRegDate()}"></b></td>
-        </tr>
+<!--        유저용-->
+        <div th:if="${member.getRole().name().equals('USER')}">
+            <tr>
+                <th>답변이</th>
+                <td><b th:text="${reply?.getMember()?.getUserName()}"></b>
+                </td>
+            </tr>
+            <tr>
+                <th>답변 날짜</th>
+                <td><b th:text="${reply?.getReRegDate()}"></b></td>
+            </tr>
 
-        <tr>
-            <th style="padding:13px 0 0 15px;">답변 내용</th>
-            <td><b th:text="${reply?.getReContent()}"></b></td>
-        </tr>
+            <tr>
+                <th>답변 내용</th>
+                <td><b th:text="${reply?.getReContent()}"></b></td>
+            </tr>
+        </div>
 
-        <tr>
-            <td></td>
-            <td></td>
-        </tr>
+
+<!--        관리자 권한-->
+        <div th:if="${member.getRole().name().equals('ADMIN')}">
+            <tr>
+                <th>답변이</th>
+                <td><b th:text="${member?.getUserName()}"></b>
+                </td>
+            </tr>
+            <tr th:if="${reply?.getReRegDate()}">
+                <th>답변 날짜</th>
+                <td><b th:text="${reply?.getReRegDate()}"></b></td>
+            </tr>
+
+            <tr>
+                <th>답변 내용</th>
+<!--                답변 전 -> 수정 가능-->
+                <td th:if='${board.getAnswerType().name().equals("대기")}'>
+                    <textarea id="board_content" class="col-md-1 form-control input-sm" rows="7" style="height: 200px;"
+                              placeholder="255자까지 입력 가능"></textarea><span class="help-block"></span>
+                </td>
+<!--                답변 완료 -> 수정 불가-->
+                <td th:if='${board.getAnswerType().name().equals("완료")}'>
+                    <div class="col-md-1 form-control input-sm" rows="7" style="height: 200px; font-size: 18px;"
+                              placeholder="255자까지 입력 가능"  th:text="${reply?.getReContent()}"></div><span class="help-block"></span>
+                </td>
+            </tr>
+
+         </div>
     </table>
+
+
     <div class="pull-left">
         <a href="/qna/ask" class="btn btn-default">목록으로</a>
     </div>
     <div class="pull-right">
-        <button th:if="${board?.id}" type="button" class="btn btn-danger" id="delete">삭제</button>
+        <button th:if="!${reply?.id}" type="button" class="btn btn-primary" id="insert">저장</button>
+        <button th:if="${reply?.id}" type="button" class="btn btn-danger" id="delete">삭제</button>
     </div>
 </div>
+<input id="board_id" type="hidden" th:value="${board?.id}"/>
 <!--/body-->
 
 <!--footer-->
 <div th:replace="fragments/footer::footer"></div>
 <!--/footer-->
 
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:if="!${reply?.id}">
+        $('#insert').click(function () {
+            var jsonData = JSON.stringify({
+               reContent: $('#board_content').val(),
+            });
+            $.ajax({
+                       url: "/qna/replies/" + $('#board_id').val(),
+                       type: "POST",
+                       data: jsonData,
+                       contentType: "application/json; charset=utf-8",
+                       dataType: "json",
+                           success: function () {
+                               alert('저장 성공!');
+                               location.href = '/qna/ask';
+                       },
+                   });
+        });
+    </script>
+<script th:if="${reply?.id}">
+        $('#delete').click(function () {
+            $.ajax({
+                       url: "/qna/replies/" + $('#board_id').val(),
+                       type: "DELETE",
+                       success: function () {
+                           alert('삭제 성공!');
+                           location.href = '/qna/ask';
+                       },
+                       error: function () {
+                           alert('삭제 실패!');
+                       }
+                   });
+        });
+    </script>
 </body>
 </html>

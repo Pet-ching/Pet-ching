@@ -5,31 +5,16 @@ import com.mandarin.petching.repository.BoardRepository;
 import com.mandarin.petching.repository.MemberRepository;
 import com.mandarin.petching.service.QnaService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.data.web.PagedResourcesAssembler;
-import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.util.Map;
-
-import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
-
 import javax.transaction.Transactional;
-
-//import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-//import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
-
+import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("qna/boards")
@@ -37,12 +22,23 @@ import javax.transaction.Transactional;
 public class QnaRestController {
 
     private final BoardRepository boardRepository;
-
-   private final QnaService qnaService;
-
+    private final QnaService qnaService;
     private final MemberRepository memberRepository;
 
 
+    //일괄 삭제
+    @DeleteMapping("/deleteAll")
+    public ResponseEntity<?> delete(Authentication authentication, @PageableDefault Pageable pageable, Model model) {
+        String userName = authentication.getName();
+        Member member = memberRepository.findByUserEmail(userName);
+
+        qnaService.deleteQnaAll(member);
+
+        return new ResponseEntity<>("{}", HttpStatus.OK);
+    }
+
+    //보드 글 관리
+    @Transactional
     @PostMapping//생성
     public ResponseEntity<?> postBoard(Authentication authentication, @RequestBody Board board) {
         String userName = authentication.getName();
@@ -55,6 +51,7 @@ public class QnaRestController {
         return new ResponseEntity<>("{}", HttpStatus.CREATED);
     }
 
+    @Transactional
     @PutMapping("/{id}")//수정
     public ResponseEntity<?> putBoard(@PathVariable("id")Long id, @RequestBody Board board) {
         //valid 체크
@@ -71,21 +68,11 @@ public class QnaRestController {
         return new ResponseEntity<>("{}", HttpStatus.OK);
     }
 
+    @Transactional
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteBoard(@PathVariable("id")Long id) {
         //valid 체크
         boardRepository.deleteById(id);
-        return new ResponseEntity<>("{}", HttpStatus.OK);
-    }
-
-    @DeleteMapping("/deleteAll")
-    @Transactional
-    public ResponseEntity<?> delete(Authentication authentication, @PageableDefault Pageable pageable, Model model) {
-        String userName = authentication.getName();
-        Member member = memberRepository.findByUserEmail(userName);
-
-        qnaService.deleteQnaAll(BoardType.QnA문의1,BoardType.QnA문의3, member);
-
         return new ResponseEntity<>("{}", HttpStatus.OK);
     }
 

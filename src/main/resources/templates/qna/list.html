@@ -40,8 +40,8 @@
                 <td th:text="${board.id}"></td>
                 <td th:text="${board.boardType}"></td>
                 <td th:text="|답변&nbsp ${board.answerType}|"></td>
-                <td th:if="${board.answerType.name()} == '대기'" ><a th:href="'/qna/form?id='+${board.id}" th:text="${board.title}"></a></td>
-                <td th:if="${board.answerType.name()} == '완료'"><a th:href="'/qna/answer?id='+${board.id}" th:text="${board.title}"></a></td>
+                <td th:if="${board.answerType.name()} == '대기' and ${member.getRole().name().equals('USER')}" ><a th:href="'/qna/form?id='+${board.id}" th:text="${board.title}"></a></td>
+                <td th:if="${board.answerType.name()} == '완료' or ${member.getRole().name().equals('ADMIN')}"><a th:href="'/qna/answer?id='+${board.id}" th:text="${board.title}"></a></td>
                 <td th:text="${#temporals.format(board.regDate,'yyyy-MM-dd HH:mm')}"></td>
             </tr>
             <tr th:if="${boardList.totalPages} <= 0">

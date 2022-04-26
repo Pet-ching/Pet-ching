@@ -19,7 +19,7 @@ configurations {
 repositories {
 	mavenCentral()
 	//Caused by: java.lang.ClassNotFoundException: com.mandarin.petching.service.QnaService
-	maven { url "https://www.datanucleus.org/downloads/maven2/"}
+//	maven { url "https://www.datanucleus.org/downloads/maven2/"}
 }
 
 dependencies {
