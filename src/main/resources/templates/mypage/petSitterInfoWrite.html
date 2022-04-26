@@ -10,98 +10,138 @@
             border-color: #dc3545;
             color: #dc3545;
         }
+        .wrapper {
+            display: flex;
+        }
     </style>
 </head>
 <body>
 <div th:replace="fragments/header.html::header"></div>
 <div class="container">
 <form action="" method="post" th:object="${petSitter}">
-    <input type="text" th:field="*{title}" placeholder="자기소개 제목">
-    <div class="field-error" th:errors="${petSitter.title}">error</div>
-    <input type="text" th:field="*{selfIntroduction}" placeholder="자기소개">
-    <div class="field-error" th:errors="${petSitter.selfIntroduction}">error</div>
-
-    <input type="number" th:field="${feeList.smallDogFee}" placeholder="소형견 요금">
-    <input type="number" th:field="${feeList.middleDogFee}" placeholder="중형견 요금">
-    <input type="number" th:field="${feeList.largeDogFee}" placeholder="대형견 요금">
-    <input type="number" th:field="${feeList.catFee}" placeholder="고양이 요금">
-    <input type="number" th:field="${feeList.etcFee}" placeholder="기타 동물 요금">
-
-    <div>
-        <input type="time" th:field="${workingDayAndTime.monStartTime}">
-        <label>월요일 시작시간</label>
+    <div class="form-group">
+        <label th:for="*{title}">자기소개 타이틀</label>
+        <input type="text" th:field="*{title}" class="form-control">
+        <div class="field-error" th:errors="${petSitter.title}">error</div>
     </div>
-    <div>
-        <input type="time" th:field="${workingDayAndTime.monFinishTime}">
-        <label>월요일 종료시간</label>
+    <div class="form-group">
+        <label th:for="*{selfIntroduction}">자기소개</label>
+        <input type="text" th:field="*{selfIntroduction}" class="form-control">
+        <div class="field-error" th:errors="${petSitter.selfIntroduction}">error</div>
     </div>
-    <div>
-        <input type="time" th:field="${workingDayAndTime.tueStartTime}">
-        <label>화요일 시작시간</label>
+    <div class="form-group">
+        <label th:for="${feeList.smallDogFee}">소형견 요금</label>
+        <input type="number" th:field="${feeList.smallDogFee}" class="form-control">
     </div>
-    <div>
-        <input type="time" th:field="${workingDayAndTime.tueFinishTime}">
-        <label>화요일 종료시간</label>
+    <div class="form-group">
+        <label th:for="${feeList.middleDogFee}">중형견 요금</label>
+        <input type="number" th:field="${feeList.middleDogFee}" class="form-control">
     </div>
-    <div>
-        <input type="time" th:field="${workingDayAndTime.wedStartTime}">
-        <label>수요일 시작시간</label>
+    <div class="form-group">
+        <label th:for="${feeList.largeDogFee}">대형견 요금</label>
+        <input type="number" th:field="${feeList.largeDogFee}" class="form-control">
     </div>
-    <div>
-        <input type="time" th:field="${workingDayAndTime.wedFinishTime}">
-        <label>수요일 종료시간</label>
+    <div class="form-group">
+        <label th:for="${feeList.catFee}">고양이 요금</label>
+        <input type="number" th:field="${feeList.catFee}" class="form-control">
     </div>
-    <div>
-        <input type="time" th:field="${workingDayAndTime.thuStartTime}">
-        <label>목요일 시작시간</label>
+    <div class="form-group">
+        <label th:for="${feeList.etcFee}">기타동물 요금</label>
+        <input type="number" th:field="${feeList.etcFee}" class="form-control">
     </div>
-    <div>
-        <input type="time" th:field="${workingDayAndTime.thuFinishTime}">
-        <label>목요일 종료시간</label>
+    <div class="wrapper">
+        <div class="form-group">
+            <label>월요일 시작시간</label>
+            <input type="time" th:field="${workingDayAndTime.monStartTime}" style="margin-right: 5px;">
+        </div>
+        <div class="form-group">
+            <label>월요일 종료시간</label>
+            <input type="time" th:field="${workingDayAndTime.monFinishTime}">
+        </div>
     </div>
-    <div>
-        <input type="time" th:field="${workingDayAndTime.friStartTime}">
-        <label>금요일 시작시간</label>
+    <div class="wrapper">
+        <div class="form-group">
+            <label>화요일 시작시간</label>
+            <input type="time" th:field="${workingDayAndTime.tueStartTime}" style="margin-right: 5px;">
+        </div>
+        <div class="form-group">
+            <label>화요일 종료시간</label>
+            <input type="time" th:field="${workingDayAndTime.tueFinishTime}">
+        </div>
     </div>
-    <div>
-        <input type="time" th:field="${workingDayAndTime.friFinishTime}">
-        <label>금요일 종료시간</label>
+    <div class="wrapper">
+        <div class="form-group">
+            <label>수요일 시작시간</label>
+            <input type="time" th:field="${workingDayAndTime.wedStartTime}" style="margin-right: 5px;">
+        </div>
+        <div class="form-group">
+            <label>수요일 종료시간</label>
+            <input type="time" th:field="${workingDayAndTime.wedFinishTime}">
+        </div>
     </div>
-    <div>
-        <input type="time" th:field="${workingDayAndTime.satStartTime}">
-        <label>토요일 시작시간</label>
+    <div class="wrapper">
+        <div class="form-group">
+            <label>목요일 시작시간</label>
+            <input type="time" th:field="${workingDayAndTime.thuStartTime}" style="margin-right: 5px;">
+        </div>
+        <div class="form-group">
+            <label>목요일 종료시간</label>
+            <input type="time" th:field="${workingDayAndTime.thuFinishTime}">
+        </div>
     </div>
-    <div>
-        <input type="time" th:field="${workingDayAndTime.satFinishTime}">
-        <label>토요일 종료시간</label>
+    <div class="wrapper">
+        <div class="form-group">
+            <label>금요일 시작시간</label>
+            <input type="time" th:field="${workingDayAndTime.friStartTime}" style="margin-right: 5px;">
+        </div>
+        <div class="form-group">
+            <label>금요일 종료시간</label>
+            <input type="time" th:field="${workingDayAndTime.friFinishTime}">
+        </div>
     </div>
-    <div>
-        <input type="time" th:field="${workingDayAndTime.sunStartTime}">
-        <label>일요일 시작시간</label>
+    <div class="wrapper">
+        <div class="form-group">
+            <label>토요일 시작시간</label>
+            <input type="time" th:field="${workingDayAndTime.satStartTime}" style="margin-right: 5px;">
+        </div>
+        <div class="form-group">
+            <label>토요일 종료시간</label>
+            <input type="time" th:field="${workingDayAndTime.satFinishTime}">
+        </div>
     </div>
-    <div>
-        <input type="time" th:field="${workingDayAndTime.sunFinishTime}">
-        <label>일요일 종료시간</label>
+    <div class="wrapper">
+        <div class="form-group">
+            <label>일요일 시작시간</label>
+            <input type="time" th:field="${workingDayAndTime.sunStartTime}" style="margin-right: 5px;">
+        </div>
+        <div class="form-group">
+            <label>일요일 종료시간</label>
+            <input type="time" th:field="${workingDayAndTime.sunFinishTime}">
+        </div>
     </div>
-    <div>
-        <div>자격증 선택(다중 선택 가능)</div>
+    <div class="form-group">
+        <h4>자격증 선택(다중 선택 가능)</h4>
         <div th:each="certificate : ${certificateList}">
             <input type="checkbox" th:field="*{certificate}" th:value="${certificate}">
             <label th:for="${#ids.prev('certificate')}" th:text="${certificate}"></label>
         </div>
     </div>
-    <div>
-        <div>이용 가능 서비스 선택(다중 선택 가능)</div>
+    <div class="form-group">
+        <h4>이용 가능 서비스 선택(다중 선택 가능)</h4>
         <div th:each="ableService : ${ableServiceList}">
             <input type="checkbox" th:field="*{ableService}" th:value="${ableService}">
             <label th:for="${#ids.prev('ableService')}" th:text="${ableService}"></label>
         </div>
     </div>
     <div class="form-group">
-        <label th:for="address">주소검색</label>
-        <input type="text" id="sample5_address" th:field="*{workingArea}" placeholder="주소검색">
+        <label th:for="*{workingArea}">주소검색</label>
+        <div style="display: flex;">
+            <input type="text" id="sample5_address" th:field="*{workingArea}" class="form-control" style="margin-right: 5px;">
+            <div class="pull-right" style="margin-bottom: 5px;">
+                <input type="button" onclick="sample5_execDaumPostcode()" class="btn btn-info" value="주소 검색">
+            </div>
+        </div>
         <div class="field-error" th:errors="${petSitter.workingArea}">error</div>
-        <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"><br>
         <div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
     </div>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -143,7 +183,9 @@
             }).open();
         }
     </script>
-    <input type="submit">
+    <div style="display: flex; justify-content: center;">
+        <input class="btn btn-primary btn-center" type="submit">
+    </div>
 </form>
 </div>
 <div th:replace="fragments/footer.html::footer"></div>

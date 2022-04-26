@@ -61,11 +61,11 @@
         </table>
     </div>
     <div>
-    <div style="display: flex;">
-        <div>
+    <div style="display: flex; justify-content: center;">
+        <div style="text-align: center;">
             <button type="button" th:onclick="|location.href='@{/mypage/pet/edit/{petId}(petId = ${pet.id})}'|" class="btn btn-info" style="margin-right: 5px;">수정하기</button>
         </div>
-        <div>
+        <div style="text-align: center;">
             <form th:if="${isReserved}" th:action="@{/mypage/pet/delete/{petId}(petId = ${pet.id})}" method="post">
                 <button type="submit"  class="btn btn-info">삭제하기</button>
             </form>
