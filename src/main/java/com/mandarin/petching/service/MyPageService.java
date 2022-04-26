@@ -7,11 +7,16 @@ import com.mandarin.petching.repository.RoomRepository;
 import com.mandarin.petching.repository.UserRepository;
 import com.mandarin.petching.repository.PetRepository;
 import lombok.RequiredArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @Transactional(readOnly = true)
@@ -70,10 +75,15 @@ public class MyPageService {
     @Transactional
     public void savePetSitter(Member member,
                               PetSitter petSitter,
-                              FeeList feeList) {
+                              FeeList feeList,
+                              MultipartFile file) throws Exception{
 
         petSitter.setMember(member);
         petSitter.setFeeList(feeList);
+
+        String fileName = getFileName(file);
+
+        petSitter.getImgPaths().add("/memberImages/images/" + fileName);
 
         petSitterRepository.save(petSitter);
     }
@@ -81,7 +91,8 @@ public class MyPageService {
     @Transactional
     public void updatePetSitter(Member member,
                                 PetSitter petSitter,
-                                FeeList feeList) {
+                                FeeList feeList,
+                                MultipartFile file) throws Exception{
 
         PetSitter findPetSitter = member.getPetSitter();
 
@@ -92,6 +103,10 @@ public class MyPageService {
         findPetSitter.setTitle(petSitter.getTitle());
         findPetSitter.setWorkingDay(petSitter.getWorkingDay());
         findPetSitter.setFeeList(feeList);
+
+        String fileName = getFileName(file);
+
+        findPetSitter.getImgPaths().add("/memberImages/images/" + fileName);
     }
 
     public List<ChatRoom> getChatList(Long memberId) {
@@ -104,5 +119,17 @@ public class MyPageService {
         chatRoomList.addAll(sellerChatRooms);
 
         return chatRoomList;
+    }
+
+    @NotNull
+    private String getFileName(MultipartFile file) throws IOException {
+
+        String filePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\images\\memberImages";
+        UUID uuid = UUID.randomUUID();
+        String fileName = uuid + "_" + file.getOriginalFilename();
+        File saveFile = new File(filePath, fileName);
+        file.transferTo(saveFile);
+
+        return fileName;
     }
 }
