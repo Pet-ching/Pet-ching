@@ -79,6 +79,7 @@ public class PetInfoController {
         Pet pet = myPageService.getPetById(petId);
 
         model.addAttribute("pet", pet);
+        model.addAttribute("isReserved", pet.getReservationList().isEmpty());
 
         return "mypage/petInfoView";
     }
