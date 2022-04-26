@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<sec:authorize access="isAuthenticated()">
+    <sec:authentication property="principal" var="principal"/>
+</sec:authorize>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Board Form</title>
@@ -77,15 +80,21 @@
             </tbody>
         </table>
     </div>
-    <div th:if="${type == 'petowner'}" class="text-right">
-        <a type="button" class="btn btn-info" th:href="@{/mypage/pet}">반려동물 조회</a>
-        <a type="button" class="btn btn-info" th:href="@{/mypage/pet/reservation}">예약현황 조회</a>
-        <a type="button" class="btn btn-info" th:href="@{/mypage/chats}">채팅창 조회</a>
+    <div th:if="${type == 'petowner'}" class="text-right" style="display: flex; justify-content: center;">
+        <a type="button" class="btn btn-info" th:href="@{/mypage/pet}" style="margin-right: 5px;">반려동물 조회</a>
+        <a type="button" class="btn btn-info" th:href="@{/mypage/pet/reservation}" style="margin-right: 5px;">예약현황 조회</a>
+        <a type="button" class="btn btn-info" th:href="@{/mypage/chats}" style="margin-right: 5px;">채팅창 조회</a>
+        <form sec:authorize="isAuthenticated()" th:action="@{/members/withdrawal}" th:method="get">
+            <button type="submit" class="btn btn-info">탈퇴하기</button>
+        </form>
     </div>
-    <div th:if="${type == 'petsitter'}" class="text-right">
-        <a type="button" class="btn btn-info" th:href="@{/mypage/petsitter}">돌봄환경 조회</a>
-        <a type="button" class="btn btn-info" th:href="@{/mypage/petsitter/reservation}">예약현황 조회</a>
-        <a type="button" class="btn btn-info" th:href="@{/mypage/chats}">채팅창 조회</a>
+    <div th:if="${type == 'petsitter'}" class="text-right" style="display: flex; justify-content: center;">
+        <a type="button" class="btn btn-info" th:href="@{/mypage/petsitter}" style="margin-right: 5px;">돌봄환경 조회</a>
+        <a type="button" class="btn btn-info" th:href="@{/mypage/petsitter/reservation}" style="margin-right: 5px;">예약현황 조회</a>
+        <a type="button" class="btn btn-info" th:href="@{/mypage/chats}" style="margin-right: 5px;">채팅창 조회</a>
+        <form sec:authorize="isAuthenticated()" th:action="@{/members/withdrawal}" th:method="get">
+            <button type="submit" class="btn btn-info">탈퇴하기</button>
+        </form>
     </div>
 </div>
 <div th:replace="fragments/footer.html::footer"></div>

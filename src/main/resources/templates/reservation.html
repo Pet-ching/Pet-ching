@@ -2,58 +2,75 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Board Form</title>
+    <title>예약 페이지</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/base.css}" />
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/reservation.css}">
+    <!--로컬 테스트용-->
+    <link href="../static/css/reservation.css" rel="stylesheet">
+    <link href="../static/css/base.css" rel="stylesheet">
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <script>
     function submitSuc(){
         alert("예약이 성공적으로 완료되었습니다");
     }
 </script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script th:inline="javascript" th:src="@{/js/reservation.js}"></script>
-<link th:href="@{/css/reservation.css}" rel="stylesheet">
     <body>
     <div th:replace="fragments/header.html::header"></div>
     <div class="container">
-        <div th:if="${petListEmpty}">
-            <h1>펫을 먼저 등록하셔야 합니다!</h1>
-            <button onclick="history.back()">뒤로가기</button>
-            <button th:onclick="|location.href='@{/mypage/pet/create}'|">펫 등록하러 가기!</button>
-        </div>
-        <div th:unless="${petListEmpty}">
-            <h1>예약 정보</h1>
-            <form th:action="@{/matching/profile/reservation/match}" method="POST" onsubmit="submitSuc();">
-                <div>
-                    <label >보호자 이름</label>
-                    <input th:placeholder="${petOwner.userName}" th:value="${petOwner.userName}" name="petOwner" readonly/>
+        <div class = "content">
+            <div class="item petNull" th:if="${petListEmpty}">
+                <h1>🐶 펫을 먼저 등록하셔야 합니다! 🐱</h1>
+                <img class="image" src="../static/img/catdog.jpg" th:src="/img/catdog.jpg" alt="동물사진">
+                <div class="buttons">
+                    <button class="btn btn-primary btn-block"
+                            th:onclick="|location.href='@{/mypage/pet/create}'|">펫 등록하러 가기!</button>
+                    <button class="btn btn-info"
+                            onclick="history.back()">뒤로가기</button>
                 </div>
-                <div>
-                    <label>펫 이름</label>
-                    <div th:each="pet : ${petList}">
-                        <input type="radio" th:value="${pet.id}" name="pet"> <span th:text="${pet.petName}"></span>
+            </div>
+            <div class="item petNotNull" th:unless="${petListEmpty}">
+                <h1><strong>예약 정보</strong></h1>
+                <div class="line"></div>
+                <form class="data" th:action="@{/matching/profile/reservation/match}" method="POST" onsubmit="submitSuc();">
+                    <div class="item">
+                        <h4><label >보호자 이름</label></h4>
+                        <input th:placeholder="${petOwner.userName}" th:value="${petOwner.userName}" name="petOwner" readonly/>
                     </div>
-                </div>
-                <div>
-                    <label >펫시터 이름</label>
-                    <input th:placeholder="${petSitter.userName}" th:value="${petSitter.userName}" name="petSitter" readonly/>
-                </div>
-                <div>
-                    <label>시작 날짜</label>
-                    <input type="datetime-local" name="startDate">
-                </div>
-                <div>
-                    <label> 종료 날짜 </label>
-                    <input type="datetime-local" name="endDate">
-                </div>
-                <div>
-                    <label>요금</label>
-                    <input type="number" name="fee">원
-                </div>
-                <button type="submit">예약 확정</button>
-            </form>
-        </div></div>
+                    <div class="item">
+                        <h4><label>펫 이름</label></h4>
+                        <div th:each="pet : ${petList}">
+                            <input type="radio" th:value="${pet.id}" name="pet"> <span th:text="${pet.petName}"></span>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <h4><label >펫시터 이름</label></h4>
+                        <input th:placeholder="${petSitter.userName}" th:value="${petSitter.userName}" name="petSitter" readonly/>
+                    </div>
+                    <div class="item">
+                        <h4><label>시작 날짜</label></h4>
+                        <input type="datetime-local" name="startDate">
+                    </div>
+                    <div class="item">
+                        <h4><label> 종료 날짜 </label></h4>
+                        <input type="datetime-local" name="endDate">
+                    </div>
+                    <div class="item">
+                        <h4><label>요금</label></h4>
+                        <input type="number" name="fee">원
+                    </div>
+                    <div class="buttons">
+                        <button class="btn btn-primary btn-block"
+                                type="submit">예약 확정</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div> <!--container-->
     <div th:replace="fragments/footer.html::footer"></div>
     </body>
 </html>

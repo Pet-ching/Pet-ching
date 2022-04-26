@@ -47,14 +47,19 @@ public class MyPageService {
     }
 
     @Transactional
-    public void updatePet(Long petId, Pet pet, Member member) {
+    public void updatePet(Long petId, Pet pet) {
 
         Pet findPet = petRepository.findById(petId).get();
-        petRepository.delete(findPet);
-
-        petRepository.flush();
-
-        createPet(member, pet);
+        findPet.setPetName(pet.getPetName());
+        findPet.setPetGender(pet.getPetGender());
+        findPet.setPetType(pet.getPetType());
+        findPet.setPetAge(pet.getPetAge());
+        findPet.setWeight(pet.getWeight());
+        findPet.setNeutralization(pet.isNeutralization());
+        findPet.setHospitalName(pet.getHospitalName());
+        findPet.setHospitalTel(pet.getHospitalTel());
+        findPet.setHospitalAdr(pet.getHospitalAdr());
+        findPet.setNote(pet.getNote());
     }
 
     @Transactional
@@ -82,11 +87,14 @@ public class MyPageService {
                                 WorkingDayAndTime workingDayAndTime) {
 
         PetSitter findPetSitter = member.getPetSitter();
-        petSitterRepository.delete(findPetSitter);
 
-        petSitterRepository.flush();
-
-        savePetSitter(member, petSitter, feeList, workingDayAndTime);
+        findPetSitter.setCertificate(petSitter.getCertificate());
+        findPetSitter.setAbleService(petSitter.getAbleService());
+        findPetSitter.setWorkingArea(petSitter.getWorkingArea());
+        findPetSitter.setSelfIntroduction(petSitter.getSelfIntroduction());
+        findPetSitter.setTitle(petSitter.getTitle());
+        findPetSitter.setFeeList(feeList);
+        findPetSitter.setWorkingDayAndTime(workingDayAndTime);
     }
 
     public List<ChatRoom> getChatList(Long memberId) {

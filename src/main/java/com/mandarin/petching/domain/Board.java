@@ -4,6 +4,7 @@ package com.mandarin.petching.domain;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 import javax.persistence.*;
 
 @Getter
@@ -40,6 +41,9 @@ public class Board {
 
     @Enumerated(EnumType.STRING)
     private AnswerType answerType;
+
+    @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
+    private List<Reply> replies;
 
     @Builder
     public Board(String title, String content, BoardType boardType, LocalDateTime regDate, Member member, AnswerType answerType) {
