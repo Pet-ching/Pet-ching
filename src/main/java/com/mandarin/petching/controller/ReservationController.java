@@ -31,6 +31,7 @@ public class ReservationController {
         model.addAttribute("petOwner", member);
         model.addAttribute("petSitter", petSitter);
         model.addAttribute("petList", petList);
+        model.addAttribute("petListEmpty", petList.isEmpty());
 
         return "reservation";
     }
