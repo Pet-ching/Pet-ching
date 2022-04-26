@@ -6,6 +6,9 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -20,26 +23,31 @@ public class Board {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "member_id", referencedColumnName = "member_id")
     private Member member;
 
-    @Column(columnDefinition = "integer default 0", nullable = false)
+
+    @Column(columnDefinition = "integer default 0")
     private Integer hits;
 
     @Column(name = "reg_date", updatable = false)
     @CreationTimestamp
     private LocalDateTime regDate;
 
-    @Column(length = 20)
+
+    @Column(length = 20 )
+    @NotBlank(message = "제목을 입력해 주세요!")
     private String title;
 
     @Lob
+    @NotBlank(message = "제목을 입력해 주세요!")
     private String content;
 
+    @NotNull(message = "보드 타입을 선택해 주세요!")
     @Enumerated(EnumType.STRING)
     private BoardType boardType;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)// Enum 타입의 필드를 DB에 저장할 때 enum '이름'으로 매핑해주는 어노테이션
     private AnswerType answerType;
 
     @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
