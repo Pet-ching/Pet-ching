@@ -27,7 +27,7 @@ public class InfoController {
     private final MemberRepository memberRepository;
 
     @GetMapping("/matching/list")
-    public String list(Model model, @PageableDefault(page = 0, size = 10, sort = "workingArea", direction = Sort.Direction.ASC) Pageable pageable,
+    public String list(Model model, @PageableDefault(page = 0, size = 2, sort = "workingArea", direction = Sort.Direction.ASC) Pageable pageable,
                        String searchKeyword, String ableService) {
 
         Page<PetSitter> list = null;
@@ -61,7 +61,6 @@ public class InfoController {
         int nowPage = list.getPageable().getPageNumber() + 1;
         int startPage = Math.max(nowPage - 4, 1);
         int endPage = Math.min(nowPage + 5, list.getTotalPages());
-
         model.addAttribute("list", list);
         model.addAttribute("nowPage", nowPage);
         model.addAttribute("startPage", startPage);

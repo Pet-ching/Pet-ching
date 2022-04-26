@@ -51,17 +51,15 @@ public class BoardController {
             model.addAttribute("board", new Board());
         } else {
             Board board = boardRepository.findById(id).orElse(null);
+            boardService.updateHits(board.getId());
             model.addAttribute("board", board);
             String userName = authentication.getName();
             Member member = memberRepository.findByUserEmail(userName);
             model.addAttribute("writer", member.getId() == board.getMember().getId());
         }
 
-
         return "board/read";
     }
-
-
 
     @GetMapping("/form")
     public String form(Model model, @RequestParam(required = false) Long id ) {
@@ -87,13 +85,5 @@ public class BoardController {
         boardService.save(userName, board);
         //boardRepository.save(board);
         return "redirect:/board/list";
-    }
-
-    @GetMapping("/read/{id}")
-    public String hits(@PathVariable Long id, Model model) {
-        model.addAttribute("board", boardService.updateHits(id));
-        boardService.updateHits(id);
-
-        return "/board/read";
     }
 }

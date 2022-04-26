@@ -2,24 +2,17 @@ package com.mandarin.petching.domain;
 
 
 import lombok.*;
-
 import org.hibernate.annotations.CreationTimestamp;
-
-
 import java.time.LocalDateTime;
 import javax.persistence.*;
 
-
-
-
-
 @Getter
 @Setter
-@Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 public class Board {
+
     @Id
     @Column(name = "board_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,6 +28,7 @@ public class Board {
     @Column(name = "reg_date", updatable = false)
     @CreationTimestamp
     private LocalDateTime regDate;
+
     @Column(length = 20)
     private String title;
 
@@ -56,6 +50,5 @@ public class Board {
         this.member = member;
         this.answerType = answerType;
     }
-
 }
 
