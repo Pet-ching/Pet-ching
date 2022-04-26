@@ -13,6 +13,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 @Slf4j
 @Controller
@@ -54,7 +55,8 @@ public class PetSitterInfoController {
                             @Validated PetSitter petSitter,
                             BindingResult bindingResult,
                             FeeList feeList,
-                            Model model) {
+                            MultipartFile file,
+                            Model model) throws Exception{
 
         if (bindingResult.hasErrors()) {
 
@@ -69,7 +71,7 @@ public class PetSitterInfoController {
         String userName = authentication.getName();
         Member member = memberRepository.findByUserEmail(userName);
 
-        myPageService.savePetSitter(member, petSitter, feeList);
+        myPageService.savePetSitter(member, petSitter, feeList, file);
 
         return "redirect:/mypage/petsitter";
     }
@@ -97,7 +99,8 @@ public class PetSitterInfoController {
                                 @Validated PetSitter petSitter,
                                 BindingResult bindingResult,
                                 FeeList feeList,
-                                Model model) {
+                                MultipartFile file,
+                                Model model) throws Exception{
 
         if (bindingResult.hasErrors()) {
 
@@ -112,7 +115,7 @@ public class PetSitterInfoController {
         String userName = authentication.getName();
         Member member = memberRepository.findByUserEmail(userName);
 
-        myPageService.updatePetSitter(member, petSitter, feeList);
+        myPageService.updatePetSitter(member, petSitter, feeList, file);
 
         return "redirect:/mypage/petsitter";
     }

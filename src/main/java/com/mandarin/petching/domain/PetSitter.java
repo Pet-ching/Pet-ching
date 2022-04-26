@@ -8,6 +8,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -52,4 +53,9 @@ public class PetSitter {
 
     @NotBlank
     private String title;
+
+    @ElementCollection
+    @CollectionTable(name = "images",
+            joinColumns = @JoinColumn(name = "sitter_id"))
+    private List<String> imgPaths = new ArrayList<>();
 }

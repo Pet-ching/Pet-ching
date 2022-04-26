@@ -18,7 +18,7 @@
 <body>
 <div th:replace="fragments/header.html::header"></div>
 <div class="container">
-<form action="" method="post" th:object="${petSitter}">
+<form action="" method="post" th:object="${petSitter}" enctype="multipart/form-data">
     <div class="form-group">
         <label th:for="*{title}">자기소개 타이틀</label>
         <input type="text" th:field="*{title}" class="form-control">
@@ -28,6 +28,10 @@
         <label th:for="*{selfIntroduction}">자기소개</label>
         <input type="text" th:field="*{selfIntroduction}" class="form-control">
         <div class="field-error" th:errors="${petSitter.selfIntroduction}">error</div>
+    </div>
+    <div class="form-group">
+        <label th:for="file">돌봄환경 사진 추가</label>
+        <input type="file" name="file" multiple="multiple">
     </div>
     <div class="form-group">
         <label th:for="${feeList.smallDogFee}">소형견 요금</label>
