@@ -15,8 +15,13 @@
         <h1>게시글 목록</h1>
     </div>
     <div class="pull-right" style="width:100px;margin:10px 0;">
+        <button  type="button" class="btn btn-danger" id="deleteAll">모든 글 삭제</button>
+    </div>
+    <div  class="pull-right" style="width:100px;margin:10px 0; margin-right:10px">
         <a href="/qna/form" class="btn btn-primary btn-block">등록</a>
     </div>
+
+
     <br/><br/><br/>
     <div id="mainHide">
         <table class="table table-hover">
@@ -31,21 +36,37 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="board : ${boardList}">
+            <tr th:if="${not #lists.isEmpty( boardList )}" th:each="board : ${boardList}">
                 <td th:text="${board.id}"></td>
                 <td th:text="${board.boardType}"></td>
                 <td th:text="|답변&nbsp ${board.answerType}|"></td>
-                <td><a th:href="'/qna/form?id='+${board.id}" th:text="${board.title}"></a></td>
+                <td th:if="${board.answerType.name()} == '대기' and ${member.getRole().name().equals('USER')}" ><a th:href="'/qna/form?id='+${board.id}" th:text="${board.title}"></a></td>
+                <td th:if="${board.answerType.name()} == '완료' or ${member.getRole().name().equals('ADMIN')}"><a th:href="'/qna/answer?id='+${board.id}" th:text="${board.title}"></a></td>
                 <td th:text="${#temporals.format(board.regDate,'yyyy-MM-dd HH:mm')}"></td>
-<!--                <td th:text="${#temporals.format(board.updatedDate,'yyyy-MM-dd HH:mm')}"></td>  수정날짜 상의할 것?-->
             </tr>
+            <tr th:if="${boardList.totalPages} <= 0">
+                <td colspan="5" style="text-align:center"><font size : large><b>조회된 결과가 없습니다.</b></font></td>
+            </tr>
+<!--            <tr th:if="${#lists.isEmpty( boardList )}">-->
+<!--            <div th:text="${#lists.size('boardList')}"></div>-->
+<!--            <tr th:if="${#lists.size('boardList')} < 0">-->
+
             </tbody>
         </table>
     </div>
+
     <br/>
     <!-- Pagination -->
-    <nav aria-label="Page navigation" style="text-align:center;">
-        <ul class="pagination" th:with="startNumber=${T(java.lang.Math).floor(boardList.number/10)}*10+1, endNumber=(${boardList.totalPages} > ${startNumber}+9) ? ${startNumber}+9 : ${boardList.totalPages}">
+
+<!--    <nav  aria-label="Page navigation" style="text-align:center;" >-->
+    <nav  aria-label="Page navigation" class="text-center" >
+        <div class="pull-left">
+            <a href="/qna/ask" class="btn btn-default">목록으로</a>
+        </div>
+        <br><br>
+        <ul class="pagination" th:with="startNumber=${T(java.lang.Math).floor(boardList.number/10)}*10+1,
+        endNumber=(${boardList.totalPages} > ${startNumber}+9) ? ${startNumber}+9 : ${boardList.totalPages},
+        endNumber=(${endNumber} < ${startNumber}) ? ${startNumber} : ${endNumber}">
             <li><a aria-label="Previous" href="/qna/ask?page=1">&laquo;</a></li>
             <li th:style="${boardList.first} ? 'display:none'">
                 <a th:href="@{/qna/ask(page=${boardList.number})}">&lsaquo;</a>
@@ -56,16 +77,61 @@
             <li th:style="${boardList.last} ? 'display:none'">
                 <a th:href="@{/qna/ask(page=${boardList.number}+2)}">&rsaquo;</a>
             </li>
-            <li><a aria-label="Next" th:href="@{/board/ask(page=${boardList.totalPages})}">&raquo;</a></li>
+            <li><a aria-label="Next" th:href="@{/qna/ask(page=${boardList.totalPages})}">&raquo;</a></li>
         </ul>
+
+<!--        검색-->
+
+
+
+        <br><br>
+
+        <form method="get" action="/qna/search">
+            <div style="display: inline-block; left:30%;">
+                <select class="form-control" id="searchType" name="searchType">
+                    <option th:each="searchTypeValue : ${T(com.mandarin.petching.domain.SearchType).values()}"
+                            th:value="${searchTypeValue.name()}"
+                            th:text="${searchTypeValue.getKorName()}"
+                            th:selected="${searchTypeValue.name()} ==  ${search.getType().name()}">
+                    </option>
+                </select>
+             </div>
+
+            <div class="w300" style="padding-right: 10px; display: inline-block;  width : 40%; text-align: left;">
+                <input type="text" class="form-control form-control-sm" name="keyword" id="keyword" placeholder="검색어를 입력해주세요" th:value="${search.getKeyword()}">
+            </div>
+
+            <div style="display: inline-block;">
+                <input type="submit" class="pull right btn btn-sm btn-primary" value="검색">
+            </div>
+        </form>
+        <div style="height:100px;"></div>
     </nav>
     <!-- /Pagination -->
 </div>
 <!--/body-->
+<!--<script th:if="${board?.id}">-->
+<script th:src="@{/js/jquery.min.js}"></script>
+<script>
+    $('#deleteAll').click(function () {
+        $.ajax({
+            url: "/qna/boards/deleteAll",
+            type: "DELETE",
+            success: function () {
+                alert('삭제 성공!');
+                location.href = '/qna/ask';
+                },
+            error: function () {
+                alert('삭제 실패!');
+            }
+        });
+    });
+</script>
 
 </div>
 <!--footer-->
 <div th:replace="fragments/footer::footer"></div>
 <!--/footer-->
+<div style="height:100px;"></div>
 </body>
 </html>

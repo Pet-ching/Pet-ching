@@ -49,7 +49,7 @@ public class Member {
 
     private String imgUrl;
 
-    public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder){
+    public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
         Member member = new Member();
 //        member.setUserId(memberFormDto.getUserId());
         member.setUserName(memberFormDto.getUserName());
