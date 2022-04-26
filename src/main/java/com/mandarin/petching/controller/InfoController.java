@@ -4,6 +4,7 @@ package com.mandarin.petching.controller;
 import com.mandarin.petching.domain.Member;
 import com.mandarin.petching.domain.PetSitter;
 import com.mandarin.petching.repository.MemberRepository;
+import com.mandarin.petching.repository.PetSitterRepository;
 import com.mandarin.petching.service.InfoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ public class InfoController {
     private InfoService infoService;
 
     private final MemberRepository memberRepository;
+    private final PetSitterRepository petSitterRepository;
 
     @GetMapping("/matching/list")
     public String list(Model model, @PageableDefault(page = 0, size = 2, sort = "workingArea", direction = Sort.Direction.ASC) Pageable pageable,
@@ -72,18 +74,11 @@ public class InfoController {
     public String search(Authentication authentication, Model model, Long id) {
         String userEmail = authentication.getName();
         Member loginMember = memberRepository.findByUserEmail(userEmail);
-        Member petSitterMember= memberRepository.findById(id).get();
-        model.addAttribute("petSitterMember", petSitterMember);
-        model.addAttribute("petSitter", petSitterMember.getPetSitter());
+        PetSitter petSitterMember= petSitterRepository.findById(id).get();
+        model.addAttribute("petSitter", petSitterMember);
+        model.addAttribute("petSitterMember", petSitterMember.getMember());
         model.addAttribute("loginMember", loginMember);
         return "details";
     }
-
-
-//    @GetMapping("/maching/list/{area}")
-//    public String search(Model model, String area) {
-//        model.addAttribute("area", infoService.area);
-//        return "infolist";
-//    }
 
 }

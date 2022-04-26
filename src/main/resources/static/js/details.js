@@ -50,6 +50,9 @@ function splitAddress(address) {
     } else if(address.includes('동 ')) {
         var addressArray = address.split('동 ');
         var splitedAddress = addressArray[0] + "동"
+    } else if(address.includes('길 ')) {
+        var addressArray = address.split('길 ');
+        var splitedAddress = addressArray[0] + "길"
     } else {
         var splitedAddress = address;
     }
