@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @Slf4j
 @Controller
 @RequestMapping("/mypage/petsitter")
@@ -99,7 +101,7 @@ public class PetSitterInfoController {
                                 @Validated PetSitter petSitter,
                                 BindingResult bindingResult,
                                 FeeList feeList,
-                                MultipartFile file,
+                                List<MultipartFile> files,
                                 Model model) throws Exception{
 
         if (bindingResult.hasErrors()) {
@@ -115,7 +117,7 @@ public class PetSitterInfoController {
         String userName = authentication.getName();
         Member member = memberRepository.findByUserEmail(userName);
 
-        myPageService.updatePetSitter(member, petSitter, feeList, file);
+        myPageService.updatePetSitter(member, petSitter, feeList, files);
 
         return "redirect:/mypage/petsitter";
     }
