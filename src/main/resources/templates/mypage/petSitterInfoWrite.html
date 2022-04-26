@@ -30,8 +30,16 @@
         <div class="field-error" th:errors="${petSitter.selfIntroduction}">error</div>
     </div>
     <div class="form-group">
-        <label th:for="file">돌봄환경 사진 추가</label>
-        <input type="file" name="file" multiple="multiple">
+        <label th:for="file">돌봄환경 사진 1</label>
+        <input type="file" name="files" multiple="multiple">
+    </div>
+    <div class="form-group">
+        <label th:for="file">돌봄환경 사진 2</label>
+        <input type="file" name="files" multiple="multiple">
+    </div>
+    <div class="form-group">
+        <label th:for="file">돌봄환경 사진 3</label>
+        <input type="file" name="files" multiple="multiple">
     </div>
     <div class="form-group">
         <label th:for="${feeList.smallDogFee}">소형견 요금</label>
