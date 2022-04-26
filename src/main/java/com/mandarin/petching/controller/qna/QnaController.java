@@ -111,6 +111,7 @@ public class QnaController {
         search.setType(SearchType.valueOf(searchType));
 
         model.addAttribute("boardList", this.qnaService.search(search,member, pageable));
+        model.addAttribute("member", member);
         model.addAttribute("search", search);
 
         return "/qna/list";
