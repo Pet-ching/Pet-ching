@@ -28,9 +28,10 @@ public class PetSitter {
     @JoinColumn(name = "fee_list", unique = true)
     private FeeList feeList;
 
-    @OneToOne
-    @JoinColumn(name = "working_id")
-    private WorkingDayAndTime workingDayAndTime;
+    @ElementCollection
+    @CollectionTable(name = "workingDay",
+            joinColumns = @JoinColumn(name = "sitter_id"))
+    private List<String> workingDay;
 
     @ElementCollection
     @CollectionTable(name = "certificate",
