@@ -6,9 +6,6 @@
     <link rel="stylesheet" th:href="@{/css/base.css}"/>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
     <link rel="stylesheet" th:href="@{/css/infolist.css}"/>
-    <link rel="stylesheet" href="../static/css/base.css"/>
-    <link rel="stylesheet" href="../static/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="../static/css/infolist.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
           rel="stylesheet">
 </head>
@@ -33,8 +30,13 @@
     <!--전체 펫시터 출력하기 : 검색을 할 경우 안 보이게 표시-->
     <div class="total-pet">
         <div class="batch" th:each="sitter : ${list}">
-            <div class="petlist" th:onclick="|location.href='@{/matching/details(id=${sitter.id})}'|" style="cursor:pointer;">
-                <div class="item">썸네일</div>
+            <div class="petlist" th:onclick="|location.href='@{/matching/details(id=${sitter.id})}'|"
+                 style="cursor:pointer;">
+                <div class="item profileImage">
+                    <img th:if="${not #strings.isEmpty(sitter.member.imgPath)}" th:src="@{${sitter.member.imgPath}}" alt="프로필 이미지"
+                         th:onerror="|this.src='@{/images/icons/basic_icon.png}'|">
+                    <img th:unless="${not #strings.isEmpty(sitter.member.imgPath)}" th:src="@{/images/icons/basic_icon.png}">
+                </div>
                 <div class="item" th:text="${sitter.workingArea}">근무지(주소)</div>
                 <div class="item" th:text="${sitter.title}">제목</div>
                 <div class="item" th:text="${sitter.ableService}">이용서비스</div>
