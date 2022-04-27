@@ -20,12 +20,11 @@
 
 
 .batch {
-position:absolute;
-left:50%;
-top: 40%;
-    margin-top: 150px;
-    margin-bottom: 300px;
-    transform: translate(-50%, -50%);
+margin-top: 150px;
+margin-left: 250px;
+display:inline-block;
+justify-content: center;
+align-text: center;
 
 }
 
@@ -34,7 +33,6 @@ top: 40%;
     height: 150px;
     display: grid;
     margin: 50px 0px 150px 0px;
-
 }
 
 
@@ -116,7 +114,9 @@ border-bottom-right-radius: 0px;
 }
 
 .input-box{
-    position:absolute;
-    left: 50%;
-    transform: translate(-50%, -50%);
+display: flex;
+justify-content: center;
+align-text: center;
+
 }
+
