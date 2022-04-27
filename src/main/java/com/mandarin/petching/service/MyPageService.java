@@ -79,7 +79,7 @@ public class MyPageService {
 
         for(MultipartFile file : files) {
             String fileName = getFileName(file);
-            petSitter.getImgPaths().add("/memberImages/images/" + fileName);
+            petSitter.getImgPaths().add("/images/memberImages/" + fileName);
         }
 
         petSitterRepository.save(petSitter);
@@ -103,7 +103,7 @@ public class MyPageService {
 
         for(MultipartFile file : files) {
             String fileName = getFileName(file);
-            findPetSitter.getImgPaths().add("/memberImages/images/" + fileName);
+            findPetSitter.getImgPaths().add("/images/memberImages/" + fileName);
         }
     }
 
