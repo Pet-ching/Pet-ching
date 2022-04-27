@@ -182,7 +182,7 @@
                 <th class="NotAbleDay" th:unless="*{#lists.contains(workingDay,'금요일')}">금</th>
 
                 <th class="ableDay" th:if="*{#lists.contains(workingDay,'토요일')}">토</th>
-                <th class="NotAbleDay" th:unless="*{#lists.contains(workingDay,'월요일')}">토</th>
+                <th class="NotAbleDay" th:unless="*{#lists.contains(workingDay,'토요일')}">토</th>
 
                 <th class="ableDay" th:if="*{#lists.contains(workingDay,'일요일')}">일</th>
                 <th class="NotAbleDay" th:unless="*{#lists.contains(workingDay,'일요일')}">일</th>
