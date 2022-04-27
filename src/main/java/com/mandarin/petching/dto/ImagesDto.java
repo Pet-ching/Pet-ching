@@ -4,6 +4,7 @@ package com.mandarin.petching.dto;
 import com.mandarin.petching.domain.Board;
 import com.mandarin.petching.domain.ImageType;
 import com.mandarin.petching.domain.Images;
+import com.mandarin.petching.domain.PetSitter;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 
@@ -32,6 +33,7 @@ public class ImagesDto {
     private String serverImgName; //서버용 이미지 이름
 
     private String imgPath; //경로
+
 
     public Images toEntity()
     {

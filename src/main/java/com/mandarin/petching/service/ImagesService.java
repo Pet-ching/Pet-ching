@@ -68,4 +68,17 @@ public class ImagesService {
     {
         imagesRepository.deleteByBoard(board);
     }
+
+    @Transactional
+    public ImagesDto getFile(Long id) {
+        Images image = imagesRepository.findById(id).get();
+
+        ImagesDto imagesDto = ImagesDto.builder()
+                .id(id)
+                .imgName(image.getImgName())
+                .serverImgName(image.getServerImgName())
+                .imgPath(image.getImgPath())
+                .build();
+        return imagesDto;
+    }
 }

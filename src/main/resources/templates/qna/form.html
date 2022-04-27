@@ -81,13 +81,23 @@
                 </td>
                 <td>
                     <div class="col-sm-10">
-                        <div class="custom-file" id="inputFile">
+                        <div th:if="!${image?.id}" class="custom-file" id="inputFile">
                             <form action="/qna/images" method="post" enctype="multipart/form-data">
                                 <label for="file">Upload your file:</label>
-                                <input name="file" type="file" class="custom-file-input" id="file" accept="*.rar, *.zip, *.gif, *.jpeg, *.png, *.jpg, *.bmp, *pdf, *hwp">
-                                <input class="btn btn-primary" onclick="submitButtonOnclick()" id="submitBtn" type="submit" role="button" value="파일 전송" style="display:none;">
+                                <input name="file" type="file" class="custom-file-input" id="file" accept="*.rar, *.zip, *.gif, *.jpeg, *.png, *.jpg, *.bmp, *pdf, *hwp"/>
+                                <input class="btn btn-primary" onclick="submitButtonOnclick()" id="submitBtn" type="submit" role="button" value="파일 전송" style="display:none;"/>
                             </form>
                         </div>
+<!--                        <div th:if="${image?.id}" class="custom-file">-->
+<!--                            이미지 있음-->
+<!--                            <img th:src="${image?.imgPath} +@{//} + ${image?.serverImgName}" alt="첨부이미지"  th:if="${image?.id}"/>-->
+                        <div th:if="${image?.id}">
+                            <a class="card-text" th:href="@{'/qna/download/' + ${image?.id}}" th:text="${image?.imgName}"></a>
+                            <img th:src="@{${image?.imgPath + '\' +image?.serverImgName}}" alt="첨부이미지"  />
+                        </div>
+
+
+<!--                        </div>-->
                     </div>
                 </td>
         </tr>
