@@ -101,6 +101,14 @@
             </tr>
 
          </div>
+        <tr>
+            <th>첨부 파일</th>
+            <td>
+                <b th:if="!${image?.id}">첨부파일이 없습니다!</b>
+                <a th:if="${image?.id}" class="card-text" th:href="@{'/qna/download/' + ${image?.id}}" th:text="${image?.imgName}"></a>
+            </td>
+        </tr>
+
     </table>
 
 

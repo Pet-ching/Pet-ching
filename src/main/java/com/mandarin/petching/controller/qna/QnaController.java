@@ -120,6 +120,7 @@ public class QnaController {
             model.addAttribute("board", this.qnaService.findBoardById(id, member));
             model.addAttribute("member", member);
             model.addAttribute("reply", reply);
+            model.addAttribute("image",this.imagesService.findOneByBoard(board));
 
             return "/qna/answer";
         }

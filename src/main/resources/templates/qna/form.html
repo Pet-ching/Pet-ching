@@ -88,16 +88,11 @@
                                 <input class="btn btn-primary" onclick="submitButtonOnclick()" id="submitBtn" type="submit" role="button" value="파일 전송" style="display:none;"/>
                             </form>
                         </div>
-<!--                        <div th:if="${image?.id}" class="custom-file">-->
-<!--                            이미지 있음-->
 <!--                            <img th:src="${image?.imgPath} +@{//} + ${image?.serverImgName}" alt="첨부이미지"  th:if="${image?.id}"/>-->
                         <div th:if="${image?.id}">
                             <a class="card-text" th:href="@{'/qna/download/' + ${image?.id}}" th:text="${image?.imgName}"></a>
-                            <img th:src="@{${image?.imgPath + '\' +image?.serverImgName}}" alt="첨부이미지"  />
+<!--                            <img th:src="@{${image?.imgPath + '\' +image?.serverImgName}}" alt="첨부이미지"  />-->
                         </div>
-
-
-<!--                        </div>-->
                     </div>
                 </td>
         </tr>
