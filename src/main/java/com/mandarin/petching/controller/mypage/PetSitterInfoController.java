@@ -57,7 +57,7 @@ public class PetSitterInfoController {
                             @Validated PetSitter petSitter,
                             BindingResult bindingResult,
                             FeeList feeList,
-                            MultipartFile file,
+                            List<MultipartFile> files,
                             Model model) throws Exception{
 
         if (bindingResult.hasErrors()) {
@@ -73,7 +73,7 @@ public class PetSitterInfoController {
         String userName = authentication.getName();
         Member member = memberRepository.findByUserEmail(userName);
 
-        myPageService.savePetSitter(member, petSitter, feeList, file);
+        myPageService.savePetSitter(member, petSitter, feeList, files);
 
         return "redirect:/mypage/petsitter";
     }

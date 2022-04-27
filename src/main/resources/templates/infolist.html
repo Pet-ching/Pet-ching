@@ -43,7 +43,7 @@
         <ul class="pagination justify-content-center">
             <li class="page-item" th:classappend="${1 == list.pageable.pageNumber + 1} ? 'disabled'">
                 <a class="page-link" href="#"
-                   th:href="@{/matching/list(page=${list.pageable.pageNumber - 1},searchKeyword=${param.searchKeyword})}"
+                   th:href="@{/matching/list(page=${list.pageable.pageNumber - 3},searchKeyword=${param.searchKeyword})}"
                    tabindex="-1" aria-disabled="true">이전</a>
             </li>
             <li class="page-item" th:classappend="${i == list.pageable.pageNumber + 1} ? 'disabled'"
@@ -54,7 +54,7 @@
             <li class="page-item"
                 th:classappend="${list.totalPages == list.pageable.pageNumber + 1} ? 'disabled'">
                 <a class="page-link" href="#"
-                   th:href="@{/matching/list(page=${list.pageable.pageNumber + 1},searchKeyword=${param.searchKeyword})}">다음</a>
+                   th:href="@{/matching/list(page=${list.pageable.pageNumber + 3},searchKeyword=${param.searchKeyword})}">다음</a>
             </li>
         </ul>
     </nav>
