@@ -66,7 +66,10 @@
 
             <tr>
                 <th>답변 내용</th>
-                <td><b th:text="${reply?.getReContent()}"></b></td>
+                <td>
+                    <div th:text="${reply?.getReContent()}" class="col-md-1 form-control input-sm" rows="7" style="height: 200px; font-size: 18px;"></div>
+                    <span class="help-block"></span>
+                </td>
             </tr>
         </div>
 
@@ -115,6 +118,7 @@
 <!--footer-->
 <div th:replace="fragments/footer::footer"></div>
 <!--/footer-->
+<div style="height:100px;"></div>
 
 <script th:src="@{/js/jquery.min.js}"></script>
 <script th:if="!${reply?.id}">

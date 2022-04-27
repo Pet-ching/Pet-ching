@@ -1,6 +1,7 @@
 package com.mandarin.petching.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
@@ -22,10 +23,10 @@ public class Board {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "member_id", referencedColumnName = "member_id")
     private Member member;
-
 
     @Column(columnDefinition = "integer default 0")
     private Integer hits;
@@ -61,6 +62,7 @@ public class Board {
         this.regDate = regDate;
         this.member = member;
         this.answerType = answerType;
+//        this.ImageId = ImageId;
     }
 }
 

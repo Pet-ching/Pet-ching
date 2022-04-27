@@ -1,5 +1,6 @@
 package com.mandarin.petching.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.mandarin.petching.dto.MemberFormDto;
 import lombok.Getter;
 import lombok.Setter;
@@ -40,6 +41,7 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Board> board = new ArrayList<>();
 

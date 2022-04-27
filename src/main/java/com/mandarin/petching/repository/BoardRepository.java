@@ -9,9 +9,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface BoardRepository extends JpaRepository<Board, Long> {
 
     List<Board> findByTitle(String title);
@@ -20,14 +22,14 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 
 
     //김귀영 추가
+
     //qna 전부 검색
-    List<Board> findByBoardTypeBetween(BoardType start, BoardType last);
+//    List<Board> findByBoardTypeBetween(BoardType start, BoardType last);
     List<Board> findByBoardTypeBetweenAndMemberLike (BoardType start, BoardType last,Member member);
 
     Page<Board> findByBoardTypeBetween(BoardType start, BoardType last, Pageable pageable);
     Page<Board> findByBoardTypeBetweenAndMemberLike (BoardType start, BoardType last,Member member, Pageable pageable);
 
-    //select * from board where board_type between 'QnA문의1' and 'QnA문의3' and title like'%김%';
     // 제목으로 검색
     Page<Board> findByBoardTypeBetweenAndTitleContaining (BoardType startBT, BoardType lastBT, String keyword, Pageable pageable);
     Page<Board> findByBoardTypeBetweenAndTitleContainingAndMemberLike (BoardType startBT, BoardType lastBT, String keyword,Member member, Pageable pageable);
