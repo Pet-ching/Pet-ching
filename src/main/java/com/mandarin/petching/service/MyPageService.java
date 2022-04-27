@@ -1,10 +1,7 @@
 package com.mandarin.petching.service;
 
 import com.mandarin.petching.domain.*;
-import com.mandarin.petching.repository.PetSitterRepository;
-import com.mandarin.petching.repository.RoomRepository;
-import com.mandarin.petching.repository.UserRepository;
-import com.mandarin.petching.repository.PetRepository;
+import com.mandarin.petching.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
@@ -22,13 +19,13 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class MyPageService {
 
-    private final UserRepository userRepository;
+    private final MemberRepository memberRepository;
     private final PetRepository petRepository;
     private final PetSitterRepository petSitterRepository;
     private final RoomRepository roomRepository;
 
     public Member findMemberById(Long memberId) {
-        return userRepository.getById(memberId);
+        return memberRepository.getById(memberId);
     }
 
     @Transactional

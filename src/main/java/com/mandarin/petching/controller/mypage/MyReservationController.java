@@ -26,7 +26,6 @@ public class MyReservationController {
     private final ReservationService reservationService;
     private final MemberRepository memberRepository;
     private final PetSitterRepository petSitterRepository;
-    private final PetRepository petRepository;
 
     @GetMapping("/pet/reservation")
     public String PetOwnerReservationList(Authentication authentication, Model model) {
