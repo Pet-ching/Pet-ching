@@ -11,8 +11,17 @@
 <div th:replace="fragments/header.html::header"></div>
 <div class="container">
         <h2>게시판</h2>
-        <form action="#" th:action="@{/board/form}" th:object="${board}" method="post">
+        <form th:object="${board}" th:action="@{/board/form}" method="post">
             <input type="hidden" th:field="*{id}">
+            <div class="pull-left">
+                <select class="form-control input-sm" id="board_type" th:field="*{boardType}">
+                    <option th:value="COMMUNITY">COMMUNITY</option>
+                </select>
+            </div>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('boardType')}" th:errors="*{boardType}">
+                제목 에러 메시지
+            </div>
+            <br><br><br><br>
             <div class="form-group">
                 <label for="title">제목</label>
                 <input type="text" minlength="1" class="form-control"
