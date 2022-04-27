@@ -3,6 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>예약 페이지</title>
+    <link rel="icon" th:href="@{/images/icons/Home.png}" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
@@ -21,7 +22,7 @@
 </script>
     <body>
     <div th:replace="fragments/header.html::header"></div>
-    <div class="container">
+    <div class="container-fluid">
         <div class = "content">
             <div class="item petNull" th:if="${petListEmpty}">
                 <h1>🐶 펫을 먼저 등록하셔야 합니다! 🐱</h1>
@@ -65,7 +66,7 @@
                     </div>
                     <div class="item">
                         <h4><label>요금</label></h4>
-                        <input type="number" name="fee">원
+                        <input type="number" name="fee"> 원
                     </div>
                     <div class="buttons">
                         <button class="btn btn-primary btn-block"
