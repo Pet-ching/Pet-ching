@@ -73,9 +73,9 @@
         </div>
         <div class="item petsitter_name">
             <div class="profileImage">
-                <img th:src="@{/images/memberImages/2/profile/pf_2_00.jpg}"
-                     src="../static/images/memberImages/2/profile/pf_2_00.jpg"
-                >
+                <img th:if="${not #strings.isEmpty(petSitterMember.imgPath)}" th:src="@{${petSitterMember.imgPath}}" alt="프로필 이미지"
+                     th:onerror="|this.src='@{/images/icons/basic_icon.png}'|">
+                <img th:unless="${not #strings.isEmpty(petSitterMember.imgPath)}" th:src="@{/images/icons/basic_icon.png}">
             </div>
             <div class="textBox" style="display: inline-block;">
                 <p class= "address" id="address01">서울시 서울구 서울동</p>
