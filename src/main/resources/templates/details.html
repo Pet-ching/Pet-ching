@@ -114,7 +114,7 @@
             </div>
             <div th:unless="(${petSitterMember.id}==${loginMember.id})">
                 <button type="button"
-                        th:onclick="|location.href='@{/matching/profile/reservation/{petSitterMember_id}(petSitterMember_id=${petSitterMember.id})}'|"
+                        th:onclick="|location.href='@{/matching/profile/reservation/{petSitter_id}(petSitter_id=${petSitter.id})}'|"
                         class="btn btn-primary btn-block"
                         style="width:150px;margin:10px 0;"
                 >예약하러가기
