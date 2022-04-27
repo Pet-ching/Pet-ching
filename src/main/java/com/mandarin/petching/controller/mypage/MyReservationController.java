@@ -43,7 +43,7 @@ public class MyReservationController {
         String userName = authentication.getName();
         Member member = memberRepository.findByUserEmail(userName);
 
-        List<Reservation> reservationList = reservationService.findByPetSitter(member.getId());
+        List<Reservation> reservationList = reservationService.findByPetSitter(member.getPetSitter().getId());
 
         model.addAttribute("reservationList", reservationList);
         model.addAttribute("reservationEmpty", reservationList.isEmpty());
