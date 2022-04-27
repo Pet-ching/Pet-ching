@@ -15,7 +15,6 @@
 <div th:replace="fragments/header.html::header"></div>
 <div class="container">
     <!--&lt;!&ndash;Todo : 원하는 서비스 조건 선택 필터링&ndash;&gt;-->
-    <div class="taehyeok">
         <div class="search-form">
             <p style="font-size: 20px; font-weight: 600; color: rgb(57, 60, 71); margin-left: 3px;">어디에 사시나요?</p>
             <form class="form-inline d-flex justify-content-end" th:action="@{/matching/list}" type="get">
@@ -41,30 +40,28 @@
                     <div class="item" th:text="${sitter.member.userName}">1</div>
                 </div>
             </div>
-
-            <nav class="input-box" aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item" th:classappend="${1 == nowPage} ? 'disabled'">
-                        <a class="page-link" href="#"
-                           th:href="@{/matching/list(page=${list.pageable.pageNumber - 1},searchKeyword=${param.searchKeyword})}"
-                           tabindex="-1" aria-disabled="true">이전</a>
-                    </li>
-                    <li class="page-item" th:classappend="${i == endPage} ? 'disabled'"
-                        th:each="i : ${#numbers.sequence(startPage, endPage)}">
-                        <a class="page-link" href="#"
-                           th:href="@{/matching/list(page=${i - 1},searchText=${param.searchKeyword})}"
-                           th:text="${i}"></a>
-                    </li>
-                    <li class="page-item"
-                        th:classappend="${list.totalPages == list.pageable.pageNumber + 1} ? 'disabled'">
-                        <a class="page-link" href="#"
-                           th:href="@{/matching/list(page=${list.pageable.pageNumber + 1},searchKeyword=${param.searchKeyword})}">다음</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
+            </div>
+    <nav class="input-box" aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" th:classappend="${1 == nowPage} ? 'disabled'">
+                <a class="page-link" href="#"
+                   th:href="@{/matching/list(page=${list.pageable.pageNumber - 1},searchKeyword=${param.searchKeyword})}"
+                   tabindex="-1" aria-disabled="true">이전</a>
+            </li>
+            <li class="page-item" th:classappend="${i == endPage} ? 'disabled'"
+                th:each="i : ${#numbers.sequence(startPage, endPage)}">
+                <a class="page-link" href="#"
+                   th:href="@{/matching/list(page=${i - 1},searchText=${param.searchKeyword})}"
+                   th:text="${i}"></a>
+            </li>
+            <li class="page-item"
+                th:classappend="${list.totalPages == list.pageable.pageNumber + 1} ? 'disabled'">
+                <a class="page-link" href="#"
+                   th:href="@{/matching/list(page=${list.pageable.pageNumber + 1},searchKeyword=${param.searchKeyword})}">다음</a>
+            </li>
+        </ul>
+    </nav>
     </div>
-</div>
 <div th:replace="fragments/footer.html::footer"></div>
 </body>
 </html>
