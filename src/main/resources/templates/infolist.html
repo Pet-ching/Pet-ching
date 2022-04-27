@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../static/css/base.css"/>
     <link rel="stylesheet" href="../static/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="../static/css/infolist.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -34,21 +35,21 @@
                  th:onclick="|location.href='@{/matching/details(id=${sitter.id})}'|">
                 <div class="cocomo">
                     <div class="item">썸네일</div>
-                    <div class="item" th:text="${sitter.workingArea}">근무지</div>
+                    <div class="item" th:text="${sitter.workingArea}">근무지(주소)</div>
                     <div class="item" th:text="${sitter.title}">제목</div>
                     <div class="item" th:text="${sitter.ableService}">이용서비스</div>
-                    <div class="item" th:text="${sitter.member.userName}">1</div>
+                    <div class="item" th:text="${sitter.member.userName}">설태혁</div>
                 </div>
             </div>
             </div>
     <nav class="input-box" aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
-            <li class="page-item" th:classappend="${1 == nowPage} ? 'disabled'">
+            <li class="page-item" th:classappend="${1 == list.pageable.pageNumber + 1} ? 'disabled'">
                 <a class="page-link" href="#"
                    th:href="@{/matching/list(page=${list.pageable.pageNumber - 1},searchKeyword=${param.searchKeyword})}"
                    tabindex="-1" aria-disabled="true">이전</a>
             </li>
-            <li class="page-item" th:classappend="${i == endPage} ? 'disabled'"
+            <li class="page-item" th:classappend="${i == list.pageable.pageNumber + 1} ? 'disabled'"
                 th:each="i : ${#numbers.sequence(startPage, endPage)}">
                 <a class="page-link" href="#"
                    th:href="@{/matching/list(page=${i - 1},searchText=${param.searchKeyword})}"
