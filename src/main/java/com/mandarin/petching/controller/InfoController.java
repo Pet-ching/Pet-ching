@@ -29,7 +29,7 @@ public class InfoController {
     private final PetSitterRepository petSitterRepository;
 
     @GetMapping("/matching/list")
-    public String list(Model model, @PageableDefault(page = 0, size = 2, sort = "workingArea", direction = Sort.Direction.ASC) Pageable pageable,
+    public String list(Model model, @PageableDefault(page = 0, size = 3, sort = "workingArea", direction = Sort.Direction.ASC) Pageable pageable,
                        String searchKeyword, String ableService) {
 
         Page<PetSitter> list = null;
