@@ -76,14 +76,15 @@ public class MyPageService {
     public void savePetSitter(Member member,
                               PetSitter petSitter,
                               FeeList feeList,
-                              MultipartFile file) throws Exception{
+                              List<MultipartFile> files) throws Exception{
 
         petSitter.setMember(member);
         petSitter.setFeeList(feeList);
 
-        String fileName = getFileName(file);
-
-        petSitter.getImgPaths().add("/memberImages/images/" + fileName);
+        for(MultipartFile file : files) {
+            String fileName = getFileName(file);
+            petSitter.getImgPaths().add("/memberImages/images/" + fileName);
+        }
 
         petSitterRepository.save(petSitter);
     }
