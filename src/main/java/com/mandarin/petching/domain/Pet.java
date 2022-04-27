@@ -1,14 +1,11 @@
 package com.mandarin.petching.domain;
 
-import com.mandarin.petching.dto.PetDto;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 

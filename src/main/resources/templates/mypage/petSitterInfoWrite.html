@@ -18,7 +18,7 @@
 <body>
 <div th:replace="fragments/header.html::header"></div>
 <div class="container">
-<form action="" method="post" th:object="${petSitter}">
+<form action="" method="post" th:object="${petSitter}" enctype="multipart/form-data">
     <div class="form-group">
         <label th:for="*{title}">자기소개 타이틀</label>
         <input type="text" th:field="*{title}" class="form-control">
@@ -28,6 +28,18 @@
         <label th:for="*{selfIntroduction}">자기소개</label>
         <input type="text" th:field="*{selfIntroduction}" class="form-control">
         <div class="field-error" th:errors="${petSitter.selfIntroduction}">error</div>
+    </div>
+    <div class="form-group">
+        <label th:for="file">돌봄환경 사진 1</label>
+        <input type="file" name="files" multiple="multiple" required>
+    </div>
+    <div class="form-group">
+        <label th:for="file">돌봄환경 사진 2</label>
+        <input type="file" name="files" multiple="multiple">
+    </div>
+    <div class="form-group">
+        <label th:for="file">돌봄환경 사진 3</label>
+        <input type="file" name="files" multiple="multiple">
     </div>
     <div class="form-group">
         <label th:for="${feeList.smallDogFee}">소형견 요금</label>
@@ -49,81 +61,11 @@
         <label th:for="${feeList.etcFee}">기타동물 요금</label>
         <input type="number" th:field="${feeList.etcFee}" class="form-control">
     </div>
-    <div class="wrapper">
-        <div class="form-group">
-            <label>월요일 시작시간</label>
-            <input type="time" th:field="${workingDayAndTime.monStartTime}" style="margin-right: 5px;">
-        </div>
-        <div class="form-group">
-            <label>월요일 종료시간</label>
-            <input type="time" th:field="${workingDayAndTime.monFinishTime}">
-        </div>
-    </div>
-    <div class="wrapper">
-        <div class="form-group">
-            <label>화요일 시작시간</label>
-            <input type="time" th:field="${workingDayAndTime.tueStartTime}" style="margin-right: 5px;">
-        </div>
-        <div class="form-group">
-            <label>화요일 종료시간</label>
-            <input type="time" th:field="${workingDayAndTime.tueFinishTime}">
-        </div>
-    </div>
-    <div class="wrapper">
-        <div class="form-group">
-            <label>수요일 시작시간</label>
-            <input type="time" th:field="${workingDayAndTime.wedStartTime}" style="margin-right: 5px;">
-        </div>
-        <div class="form-group">
-            <label>수요일 종료시간</label>
-            <input type="time" th:field="${workingDayAndTime.wedFinishTime}">
-        </div>
-    </div>
-    <div class="wrapper">
-        <div class="form-group">
-            <label>목요일 시작시간</label>
-            <input type="time" th:field="${workingDayAndTime.thuStartTime}" style="margin-right: 5px;">
-        </div>
-        <div class="form-group">
-            <label>목요일 종료시간</label>
-            <input type="time" th:field="${workingDayAndTime.thuFinishTime}">
-        </div>
-    </div>
-    <div class="wrapper">
-        <div class="form-group">
-            <label>금요일 시작시간</label>
-            <input type="time" th:field="${workingDayAndTime.friStartTime}" style="margin-right: 5px;">
-        </div>
-        <div class="form-group">
-            <label>금요일 종료시간</label>
-            <input type="time" th:field="${workingDayAndTime.friFinishTime}">
-        </div>
-    </div>
-    <div class="wrapper">
-        <div class="form-group">
-            <label>토요일 시작시간</label>
-            <input type="time" th:field="${workingDayAndTime.satStartTime}" style="margin-right: 5px;">
-        </div>
-        <div class="form-group">
-            <label>토요일 종료시간</label>
-            <input type="time" th:field="${workingDayAndTime.satFinishTime}">
-        </div>
-    </div>
-    <div class="wrapper">
-        <div class="form-group">
-            <label>일요일 시작시간</label>
-            <input type="time" th:field="${workingDayAndTime.sunStartTime}" style="margin-right: 5px;">
-        </div>
-        <div class="form-group">
-            <label>일요일 종료시간</label>
-            <input type="time" th:field="${workingDayAndTime.sunFinishTime}">
-        </div>
-    </div>
     <div class="form-group">
-        <h4>자격증 선택(다중 선택 가능)</h4>
-        <div th:each="certificate : ${certificateList}">
-            <input type="checkbox" th:field="*{certificate}" th:value="${certificate}">
-            <label th:for="${#ids.prev('certificate')}" th:text="${certificate}"></label>
+        <h4>이용 가능 요일 선택(다중 선택 가능)</h4>
+        <div th:each="workingDay : ${workingDayList}">
+            <input type="checkbox" th:field="*{workingDay}" th:value="${workingDay}">
+            <label th:for="${#ids.prev('workingDay')}" th:text="${workingDay}"></label>
         </div>
     </div>
     <div class="form-group">
@@ -131,6 +73,13 @@
         <div th:each="ableService : ${ableServiceList}">
             <input type="checkbox" th:field="*{ableService}" th:value="${ableService}">
             <label th:for="${#ids.prev('ableService')}" th:text="${ableService}"></label>
+        </div>
+    </div>
+    <div class="form-group">
+        <h4>자격증 선택(다중 선택 가능)</h4>
+        <div th:each="certificate : ${certificateList}">
+            <input type="checkbox" th:field="*{certificate}" th:value="${certificate}">
+            <label th:for="${#ids.prev('certificate')}" th:text="${certificate}"></label>
         </div>
     </div>
     <div class="form-group">

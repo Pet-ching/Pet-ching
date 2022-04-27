@@ -4,6 +4,7 @@ package com.mandarin.petching.controller;
 import com.mandarin.petching.domain.Member;
 import com.mandarin.petching.domain.PetSitter;
 import com.mandarin.petching.repository.MemberRepository;
+import com.mandarin.petching.repository.PetSitterRepository;
 import com.mandarin.petching.service.InfoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +26,10 @@ public class InfoController {
     private InfoService infoService;
 
     private final MemberRepository memberRepository;
+    private final PetSitterRepository petSitterRepository;
 
     @GetMapping("/matching/list")
-    public String list(Model model, @PageableDefault(page = 0, size = 2, sort = "workingArea", direction = Sort.Direction.ASC) Pageable pageable,
+    public String list(Model model, @PageableDefault(page = 0, size = 3, sort = "workingArea", direction = Sort.Direction.ASC) Pageable pageable,
                        String searchKeyword, String ableService) {
 
         Page<PetSitter> list = null;
@@ -59,12 +61,20 @@ public class InfoController {
             list = infoService.sitterList(pageable);
         }
         int nowPage = list.getPageable().getPageNumber() + 1;
-        int startPage = Math.max(nowPage - 4, 1);
-        int endPage = Math.min(nowPage + 5, list.getTotalPages());
+        int startPage = Math.max(nowPage - 2, 1);
+        int endPage = Math.min(startPage+2, list.getTotalPages());
+//        double startPage2 = Math.floor(list.getNumber())*10+1;
+//        double endPage2;
+//        double endPage3;
+//        endPage = list.getTotalPages() > startPage+9 ? startPage+9 : list.getTotalPages();
+//        endPage3 = endPage < startPage ? startPage : endPage;
+
+//        int endPage = Math.min(nowPage + 5, list.getTotalPages());
         model.addAttribute("list", list);
         model.addAttribute("nowPage", nowPage);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
+
         return "infolist";
     }
 
@@ -72,18 +82,11 @@ public class InfoController {
     public String search(Authentication authentication, Model model, Long id) {
         String userEmail = authentication.getName();
         Member loginMember = memberRepository.findByUserEmail(userEmail);
-        Member petSitterMember= memberRepository.findById(id).get();
-        model.addAttribute("petSitterMember", petSitterMember);
-        model.addAttribute("petSitter", petSitterMember.getPetSitter());
+        PetSitter petSitterMember= petSitterRepository.findById(id).get();
+        model.addAttribute("petSitter", petSitterMember);
+        model.addAttribute("petSitterMember", petSitterMember.getMember());
         model.addAttribute("loginMember", loginMember);
         return "details";
     }
-
-
-//    @GetMapping("/maching/list/{area}")
-//    public String search(Model model, String area) {
-//        model.addAttribute("area", infoService.area);
-//        return "infolist";
-//    }
 
 }

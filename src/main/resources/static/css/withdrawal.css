@@ -2,7 +2,7 @@
 .withdrawal-div {
 position:absolute;
 left:50%;
-top:50%;
+top:30%;
     padding: 20px; 50px; 20px; 50px;
     transform: translate(-50%, -50%);
     border: 2px solid black;
@@ -33,3 +33,4 @@ top:50%;
     text-align: center;
     margin: 15px;
 }
+

@@ -3,6 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>예약 페이지</title>
+    <link rel="icon" th:href="@{/images/icons/Home.png}" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
@@ -21,11 +22,11 @@
 </script>
     <body>
     <div th:replace="fragments/header.html::header"></div>
-    <div class="container">
+    <div class="container-fluid">
         <div class = "content">
             <div class="item petNull" th:if="${petListEmpty}">
                 <h1>🐶 펫을 먼저 등록하셔야 합니다! 🐱</h1>
-                <img class="image" src="../static/img/catdog.jpg" th:src="/img/catdog.jpg" alt="동물사진">
+                <img class="image" src="../static/img/catdog.jpg" th:src="@{/img/catdog.jpg}" alt="동물사진">
                 <div class="buttons">
                     <button class="btn btn-primary btn-block"
                             th:onclick="|location.href='@{/mypage/pet/create}'|">펫 등록하러 가기!</button>
@@ -39,17 +40,21 @@
                 <form class="data" th:action="@{/matching/profile/reservation/match}" method="POST" onsubmit="submitSuc();">
                     <div class="item">
                         <h4><label >보호자 이름</label></h4>
-                        <input th:placeholder="${petOwner.userName}" th:value="${petOwner.userName}" name="petOwner" readonly/>
+                        <div th:text="${petOwner.userName}"></div>
+                        <input type="hidden" th:value="${petOwner.id}" name="petOwnerId"/>
                     </div>
                     <div class="item">
                         <h4><label>펫 이름</label></h4>
-                        <div th:each="pet : ${petList}">
-                            <input type="radio" th:value="${pet.id}" name="pet"> <span th:text="${pet.petName}"></span>
-                        </div>
+                        <select class="form-control" name="pet">
+                            <div th:each="pet : ${petList}">
+                                <option th:value="${pet.id}"><span th:text="${pet.petName}"></span></option>
+                            </div>
+                        </select>
                     </div>
                     <div class="item">
                         <h4><label >펫시터 이름</label></h4>
-                        <input th:placeholder="${petSitter.userName}" th:value="${petSitter.userName}" name="petSitter" readonly/>
+                        <div th:text="${petSitter.member.userName}"></div>
+                        <input type="hidden" th:value="${petSitter.id}" name="petSitterId"/>
                     </div>
                     <div class="item">
                         <h4><label>시작 날짜</label></h4>
@@ -61,7 +66,7 @@
                     </div>
                     <div class="item">
                         <h4><label>요금</label></h4>
-                        <input type="number" name="fee">원
+                        <input type="number" name="fee"> 원
                     </div>
                     <div class="buttons">
                         <button class="btn btn-primary btn-block"

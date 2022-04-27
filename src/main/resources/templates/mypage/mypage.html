@@ -34,6 +34,9 @@
     <div class="pull-right" style="width:150px;margin:10px 0;" th:if="${type == 'petsitter'}">
         <a th:href="@{/mypage(type='petowner')}" class="btn btn-primary btn-block">보호자 모드로 변경</a>
     </div>
+    <div class="pull-right" style="width:150px;margin:10px 0;margin-right:5px;">
+        <a th:href="@{/mypage/member/edit}" class="btn btn-primary btn-block">회원정보 수정</a>
+    </div>
     <div id="mainHide">
         <table class="table table-hover">
             <tbody th:object="${member}">

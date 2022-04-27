@@ -13,6 +13,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -42,7 +45,7 @@ public class PetSitterInfoController {
 
         model.addAttribute("petSitter", new PetSitter());
         model.addAttribute("feeList", new FeeList());
-        model.addAttribute("workingDayAndTime", new WorkingDayAndTime());
+        model.addAttribute("workingDayList", WorkingDay.getWorkingList());
         model.addAttribute("certificateList", CertificateType.getCertificateList());
         model.addAttribute("ableServiceList", AbleServiceType.getAbleServiceList());
 
@@ -54,13 +57,13 @@ public class PetSitterInfoController {
                             @Validated PetSitter petSitter,
                             BindingResult bindingResult,
                             FeeList feeList,
-                            WorkingDayAndTime workingDayAndTime,
-                            Model model) {
+                            List<MultipartFile> files,
+                            Model model) throws Exception{
 
         if (bindingResult.hasErrors()) {
 
             model.addAttribute("feeList", new FeeList());
-            model.addAttribute("workingDayAndTime", new WorkingDayAndTime());
+            model.addAttribute("workingDayList", WorkingDay.getWorkingList());
             model.addAttribute("certificateList", CertificateType.getCertificateList());
             model.addAttribute("ableServiceList", AbleServiceType.getAbleServiceList());
 
@@ -70,7 +73,7 @@ public class PetSitterInfoController {
         String userName = authentication.getName();
         Member member = memberRepository.findByUserEmail(userName);
 
-        myPageService.savePetSitter(member, petSitter, feeList, workingDayAndTime);
+        myPageService.savePetSitter(member, petSitter, feeList, files);
 
         return "redirect:/mypage/petsitter";
     }
@@ -83,11 +86,10 @@ public class PetSitterInfoController {
 
         PetSitter petSitter = member.getPetSitter();
         FeeList feeList = petSitter.getFeeList();
-        WorkingDayAndTime workingDayAndTime = petSitter.getWorkingDayAndTime();
 
         model.addAttribute("petSitter", petSitter);
         model.addAttribute("feeList", feeList);
-        model.addAttribute("workingDayAndTime", workingDayAndTime);
+        model.addAttribute("workingDayList", WorkingDay.getWorkingList());
         model.addAttribute("certificateList", CertificateType.getCertificateList());
         model.addAttribute("ableServiceList", AbleServiceType.getAbleServiceList());
 
@@ -99,13 +101,13 @@ public class PetSitterInfoController {
                                 @Validated PetSitter petSitter,
                                 BindingResult bindingResult,
                                 FeeList feeList,
-                                WorkingDayAndTime workingDayAndTime,
-                                Model model) {
+                                List<MultipartFile> files,
+                                Model model) throws Exception{
 
         if (bindingResult.hasErrors()) {
 
             model.addAttribute("feeList", new FeeList());
-            model.addAttribute("workingDayAndTime", new WorkingDayAndTime());
+            model.addAttribute("workingDayList", WorkingDay.getWorkingList());
             model.addAttribute("certificateList", CertificateType.getCertificateList());
             model.addAttribute("ableServiceList", AbleServiceType.getAbleServiceList());
 
@@ -115,7 +117,7 @@ public class PetSitterInfoController {
         String userName = authentication.getName();
         Member member = memberRepository.findByUserEmail(userName);
 
-        myPageService.updatePetSitter(member, petSitter, feeList, workingDayAndTime);
+        myPageService.updatePetSitter(member, petSitter, feeList, files);
 
         return "redirect:/mypage/petsitter";
     }

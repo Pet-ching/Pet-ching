@@ -56,71 +56,21 @@
                     <td th:text="*{workingArea}"></td>
                 </tr>
                 <tr>
-                    <td>월요일 시작시간</td>
-                    <td th:text="*{workingDayAndTime.monStartTime}"></td>
-                </tr>
-                <tr>
-                    <td>월요일 종료시간</td>
-                    <td th:text="*{workingDayAndTime.monFinishTime}"></td>
-                </tr>
-                <tr>
-                    <td>화요일 시작시간</td>
-                    <td th:text="*{workingDayAndTime.tueStartTime}"></td>
-                </tr>
-                <tr>
-                    <td>화요일 종료시간</td>
-                    <td th:text="*{workingDayAndTime.tueFinishTime}"></td>
-                </tr>
-                <tr>
-                    <td>수요일 시작시간</td>
-                    <td th:text="*{workingDayAndTime.wedStartTime}"></td>
-                </tr>
-                <tr>
-                    <td>수요일 종료시간</td>
-                    <td th:text="*{workingDayAndTime.wedFinishTime}"></td>
-                </tr>
-                <tr>
-                    <td>목요일 시작시간</td>
-                    <td th:text="*{workingDayAndTime.thuStartTime}"></td>
-                </tr>
-                <tr>
-                    <td>목요일 종료시간</td>
-                    <td th:text="*{workingDayAndTime.thuFinishTime}"></td>
-                </tr>
-                <tr>
-                    <td>금요일 시작시간</td>
-                    <td th:text="*{workingDayAndTime.friStartTime}"></td>
-                </tr>
-                <tr>
-                    <td>금요일 종료시간</td>
-                    <td th:text="*{workingDayAndTime.friFinishTime}"></td>
-                </tr>
-                <tr>
-                    <td>토요일 시작시간</td>
-                    <td th:text="*{workingDayAndTime.satStartTime}"></td>
-                </tr>
-                <tr>
-                    <td>토요일 종료시간</td>
-                    <td th:text="*{workingDayAndTime.satFinishTime}"></td>
-                </tr>
-                <tr>
-                    <td>일요일 시작시간</td>
-                    <td th:text="*{workingDayAndTime.sunStartTime}"></td>
-                </tr>
-                <tr>
-                    <td>일요일 종료시간</td>
-                    <td th:text="*{workingDayAndTime.sunFinishTime}"></td>
-                </tr>
-                <tr>
-                    <td>자격증</td>
+                    <td>이용 가능 요일</td>
                     <td>
-                        <p th:each="c : *{certificate}" th:text="${c}"></p>
+                        <p th:each="w : *{workingDay}" th:text="${w}"></p>
                     </td>
                 </tr>
                 <tr>
                     <td>이용 가능 서비스</td>
                     <td>
                         <p th:each="a : *{ableService}" th:text="${a}"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>자격증</td>
+                    <td>
+                        <p th:each="c : *{certificate}" th:text="${c}"></p>
                     </td>
                 </tr>
             </tbody>
