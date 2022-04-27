@@ -37,6 +37,7 @@ justify-content: center;
 
 
 
+
 .item {
 
     display: flex;
@@ -122,3 +123,19 @@ margin-bottom: 20px;
 .total-pet {
 margin-top:130px;
 }
+
+
+/* 프로필 이미지 */
+.profileImage {
+    display: inline-block;
+    margin:0px;
+    border-radius:10px;
+    width:100px;
+    height:100px;
+}
+.profileImage img {
+    border-radius:10px;
+    width:238px;
+    height:238px;
+    object-fit:cover;
+ }
