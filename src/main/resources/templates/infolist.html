@@ -9,39 +9,41 @@
     <link rel="stylesheet" href="../static/css/base.css"/>
     <link rel="stylesheet" href="../static/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="../static/css/infolist.css"/>
-    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+          rel="stylesheet">
 </head>
 
 <body>
 <div th:replace="fragments/header.html::header"></div>
 <div class="container-fluid">
     <!--&lt;!&ndash;Todo : 원하는 서비스 조건 선택 필터링&ndash;&gt;-->
-        <div class="search-form">
-            <p style="font-size: 20px; font-weight: 600; color: rgb(57, 60, 71); margin-left: 3px;">어디에 사시나요?</p>
-            <form class="form-inline d-flex justify-content-end" th:action="@{/matching/list}" type="get">
-                <div class="form-group mx-sm-3 mb-2">
-                    <label for="searchKeyword" class="sr-only">검색</label>
-                    <input type="text" class="form-control sh-input" id="searchKeyword" name="searchKeyword"
-                           th:value="${param.searchKeyword}" placeholder="지역을 입력하세요">
-                </div>
-                <button type="submit" class="btn btn-light mb-2 sh">검색</button>
-            </form>
+    <div class="search-form">
+        <p style="font-size: 20px; font-weight: 600; color: rgb(57, 60, 71); margin-left: 3px;">어디에 사시나요?</p>
+        <form class="form-inline d-flex justify-content-end" th:action="@{/matching/list}" type="get">
+            <div class="form-group mx-sm-3 mb-2">
+                <label for="searchKeyword" class="sr-only">검색</label>
+                <input type="text" class="form-control area-search" id="searchKeyword" name="searchKeyword"
+                       th:value="${param.searchKeyword}" placeholder="지역을 입력하세요">
+            </div>
+            <button type="submit" class="btn btn-light mb-2 searchbtn">검색</button>
+        </form>
+    </div>
+    <br><br><br>
+
+    <!--전체 펫시터 출력하기 : 검색을 할 경우 안 보이게 표시-->
+    <div class="total-pet">
+        <div class="batch" th:each="sitter : ${list}">
+            <div class="petlist" th:onclick="|location.href='@{/matching/details(id=${sitter.id})}'|" style="cursor:pointer;">
+                <div class="item">썸네일</div>
+                <div class="item" th:text="${sitter.workingArea}">근무지(주소)</div>
+                <div class="item" th:text="${sitter.title}">제목</div>
+                <div class="item" th:text="${sitter.ableService}">이용서비스</div>
+                <div class="item" th:text="${sitter.member.userName}">설태혁</div>
+                <br>
+            </div>
         </div>
-
-        <!--전체 펫시터 출력하기 : 검색을 할 경우 안 보이게 표시-->
-
-        <div class="batch">
-            <div class="" th:each="sitter : ${list}" style="cursor:pointer;"
-                 th:onclick="|location.href='@{/matching/details(id=${sitter.id})}'|">
-                <div class="cocomo">
-                    <div class="item">썸네일</div>
-                    <div class="item" th:text="${sitter.workingArea}">근무지(주소)</div>
-                    <div class="item" th:text="${sitter.title}">제목</div>
-                    <div class="item" th:text="${sitter.ableService}">이용서비스</div>
-                    <div class="item" th:text="${sitter.member.userName}">설태혁</div>
-                </div>
-            </div>
-            </div>
+        <br>
+    </div>
     <nav class="input-box" aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
             <li class="page-item" th:classappend="${1 == list.pageable.pageNumber + 1} ? 'disabled'">
@@ -62,7 +64,7 @@
             </li>
         </ul>
     </nav>
-    </div>
+</div>
 <div th:replace="fragments/footer.html::footer"></div>
 </body>
 </html>
