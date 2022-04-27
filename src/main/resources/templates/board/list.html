@@ -45,7 +45,7 @@
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
                 <li class="page-item" th:classappend="${1 == boards.pageable.pageNumber + 1} ? 'disabled'">
-                    <a class="page-link" th:href="@{/board/list(page=${boards.pageable.pageNumber - 3},searchText=${param.searchText})}"
+                    <a class="page-link" th:href="@{/board/list(page=${boards.pageable.pageNumber - 1},searchText=${param.searchText})}"
                         tabindex="-1" aria-disabled="true">이전</a>
                 </li>
                 <li class="page-item" th:classappend="${i == boards.pageable.pageNumber + 1} ? 'disabled'"
@@ -55,7 +55,7 @@
                 <li class="page-item"
                     th:classappend="${boards.totalPages == boards.pageable.pageNumber + 1} ? 'disabled'">
                     <a class="page-link"
-                        th:href="@{/board/list(page=${boards.pageable.pageNumber + 3},searchText=${param.searchText})}">다음</a>
+                        th:href="@{/board/list(page=${boards.pageable.pageNumber + 1},searchText=${param.searchText})}">다음</a>
                 </li>
             </ul>
         </nav>
