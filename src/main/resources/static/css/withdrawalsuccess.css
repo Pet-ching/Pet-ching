@@ -1,7 +1,7 @@
 .withdrawal-div {
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 30%;
     padding: 80px 150px 80px 150px;
     transform: translate(-50%, -50%);
     border: 2px solid black;
