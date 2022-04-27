@@ -1,6 +1,7 @@
 package com.mandarin.petching.service;
 
 import com.mandarin.petching.domain.Board;
+import com.mandarin.petching.domain.BoardType;
 import com.mandarin.petching.domain.Member;
 import com.mandarin.petching.domain.Reply;
 import com.mandarin.petching.repository.BoardRepository;
@@ -35,6 +36,7 @@ public class BoardService {
        Member member =  memberRepository.findByUserEmail(userName);
        board.setMember(member);
        board.setHits(0);
+       board.setBoardType(BoardType.COMMUNITY);
        return boardRepository.save(board);
     }
 
