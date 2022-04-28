@@ -13,7 +13,7 @@
 </head>
 <body>
 <div th:replace="fragments/header.html::header"></div>
-<div class="container">
+<div class="container-fluid" style="margin-top:100px; margin-bottom:80px;">
 <div th:if="${petSitterEmpty}">
     <h1>아직 입력된 정보가 없어요!</h1>
     <a th:href="@{/mypage/petsitter/create}">등록할래요?</a>
