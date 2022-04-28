@@ -2,38 +2,8 @@
 .content {display: grid;grid-template-columns: 1fr 300px;width: 800px;margin: 0 auto;margin-top: 50px;margin-bottom: 50px;font-family: "Noto Sans KR", sans-serif;}
 
 /* 이미지 */
-    .content .section {grid-column: 1 / 3;grid-row: 1;}
-
-    .section input[id*="slide"] {display:none;}
-    .section .slidewrap {max-width:800px; margin:0 auto;}
-    .section .slidewrap >ul {padding:0px; padding-bottom:10px;}
-    .section .slidelist {white-space:nowrap;overflow:hidden;position:relative;margin:0 auto; font-size: 0px;}
-    .section .slidelist > li {display:inline-block;vertical-align:middle;width:100%;transition:all .5s;}
-    .section .slidelist > li > a {display:block; position:relative;}
-    .section .slidelist > li > a img {display: inline-block; width:100%; height:450px; object-fit:cover;}
-    .section .slidelist label {position:absolute;z-index:10;top:50%;transform:translateY(-50%);padding:50px;cursor:pointer;}
-
-
-    /* input에 체크되면 슬라이드 효과 */
-    .section input[id="slide01"]:checked ~ .slidewrap .slidelist > li {transform:translateX(0%);}
-    .section input[id="slide02"]:checked ~ .slidewrap .slidelist > li {transform:translateX(-100%);}
-    .section input[id="slide03"]:checked ~ .slidewrap .slidelist > li {transform:translateX(-200%);}
-
-    /* 좌,우 슬라이드 버튼 */
-    .slide-control > div {display:none;}
-    .section .left {left:30px;background:url('../img/left.png') center center / 100% no-repeat;}
-    .section .right {right:30px;background:url('../img/right.png') center center / 100% no-repeat;}
-    .section input[id="slide01"]:checked ~ .slidewrap .slide-control > div:nth-child(1) {display:block;}
-    .section input[id="slide02"]:checked ~ .slidewrap .slide-control > div:nth-child(2) {display:block;}
-    .section input[id="slide03"]:checked ~ .slidewrap .slide-control > div:nth-child(3) {display:block;}
-
-    /* 페이징 */
-    .slide-pagelist {text-align:center;padding:0px; margin:0px;}
-    .slide-pagelist > li {display:inline-block;vertical-align:middle;}
-    .slide-pagelist > li > label {display:block;padding:8px 20px;border-radius:30px;background:#ccc;margin:0px 5px;cursor:pointer;}
-    .section input[id="slide01"]:checked ~ .slidewrap .slide-pagelist > li:nth-child(1) > label {background:#999;}
-    .section input[id="slide02"]:checked ~ .slidewrap .slide-pagelist > li:nth-child(2) > label {background:#999;}
-    .section input[id="slide03"]:checked ~ .slidewrap .slide-pagelist > li:nth-child(3) > label {background:#999;}
+    .content .section {grid-column: 1 / 3;grid-row: 1; border-radius:30px; margin:20px;}
+    .section .item {display: inline-block; height:450px; object-fit:fit;}
 
 /* 프로필 */
     .content .petsitter_name {grid-column: 1 / 2;grid-row: 2; display:flex; align-items:center;}
@@ -49,6 +19,7 @@
 /* 자기소개 */
     .content .introduce{grid-column: 1 / 2;grid-row: 3; margin-top: 30px;}
     .introduce .textBox {font-size: 15px; line-height: 25px; color: rgb(85, 85, 85); margin-top: 20px;}
+
 /* 자격증 */
     .content .certifi{grid-column: 1 / 2;grid-row: 4;margin-top: 30px;}
     .certifi ul{padding:0px;}
@@ -58,9 +29,11 @@
     .content .services{grid-column: 1 / 2;grid-row: 5;margin-top: 30px;}
     .services ul{padding:0px;}
     .services .textBox {font-size: 15px; line-height: 25px; color: rgb(85, 85, 85); margin-top: 20px;}
+
 /* 버튼 */
     .content .buttonBox{grid-column: 2 / 3;grid-row: 2; justify-self: center;}
     .buttonBox{width: 300px; border-radius: 8px; border: 1px solid rgb(223, 227, 234); box-shadow: rgba(0, 0, 0, 0.07) 1px 3px 7px; padding: 15px; display: flex; align-items: center; flex-direction: row;justify-content: center;}
+
 /* 가격표 */
     .content .feeList{grid-column: 2 / 3;grid-row: 3;margin-top: 30px;}
     .line {width: 250px; height: 1px; background-color: rgb(235, 235, 235); margin: 5px 0px;}
@@ -72,6 +45,7 @@
     .feeList .feeListKey{padding-right:10px;}
     /* 텍스트 */
     .feeList p{color:gray;}
+
 /* 가능 시간 */
     .content .workingDay{grid-column: 2 / 3;grid-row: 4;margin-top: 30px;}
     .workingDay{width: 300px; border-radius: 8px; border: 1px solid rgb(223, 227, 234); box-shadow: rgba(0, 0, 0, 0.07) 1px 3px 7px; padding: 15px; display: flex; align-items: center; flex-direction: column;justify-content: center;}
@@ -79,6 +53,7 @@
     .workingDay th{border-radius:6px; text-align:center; border: 1px solid #0A6ECD; padding:10px; margin:10px;}
     .workingDay .ableDay{background-color: #0A6ECD; color:white;}
     .workingDay .NotAbleDay{color:lightgray;}
+
 /* 지역 */
     .content .workingArea{grid-column: 2 / 3;grid-row: 5 / 7; margin-top: 30px;}
     .workingArea {width: 300px; border-radius: 8px; border: 1px solid rgb(223, 227, 234); box-shadow: rgba(0, 0, 0, 0.07) 1px 3px 7px; padding: 10px; display: flex; align-items: center; flex-direction: column;justify-content: center;}
