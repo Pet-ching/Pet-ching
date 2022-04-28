@@ -2,8 +2,11 @@
 .content {display: grid;grid-template-columns: 1fr 300px;width: 800px;margin: 0 auto;margin-top: 50px;margin-bottom: 50px;font-family: "Noto Sans KR", sans-serif;}
 
 /* 이미지 */
-    .content .section {grid-column: 1 / 3;grid-row: 1; border-radius:30px; margin:20px;}
-    .section .item {display: inline-block; height:450px; object-fit:fit;}
+    .content .section {grid-column: 1 / 3;grid-row: 1; margin-top:40px; margin-bottom:40px; height:450px;border-radius:10px; display: inline-block; object-fit:cover;}
+    .section a{border-radius:10px; }
+    .section .slideImgCover {height:450px; border-radius:10px;}
+    .section .slideImg {height:450px; border-radius:10px;}
+    .section img {width:100%; height:100%; object-fit:cover; border-radius:10px;}
 
 /* 프로필 */
     .content .petsitter_name {grid-column: 1 / 2;grid-row: 2; display:flex; align-items:center;}

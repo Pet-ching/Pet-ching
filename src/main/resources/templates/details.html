@@ -36,24 +36,26 @@
 <div th:replace="fragments/header.html::header"></div>
     <div class="container-fluid">
         <div class="content" th:object="${petSitter}">
-            <div class="item section carousel slide" id="my-pics" data-ride="carousel">
-                    <div class="carousel-inner" role="listbox">
-                        <div th:if="${slideImg.index}==0" class="item active" th:each="slideImg : *{imgPaths}">
-                            <img th:src="@{slideImg}" onerror="this.parentNode.style.display='none'">
-                        </div>
-                        <div th:unless="${slideImg.index}==0" class="item" th:each="slideImg : *{imgPaths}">
-                            <img th:src="@{slideImg}" onerror="this.parentNode.style.display='none'">
-                        </div>
+            <div class="item section" th:unless="*{not #lists.isEmpty(imgPaths)}">
+                <img th:src="@{/img/petsitter_default.jpg}">
+            </div>
+            <div class="item section carousel slide" th:if="*{not #lists.isEmpty(imgPaths)}" id="my-pics" data-ride="carousel">
+                <div class="carousel-inner slideImgCover" role="listbox">
+                    <div th:each="slideImg, i : *{imgPaths}" th:if="${i.index==0}" class="item slideImg active" >
+                        <img th:src="@{${slideImg}}" th:onerror="|this.src='@{/img/petsitter_default.jpg}'|">
                     </div>
-
-                    <a class="left carousel-control" href="#my-pics" role="button" data-slide="prev">
-                        <span class="icon-prev" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="right carousel-control" href="#my-pics" role="button" data-slide="next">
-                        <span class="icon-next" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
+                    <div th:each="slideImg, i : *{imgPaths}" th:unless="${i.index==0}" class="item slideImg">
+                        <img th:src="@{${slideImg}}" th:onerror="|this.src='@{/img/petsitter_default.jpg}'|">
+                    </div>
+                </div>
+                <a class="left carousel-control" href="#my-pics" role="button" data-slide="prev">
+                    <span class="icon-prev" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#my-pics" role="button" data-slide="next">
+                    <span class="icon-next" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
             <div class="item petsitter_name">
                 <div class="profileImage">
