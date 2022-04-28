@@ -64,7 +64,7 @@ public class MemberService implements UserDetailsService {
         File saveFile = new File(filePath, fileName);
         file.transferTo(saveFile);
 
-        findMember.setImgPath("/memberImages/images/" + fileName);
+        findMember.setImgPath("/images/memberImages/" + fileName);
     }
 
     public void deleteMember(Long id){
