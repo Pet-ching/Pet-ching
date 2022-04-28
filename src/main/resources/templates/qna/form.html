@@ -83,8 +83,11 @@
                     <div class="col-sm-10">
                         <div th:if="!${image?.id}" class="custom-file" id="inputFile">
                             <form action="/qna/images" method="post" enctype="multipart/form-data">
+<!--                                <div> *.rar, *.zip, *.gif, *.jpeg, *.png</div>-->
+<!--                                <div> *.jpg, *.bmp, *pdf, *.hwp, *.docx</div>-->
+<!--                                <div> 파일만 업로드 가능!</div>-->
                                 <label for="file">Upload your file:</label>
-                                <input name="file" type="file" class="custom-file-input" id="file" accept="*.rar, *.zip, *.gif, *.jpeg, *.png, *.jpg, *.bmp, *pdf, *hwp"/>
+                                <input name="file" type="file" class="custom-file-input" id="file" accept="*.rar, *.zip, *.gif, *.jpeg, *.png, *.jpg, *.bmp, *.pdf, *.hwp, *.txt"/>
                                 <input class="btn btn-primary" onclick="submitButtonOnclick()" id="submitBtn" type="submit" role="button" value="파일 전송" style="display:none;"/>
                             </form>
                         </div>
