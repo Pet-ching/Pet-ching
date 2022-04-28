@@ -13,9 +13,13 @@ import com.mandarin.petching.service.ImagesService;
 import com.mandarin.petching.service.QnaService;
 import com.mandarin.petching.util.MD5Generator;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.ui.Model;
@@ -26,6 +30,10 @@ import javax.transaction.Transactional;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.Map;
 
@@ -81,9 +89,9 @@ public class QnaRestController {
         mapper.writeValue(fileOutputStream, board);
 
 
-        Map<String, Object> toJson = new BoardDto().toJson(board);
+//        Map<String, Object> toJson = new BoardDto().toJson(board);
 
-        return new ResponseEntity<>(toJson, HttpStatus.CREATED);
+        return new ResponseEntity<>("{}", HttpStatus.CREATED);
     }
 
 
@@ -119,38 +127,16 @@ public class QnaRestController {
         return new ResponseEntity<>("{}", HttpStatus.OK);
     }
 
-//    @PostMapping("/image")
-//    public ResponseEntity<?> write(@RequestParam("file") MultipartFile files) {
-//        try {
-//            String origFilename = files.getOriginalFilename();
-//            String filename = new MD5Generator(origFilename).toString();
-//            /* 실행되는 위치의 'files' 폴더에 파일이 저장됩니다. */
-//            //System.getProperty("user.dir") 프로젝트 경로
-//            String savePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
-//            /* 파일이 저장되는 폴더가 없으면 폴더를 생성합니다. */
-//            //new File(경로, 이름);
-//            if (!new File(savePath).exists()) {
-//                try{
-//                    new File(savePath).mkdir();//디렉토리 생성
-//                }
-//                catch(Exception e){
-//                    e.getStackTrace();
-//                }
-//            }
-//            String filePath = savePath + "\\" + filename;
-//            files.transferTo(new File(filePath));
-//
-//            ImagesDto imagesDto = new ImagesDto();
-//            imagesDto.setImgName(origFilename);
-//            imagesDto.setServerImgName(filename);
-//            imagesDto.setImgPath(filePath);
-//
-//            Long ImageId = imagesService.saveImage(imagesDto);
-//
-//        } catch(Exception e) {
-//            e.printStackTrace();
-//        }
-//       return new ResponseEntity<>("{}", HttpStatus.OK);
-//    }
+    //파일 다운로드
+    @GetMapping("/download/{fileId}")
+    public ResponseEntity<Resource> fileDownload(@PathVariable("fileId") Long fileId) throws IOException {
+        ImagesDto imagesDto = imagesService.getFile(fileId);
+        Path path = Paths.get(imagesDto.getImgPath());
+        Resource resource = new InputStreamResource(Files.newInputStream(path));
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType("application/octet-stream"))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; fileName=\"" + URLEncoder.encode(imagesDto.getImgName(), "UTF-8")+"\";")
+                .body(resource);
+    }
 
 }

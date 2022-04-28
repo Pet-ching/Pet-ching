@@ -148,74 +148,39 @@ public class QnaController {
 
 
     //파일 업로드
+    //저장했을 때
     @PostMapping("/images")
-    public String write(Authentication authentication, @RequestParam("file") MultipartFile files, @PageableDefault Pageable pageable, Model model) {
+    public String createFile(Authentication authentication, @RequestParam("file") MultipartFile files, @PageableDefault Pageable pageable, Model model) {
 
-        String lootPath = System.getProperty("user.dir");
-        try {
-                String origFilename = files.getOriginalFilename();
-                String filename = new MD5Generator(origFilename).toString();
-                /* 실행되는 위치의 'files' 폴더에 파일이 저장됩니다. */
-                //System.getProperty("user.dir") 프로젝트 경로
-                String savePath = lootPath + "\\src\\main\\resources\\static\\files";
-                /* 파일이 저장되는 폴더가 없으면 폴더를 생성합니다. */
-                //new File(경로, 이름);
-                if (!new File(savePath).exists()) {
-                    try{
-                        new File(savePath).mkdir();//디렉토리 생성
-                    }
-                    catch(Exception e){
-                        e.getStackTrace();
-                    }
-            }
+        ImagesDto imagesDto= imagesService.storeFile(authentication,files,pageable,model);
 
-                if(filename.length()>0) {
-
-                    //json 파일 읽기
-                    JSONParser parser = new JSONParser();
-                    Reader reader = new FileReader(lootPath + "\\src\\main\\resources\\static\\json\\petchingBoard.json");
-                    JSONObject jsonObject = (JSONObject) parser.parse(reader);
-
-                    //json파일에서 id부분 get하기
-                    long id = (Long) jsonObject.get("id");
-                    Board board = boardRepository.getById(id);
-
-                    //파일 경로 지정
-                    String filePath = savePath + "\\" + filename;
-                    files.transferTo(new File(filePath));
-
-                    ImagesDto imagesDto = new ImagesDto();
-                    imagesDto.setImgName(origFilename);
-                    imagesDto.setServerImgName(filename);
-                    imagesDto.setImgPath(filePath);
-                    imagesDto.setImgRegDate(LocalDateTime.now());
-                    imagesDto.setImageType(ImageType.Qna);
-                    imagesDto.setBoard(board);
-
-                    imagesService.saveImage(imagesDto);
-                }
-
-        } catch(Exception e) {
-            e.printStackTrace();
+        //파일 제목으로 빈 파일 생성 막기
+        if(imagesDto.getImgName() != null && imagesDto.getImgName() != "" && imagesDto.getImgName().length()>0) {
+            imagesService.saveImage(imagesDto);
         }
-
 
         return "redirect:/qna/ask";
     }
 
-    //파일 다운로드
-    @ResponseBody
-    @GetMapping("/download/{fileId}")
-    public ResponseEntity<Resource> fileDownload(@PathVariable("fileId") Long fileId) throws IOException {
-        ImagesDto imagesDto = imagesService.getFile(fileId);
-        Path path = Paths.get(imagesDto.getImgPath());
-        Resource resource = new InputStreamResource(Files.newInputStream(path));
-        return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType("application/octet-stream"))
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; fileName=\"" + URLEncoder.encode(imagesDto.getImgName(), "UTF-8")+"\";")
-                .body(resource);
-    }
 
+
+    //수정했을 때
+    @PostMapping("/images/{id}")//수정
+    public String updateFile(Authentication authentication, @RequestParam("file") MultipartFile files, @PageableDefault Pageable pageable, Model model, @PathVariable("id")Long id) {
+
+        ImagesDto imagesDto= imagesService.storeFile(authentication,files,pageable,model);
+        //boardId 넣기
+        imagesDto.setBoard(boardRepository.getById(id));
+
+        //파일 제목으로 빈 파일 생성 막기
+        if(imagesDto.getImgName() != null && imagesDto.getImgName() != "" && imagesDto.getImgName().length()>0) {
+            imagesService.saveImage(imagesDto);
+        }
+
+
+        return "redirect:/qna/ask";
+
+    }
 
 
 

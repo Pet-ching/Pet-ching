@@ -76,25 +76,28 @@
         <tr>
                 <td>
                     <div class="form-group row">
-                        <label for="inputFile"><strong>첨부 파일</strong></label>
+                      <strong>첨부 파일</strong>
                     </div>
                 </td>
                 <td>
                     <div class="col-sm-10">
-                        <div th:if="!${image?.id}" class="custom-file" id="inputFile">
-                            <form action="/qna/images" method="post" enctype="multipart/form-data">
-<!--                                <div> *.rar, *.zip, *.gif, *.jpeg, *.png</div>-->
-<!--                                <div> *.jpg, *.bmp, *pdf, *.hwp, *.docx</div>-->
-<!--                                <div> 파일만 업로드 가능!</div>-->
+
+                        <div th:if="!${image?.id}">
+                            <form th:if="!${board?.id}" action="/qna/images" method="post" enctype="multipart/form-data">
                                 <label for="file">Upload your file:</label>
-                                <input name="file" type="file" class="custom-file-input" id="file" accept="*.rar, *.zip, *.gif, *.jpeg, *.png, *.jpg, *.bmp, *.pdf, *.hwp, *.txt"/>
-                                <input class="btn btn-primary" onclick="submitButtonOnclick()" id="submitBtn" type="submit" role="button" value="파일 전송" style="display:none;"/>
+                                <input type="file" class="custom-file-input" name ="file" id="file"/>
+                                <input class="btn btn-primary" id="idSubmitBtn" type="submit" role="button" value="파일 전송" style="display:none;"/>
                             </form>
-                        </div>
-<!--                            <img th:src="${image?.imgPath} +@{//} + ${image?.serverImgName}" alt="첨부이미지"  th:if="${image?.id}"/>-->
+
+                            <form th:if="${board?.id}" th:action="@{/qna/images/} + ${board?.id}" method="post" enctype="multipart/form-data">
+                                <label for="file">Upload your file:</label>
+                                <input type="file" class="custom-file-input" name ="file"/>
+                                <input class="btn btn-primary" id="noIdSubmitBtn" type="submit" role="button" value="파일 전송" style="display:none;"/>
+                            </form>
+                      </div>
+
                         <div th:if="${image?.id}">
-                            <a class="card-text" th:href="@{'/qna/download/' + ${image?.id}}" th:text="${image?.imgName}"></a>
-<!--                            <img th:src="@{${image?.imgPath + '\' +image?.serverImgName}}" alt="첨부이미지"  />-->
+                            <a class="card-text" th:href="@{'/qna/boards/download/' + ${image?.id}}" th:text="${image?.imgName}"></a>
                         </div>
                     </div>
                 </td>
@@ -105,7 +108,7 @@
     </div>
     <div class="pull-right">
         <button onclick="Check()" th:if="!${board?.id}" type="button" class="btn btn-primary" id="insert">저장</button>
-        <button onclick="Check()" th:if="${board?.id} " type="button" class="btn btn-info" id="update">수정</button>
+        <button onclick="Check()" th:if="${board?.id}" type="button" class="btn btn-info" id="update">수정</button>
         <button th:if="${board?.id}" type="button" class="btn btn-danger" id="delete">삭제</button>
     </div>
 </div>
@@ -115,15 +118,19 @@
 <div th:replace="fragments/footer::footer"></div>
 <!--/footer-->
 <div style="height:500px;"></div>
-<script>
-function submitButtonOnclick()  {
-  alert('이미 전송 버튼이 클릭되었습니다!!');
-}
-</script>
+<!--<script>-->
+<!--function submitButtonOnclick()  {-->
+<!--  alert('이미 전송 버튼이 클릭되었습니다!!');-->
+<!--}-->
+<!--</script>-->
 
 <script th:src="@{/js/jquery.min.js}"></script>
 <script>
-    $(".file").on("change", function() {
+    $('#idSubmitBtn).on("change", function() {
+         var fileName = $(this).val().split("\\").pop();
+         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+        $('#noIdSubmitBtn).on("change", function() {
          var fileName = $(this).val().split("\\").pop();
          $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
     });
@@ -144,7 +151,7 @@ function submitButtonOnclick()  {
                        dataType: "json",
                            success: function () {
                                alert('저장 성공!');
-                               $("#submitBtn").trigger("click");
+                               $("#idSubmitBtn").trigger("click");
                        },
            });
         });
@@ -166,7 +173,7 @@ function submitButtonOnclick()  {
                        dataType: "json",
                        success: function () {
                               alert('수정 성공!');
-                               $("#submitBtn").trigger("click");
+                               $("#noIdSubmitBtn").trigger("click");
 <!--                           location.href = '/qna/ask';-->
                        },
                        error: function () {
