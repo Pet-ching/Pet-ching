@@ -36,7 +36,7 @@
 <div th:replace="fragments/header.html::header"></div>
     <div class="container-fluid">
         <div class="content" th:object="${petSitter}">
-            <div class="item section" th:unless="*{not #lists.isEmpty(imgPaths)}">
+            <div class="section" th:unless="*{not #lists.isEmpty(imgPaths)}">
                 <img th:src="@{/img/petsitter_default.jpg}">
             </div>
             <div class="item section carousel slide" th:if="*{not #lists.isEmpty(imgPaths)}" id="my-pics" data-ride="carousel">
