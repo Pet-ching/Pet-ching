@@ -7,7 +7,6 @@ import com.mandarin.petching.dto.ImagesDto;
 import com.mandarin.petching.repository.BoardRepository;
 import com.mandarin.petching.repository.ImagesRepository;
 import com.mandarin.petching.util.MD5Generator;
-import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;

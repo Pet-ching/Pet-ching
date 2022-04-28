@@ -13,3 +13,4 @@ public enum SearchType {
         this.korName = korName;
     }
 }
+

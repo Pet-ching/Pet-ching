@@ -1,7 +1,6 @@
 package com.mandarin.petching.controller.qna;
 
 import com.mandarin.petching.domain.*;
-import com.mandarin.petching.dto.BoardDto;
 import com.mandarin.petching.dto.ImagesDto;
 import com.mandarin.petching.repository.BoardRepository;
 import com.mandarin.petching.repository.ImagesRepository;
@@ -9,34 +8,17 @@ import com.mandarin.petching.repository.MemberRepository;
 import com.mandarin.petching.repository.PetSitterRepository;
 import com.mandarin.petching.service.ImagesService;
 import com.mandarin.petching.service.QnaService;
-import com.mandarin.petching.util.MD5Generator;
 import lombok.RequiredArgsConstructor;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.transaction.Transactional;
 import java.io.*;
-import java.net.URLEncoder;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.time.LocalDateTime;
 
 
 @Controller
@@ -47,10 +29,7 @@ public class QnaController {
     private final QnaService qnaService;
     private final MemberRepository memberRepository;
     private final ImagesService imagesService;
-    private final ImagesRepository imagesRepository;
     private final BoardRepository boardRepository;
-    private final PetSitterRepository petSitterRepository;
-
     @Autowired
     private Search search;
 
@@ -86,6 +65,7 @@ public class QnaController {
         return "/qna/list";
     }
 
+    //상세 보기
     @GetMapping({"/form"})
     public String form(Authentication authentication, @RequestParam(value = "id",defaultValue = "0") Long id, Model model) throws IOException {
         String userName = authentication.getName();
@@ -161,7 +141,6 @@ public class QnaController {
 
         return "redirect:/qna/ask";
     }
-
 
 
     //수정했을 때

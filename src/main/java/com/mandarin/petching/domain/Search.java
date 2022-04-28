@@ -12,7 +12,5 @@ public class Search {
     private SearchType type = SearchType.title;
     private  String keyword = "";
 
-
-
 }
 

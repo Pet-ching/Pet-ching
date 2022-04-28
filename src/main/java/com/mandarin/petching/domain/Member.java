@@ -1,7 +1,6 @@
 package com.mandarin.petching.domain;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.mandarin.petching.dto.MemberFormDto;
 import lombok.Getter;
