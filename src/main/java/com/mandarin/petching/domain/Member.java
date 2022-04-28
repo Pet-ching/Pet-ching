@@ -1,5 +1,7 @@
 package com.mandarin.petching.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.mandarin.petching.dto.MemberFormDto;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,6 +13,7 @@ import java.util.List;
 
 @Entity
 @Getter @Setter
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class , property = "id")
 public class Member {
     @Id
     @Column(name = "member_id")
@@ -19,6 +22,7 @@ public class Member {
 
     private String userName;
 
+//    @JsonManagedReference
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Pet> petList = new ArrayList<>();
 
@@ -40,6 +44,7 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+//    @JsonManagedReference
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Board> board = new ArrayList<>();
 

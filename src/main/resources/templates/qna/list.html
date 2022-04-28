@@ -32,7 +32,7 @@
                 <th class="col-md-2">답변 상태</th>
                 <th class="col-md-5">제목</th>
                 <th class="col-md-2">작성 날짜</th>
-<!--                <th class="col-md-2">수정 날짜</th>-->
+                <!--                <th class="col-md-2">수정 날짜</th>-->
             </tr>
             </thead>
             <tbody>
@@ -47,9 +47,9 @@
             <tr th:if="${boardList.totalPages} <= 0">
                 <td colspan="5" style="text-align:center"><font size : large><b>조회된 결과가 없습니다.</b></font></td>
             </tr>
-<!--            <tr th:if="${#lists.isEmpty( boardList )}">-->
-<!--            <div th:text="${#lists.size('boardList')}"></div>-->
-<!--            <tr th:if="${#lists.size('boardList')} < 0">-->
+            <!--            <tr th:if="${#lists.isEmpty( boardList )}">-->
+            <!--            <div th:text="${#lists.size('boardList')}"></div>-->
+            <!--            <tr th:if="${#lists.size('boardList')} < 0">-->
 
             </tbody>
         </table>
@@ -58,7 +58,7 @@
     <br/>
     <!-- Pagination -->
 
-<!--    <nav  aria-label="Page navigation" style="text-align:center;" >-->
+    <!--    <nav  aria-label="Page navigation" style="text-align:center;" >-->
     <nav  aria-label="Page navigation" class="text-center" >
         <div class="pull-left">
             <a href="/qna/ask" class="btn btn-default">목록으로</a>
@@ -80,7 +80,7 @@
             <li><a aria-label="Next" th:href="@{/qna/ask(page=${boardList.totalPages})}">&raquo;</a></li>
         </ul>
 
-<!--        검색-->
+        <!--        검색-->
 
 
 
@@ -95,7 +95,7 @@
                             th:selected="${searchTypeValue.name()} ==  ${search.getType().name()}">
                     </option>
                 </select>
-             </div>
+            </div>
 
             <div class="w300" style="padding-right: 10px; display: inline-block;  width : 40%; text-align: left;">
                 <input type="text" class="form-control form-control-sm" name="keyword" id="keyword" placeholder="검색어를 입력해주세요" th:value="${search.getKeyword()}">

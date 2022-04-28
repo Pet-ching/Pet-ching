@@ -1,12 +1,17 @@
 
 .withdrawal-div {
-position:absolute;
-left:50%;
-top:30%;
+
+margin: 40px; auto;
+
+
     padding: 20px; 50px; 20px; 50px;
-    transform: translate(-50%, -50%);
+
     border: 2px solid black;
     border-radius: 10px;
+
+    justify-content: center;
+    align-item: center;
+
 }
 
 .alert-message {
@@ -34,3 +39,18 @@ top:30%;
     margin: 15px;
 }
 
+
+
+margin: 0 auto;
+position:absolute;
+width:1000px;
+left:50%;
+top:30%;
+    padding: 20px; 50px; 20px; 50px;
+    transform: translate(-50%, -50%);
+    border: 2px solid black;
+    border-radius: 10px;
+
+    display: table;
+    margin-left: auto;
+    margin-right: auto;

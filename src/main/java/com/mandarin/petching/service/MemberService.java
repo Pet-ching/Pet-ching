@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -64,7 +63,7 @@ public class MemberService implements UserDetailsService {
         File saveFile = new File(filePath, fileName);
         file.transferTo(saveFile);
 
-        findMember.setImgPath("/memberImages/images/" + fileName);
+        findMember.setImgPath("/images/memberImages/" + fileName);
     }
 
     public void deleteMember(Long id){

@@ -2,6 +2,7 @@ package com.mandarin.petching.service;
 
 import com.mandarin.petching.domain.*;
 import com.mandarin.petching.repository.BoardRepository;
+import com.mandarin.petching.repository.ImagesRepository;
 import com.mandarin.petching.repository.ReplyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -10,7 +11,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -18,6 +18,7 @@ public class QnaService {
 
     private final BoardRepository boardRepository;
     private final ReplyRepository replyRepository;
+    private final ImagesRepository imagesRepository;
 
     public boolean isAdmin(Member member)
     {
@@ -56,7 +57,10 @@ public class QnaService {
         else
         {
             Board board = new Board();
+
+            //멤버가 있어야지 들어갈 수 있는 조건문 때문에 필요
             board.setMember(member);
+
             return board;
         }
     }
@@ -66,6 +70,18 @@ public class QnaService {
         return boardRepository.save(board);
     }
 
+// 게시글 한개 삭제
+    @Transactional
+    public void deleteOneBoard(Board board)
+    {
+        //reply, 이미지 먼저 삭제
+        replyRepository.deleteByBoard(board);
+        imagesRepository.deleteByBoard(board);
+
+        boardRepository.deleteById(board.getId());
+
+    }
+
 
 //    전부삭제
     @Transactional
@@ -73,11 +89,13 @@ public class QnaService {
     {
         List<Board> deletedList  = boardRepository.findByBoardTypeBetweenAndMemberLike(BoardType.QnA문의1 ,BoardType.QnA문의3, member);
 
-        //reply 먼저 삭제
+        //reply, 이미지 먼저 삭제
         for(int i=0; i< deletedList.size();i++)
         {
             replyRepository.deleteByBoard(deletedList.get(i));
+            imagesRepository.deleteByBoard(deletedList.get(i));
         }
+
 
         if(isAdmin(member) == false)
         {
@@ -93,7 +111,7 @@ public class QnaService {
     }
 
 //    검색
-    public Page<Board> search(Search st, Member member,  Pageable pageable)
+    public Page<Board> search(Search st, Member member, Pageable pageable)
     {
         if(SearchType.title.equals(st.getType())) //제목
         {
@@ -136,10 +154,8 @@ public class QnaService {
             return replyRepository.findByBoard(board);
     }
 
-//    public void deleteByBoard(Board board)
-//    {
-//        replyRepository.deleteByBoard(board);
-//    }
-
-
+    public void saveBoard(Board board)
+    {
+        boardRepository.save(board);
+    }
 }

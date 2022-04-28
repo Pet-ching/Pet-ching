@@ -14,12 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.Optional;
 
 @RequestMapping("/members")
 @Controller
@@ -67,11 +64,11 @@ public class MemberController {
     }
 
     @GetMapping("/success")
-    public ModelAndView loginSuccess(Authentication auth) {
-        ModelAndView mav = new ModelAndView("/member/success");
+    public String loginSuccess(Authentication auth) {
         System.out.println("Authentication 안에 해당 로그인 사용자 정보 담겨 있음");
         System.out.println("유저 로그인 성공");
-        return mav;
+
+        return "index";
     }
 
     @GetMapping("/logout")

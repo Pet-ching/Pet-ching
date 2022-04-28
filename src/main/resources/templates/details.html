@@ -5,202 +5,190 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>펫시터 상세 정보</title>
+    <!-- 탭 아이콘 -->
     <link rel="icon" th:href="@{/images/icons/Home.png}" />
+    <!-- 폰트 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- 파일 css, js -->
     <link rel="stylesheet" th:href="@{/css/base.css}"/>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
     <link rel="stylesheet" th:href="@{/css/details.css}">
-    <script src="/js/details.js" th:src="@{/js/details}"></script>
+    <script type="text/jacascript" th:src="@{/js/details}"></script>
+    <!-- 필요 기능 -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
 
-<!--    로컬 테스트용-->
-        <link href="../static/css/details.css" rel="stylesheet">
-        <link href="../static/css/base.css" rel="stylesheet">
-        <link href="../static/css/bootstrap.min.css" rel="stylesheet">
-        <script type="text/javascript" src="../static/js/details.js"></script>
+    <script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- 로컬 테스트용 -->
+    <link href="../static/css/details.css" rel="stylesheet">
+    <link href="../static/css/base.css" rel="stylesheet">
+    <script type="text/javascript" src="../static/js/details.js"></script>
+
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../static/js/bootstrap.bundle.min.js"></script>
 
 </head>
 <body>
 <div th:replace="fragments/header.html::header"></div>
-<div class="container-fluid">
-    <div class="content" th:object="${petSitter}">
-        <div class="item section">
-            <input type="radio" name="slide" id="slide01" checked>
-            <input type="radio" name="slide" id="slide02">
-            <input type="radio" name="slide" id="slide03">
-            <div class="slidewrap">
-                <ul class="slidelist">
-                    <!-- 슬라이드 영역 -->
-                    <li class="slideitem">
-                        <a>
-                            <img th:src="@{/images/memberImages/2/petSitter/ps_2_00.jpg}" src="../static/images/memberImages/2/petSitter/ps_2_00.jpg">
-                        </a>
-                    </li>
-                    <li class="slideitem">
-                        <a>
-                            <img th:src="@{/images/memberImages/2/petSitter/ps_2_01.jpg}" src="../static/images/memberImages/2/petSitter/ps_2_01.jpg">
-                        </a>
-                    </li>
-                    <li class="slideitem">
-                        <a>
-                            <img th:src="@{/images/memberImages/2/petSitter/ps_2_02.jpg}" src="../static/images/memberImages/2/petSitter/ps_2_02.jpg">
-                        </a>
-                    </li>
-                    <!-- 좌,우 슬라이드 버튼 -->
-                    <div class="slide-control">
-                        <div>
-                            <label for="slide03" class="left"></label>
-                            <label for="slide02" class="right"></label>
-                        </div>
-                        <div>
-                            <label for="slide01" class="left"></label>
-                            <label for="slide03" class="right"></label>
-                        </div>
-                        <div>
-                            <label for="slide02" class="left"></label>
-                            <label for="slide01" class="right"></label>
-                        </div>
+    <div class="container-fluid">
+        <div class="content" th:object="${petSitter}">
+            <div class="section" th:unless="*{not #lists.isEmpty(imgPaths)}">
+                <img th:src="@{/img/petsitter_default.jpg}">
+            </div>
+            <div class="item section carousel slide" th:if="*{not #lists.isEmpty(imgPaths)}" id="my-pics" data-ride="carousel">
+                <div class="carousel-inner slideImgCover" role="listbox">
+                    <div th:each="slideImg, i : *{imgPaths}" th:if="${i.index==0}" class="item slideImg active" >
+                        <img th:src="@{${slideImg}}" th:onerror="|this.src='@{/img/petsitter_default.jpg}'|">
                     </div>
-                </ul>
-                <!-- 페이징 -->
-                <ul class="slide-pagelist">
-                    <li><label for="slide01"></label></li>
-                    <li><label for="slide02"></label></li>
-                    <li><label for="slide03"></label></li>
-                </ul>
+                    <div th:each="slideImg, i : *{imgPaths}" th:unless="${i.index==0}" class="item slideImg">
+                        <img th:src="@{${slideImg}}" th:onerror="|this.src='@{/img/petsitter_default.jpg}'|">
+                    </div>
+                </div>
+                <a class="left carousel-control" href="#my-pics" role="button" data-slide="prev">
+                    <span class="icon-prev" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#my-pics" role="button" data-slide="next">
+                    <span class="icon-next" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
-        </div>
-        <div class="item petsitter_name">
-            <div class="profileImage">
-                <img th:src="@{/images/memberImages/2/profile/pf_2_00.jpg}"
-                     src="../static/images/memberImages/2/profile/pf_2_00.jpg"
-                >
+            <div class="item petsitter_name">
+                <div class="profileImage">
+                    <img th:if="${not #strings.isEmpty(petSitterMember.imgPath)}" th:src="@{${petSitterMember.imgPath}}" alt="프로필 이미지"
+                         th:onerror="|this.src='@{/images/icons/basic_icon.png}'|">
+                    <img th:unless="${not #strings.isEmpty(petSitterMember.imgPath)}" th:src="@{/images/icons/basic_icon.png}">
+                </div>
+                <div class="textBox" style="display: inline-block;">
+                    <p class= "address" id="address01">서울시 서울구 서울동</p>
+                    <p class= "name" th:text="${petSitterMember.userName}+'님을 소개합니다!!'">테스트님을 소개합니다.</p>
+                </div>
             </div>
-            <div class="textBox" style="display: inline-block;">
-                <p class= "address" id="address01">서울시 서울구 서울동</p>
-                <p class= "name" th:text="${petSitterMember.userName}+'님을 소개합니다!!'">테스트님을 소개합니다.</p>
+            <div class="item introduce">
+                <h3><strong th:text="*{title}">여기는 제목~</strong></h3>
+                <div class="textBox" th:text="*{selfIntroduction}">여기는 자기소개~</div>
             </div>
-        </div>
-        <div class="item introduce">
-            <h3><strong th:text="*{title}">여기는 제목~</strong></h3>
-            <div class="textBox" th:text="*{selfIntroduction}">여기는 자기소개~</div>
-        </div>
-        <div class="item certifi">
-            <h4><strong>자격증 보유 내역</strong></h4>
-            <div class="textBox">
-                <ul>
-                    <li th:each="certifi : *{certificate}">
-                        <p th:text="${certifi}">여기에 자격증 나와요~
-                    </li>
-                </ul>
+            <div class="item certifi">
+                <h4><strong>자격증 보유 내역</strong></h4>
+                <div class="textBox">
+                    <ul>
+                        <li th:each="certifi : *{certificate}">
+                            <p th:text="${certifi}">여기에 자격증 나와요~
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-        <div class="item services">
-            <h4><strong>이용 가능 서비스</strong></h4>
-            <div class="textBox">
-                <ul>
-                    <li th:each="ableService : *{ableService}">
-                        <p th:text="${ableService}"> 여기는 이용가능 서비스
-                    </li>
-                </ul>
+            <div class="item services">
+                <h4><strong>이용 가능 서비스</strong></h4>
+                <div class="textBox">
+                    <ul>
+                        <li th:each="ableService : *{ableService}">
+                            <p th:text="${ableService}"> 여기는 이용가능 서비스
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-        <div class="item buttonBox">
-            <div th:if="(${petSitterMember.id}==${loginMember.id})">
-                <button type="button" th:onclick="|location.href='@{/mypage/petsitter/edit}'|"
-                        class="btn btn-primary btn-block"
-                        style="width:150px;margin:10px 0;"
-                >수정하기</button>
+            <div class="item buttonBox">
+                <div th:if="(${petSitterMember.id}==${loginMember.id})">
+                    <button type="button" th:onclick="|location.href='@{/mypage/petsitter/edit}'|"
+                            class="btn btn-primary btn-block"
+                            style="width:150px;margin:10px 0;"
+                    >수정하기</button>
+                </div>
+                <div th:unless="(${petSitterMember.id}==${loginMember.id})">
+                    <button type="button"
+                            th:onclick="|location.href='@{/matching/profile/reservation/{petSitter_id}(petSitter_id=${petSitter.id})}'|"
+                            class="btn btn-primary btn-block"
+                            style="width:150px;margin:10px 0;"
+                    >예약하러가기
+                    </button>
+                    <button type="button"
+                            th:onclick="|location.href='@{/chat/{petSitterId}(petSitterId = ${petSitterMember.id})}'|"
+                            class="btn btn-info"
+                            style="width:150px;margin:10px 0;"
+                    >채팅하기
+                    </button>
+                </div>
             </div>
-            <div th:unless="(${petSitterMember.id}==${loginMember.id})">
-                <button type="button"
-                        th:onclick="|location.href='@{/matching/profile/reservation/{petSitter_id}(petSitter_id=${petSitter.id})}'|"
-                        class="btn btn-primary btn-block"
-                        style="width:150px;margin:10px 0;"
-                >예약하러가기
-                </button>
-                <button type="button"
-                        th:onclick="|location.href='@{/chat/{petSitterId}(petSitterId = ${petSitterMember.id})}'|"
-                        class="btn btn-info"
-                        style="width:150px;margin:10px 0;"
-                >채팅하기
-                </button>
+            <div class="item feeList">
+                <h4><strong>이용 요금</strong></h4>
+                <div class="line"></div>
+                <table class="feeListTable">
+                    <th class="feeListKey">분류</th>
+                    <th>가격</th>
+                    <tr>
+                        <td class="feeListKey">🐶 소형견</td>
+                        <td class="feeListValue" th:if="*{feeList.smallDogFee==null}" th:text="이용불가" bgcolor="lightgray"></td>
+                        <td class="feeListValue" th:unless="*{feeList.smallDogFee==null}" th:text="*{feeList.smallDogFee}+'원'"></td>
+                    </tr>
+                    <tr>
+                        <td class="feeListKey">🐶 중형견</td>
+                        <td class="feeListValue" th:if="*{feeList.middleDogFee==null}" th:text="이용불가" bgcolor="lightgray"></td>
+                        <td class="feeListValue" th:unless="*{feeList.middleDogFee==null}" th:text="*{feeList.middleDogFee}+'원'"></td>
+                    </tr>
+                    <tr>
+                        <td class="feeListKey">🐶 대형견</td>
+                        <td class="feeListValue" th:if="*{feeList.largeDogFee==null}" th:text="이용불가" bgcolor="lightgray"></td>
+                        <td class="feeListValue" th:unless="*{feeList.largeDogFee==null}" th:text="*{feeList.largeDogFee}+'원'"></td>
+                    </tr>
+                    <tr>
+                        <td class="feeListKey">🐱 반려묘</td>
+                        <td class="feeListValue" th:if="*{feeList.catFee==null}" th:text="이용불가" bgcolor="lightgray"></td>
+                        <td class="feeListValue" th:unless="*{feeList.catFee==null}" th:text="*{feeList.catFee}+'원'"></td>
+                    </tr>
+                    <tr>
+                        <td class="feeListKey">🐹 기타동물</td>
+                        <td class="feeListValue" th:if="*{feeList.etcFee==null}" th:text="이용불가" bgcolor="lightgray"></td>
+                        <td class="feeListValue" th:unless="*{feeList.etcFee==null}" th:text="*{feeList.etcFee}+'원'"></td>
+                    </tr>
+                </table>
+                </br>
+                <p>자세한 요금은 채팅을 통해 문의해주세요!</p>
             </div>
-        </div>
-        <div class="item feeList">
-            <h4><strong>이용 요금</strong></h4>
-            <div class="line"></div>
-            <table class="feeListTable">
-                <th class="feeListKey">분류</th>
-                <th>가격</th>
-                <tr>
-                    <td class="feeListKey">🐶 소형견</td>
-                    <td class="feeListValue" th:if="*{feeList.smallDogFee==null}" th:text="이용불가" bgcolor="lightgray"></td>
-                    <td class="feeListValue" th:unless="*{feeList.smallDogFee==null}" th:text="*{feeList.smallDogFee}+'원'"></td>
-                </tr>
-                <tr>
-                    <td class="feeListKey">🐶 중형견</td>
-                    <td class="feeListValue" th:if="*{feeList.middleDogFee==null}" th:text="이용불가" bgcolor="lightgray"></td>
-                    <td class="feeListValue" th:unless="*{feeList.middleDogFee==null}" th:text="*{feeList.middleDogFee}+'원'"></td>
-                </tr>
-                <tr>
-                    <td class="feeListKey">🐶 대형견</td>
-                    <td class="feeListValue" th:if="*{feeList.largeDogFee==null}" th:text="이용불가" bgcolor="lightgray"></td>
-                    <td class="feeListValue" th:unless="*{feeList.largeDogFee==null}" th:text="*{feeList.largeDogFee}+'원'"></td>
-                </tr>
-                <tr>
-                    <td class="feeListKey">🐱 반려묘</td>
-                    <td class="feeListValue" th:if="*{feeList.catFee==null}" th:text="이용불가" bgcolor="lightgray"></td>
-                    <td class="feeListValue" th:unless="*{feeList.catFee==null}" th:text="*{feeList.catFee}+'원'"></td>
-                </tr>
-                <tr>
-                    <td class="feeListKey">🐹 기타동물</td>
-                    <td class="feeListValue" th:if="*{feeList.etcFee==null}" th:text="이용불가" bgcolor="lightgray"></td>
-                    <td class="feeListValue" th:unless="*{feeList.etcFee==null}" th:text="*{feeList.etcFee}+'원'"></td>
-                </tr>
-            </table>
-            </br>
-            <p>자세한 요금은 채팅을 통해 문의해주세요!</p>
-        </div>
-        <div class="item workingDay">
-            <h4><strong>예약 가능 요일</strong></h4>
-            <div class="line"></div>
-            <table class="workingDayTable">
-                <th class="ableDay" th:if="*{#lists.contains(workingDay,'월요일')}">월</th>
-                <th class="NotAbleDay" th:unless="*{#lists.contains(workingDay,'월요일')}">월</th>
+            <div class="item workingDay">
+                <h4><strong>예약 가능 요일</strong></h4>
+                <div class="line"></div>
+                <table class="workingDayTable">
+                    <th class="ableDay" th:if="*{#lists.contains(workingDay,'월요일')}">월</th>
+                    <th class="NotAbleDay" th:unless="*{#lists.contains(workingDay,'월요일')}">월</th>
 
-                <th class="ableDay" th:if="*{#lists.contains(workingDay,'화요일')}">화</th>
-                <th class="NotAbleDay" th:unless="*{#lists.contains(workingDay,'화요일')}">화</th>
+                    <th class="ableDay" th:if="*{#lists.contains(workingDay,'화요일')}">화</th>
+                    <th class="NotAbleDay" th:unless="*{#lists.contains(workingDay,'화요일')}">화</th>
 
-                <th class="ableDay" th:if="*{#lists.contains(workingDay,'수요일')}">수</th>
-                <th class="NotAbleDay" th:unless="*{#lists.contains(workingDay,'수요일')}">수</th>
+                    <th class="ableDay" th:if="*{#lists.contains(workingDay,'수요일')}">수</th>
+                    <th class="NotAbleDay" th:unless="*{#lists.contains(workingDay,'수요일')}">수</th>
 
-                <th class="ableDay" th:if="*{#lists.contains(workingDay,'목요일')}">목</th>
-                <th class="NotAbleDay" th:unless="*{#lists.contains(workingDay,'목요일')}">목</th>
+                    <th class="ableDay" th:if="*{#lists.contains(workingDay,'목요일')}">목</th>
+                    <th class="NotAbleDay" th:unless="*{#lists.contains(workingDay,'목요일')}">목</th>
 
-                <th class="ableDay" th:if="*{#lists.contains(workingDay,'금요일')}">금</th>
-                <th class="NotAbleDay" th:unless="*{#lists.contains(workingDay,'금요일')}">금</th>
+                    <th class="ableDay" th:if="*{#lists.contains(workingDay,'금요일')}">금</th>
+                    <th class="NotAbleDay" th:unless="*{#lists.contains(workingDay,'금요일')}">금</th>
 
-                <th class="ableDay" th:if="*{#lists.contains(workingDay,'토요일')}">토</th>
-                <th class="NotAbleDay" th:unless="*{#lists.contains(workingDay,'토요일')}">토</th>
+                    <th class="ableDay" th:if="*{#lists.contains(workingDay,'토요일')}">토</th>
+                    <th class="NotAbleDay" th:unless="*{#lists.contains(workingDay,'토요일')}">토</th>
 
-                <th class="ableDay" th:if="*{#lists.contains(workingDay,'일요일')}">일</th>
-                <th class="NotAbleDay" th:unless="*{#lists.contains(workingDay,'일요일')}">일</th>
-            </table>
-        </div>
-        <div class="item workingArea">
-            <h4><strong>예약 가능 지역</strong></h4>
-            <div id="address02">지이이역</div>
-            <div class="line"></div>
-            <div class="item maps">
-                <div id="map" style="width:250px;height:200px;"> 맵보여주는곳</div>
+                    <th class="ableDay" th:if="*{#lists.contains(workingDay,'일요일')}">일</th>
+                    <th class="NotAbleDay" th:unless="*{#lists.contains(workingDay,'일요일')}">일</th>
+                </table>
+            </div>
+            <div class="item workingArea">
+                <h4><strong>예약 가능 지역</strong></h4>
+                <div id="address02">지이이역</div>
+                <div class="line"></div>
+                <div class="item maps">
+                    <div id="map" style="width:250px;height:200px;"> 맵보여주는곳</div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 <script th:inline="javascript" th:src="@{//dapi.kakao.com/v2/maps/sdk.js?appkey=}+#{appkey}+@{&libraries=services}"></script>
 <script th:inline="javascript" th:src="@{/js/details.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
 <script>
         let address = "[[${petSitter.workingArea}]]";
         showMap(address, 20);

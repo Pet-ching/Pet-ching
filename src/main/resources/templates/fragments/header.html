@@ -20,7 +20,7 @@
                 </button>
                 <a href="/" class="navbar-brand" style="text-decoration:none;">
                     <img th:src="@{/images/icons/Home.png}" class="img-rounded" style="display:inline-block;height:100%;margin-right:5px" />
-                    <span style="vertical-align:middle;">펫칭</span>
+                    <span style="vertical-align:middle;">Petching</span>
                 </a>
             </div>
 
@@ -36,19 +36,19 @@
                         <a class="nav-link" th:href="@{/members/login}">로그인</a>
                     </li>
                     <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_USER')">
-                        <a class="nav-link" th:href="@{/matching/list}">matching</a>
+                        <a class="nav-link" th:href="@{/matching/list}">펫시터 찾기</a>
                     </li>
                     <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_USER')">
-                        <a class="nav-link"th:href="@{/board/list}">게시판</a>
+                        <a class="nav-link"th:href="@{/board/list}">커뮤니티</a>
                     </li>
                     <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_USER')">
-                        <a class="nav-link"th:href="@{/qna}">QnA</a>
+                        <a class="nav-link"th:href="@{/qna}">고객센터</a>
                     </li>
                     <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_USER')">
-                        <a class="nav-link"th:href="@{/mypage(type='petowner')}">mypage</a>
+                        <a class="nav-link"th:href="@{/mypage(type='petowner')}">마이페이지</a>
                     </li>
                     <li class="nav-item" sec:authorize="isAuthenticated()">
-                        <a class="nav-link"th:href="@{/logout}">logout</a>
+                        <a class="nav-link"th:href="@{/logout}">로그아웃</a>
                     </li>
                 </ul>
             </div>

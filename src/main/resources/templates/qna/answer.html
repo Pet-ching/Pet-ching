@@ -66,7 +66,10 @@
 
             <tr>
                 <th>답변 내용</th>
-                <td><b th:text="${reply?.getReContent()}"></b></td>
+                <td>
+                    <div th:text="${reply?.getReContent()}" class="col-md-1 form-control input-sm" rows="7" style="height: 200px; font-size: 18px;"></div>
+                    <span class="help-block"></span>
+                </td>
             </tr>
         </div>
 
@@ -98,6 +101,14 @@
             </tr>
 
          </div>
+        <tr>
+            <th>첨부 파일</th>
+            <td>
+                <b th:if="!${image?.id}">첨부파일이 없습니다!</b>
+                <a th:if="${image?.id}" class="card-text" th:href="@{'/qna/boards/download/' + ${image?.id}}" th:text="${image?.imgName}"></a>
+            </td>
+        </tr>
+
     </table>
 
 
@@ -111,10 +122,11 @@
 </div>
 <input id="board_id" type="hidden" th:value="${board?.id}"/>
 <!--/body-->
-
+<div style="height:100px;"></div>
 <!--footer-->
 <div th:replace="fragments/footer::footer"></div>
 <!--/footer-->
+<div style="height:100px;"></div>
 
 <script th:src="@{/js/jquery.min.js}"></script>
 <script th:if="!${reply?.id}">

@@ -41,3 +41,6 @@ out/
 .vscode/
 
 application-db.properties
+
+src/main/resources/static/files
+src/main/resources/static/json
