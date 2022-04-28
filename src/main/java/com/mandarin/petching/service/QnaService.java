@@ -111,7 +111,7 @@ public class QnaService {
     }
 
 //    검색
-    public Page<Board> search(Search st, Member member,  Pageable pageable)
+    public Page<Board> search(Search st, Member member, Pageable pageable)
     {
         if(SearchType.title.equals(st.getType())) //제목
         {

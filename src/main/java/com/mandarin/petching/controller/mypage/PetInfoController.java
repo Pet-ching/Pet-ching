@@ -1,6 +1,9 @@
 package com.mandarin.petching.controller.mypage;
 
-import com.mandarin.petching.domain.*;
+import com.mandarin.petching.domain.GenderType;
+import com.mandarin.petching.domain.Member;
+import com.mandarin.petching.domain.Pet;
+import com.mandarin.petching.domain.PetType;
 import com.mandarin.petching.repository.MemberRepository;
 import com.mandarin.petching.service.MyPageService;
 import lombok.RequiredArgsConstructor;

@@ -1,18 +1,14 @@
 package com.mandarin.petching.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
-import javax.validation.constraints.NotBlank;
+
 import java.time.LocalDateTime;
 import javax.validation.constraints.NotEmpty;
-import java.time.LocalDateTime;
 import javax.persistence.*;
 
 @NoArgsConstructor

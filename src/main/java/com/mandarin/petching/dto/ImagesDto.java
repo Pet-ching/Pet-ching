@@ -4,13 +4,8 @@ package com.mandarin.petching.dto;
 import com.mandarin.petching.domain.Board;
 import com.mandarin.petching.domain.ImageType;
 import com.mandarin.petching.domain.Images;
-import com.mandarin.petching.domain.PetSitter;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Id;
 import java.time.LocalDateTime;
 
 

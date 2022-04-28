@@ -1,17 +1,15 @@
 package com.mandarin.petching.controller.qna;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.mandarin.petching.domain.*;
-import com.mandarin.petching.dto.BoardDto;
 import com.mandarin.petching.dto.ImagesDto;
+import com.mandarin.petching.domain.AnswerType;
+import com.mandarin.petching.domain.Board;
+import com.mandarin.petching.domain.Member;
 import com.mandarin.petching.repository.BoardRepository;
-import com.mandarin.petching.repository.ImagesRepository;
 import com.mandarin.petching.repository.MemberRepository;
 import com.mandarin.petching.service.ImagesService;
 import com.mandarin.petching.service.QnaService;
-import com.mandarin.petching.util.MD5Generator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
@@ -24,7 +22,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.io.File;
@@ -35,7 +32,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
-import java.util.Map;
 
 @RestController
 @RequestMapping("qna/boards")

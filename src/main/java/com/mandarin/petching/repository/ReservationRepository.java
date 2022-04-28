@@ -1,6 +1,5 @@
 package com.mandarin.petching.repository;
 
-import com.mandarin.petching.domain.PetSitter;
 import com.mandarin.petching.domain.Reservation;
 import org.springframework.data.jpa.repository.JpaRepository;
 

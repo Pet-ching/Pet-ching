@@ -1,9 +1,10 @@
 package com.mandarin.petching.dto;
 
-import com.mandarin.petching.domain.*;
+import com.mandarin.petching.domain.AnswerType;
+import com.mandarin.petching.domain.Board;
+import com.mandarin.petching.domain.BoardType;
+import com.mandarin.petching.domain.Member;
 import lombok.NoArgsConstructor;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -11,7 +12,6 @@ import java.util.*;
 @NoArgsConstructor
 public class BoardDto {
     private Long id;
-
 
     private Member member;
 

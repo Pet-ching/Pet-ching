@@ -1,11 +1,9 @@
 package com.mandarin.petching.controller.mypage;
 
 import com.mandarin.petching.domain.Member;
-import com.mandarin.petching.domain.Pet;
 import com.mandarin.petching.domain.PetSitter;
 import com.mandarin.petching.domain.Reservation;
 import com.mandarin.petching.repository.MemberRepository;
-import com.mandarin.petching.repository.PetRepository;
 import com.mandarin.petching.repository.PetSitterRepository;
 import com.mandarin.petching.service.ReservationService;
 import lombok.RequiredArgsConstructor;
@@ -14,9 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/mypage")

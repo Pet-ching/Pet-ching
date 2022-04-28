@@ -1,11 +1,9 @@
 package com.mandarin.petching.domain;
 
-import com.mandarin.petching.dto.ImagesDto;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Getter
