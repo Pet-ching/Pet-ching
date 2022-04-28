@@ -1,11 +1,13 @@
 package com.mandarin.petching.controller;
 
 import com.mandarin.petching.domain.Board;
+import com.mandarin.petching.domain.BoardType;
 import com.mandarin.petching.domain.Member;
 import com.mandarin.petching.domain.Reply;
 import com.mandarin.petching.repository.BoardRepository;
 import com.mandarin.petching.repository.MemberRepository;
 import com.mandarin.petching.service.BoardService;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +21,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
+import java.util.Iterator;
+import java.util.List;
+import java.util.function.Function;
 
 @Controller
 @RequestMapping("/board")
@@ -34,15 +39,17 @@ public class BoardController {
     private MemberRepository memberRepository;
 
     @GetMapping("/list")
-    public String list(Model model, @PageableDefault(size = 2, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
+    public String list(Model model, @PageableDefault(size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
                        @RequestParam(required = false, defaultValue = "") String searchText) {
-        //Page<Board> boards = boardRepository.findAll(pageable);
-        Page<Board> boards = boardRepository.findByTitleContainingOrContentContaining(searchText, searchText, pageable);
+
+        Page<Board> boards = boardRepository.findByBoardTypeOrderByIdDesc(BoardType.COMMUNITY, pageable);
+
 //        int startPage = Math.max(1, boards.getPageable().getPageNumber() - 4);
 //        int endPage = Math.min(boards.getTotalPages(), boards.getPageable().getPageNumber() + 4);
         int nowPage = boards.getPageable().getPageNumber()+1;
         int startPage = Math.max(1, nowPage-2);
         int endPage = Math.min(startPage+2, boards.getTotalPages());
+
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
         model.addAttribute("boards", boards);
