@@ -50,6 +50,13 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 	implementation 'com.google.code.gson:gson:2.9.0'
 
+	//이미지 저장될 파일명을 랜덤 문자열로 만들기 위해 사용
+	implementation 'org.apache.commons:commons-lang3'
+
+	//json
+	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.2'
+	implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+
 }
 
 tasks.named('test') {
