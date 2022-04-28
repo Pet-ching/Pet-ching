@@ -1,6 +1,10 @@
 package com.mandarin.petching.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
@@ -15,6 +19,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class , property = "id")
 public class Board {
 
     @Id
@@ -22,10 +27,10 @@ public class Board {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+//    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "member_id", referencedColumnName = "member_id")
     private Member member;
-
 
     @Column(columnDefinition = "integer default 0")
     private Integer hits;
@@ -50,6 +55,7 @@ public class Board {
     @Enumerated(EnumType.STRING)// Enum 타입의 필드를 DB에 저장할 때 enum '이름'으로 매핑해주는 어노테이션
     private AnswerType answerType;
 
+//    @JsonManagedReference
     @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
     private List<Reply> replies;
 
@@ -61,6 +67,7 @@ public class Board {
         this.regDate = regDate;
         this.member = member;
         this.answerType = answerType;
+//        this.ImageId = ImageId;
     }
 }
 
