@@ -85,29 +85,44 @@ public class QnaService {
 
 //    전부삭제
     @Transactional
-    public List<Board> deleteQnaAll(Member member)
+//    public List<Board> deleteQnaAll(Member member)
+    public void deleteQnaAll(Member member)
     {
-        List<Board> deletedList  = boardRepository.findByBoardTypeBetweenAndMemberLike(BoardType.QnA문의1 ,BoardType.QnA문의3, member);
+        List<Board> deletedList;
 
-        //reply, 이미지 먼저 삭제
-        for(int i=0; i< deletedList.size();i++)
-        {
-            replyRepository.deleteByBoard(deletedList.get(i));
-            imagesRepository.deleteByBoard(deletedList.get(i));
-        }
-
-
+        //일반 유저
         if(isAdmin(member) == false)
         {
+            deletedList  = boardRepository.findByBoardTypeBetweenAndMemberLike(BoardType.QnA문의1 ,BoardType.QnA문의3, member);
+            //FK 엮인 것들 먼저 삭제
+            this.deleteBoardFkDomain(deletedList);
 
-            deletedList = boardRepository.deleteByBoardTypeBetweenAndMemberLike(BoardType.QnA문의1 ,BoardType.QnA문의3, member);
+            boardRepository.deleteByBoardTypeBetweenAndMemberLike(BoardType.QnA문의1 ,BoardType.QnA문의3, member);
         }
+        //관리자
         else
         {
-           deletedList = boardRepository.deleteByBoardTypeBetween(BoardType.QnA문의1 ,BoardType.QnA문의3);
+            deletedList  = boardRepository.findByBoardTypeBetween(BoardType.QnA문의1 ,BoardType.QnA문의3);
+            //FK 엮인 것들 먼저 삭제
+            this.deleteBoardFkDomain(deletedList);
+
+            boardRepository.deleteByBoardTypeBetween(BoardType.QnA문의1 ,BoardType.QnA문의3);
+
         }
 
-        return deletedList;
+    }
+
+    public void deleteBoardFkDomain(List<Board> deletedList)
+    {
+        for(int i=0; i< deletedList.size();i++)
+        {
+            if(replyRepository.findByBoard(deletedList.get(i)) != null) {
+                replyRepository.deleteByBoard(deletedList.get(i));
+            }
+            if(imagesRepository.findByBoard(deletedList.get(i)) != null) {
+                imagesRepository.deleteByBoard(deletedList.get(i));
+            }
+        }
     }
 
 //    검색

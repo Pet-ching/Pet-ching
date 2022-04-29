@@ -149,6 +149,7 @@
                        data: jsonData,
                        contentType: "application/json; charset=utf-8",
                        dataType: "json",
+<!--                       async: false,-->
                            success: function () {
                                alert('저장 성공!');
                                $("#idSubmitBtn").trigger("click");
@@ -171,6 +172,7 @@
                        data: jsonData,
                        contentType: "application/json",
                        dataType: "json",
+<!--                      async: false,-->
                        success: function () {
                               alert('수정 성공!');
                                $("#noIdSubmitBtn").trigger("click");

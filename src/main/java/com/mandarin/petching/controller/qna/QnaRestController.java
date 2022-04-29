@@ -102,13 +102,11 @@ public class QnaRestController {
         //valid 체크
         Board persistBoard = boardRepository.getById(id) ;
 
-//        persistBoard.builder().title(board.getTitle()).content(board.getContent());
+
        persistBoard.setBoardType(board.getBoardType());
        persistBoard.setTitle(board.getTitle());
        persistBoard.setContent(board.getContent());
        persistBoard.setRegDate(LocalDateTime.now());
-
-//        qnaService.write(board,file);
 
         boardRepository.save(persistBoard);
         return new ResponseEntity<>("{}", HttpStatus.OK);
