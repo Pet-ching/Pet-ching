@@ -1,5 +1,5 @@
 # Petching
-반려동물 주인과 펫시터를 1:1로 매칭해주는 플랫폼 서비스입니다.
+✔ 반려동물 주인과 펫시터를 1:1로 매칭해주는 플랫폼 서비스입니다.
 
 <br>
 
@@ -54,7 +54,7 @@
 |[박승연](https://github.com/seungyeonpark)|- STOMP 웹 소켓을 이용한 채팅 기능 구현 <br>- 예약 관리 기능 구현 <br> - 반려동물 정보 관리 기능 구현 <br>- 펫시터 돌봄환경 관리 기능 구현 <br>- 회원정보 관리 기능 구현|
 |[이정수](https://github.com/2cleanwater)|- 펫시터 상세 정보 서비스 구현 <br>- 예약 등록 기능 구현 <br>- 카카오 맵 API 서비스 구현|
 |[설태혁](https://github.com/seoltaehyeok)|- spring security를 사용해 로그인, 회원가입 구현 <br>- 로그인, 회원가입 제약 조건 구현 <br>- 회원 탈퇴 구현 <br>- 펫시터-보호자 매칭 로직 및 페이지 구현|
-|[김선화](https://github.com/hhhhhsh)|- spring security를 사용해 보안 설계 구현 <br>- 회원가입 제약 조건 구현 <br>- index 페이지 구현|
+|[김선화](https://github.com/hhhhhsh)|- spring security를 사용해 로그인 보안 설계 구현 <br>- 회원가입 제약 조건 구현 <br>- index 페이지 구현|
 |[이정운](https://github.com/wjddns0882)|- 커뮤니티 게시판 등록, 조회, 수정, 삭제 <br>- 커뮤니티 게시판 댓글 구현 <br>- 문서 작업|
 |[김귀영](https://github.com/Onlwu)|- 고객센터 자주 찾는 질문 페이지 구현 <br>- 고객센터 1:1 문의 서비스 구현 <br>- 1:1 문의 페이지 관리자, 유저 권한 설정 <br>- 1:1 문의 페이지 파일 업로드, 다운로드|
 
