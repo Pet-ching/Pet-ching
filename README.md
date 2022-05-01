@@ -11,7 +11,7 @@
 
 ## 2. 기술 스택
 - Java 11
-- Spring Boot 2.6.4
+- Spring Boot 2.6.6
 - Spring Web MVC 5.3.19
 - Spring Security 5.6.2
 - Spring data JPA 2.6.3
@@ -51,7 +51,7 @@
 ## 7. 개발 팀 소개
 |이름|역할|
 |--|--|
-|[박승연](https://github.com/seungyeonpark)|- STOMP 웹 소켓을 이용한 채팅 기능 구현 <br>- 예약 관리 기능 구현 <br> - 반려동물 정보 관리 기능 구현 <br>- 펫시터 돌봄환경 관리 기능 구현 <br>- 회원정보 관리 기능 구현|
+|[박승연](https://github.com/seungyeonpark)|- 웹 소켓을 이용한 채팅 기능 구현 <br>- 예약 관리 기능 구현 <br> - 반려동물 정보 관리 기능 구현 <br>- 펫시터 돌봄환경 관리 기능 구현 <br>- 회원정보 관리 기능 구현|
 |[이정수](https://github.com/2cleanwater)|- 펫시터 상세 정보 서비스 구현 <br>- 예약 등록 기능 구현 <br>- 카카오 맵 API 서비스 구현|
 |[설태혁](https://github.com/seoltaehyeok)|- spring security를 사용해 로그인, 회원가입 구현 <br>- 로그인, 회원가입 제약 조건 구현 <br>- 회원 탈퇴 구현 <br>- 펫시터-보호자 매칭 로직 및 페이지 구현|
 |[김선화](https://github.com/hhhhhsh)|- spring security를 사용해 로그인 보안 설계 구현 <br>- 회원가입 제약 조건 구현 <br>- index 페이지 구현|
