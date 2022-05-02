@@ -6,7 +6,6 @@ import com.mandarin.petching.repository.MemberRepository;
 import com.mandarin.petching.service.MemberService;
 import com.mandarin.petching.service.MyPageService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-@Slf4j
 @Controller
 @RequestMapping("/mypage")
 @RequiredArgsConstructor
