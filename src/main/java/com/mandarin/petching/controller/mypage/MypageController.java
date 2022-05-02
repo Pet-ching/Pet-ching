@@ -6,7 +6,6 @@ import com.mandarin.petching.repository.MemberRepository;
 import com.mandarin.petching.service.MemberService;
 import com.mandarin.petching.service.MyPageService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-@Slf4j
 @Controller
 @RequestMapping("/mypage")
 @RequiredArgsConstructor
@@ -30,8 +28,7 @@ public class MypageController {
     @GetMapping
     public String mypage(Authentication authentication, @RequestParam String type, Model model) {
 
-        String userName = authentication.getName();
-        Member member = memberRepository.findByUserEmail(userName);
+        Member member = getMember(authentication);
 
         model.addAttribute("member", member);
         model.addAttribute("type", type);
@@ -41,8 +38,7 @@ public class MypageController {
     @GetMapping("/chats")
     public String viewChatList(Authentication authentication, Model model) {
 
-        String userName = authentication.getName();
-        Member member = memberRepository.findByUserEmail(userName);
+        Member member = getMember(authentication);
 
         List<ChatRoom> chatRoomList = myPageService.getChatList(member.getId());
 
@@ -54,8 +50,7 @@ public class MypageController {
     @GetMapping("/member/edit")
     public String editMemberForm(Authentication authentication, Model model) {
 
-        String userName = authentication.getName();
-        Member member = memberRepository.findByUserEmail(userName);
+        Member member = getMember(authentication);
 
         model.addAttribute("member", member);
 
@@ -73,11 +68,15 @@ public class MypageController {
             return "mypage/memberEdit";
         }
 
-        String userName = authentication.getName();
-        Member findMember = memberRepository.findByUserEmail(userName);
+        Member findMember = getMember(authentication);
 
         memberService.updateMember(findMember.getId(), member, file);
 
         return "redirect:/mypage?type=petowner";
+    }
+
+    private Member getMember(Authentication authentication) {
+        String userName = authentication.getName();
+        return memberRepository.findByUserEmail(userName);
     }
 }

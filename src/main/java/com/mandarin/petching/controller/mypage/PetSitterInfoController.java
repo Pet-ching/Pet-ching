@@ -5,7 +5,6 @@ import com.mandarin.petching.domain.*;
 import com.mandarin.petching.repository.MemberRepository;
 import com.mandarin.petching.service.MyPageService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-@Slf4j
 @Controller
 @RequestMapping("/mypage/petsitter")
 @RequiredArgsConstructor
@@ -30,8 +28,7 @@ public class PetSitterInfoController {
     @GetMapping
     public String petSitterInfoView(Authentication authentication, Model model) {
 
-        String userName = authentication.getName();
-        Member member = memberRepository.findByUserEmail(userName);
+        Member member = getMember(authentication);
 
         PetSitter petSitter = member.getPetSitter();
 
@@ -71,8 +68,7 @@ public class PetSitterInfoController {
             return "mypage/petSitterInfoWrite";
         }
 
-        String userName = authentication.getName();
-        Member member = memberRepository.findByUserEmail(userName);
+        Member member = getMember(authentication);
 
         myPageService.savePetSitter(member, petSitter, feeList, files);
 
@@ -82,8 +78,7 @@ public class PetSitterInfoController {
     @GetMapping("/edit")
     public String editPetSitterForm(Authentication authentication, Model model) {
 
-        String userName = authentication.getName();
-        Member member = memberRepository.findByUserEmail(userName);
+        Member member = getMember(authentication);
 
         PetSitter petSitter = member.getPetSitter();
         FeeList feeList = petSitter.getFeeList();
@@ -115,11 +110,15 @@ public class PetSitterInfoController {
             return "mypage/petSitterInfoWrite";
         }
 
-        String userName = authentication.getName();
-        Member member = memberRepository.findByUserEmail(userName);
+        Member member = getMember(authentication);
 
         myPageService.updatePetSitter(member, petSitter, feeList, files);
 
         return "redirect:/mypage/petsitter";
+    }
+
+    private Member getMember(Authentication authentication) {
+        String userName = authentication.getName();
+        return memberRepository.findByUserEmail(userName);
     }
 }
