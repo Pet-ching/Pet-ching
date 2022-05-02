@@ -28,8 +28,7 @@ public class PetSitterInfoController {
     @GetMapping
     public String petSitterInfoView(Authentication authentication, Model model) {
 
-        String userName = authentication.getName();
-        Member member = memberRepository.findByUserEmail(userName);
+        Member member = getMember(authentication);
 
         PetSitter petSitter = member.getPetSitter();
 
@@ -69,8 +68,7 @@ public class PetSitterInfoController {
             return "mypage/petSitterInfoWrite";
         }
 
-        String userName = authentication.getName();
-        Member member = memberRepository.findByUserEmail(userName);
+        Member member = getMember(authentication);
 
         myPageService.savePetSitter(member, petSitter, feeList, files);
 
@@ -80,8 +78,7 @@ public class PetSitterInfoController {
     @GetMapping("/edit")
     public String editPetSitterForm(Authentication authentication, Model model) {
 
-        String userName = authentication.getName();
-        Member member = memberRepository.findByUserEmail(userName);
+        Member member = getMember(authentication);
 
         PetSitter petSitter = member.getPetSitter();
         FeeList feeList = petSitter.getFeeList();
@@ -113,11 +110,15 @@ public class PetSitterInfoController {
             return "mypage/petSitterInfoWrite";
         }
 
-        String userName = authentication.getName();
-        Member member = memberRepository.findByUserEmail(userName);
+        Member member = getMember(authentication);
 
         myPageService.updatePetSitter(member, petSitter, feeList, files);
 
         return "redirect:/mypage/petsitter";
+    }
+
+    private Member getMember(Authentication authentication) {
+        String userName = authentication.getName();
+        return memberRepository.findByUserEmail(userName);
     }
 }

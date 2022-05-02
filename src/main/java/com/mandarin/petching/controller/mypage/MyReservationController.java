@@ -26,8 +26,7 @@ public class MyReservationController {
     @GetMapping("/pet/reservation")
     public String PetOwnerReservationList(Authentication authentication, Model model) {
 
-        String userName = authentication.getName();
-        Member member = memberRepository.findByUserEmail(userName);
+        Member member = getMember(authentication);
 
         List<Reservation> reservationList = reservationService.findByPetOwner(member.getId());
 
@@ -40,8 +39,7 @@ public class MyReservationController {
     @GetMapping("/petsitter/reservation")
     public String PetSitterReservationList(Authentication authentication, Model model) {
 
-        String userName = authentication.getName();
-        Member member = memberRepository.findByUserEmail(userName);
+        Member member = getMember(authentication);
 
         List<Reservation> reservationList = reservationService.findByPetSitter(member.getPetSitter().getId());
 
@@ -88,5 +86,10 @@ public class MyReservationController {
        reservationService.cancelReservation(reservationId);
 
        return "redirect:/mypage/pet/reservation";
+    }
+
+    private Member getMember(Authentication authentication) {
+        String userName = authentication.getName();
+        return memberRepository.findByUserEmail(userName);
     }
 }

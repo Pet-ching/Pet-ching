@@ -27,8 +27,7 @@ public class PetInfoController {
     @GetMapping
     public String petListView(Authentication authentication, Model model) {
 
-        String userName = authentication.getName();
-        Member member = memberRepository.findByUserEmail(userName);
+        Member member = getMember(authentication);
 
         List<Pet> petList = member.getPetList();
 
@@ -65,8 +64,7 @@ public class PetInfoController {
             return "mypage/petInfoWrite";
         }
 
-        String userName = authentication.getName();
-        Member member = memberRepository.findByUserEmail(userName);
+        Member member = getMember(authentication);
 
         myPageService.createPet(member, pet);
 
@@ -127,5 +125,10 @@ public class PetInfoController {
         myPageService.deletePet(petId);
 
         return "redirect:/mypage/pet";
+    }
+
+    private Member getMember(Authentication authentication) {
+        String userName = authentication.getName();
+        return memberRepository.findByUserEmail(userName);
     }
 }

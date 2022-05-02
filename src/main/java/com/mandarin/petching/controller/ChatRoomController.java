@@ -23,8 +23,7 @@ public class ChatRoomController {
     @GetMapping("/chat/{petSitterId}")
     public String createRoom(Authentication authentication, @PathVariable Long petSitterId) {
 
-        String userName = authentication.getName();
-        Member member = memberRepository.findByUserEmail(userName);
+        Member member = getMember(authentication);
         Long petOwnerId = member.getId();
 
         Long roomId = chatService.createRoom(petOwnerId, petSitterId);
@@ -36,8 +35,7 @@ public class ChatRoomController {
 
         List<ChatMessage> chatList = chatService.findAllChatByRoomId(roomId);
 
-        String userName = authentication.getName();
-        Member member = memberRepository.findByUserEmail(userName);
+        Member member = getMember(authentication);
         String username = member.getUserName();
 
         model.addAttribute("roomId", roomId);
@@ -45,5 +43,10 @@ public class ChatRoomController {
         model.addAttribute("username", username);
 
         return "chat/room";
+    }
+
+    private Member getMember(Authentication authentication) {
+        String userName = authentication.getName();
+        return memberRepository.findByUserEmail(userName);
     }
 }
