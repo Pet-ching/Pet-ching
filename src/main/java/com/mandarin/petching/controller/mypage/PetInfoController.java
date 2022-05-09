@@ -7,7 +7,6 @@ import com.mandarin.petching.domain.PetType;
 import com.mandarin.petching.repository.MemberRepository;
 import com.mandarin.petching.service.MyPageService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Slf4j
 @Controller
 @RequestMapping("/mypage/pet")
 @RequiredArgsConstructor
@@ -29,8 +27,7 @@ public class PetInfoController {
     @GetMapping
     public String petListView(Authentication authentication, Model model) {
 
-        String userName = authentication.getName();
-        Member member = memberRepository.findByUserEmail(userName);
+        Member member = getMember(authentication);
 
         List<Pet> petList = member.getPetList();
 
@@ -67,8 +64,7 @@ public class PetInfoController {
             return "mypage/petInfoWrite";
         }
 
-        String userName = authentication.getName();
-        Member member = memberRepository.findByUserEmail(userName);
+        Member member = getMember(authentication);
 
         myPageService.createPet(member, pet);
 
@@ -129,5 +125,10 @@ public class PetInfoController {
         myPageService.deletePet(petId);
 
         return "redirect:/mypage/pet";
+    }
+
+    private Member getMember(Authentication authentication) {
+        String userName = authentication.getName();
+        return memberRepository.findByUserEmail(userName);
     }
 }

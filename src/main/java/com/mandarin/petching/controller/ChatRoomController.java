@@ -5,7 +5,6 @@ import com.mandarin.petching.domain.Member;
 import com.mandarin.petching.repository.MemberRepository;
 import com.mandarin.petching.service.ChatService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class ChatRoomController {
@@ -25,8 +23,7 @@ public class ChatRoomController {
     @GetMapping("/chat/{petSitterId}")
     public String createRoom(Authentication authentication, @PathVariable Long petSitterId) {
 
-        String userName = authentication.getName();
-        Member member = memberRepository.findByUserEmail(userName);
+        Member member = getMember(authentication);
         Long petOwnerId = member.getId();
 
         Long roomId = chatService.createRoom(petOwnerId, petSitterId);
@@ -38,8 +35,7 @@ public class ChatRoomController {
 
         List<ChatMessage> chatList = chatService.findAllChatByRoomId(roomId);
 
-        String userName = authentication.getName();
-        Member member = memberRepository.findByUserEmail(userName);
+        Member member = getMember(authentication);
         String username = member.getUserName();
 
         model.addAttribute("roomId", roomId);
@@ -47,5 +43,10 @@ public class ChatRoomController {
         model.addAttribute("username", username);
 
         return "chat/room";
+    }
+
+    private Member getMember(Authentication authentication) {
+        String userName = authentication.getName();
+        return memberRepository.findByUserEmail(userName);
     }
 }
