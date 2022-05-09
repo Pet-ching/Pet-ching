@@ -8,7 +8,6 @@ build/
 application-db.properties
 messages.properties
 
-
 ### STS ###
 .apt_generated
 .classpath
@@ -39,8 +38,6 @@ out/
 
 ### VS Code ###
 .vscode/
-
-application-db.properties
 
 src/main/resources/static/files
 src/main/resources/static/json
