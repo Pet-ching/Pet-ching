@@ -1,5 +1,7 @@
 # Petching
-✔ 반려동물 주인과 펫시터를 1:1로 매칭해주는 플랫폼 서비스입니다.
+✔ 반려동물 주인과 펫시터를 1:1로 매칭해주는 플랫폼 서비스입니다.<br>
+📽 시연 영상 : https://www.youtube.com/watch?v=9caRKdyAJHk <br>
+📋 노션 페이지 : https://2cleanwater.notion.site/Pet-ching-2d0aeb3f61764f64be6da393b780507d
 
 <br>
 
