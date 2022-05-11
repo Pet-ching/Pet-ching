@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>관리자 페이지</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .wrapper {
+            display: flex;
+            justify-content: space-between;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .list {
+            list-style-type: none;
+            background-color: #f1f1f1;
+            height: 100%;
+            overflow: auto;
+            margin: 0;
+            padding: 0;
+        }
+
+        .list a {
+            display: block;
+            color: #000;
+            padding: 8px 16px;
+            text-decoration: none;
+        }
+
+        .list a.active {
+            background-color: #555;
+            color: white;
+        }
+
+        .list a:hover:not(.active) {
+            background-color: #555;
+            color: white;
+        }
+
+        .sub_view {
+            width: 20%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main_view {
+            width: 80%;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="fragments/header.html::header"></div>
+<div class="container">
+    <div class="wrapper">
+        <div class="sub_view">
+            <ul class="list">
+                <li><a class="active" th:href="@{/admin/members}">회원 조회</a></li>
+                <li><a th:href="@{/admin/reservations}">예약 조회</a></li>
+            </ul>
+        </div>
+        <div id="mainHide" class="main_view">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th class="col-md-1">예약 현황</th>
+                    <th class="col-md-1">반려동물 이름</th>
+                    <th class="col-md-1">시작일</th>
+                    <th class="col-md-1">종료일</th>
+                    <th class="col-md-1">요금</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>예약 승인</td>
+                    <td>멍멍이</td>
+                    <td>2022-05-09</td>
+                    <td>2022-05-10</td>
+                    <td>1000</td>
+                </tr>
+                </tbody>
+            </table>
+            <nav  aria-label="Page navigation" class="text-center" >
+                <br><br>
+                <ul class="pagination">
+                    <li><a aria-label="Previous" href="/qna/ask?page=1">&laquo;</a></li>
+                    <li>
+                        <a>&lsaquo;</a>
+                    </li>
+                    <li>
+                        <a><span class="sr-only"></span></a>
+                    </li>
+                    <li>
+                        <a>&rsaquo;</a>
+                    </li>
+                    <li><a aria-label="Next">&raquo;</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+<div th:replace="fragments/footer.html::footer"></div>
+</body>
+</html>
