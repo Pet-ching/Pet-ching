@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>가격 통계</title>
+</head>
+<body>
+<h3>소형견</h3>
+인원 : <div th:text="${smallDog.getTotal()}"></div>
+최고가 : <div th:text="${smallDog.getMax()}"></div>
+최저가 : <div th:text="${smallDog.getMin()}"></div>
+평균가 : <div th:text="${smallDog.getAvg()}"></div>
+<br><br>
+
+<h3>중형견</h3>
+인원 : <div th:text="${middleDog.getTotal()}"></div>
+최고가 : <div th:text="${middleDog.getMax()}"></div>
+최저가 : <div th:text="${middleDog.getMin()}"></div>
+평균가 : <div th:text="${middleDog.getAvg()}"></div>
+<br><br>
+
+<h3>대형견 </h3>
+인원 : <div th:text="${largeDog.getTotal()}"></div>
+최고가 : <div th:text="${largeDog.getMax()}"></div>
+최저가 : <div th:text="${largeDog.getMin()}"></div>
+평균가 : <div th:text="${largeDog.getAvg()}"></div>
+<br><br>
+
+
+<h3>고양이</h3>
+<table>
+    <tr>
+        <th>인원 : </th>
+        <td th:text="${etc.getTotal()}"></td>
+    </tr>
+
+    <tr>
+        <th>최저가 : </th>
+        <td th:text="${etc.getMin()}"></td>
+    </tr>
+
+    <tr>
+        <th>최고가 : </th>
+        <td th:text="${etc.getMax()}"></td>
+    </tr>
+
+    <tr>
+        <th>평균가 : </th>
+        <td th:text="${etc.getAvg()}"></td>
+    </tr>
+
+    <tr th:each="list : ${catCountByPrice}">
+        <th>가격대</th>
+        <td th:text="${list.getPrice()}"></td>
+        <th>인원수</th>
+        <td th:text="${list.getCount()}"></td>
+        <td></td>
+    </tr>
+</table>
+<br><br>
+
+<h3>기타</h3>
+인원 : <div th:text="${etc.getTotal()}"></div>
+최고가 : <div th:text="${etc.getMax()}"></div>
+최저가 : <div th:text="${etc.getMin()}"></div>
+평균가 : <div th:text="${etc.getAvg()}"></div>
+<br><br>
+
+
+
+
+</body>
+</html>
