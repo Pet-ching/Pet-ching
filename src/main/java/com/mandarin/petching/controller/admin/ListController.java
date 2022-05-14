@@ -17,4 +17,19 @@ public class ListController {
     public String reservationList() {
         return "admin/reservations";
     }
+
+    @GetMapping("/petchart")
+    public String petChartList() {
+        return "admin/petchart";
+    }
+
+    @GetMapping("/petsitterchart")
+    public String petSitterChartList() {
+        return "admin/petsitterchart";
+    }
+
+    @GetMapping("/petownerchart")
+    public String petOwnerChartList() {
+        return "admin/petownerchart";
+    }
 }
