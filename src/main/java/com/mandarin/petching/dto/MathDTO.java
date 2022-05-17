@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PriceDTO {
+public class MathDTO {
 
     private Long total;
     private Integer min;

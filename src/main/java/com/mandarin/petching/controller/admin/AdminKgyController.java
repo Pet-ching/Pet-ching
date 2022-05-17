@@ -1,10 +1,7 @@
 package com.mandarin.petching.controller.admin;
 
-import com.mandarin.petching.dto.CertificateDTO;
-import com.mandarin.petching.dto.CountByPriceDTO;
-import com.mandarin.petching.dto.PriceDTO;
+import com.mandarin.petching.dto.*;
 import com.mandarin.petching.service.AdminKgyService;
-import com.mandarin.petching.dto.AreaDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,11 +29,11 @@ public class AdminKgyController {
     {
         //소-중-대(견) -> 고양이 -> 기타 동물 순
         //총 수, 최댓값, 최솟값, 평균
-        PriceDTO smallDog = adminKgyService.getPetSitterPrice().get(0);
-        PriceDTO middleDog = adminKgyService.getPetSitterPrice().get(1);
-        PriceDTO largeDog = adminKgyService.getPetSitterPrice().get(2);
-        PriceDTO cat = adminKgyService.getPetSitterPrice().get(3);
-        PriceDTO etc = adminKgyService.getPetSitterPrice().get(4);
+        MathDTO smallDog = adminKgyService.getPetSitterPrice().get(0);
+        MathDTO middleDog = adminKgyService.getPetSitterPrice().get(1);
+        MathDTO largeDog = adminKgyService.getPetSitterPrice().get(2);
+        MathDTO cat = adminKgyService.getPetSitterPrice().get(3);
+        MathDTO etc = adminKgyService.getPetSitterPrice().get(4);
 
         model.addAttribute("smallDog", smallDog);
         model.addAttribute("middleDog", middleDog);
@@ -46,11 +43,11 @@ public class AdminKgyController {
 
         //가격 별로 인원수
         //소-중-대(견) -> 고양이 -> 기타 동물 순
-        List<CountByPriceDTO> smallDogCountByPrice = adminKgyService.getPetSitterCountByPrice().get(0);
-        List<CountByPriceDTO> middleDogCountByPrice = adminKgyService.getPetSitterCountByPrice().get(1);
-        List<CountByPriceDTO> largeDogCountByPrice = adminKgyService.getPetSitterCountByPrice().get(2);
-        List<CountByPriceDTO> catCountByPrice = adminKgyService.getPetSitterCountByPrice().get(3);
-        List<CountByPriceDTO> etcCountByPrice = adminKgyService.getPetSitterCountByPrice().get(4);
+        List<CountByNumDTO> smallDogCountByPrice = adminKgyService.getPetSitterCountByPrice().get(0);
+        List<CountByNumDTO> middleDogCountByPrice = adminKgyService.getPetSitterCountByPrice().get(1);
+        List<CountByNumDTO> largeDogCountByPrice = adminKgyService.getPetSitterCountByPrice().get(2);
+        List<CountByNumDTO> catCountByPrice = adminKgyService.getPetSitterCountByPrice().get(3);
+        List<CountByNumDTO> etcCountByPrice = adminKgyService.getPetSitterCountByPrice().get(4);
 
         model.addAttribute("smallDogCountByPrice",smallDogCountByPrice);
         model.addAttribute("middleDogCountByPrice",middleDogCountByPrice);
@@ -72,11 +69,26 @@ public class AdminKgyController {
     }
 
     @GetMapping("/certificate")
-    public String certificate(Model model)
+    public String certificateInfo(Model model)
     {
         List<CertificateDTO> list = adminKgyService.getCountByCertificate();
         model.addAttribute("certificate",list);
 
         return "/testAdmin/certificate";
     }
+
+    @GetMapping("/owner")
+    public String petOwnerInfo(Model model)
+    {
+        List<PetOwnerDTO> age = adminKgyService.getPetOwnerAgeList();
+        List<PetOwnerDTO> residence = adminKgyService.getPetOwnerResidenceList();
+        List<CountByStringDTO> count = adminKgyService.getPetCountByPetOwnerList();
+        model.addAttribute("age", age);
+        model.addAttribute("residence", residence);
+        model.addAttribute("count", count);
+
+
+        return "/testAdmin/owner";
+    }
+
 }

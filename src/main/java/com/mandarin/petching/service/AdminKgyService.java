@@ -2,17 +2,13 @@ package com.mandarin.petching.service;
 
 import com.mandarin.petching.domain.Member;
 import com.mandarin.petching.domain.Reservation;
-import com.mandarin.petching.dto.CertificateDTO;
-import com.mandarin.petching.dto.CountByPriceDTO;
-import com.mandarin.petching.dto.PriceDTO;
-import com.mandarin.petching.dto.AreaDTO;
-import com.mandarin.petching.repository.MemberRepository;
-import com.mandarin.petching.repository.QDCertificateRepository;
-import com.mandarin.petching.repository.QDFeeListRepository;
-import com.mandarin.petching.repository.ReservationRepository;
+import com.mandarin.petching.dto.*;
+import com.mandarin.petching.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Service
@@ -22,13 +18,14 @@ public class AdminKgyService {
     private final ReservationRepository reservationRepository;
     private final MemberRepository memberRepository;
     private final QDCertificateRepository certificateRepository;
+    private final QDMemberRepository qdMemberRepository;
 
     private final QDFeeListRepository feeListRepository;
 
     //가격 정보
-    public List<PriceDTO> getPetSitterPrice()
+    public List<MathDTO> getPetSitterPrice()
     {
-        List<PriceDTO> result = new ArrayList<PriceDTO>();
+        List<MathDTO> result = new ArrayList<MathDTO>();
 
         //소-중-대(견) -> 고양이 -> 기타 동물 순
         result.add(feeListRepository.findSmallDogPriceStatics());
@@ -40,9 +37,9 @@ public class AdminKgyService {
         return result;
     }
 
-    public List<List<CountByPriceDTO>> getPetSitterCountByPrice()
+    public List<List<CountByNumDTO>> getPetSitterCountByPrice()
     {
-        List<List<CountByPriceDTO>> result = new ArrayList<>();
+        List<List<CountByNumDTO>> result = new ArrayList<>();
 
         //소-중-대(견) -> 고양이 -> 기타 동물 순
         result.add(feeListRepository.findSmallDogCountByPrince());
@@ -104,4 +101,44 @@ public class AdminKgyService {
 
         return certificateRepository.findCountByCertificate();
     }
+
+    //보호자 정보
+
+    //보호자 나이
+    public List<PetOwnerDTO> getPetOwnerAgeList()
+    {
+        List<PetOwnerDTO> result = qdMemberRepository.findPetOwnerAgeStatistics();
+        for(int i=0;i<result.size();i++)
+        {
+            //오늘 날짜 구하고 int로 만들기
+            LocalDate now = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy");
+            String thisYearStr = now.format(formatter);
+            int thisYear = Integer.parseInt(thisYearStr);
+
+
+            //나이 구하기
+            String[] birth =  result.get(i).getUser_bth().split("-");
+            int memberBirthYear = Integer.parseInt(birth[0]);
+            int age = thisYear - memberBirthYear + 1;
+
+
+            result.get(i).setAge(age);
+        }
+
+        return result;
+    }
+
+    //보호자 거주지
+    public List<PetOwnerDTO> getPetOwnerResidenceList()
+    {
+        return qdMemberRepository.findPetOwnerResidence();
+    }
+
+    //보호자 가정당 반려동물 수 정보
+    public  List<CountByStringDTO> getPetCountByPetOwnerList()
+    {
+        return qdMemberRepository.findPetCountByPetOwner();
+    }
+
 }
