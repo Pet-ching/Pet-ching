@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>자격증 정보</title>
+</head>
+<body>
+    <h1>자격증 정보</h1>
+    <table>
+        <tr th:each="list : ${certificate}">
+            <th>자격증</th>
+            <td th:text="${list.getName()}"></td>
+            <th>인원 수</th>
+            <td th:text="${list.getCount()}"></td>
+            <td></td>
+        </tr>
+    </table>
+
+</body>
+</html>

@@ -2,8 +2,7 @@ package com.mandarin.petching.service;
 
 import com.mandarin.petching.dto.CountByPriceDTO;
 import com.mandarin.petching.dto.PriceDTO;
-import com.mandarin.petching.repository.FeeListRepository;
-import com.querydsl.core.Tuple;
+import com.mandarin.petching.repository.QDFeeListRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +12,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class PriceInformationService {
-    private final FeeListRepository feeListRepository;
+    private final QDFeeListRepository feeListRepository;
 
     public List<PriceDTO> getPetSitterPrice()
     {

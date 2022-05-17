@@ -17,7 +17,7 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class FeeListRepository {
+public class QDFeeListRepository {
     private final JPAQueryFactory queryFactory;
     private QFeeList feeList = QFeeList.feeList;
 
