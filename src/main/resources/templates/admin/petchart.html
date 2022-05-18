@@ -1,17 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-
-</head>
-<body>
-
-
-</body>
-</html>
-
-<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -21,6 +8,7 @@
   <style>
         body {
             margin: 0;
+            width: 1200px;
         }
 
         .wrapper {
@@ -64,283 +52,290 @@
 
         .main_view {
             width: 80%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            place-items: center;
+            
         }
+
+        .charts {
+            margin: 30px;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            border: #000 solid 1px;
+        }
+
+        #chart01 {
+            grid-column: 1; grid-row: 1;
+            
+        }
+        #chart02 {
+            grid-column: 2; grid-row: 1;
+            border: #000 solid 1px;
+        }
+        #chart03 {
+            grid-column:1; grid-row: 2;
+            border: #000 solid 1px;
+        }
+        #chart04 {
+            grid-column: 2; grid-row: 2;
+            border: #000 solid 1px;
+        }
+
+        canvas {
+            width: 100%;
+            
+        }
+
     </style>
 </head>
+
 <body>
-<div th:replace="fragments/header.html::header"></div>
-<div class="container">
-  <div class="wrapper">
-    <div class="sub_view">
-      <ul class="list">
-        <li><a class="active" th:href="@{/admin/members}">회원 조회</a></li>
-        <li><a th:href="@{/admin/reservations}">예약 조회</a></li>
-        <li><a th:href="@{/admin/petchart}">펫 정보</a></li>
-        <li><a th:href="@{/admin/petsitterchart}">펫시터 정보</a></li>
-        <li><a th:href="@{/admin/petownerchart}">펫보호자 정보</a></li>
-      </ul>
+    <div th:replace="fragments/header.html::header"></div>
+
+    <div class="container">
+        <div class="wrapper">
+            <div class="sub_view">
+            <ul class="list">
+                <li><a th:href="@{/admin/members}">회원 조회</a></li>
+                <li><a th:href="@{/admin/reservations}">예약 조회</a></li>
+                <li><a class="active" th:href="@{/admin/petchart}">펫 정보</a></li>
+                <li><a th:href="@{/admin/petsitterchart}">펫시터 정보</a></li>
+                <li><a th:href="@{/admin/petownerchart}">펫보호자 정보</a></li>
+            </ul>
+            </div>
+            <div id="mainHide" class="main_view">
+                <div id="chart01" class="charts" style="width: 420px; height: 420px;">
+                    <canvas id="myChart"></canvas>
+                </div>
+                <div id="chart02" class="charts" style="width: 420px; height: 420px;">
+                    <canvas id="myChart2"></canvas>
+                </div>
+                <div id="chart03" class="charts" style="width: 420px; height: 420px;">
+                    <canvas id="myChart3"></canvas>
+                </div>
+                <div id="chart04" class="charts" style="width: 420px; height: 420px;">
+                    <canvas id="myChart4"></canvas>
+                </div>
+            </div>
+        </div>
     </div>
-    <div id="mainHide" class="main_view">
-      <table class="table table-hover">
-        <thead>
-        <tr>
-          <th class="col-md-1">이름</th>
-          <th class="col-md-1">이메일</th>
-          <th class="col-md-1">전화번호</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>박승연</td>
-          <td>yeon@gmail.com</td>
-          <td>010-1111-1111</td>
-        </tr>
-        </tbody>
-      </table>
-      <nav  aria-label="Page navigation" class="text-center" >
-        <br><br>
-        <ul class="pagination">
-          <li><a aria-label="Previous" href="/qna/ask?page=1">&laquo;</a></li>
-          <li>
-            <a>&lsaquo;</a>
-          </li>
-          <li>
-            <a><span class="sr-only"></span></a>
-          </li>
-          <li>
-            <a>&rsaquo;</a>
-          </li>
-          <li><a aria-label="Next">&raquo;</a></li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-  <div style="width: 900px; height: 900px;">
-    <canvas id="myChart"></canvas>
-  </div>
-  <div style="width: 900px; height: 900px;">
-    <canvas id="myChart2"></canvas>
-  </div>
-  <div style="width: 900px; height: 900px;">
-    <canvas id="myChart3"></canvas>
-  </div>
-  <div style="width: 900px; height: 900px;">
-    <canvas id="myChart4"></canvas>
-  </div>
-</div>
-<div th:replace="fragments/footer.html::footer"></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-<script type="text/javascript">
-      var context = document
-          .getElementById('myChart')
-          .getContext('2d');
 
-      var myChart = new Chart(context, {
-          type: 'bar', // 차트의 형태
-          data: { // 차트에 들어갈 데이터
-              labels: [
-                  //x 축
-                  '1','2','3','4','5','6','7'
-              ],
-              datasets: [
-                  { //데이터
-                      label: 'test1', //차트 제목
-                      fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
-                      data: [
-                          21,19,25,20,23,26,25 //x축 label에 대응되는 데이터 값
-                      ],
-                      backgroundColor: [
-                          //색상
-                          'rgba(255, 99, 132, 0.2)',
-                          'rgba(54, 162, 235, 0.2)',
-                          'rgba(255, 206, 86, 0.2)',
-                          'rgba(75, 192, 192, 0.2)',
-                          'rgba(153, 102, 255, 0.2)',
-                          'rgba(255, 159, 64, 0.2)'
-                      ],
-                      borderColor: [
-                          //경계선 색상
-                          'rgba(255, 99, 132, 1)',
-                          'rgba(54, 162, 235, 1)',
-                          'rgba(255, 206, 86, 1)',
-                          'rgba(75, 192, 192, 1)',
-                          'rgba(153, 102, 255, 1)',
-                          'rgba(255, 159, 64, 1)'
-                      ],
-                      borderWidth: 1 //경계선 굵기
-                  }
-              ]
-          },
-          options: {
-              scales: {
-                  yAxes: [
-                      {
-                          ticks: {
-                              beginAtZero: true
-                          }
-                      }
-                  ]
-              }
-          }
-      });
+    <div th:replace="fragments/footer.html::footer"></div>
 
-      var context2 = document
-        .getElementById('myChart2')
-        .getContext('2d');
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script type="text/javascript">
+        var context = document
+            .getElementById('myChart')
+            .getContext('2d');
 
-      var myChart2 = new Chart(context2, {
-          type: 'bar', // 차트의 형태
-          data: { // 차트에 들어갈 데이터
-              labels: [
-                  //x 축
-                  '1','2','3','4','5','6','7'
-              ],
-              datasets: [
-                  { //데이터
-                      label: 'test1', //차트 제목
-                      fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
-                      data: [
-                          21,19,25,20,23,26,25 //x축 label에 대응되는 데이터 값
-                      ],
-                      backgroundColor: [
-                          //색상
-                          'rgba(255, 99, 132, 0.2)',
-                          'rgba(54, 162, 235, 0.2)',
-                          'rgba(255, 206, 86, 0.2)',
-                          'rgba(75, 192, 192, 0.2)',
-                          'rgba(153, 102, 255, 0.2)',
-                          'rgba(255, 159, 64, 0.2)'
-                      ],
-                      borderColor: [
-                          //경계선 색상
-                          'rgba(255, 99, 132, 1)',
-                          'rgba(54, 162, 235, 1)',
-                          'rgba(255, 206, 86, 1)',
-                          'rgba(75, 192, 192, 1)',
-                          'rgba(153, 102, 255, 1)',
-                          'rgba(255, 159, 64, 1)'
-                      ],
-                      borderWidth: 1 //경계선 굵기
-                  }
-              ]
-          },
-          options: {
-              scales: {
-                  yAxes: [
-                      {
-                          ticks: {
-                              beginAtZero: true
-                          }
-                      }
-                  ]
-              }
-          }
-      });
-      var context3 = document
-          .getElementById('myChart3')
-          .getContext('2d');
+        var myChart = new Chart(context, {
+            type: 'bar', // 차트의 형태
+            data: { // 차트에 들어갈 데이터
+                labels: [
+                    //x 축
+                    '1','2','3','4','5','6','7'
+                ],
+                datasets: [
+                    { //데이터
+                        label: 'test1', //차트 제목
+                        fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
+                        data: [
+                            21,19,25,20,23,26,25 //x축 label에 대응되는 데이터 값
+                        ],
+                        backgroundColor: [
+                            //색상
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            //경계선 색상
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1 //경계선 굵기
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        });
 
-      var myChart3 = new Chart(context3, {
-          type: 'bar', // 차트의 형태
-          data: { // 차트에 들어갈 데이터
-              labels: [
-                  //x 축
-                  '1','2','3','4','5','6','7'
-              ],
-              datasets: [
-                  { //데이터
-                      label: 'test1', //차트 제목
-                      fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
-                      data: [
-                          21,19,25,20,23,26,25 //x축 label에 대응되는 데이터 값
-                      ],
-                      backgroundColor: [
-                          //색상
-                          'rgba(255, 99, 132, 0.2)',
-                          'rgba(54, 162, 235, 0.2)',
-                          'rgba(255, 206, 86, 0.2)',
-                          'rgba(75, 192, 192, 0.2)',
-                          'rgba(153, 102, 255, 0.2)',
-                          'rgba(255, 159, 64, 0.2)'
-                      ],
-                      borderColor: [
-                          //경계선 색상
-                          'rgba(255, 99, 132, 1)',
-                          'rgba(54, 162, 235, 1)',
-                          'rgba(255, 206, 86, 1)',
-                          'rgba(75, 192, 192, 1)',
-                          'rgba(153, 102, 255, 1)',
-                          'rgba(255, 159, 64, 1)'
-                      ],
-                      borderWidth: 1 //경계선 굵기
-                  }
-              ]
-          },
-          options: {
-              scales: {
-                  yAxes: [
-                      {
-                          ticks: {
-                              beginAtZero: true
-                          }
-                      }
-                  ]
-              }
-          }
-      });
-      var context4 = document
-          .getElementById('myChart4')
-          .getContext('2d');
+        var context2 = document
+            .getElementById('myChart2')
+            .getContext('2d');
 
-      var myChart4 = new Chart(context4, {
-          type: 'bar', // 차트의 형태
-          data: { // 차트에 들어갈 데이터
-              labels: [
-                  //x 축
-                  '1','2','3','4','5','6','7'
-              ],
-              datasets: [
-                  { //데이터
-                      label: 'test1', //차트 제목
-                      fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
-                      data: [
-                          21,19,25,20,23,26,25 //x축 label에 대응되는 데이터 값
-                      ],
-                      backgroundColor: [
-                          //색상
-                          'rgba(255, 99, 132, 0.2)',
-                          'rgba(54, 162, 235, 0.2)',
-                          'rgba(255, 206, 86, 0.2)',
-                          'rgba(75, 192, 192, 0.2)',
-                          'rgba(153, 102, 255, 0.2)',
-                          'rgba(255, 159, 64, 0.2)'
-                      ],
-                      borderColor: [
-                          //경계선 색상
-                          'rgba(255, 99, 132, 1)',
-                          'rgba(54, 162, 235, 1)',
-                          'rgba(255, 206, 86, 1)',
-                          'rgba(75, 192, 192, 1)',
-                          'rgba(153, 102, 255, 1)',
-                          'rgba(255, 159, 64, 1)'
-                      ],
-                      borderWidth: 1 //경계선 굵기
-                  }
-              ]
-          },
-          options: {
-              scales: {
-                  yAxes: [
-                      {
-                          ticks: {
-                              beginAtZero: true
-                          }
-                      }
-                  ]
-              }
-          }
-      });
+        var myChart2 = new Chart(context2, {
+            type: 'bar', // 차트의 형태
+            data: { // 차트에 들어갈 데이터
+                labels: [
+                    //x 축
+                    '1','2','3','4','5','6','7'
+                ],
+                datasets: [
+                    { //데이터
+                        label: 'test2', //차트 제목
+                        fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
+                        data: [
+                            21,19,25,20,23,26,25 //x축 label에 대응되는 데이터 값
+                        ],
+                        backgroundColor: [
+                            //색상
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            //경계선 색상
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1 //경계선 굵기
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        });
+        var context3 = document
+            .getElementById('myChart3')
+            .getContext('2d');
 
-  </script>
+        var myChart3 = new Chart(context3, {
+            type: 'bar', // 차트의 형태
+            data: { // 차트에 들어갈 데이터
+                labels: [
+                    //x 축
+                    '1','2','3','4','5','6','7'
+                ],
+                datasets: [
+                    { //데이터
+                        label: 'test3', //차트 제목
+                        fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
+                        data: [
+                            21,19,25,20,23,26,25 //x축 label에 대응되는 데이터 값
+                        ],
+                        backgroundColor: [
+                            //색상
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            //경계선 색상
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1 //경계선 굵기
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        });
+        var context4 = document
+            .getElementById('myChart4')
+            .getContext('2d');
+
+        var myChart4 = new Chart(context4, {
+            type: 'bar', // 차트의 형태
+            data: { // 차트에 들어갈 데이터
+                labels: [
+                    //x 축
+                    '1','2','3','4','5','6','7'
+                ],
+                datasets: [
+                    { //데이터
+                        label: 'test4', //차트 제목
+                        fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
+                        data: [
+                            21,19,25,20,23,26,25 //x축 label에 대응되는 데이터 값
+                        ],
+                        backgroundColor: [
+                            //색상
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            //경계선 색상
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1 //경계선 굵기
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [
+                        {
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }
+                    ]
+                }
+            }
+        });
+
+    </script>
 </body>
 </html>
