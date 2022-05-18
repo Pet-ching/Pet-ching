@@ -8,6 +8,7 @@
     <style>
         body {
             margin: 0;
+            width: 1200px;
         }
 
         .wrapper {
@@ -60,8 +61,11 @@
     <div class="wrapper">
         <div class="sub_view">
             <ul class="list">
-                <li><a class="active" th:href="@{/admin/members}">회원 조회</a></li>
-                <li><a th:href="@{/admin/reservations}">예약 조회</a></li>
+                <li><a th:href="@{/admin/members}">회원 조회</a></li>
+                <li><a class="active" th:href="@{/admin/reservations}">예약 조회</a></li>
+                <li><a th:href="@{/admin/petchart}">펫 정보</a></li>
+                <li><a th:href="@{/admin/petsitterchart}">펫시터 정보</a></li>
+                <li><a th:href="@{/admin/petownerchart}">펫보호자 정보</a></li>
             </ul>
         </div>
         <div id="mainHide" class="main_view">
