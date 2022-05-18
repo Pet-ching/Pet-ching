@@ -107,15 +107,7 @@ public class AdminKgyController {
     }
 
     @GetMapping("/deny")
-    public String deny(HttpServletResponse response) throws IOException {
-//        response.setContentType("text/html; charset=utf-8");
-//        PrintWriter out = response.getWriter();
-//        out.println("<script>");
-//        out.println("alert('접근이 제한되셨습니다');");
-//        out.println("document.location.href="/");
-//        out.println("</script>");
-//        out.flush();
-//        out.close();
+    public String deny(){
 
         return "/testAdmin/deny";
     }
