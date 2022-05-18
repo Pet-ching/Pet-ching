@@ -1,8 +1,10 @@
 package com.mandarin.petching.controller.admin;
 
+import com.mandarin.petching.domain.Pet;
 import com.mandarin.petching.dto.*;
 import com.mandarin.petching.service.AdminKgyService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -89,6 +91,16 @@ public class AdminKgyController {
 
 
         return "/testAdmin/owner";
+    }
+
+    @GetMapping("/pet")
+    public String petInfo(Model model)
+    {
+        List<PetDTO> pet = adminKgyService.getAllPetList();
+        model.addAttribute("pet",pet);
+
+
+        return "/testAdmin/pet";
     }
 
 }

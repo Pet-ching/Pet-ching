@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>반려동물 정보</title>
+</head>
+<body>
+<h1>반려동물 나이</h1>
+<table>
+    <tr th:each="list : ${pet}">
+        <th>반려동물 이름</th>
+        <td th:text="${list.getPet_name()}"></td>
+        <th>반려동물 나이</th>
+        <td th:text="${list.getPet_age()}"></td>
+        <th>반려자 이름</th>
+        <td th:text="${list.getUser_name()}"></td>
+        <th>반려자 이메일</th>
+        <td th:text="${list.getUser_email()}"></td>
+
+    </tr>
+</table>
+
+<h1>반려동물 중성화 여부</h1>
+<table>
+    <tr th:each="list : ${pet}">
+        <th>반려동물 이름</th>
+        <td th:text="${list.getPet_name()}"></td>
+        <th>반려동물 중성화 여부</th>
+        <td th:text="${list.isNeutralization()}"></td>
+        <th>반려자 이름</th>
+        <td th:text="${list.getUser_name()}"></td>
+        <th>반려자 이메일</th>
+        <td th:text="${list.getUser_email()}"></td>
+    </tr>
+</table>
+
+<h1>반려동물 종류</h1>
+<table>
+    <tr th:each="list : ${pet}">
+        <th>반려동물 이름</th>
+        <td th:text="${list.getPet_name()}"></td>
+        <th>반려동물 종류</th>
+        <td th:text="${list.getPet_type().getDescription()}"></td>
+        <th>반려자 이름</th>
+        <td th:text="${list.getUser_name()}"></td>
+        <th>반려자 이메일</th>
+        <td th:text="${list.getUser_email()}"></td>
+    </tr>
+</table>
+
+
+</body>
+</html>
