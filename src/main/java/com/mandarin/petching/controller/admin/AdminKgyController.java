@@ -1,6 +1,7 @@
 package com.mandarin.petching.controller.admin;
 
 import com.mandarin.petching.domain.Pet;
+import com.mandarin.petching.domain.Role;
 import com.mandarin.petching.dto.*;
 import com.mandarin.petching.service.AdminKgyService;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 
@@ -94,13 +99,25 @@ public class AdminKgyController {
     }
 
     @GetMapping("/pet")
-    public String petInfo(Model model)
-    {
+    public String petInfo(Model model) {
+
         List<PetDTO> pet = adminKgyService.getAllPetList();
-        model.addAttribute("pet",pet);
-
-
+        model.addAttribute("pet", pet);
         return "/testAdmin/pet";
+    }
+
+    @GetMapping("/deny")
+    public String deny(HttpServletResponse response) throws IOException {
+//        response.setContentType("text/html; charset=utf-8");
+//        PrintWriter out = response.getWriter();
+//        out.println("<script>");
+//        out.println("alert('접근이 제한되셨습니다');");
+//        out.println("document.location.href="/");
+//        out.println("</script>");
+//        out.flush();
+//        out.close();
+
+        return "/testAdmin/deny";
     }
 
 }
