@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>매칭 지역 정보</title>
+</head>
+<body>
+<h1>매칭 지역 정보</h1>
+<table>
+    <tr th:each="list : ${area}">
+        <th>지역</th>
+        <td th:text="${list.getAddress()}"></td>
+        <th>인원 수</th>
+        <td th:text="${list.getCount()}"></td>
+        <td></td>
+    </tr>
+</table>
+
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>보호자 정보</title>
+</head>
+<body>
+<h1>보호자 나이 정보</h1>
+<table>
+    <tr th:each="list : ${age}">
+        <th>반려동물 이름</th>
+        <td th:text="${list.getPet_name()}"></td>
+        <th>반려동물 종류</th>
+        <td th:text="${list.getPet_type.getDescription()}"></td>
+        <th>반려자 이름</th>
+        <td th:text="${list.getUser_name()}"></td>
+        <th>반려자 이메일</th>
+        <td th:text="${list.getUser_email()}"></td>
+        <th>반려자 생년월일</th>
+        <td th:text="${list.getUser_bth()}"></td>
+        <th>나이</th>
+        <td th:text="${list.getAge()}"></td>
+    </tr>
+</table>
+
+<h1>보호자 거주지 정보</h1>
+<table>
+    <tr th:each="list : ${residence}">
+        <th>반려동물 이름</th>
+        <td th:text="${list.getPet_name()}"></td>
+        <th>반려동물 종류</th>
+        <td th:text="${list.getPet_type.getDescription()}"></td>
+        <th>반려자 이름</th>
+        <td th:text="${list.getUser_name()}"></td>
+        <th>반려자 이메일</th>
+        <td th:text="${list.getUser_email()}"></td>
+        <th>반려자 주소</th>
+        <td th:text="${list.getUser_address()}"></td>
+    </tr>
+</table>
+
+<h1>보호자 가정당 반려동물 수 정보</h1>
+<table>
+    <tr th:each="list : ${count}">
+        <th>반려자 이름</th>
+        <td th:text="${list.getName()}"></td>
+        <th>반려자 이메일</th>
+        <td th:text="${list.getEmail()}"></td>
+        <th>반려동물 수</th>
+        <td th:text="${list.getCount()}"></td>
+    </tr>
+</table>
+
+
+</body>
+</html>

@@ -23,7 +23,7 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     //김귀영 추가
 
     //qna 전부 검색
-//    List<Board> findByBoardTypeBetween(BoardType start, BoardType last);
+    List<Board> findByBoardTypeBetween(BoardType start, BoardType last);
     List<Board> findByBoardTypeBetweenAndMemberLike (BoardType start, BoardType last,Member member);
 
     Page<Board> findByBoardTypeBetween(BoardType start, BoardType last, Pageable pageable);
