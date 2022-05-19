@@ -3,6 +3,8 @@ package com.mandarin.petching.service;
 import com.mandarin.petching.domain.Reservation;
 import com.mandarin.petching.repository.ReservationRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -49,7 +51,9 @@ public class ReservationService {
         reservationRepository.deleteById(reservationId);
     }
 
-
+    public Page<Reservation> reservationList(Pageable pageable) {
+        return reservationRepository.findAll(pageable);
+    }
 
 
 }
