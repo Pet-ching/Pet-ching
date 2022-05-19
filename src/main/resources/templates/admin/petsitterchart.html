@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>관리자 페이지</title>
-    <link rel="stylesheet" th:href="@{/css/base.css}"/>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
-    <style>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <title>관리자 페이지</title>
+  <link rel="stylesheet" th:href="@{/css/base.css}"/>
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+  <style>
         body {
             margin: 0;
             width: 1200px;
@@ -54,8 +54,7 @@
             width: 80%;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            place-items: center;
-
+            place-items: center;            
         }
 
         .charts {
@@ -83,16 +82,16 @@
         canvas {
             width: 100%;
         }
-
     </style>
 </head>
 
 <body>
-<div th:replace="fragments/header.html::header"></div>
 
-<div class="container">
-    <div class="wrapper">
-        <div class="sub_view">
+    <div th:replace="fragments/header.html::header"></div>
+
+    <div class="container">
+        <div class="wrapper">
+            <div class="sub_view">
             <ul class="list">
                 <li><a th:href="@{/admin/members}">회원 조회</a></li>
                 <li><a th:href="@{/admin/reservations}">예약 조회</a></li>
@@ -100,26 +99,27 @@
                 <li><a class="active" th:href="@{/admin/petsitterchart}">펫시터 정보</a></li>
                 <li><a th:href="@{/admin/petownerchart}">펫보호자 정보</a></li>
             </ul>
-        </div>
-        <div id="mainHide" class="main_view">
-            <div class = "chartBoxs">
-                <div id="chart01" class="charts" style="width: 420px; height: 420px;">
-                    <canvas id="myChart"></canvas>
-                </div>
             </div>
-            <div class = "chartBoxs">
-                <div id="chart02" class="charts" style="width: 420px; height: 420px;">
-                    <canvas id="myChart2"></canvas>
+            <div id="mainHide" class="main_view">
+                <div class = "chartBoxs">
+                    <div id="chart01" class="charts" style="width: 420px; height: 420px;">
+                        <canvas id="myChart"></canvas>
+                    </div>
                 </div>
-            </div>
-            <div class = "chartBoxs">
-                <div id="chart03" class="charts" style="width: 420px; height: 420px;">
-                    <canvas id="myChart3"></canvas>
+                <div class = "chartBoxs">
+                    <div id="chart02" class="charts" style="width: 420px; height: 420px;">
+                        <canvas id="myChart2"></canvas>
+                    </div>
                 </div>
-            </div>
-            <div class = "chartBoxs">
-                <div id="chart04" class="charts" style="width: 420px; height: 420px;">
-                    <canvas id="myChart4"></canvas>
+                <div class = "chartBoxs">
+                    <div id="chart03" class="charts" style="width: 420px; height: 420px;">
+                        <canvas id="myChart3"></canvas>
+                    </div>
+                </div>
+                <div class = "chartBoxs">
+                    <div id="chart04" class="charts" style="width: 420px; height: 420px;">
+                        <canvas id="myChart4"></canvas>
+                    </div>
                 </div>
             </div>
         </div>

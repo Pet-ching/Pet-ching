@@ -82,6 +82,10 @@
                     </tr>
                 </thead>
                 <tbody>
+                  
+                  
+                  
+<!-- <<<<<<< young
                     <tr th:each="board : ${boardList}">
                         <td th:text="${board.approval}"></td>
                         <td th:text="${board.petName}"></td>
@@ -109,6 +113,53 @@
                         <a th:href="@{/admin/reservations(page=${boardList.number}+2)}">&rsaquo;</a>
                     </li>
                     <li><a aria-label="Next" th:href="@{/admin/reservations(page=${boardList.totalPages})}">&raquo;</a></li>
+======= -->
+                  
+                  
+                  
+                <tr th:each="a : ${list}">
+                    <td th:text="${a.approval}">예약 현황</td>
+                    <td th:text="${a.pet.petName}">반려동물 이름</td>
+                    <td th:text="${a.startDate}">시작일</td>
+                    <td th:text="${a.endDate}">종료일</td>
+                    <td th:text="${a.fee}">요금</td>
+                </tr>
+                </tbody>
+            </table>
+<!--            <nav  aria-label="Page navigation" class="text-center" >-->
+<!--                <br><br>-->
+<!--                <ul class="pagination">-->
+<!--                    <li><a aria-label="Previous" href="/qna/ask?page=1">&laquo;</a></li>-->
+<!--                    <li>-->
+<!--                        <a>&lsaquo;</a>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <a><span class="sr-only"></span></a>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <a>&rsaquo;</a>-->
+<!--                    </li>-->
+<!--                    <li><a aria-label="Next">&raquo;</a></li>-->
+<!--                </ul>-->
+<!--            </nav>-->
+            <nav class="input-box" aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item" th:classappend="${1 == list.pageable.pageNumber + 1} ? 'disabled'">
+                        <a class="page-link" href="#"
+                           th:href="@{/admin/reservations(page=${list.pageable.pageNumber - 1})}"
+                           tabindex="-1" aria-disabled="true">이전</a>
+                    </li>
+                    <li class="page-item" th:classappend="${i == list.pageable.pageNumber + 1} ? 'disabled'"
+                        th:each="i : ${#numbers.sequence(startPage, endPage)}">
+                        <a class="page-link" href="#"
+                           th:href="@{/admin/reservations(page=${i - 1})}"
+                           th:text="${i}"></a>
+                    </li>
+                    <li class="page-item"
+                        th:classappend="${list.totalPages == list.pageable.pageNumber + 1} ? 'disabled'">
+                        <a class="page-link" href="#"
+                           th:href="@{/admin/reservations(page=${list.pageable.pageNumber + 1})}">다음</a>
+                    </li>
                 </ul>
             </nav>
         </div>
