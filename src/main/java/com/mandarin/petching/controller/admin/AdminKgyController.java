@@ -5,6 +5,9 @@ import com.mandarin.petching.domain.Role;
 import com.mandarin.petching.dto.*;
 import com.mandarin.petching.service.AdminKgyService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -127,6 +130,15 @@ public class AdminKgyController {
         model.addAttribute("petTypeDTO",type);
 
         return "/testAdmin/count";
+    }
+
+    @GetMapping("/reservations")
+    public String reservations(Model model, @PageableDefault Pageable pageable)
+    {
+        Page<ReservationDTO> page = adminKgyService.getAllReservationPage(pageable);
+        model.addAttribute("boardList",page);
+
+        return "admin/reservations";
     }
 
 

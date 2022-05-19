@@ -1,7 +1,6 @@
 package com.mandarin.petching.service;
 
 import com.mandarin.petching.domain.Member;
-import com.mandarin.petching.domain.Pet;
 import com.mandarin.petching.domain.Reservation;
 import com.mandarin.petching.dto.*;
 import com.mandarin.petching.repository.*;
