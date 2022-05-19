@@ -68,24 +68,20 @@
 
         #chart01 {
             grid-column: 1; grid-row: 1;
-            
         }
+
         #chart02 {
             grid-column: 2; grid-row: 1;
-            border: #000 solid 1px;
         }
         #chart03 {
             grid-column:1; grid-row: 2;
-            border: #000 solid 1px;
         }
         #chart04 {
             grid-column: 2; grid-row: 2;
-            border: #000 solid 1px;
         }
 
         canvas {
             width: 100%;
-            
         }
 
     </style>
@@ -106,17 +102,25 @@
             </ul>
             </div>
             <div id="mainHide" class="main_view">
-                <div id="chart01" class="charts" style="width: 420px; height: 420px;">
-                    <canvas id="myChart"></canvas>
+                <div class = "chartBoxs">
+                    <div id="chart01" class="charts" style="width: 420px; height: 420px;">
+                        <canvas id="myChart"></canvas>
+                    </div>
                 </div>
-                <div id="chart02" class="charts" style="width: 420px; height: 420px;">
-                    <canvas id="myChart2"></canvas>
+                <div class = "chartBoxs">
+                    <div id="chart02" class="charts" style="width: 420px; height: 420px;">
+                        <canvas id="myChart2"></canvas>
+                    </div>
                 </div>
-                <div id="chart03" class="charts" style="width: 420px; height: 420px;">
-                    <canvas id="myChart3"></canvas>
+                <div class = "chartBoxs">
+                    <div id="chart03" class="charts" style="width: 420px; height: 420px;">
+                        <canvas id="myChart3"></canvas>
+                    </div>
                 </div>
-                <div id="chart04" class="charts" style="width: 420px; height: 420px;">
-                    <canvas id="myChart4"></canvas>
+                <div class = "chartBoxs">
+                    <div id="chart04" class="charts" style="width: 420px; height: 420px;">
+                        <canvas id="myChart4"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
@@ -125,7 +129,7 @@
     <div th:replace="fragments/footer.html::footer"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-    <script type="text/javascript">
+    <script type="text/javascript" th:inline="javascript">
         var context = document
             .getElementById('myChart')
             .getContext('2d');

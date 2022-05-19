@@ -62,7 +62,7 @@ public class AdminKgyController {
         model.addAttribute("catCountByPrice",catCountByPrice);
         model.addAttribute("etcCountByPrice",etcCountByPrice);
 
-        return "/testAdmin/price";
+        return "/admin/petsitterchart";
     }
 
     //매칭지역 정보
@@ -72,16 +72,18 @@ public class AdminKgyController {
         List<AreaDTO> list = adminKgyService.getMatchingArea();
         model.addAttribute("area", list);
 
-        return "/testAdmin/area";
+        return "/admin/petsitterchart";
     }
 
     @GetMapping("/certificate")
     public String certificateInfo(Model model)
     {
         List<CertificateDTO> list = adminKgyService.getCountByCertificate();
+
+        model.addAttribute("certificateName", list.get(0).getName());
         model.addAttribute("certificate",list);
 
-        return "/testAdmin/certificate";
+        return "/admin/petsitterchart";
     }
 
     @GetMapping("/owner")
@@ -94,8 +96,7 @@ public class AdminKgyController {
         model.addAttribute("residence", residence);
         model.addAttribute("count", count);
 
-
-        return "/testAdmin/owner";
+        return "/admin/petownerchart";
     }
 
     @GetMapping("/pet")
@@ -103,7 +104,7 @@ public class AdminKgyController {
 
         List<PetDTO> pet = adminKgyService.getAllPetList();
         model.addAttribute("pet", pet);
-        return "/testAdmin/pet";
+        return "/admin/petchart";
     }
 
     @GetMapping("/deny")
