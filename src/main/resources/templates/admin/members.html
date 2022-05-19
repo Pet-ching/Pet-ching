@@ -53,6 +53,7 @@
         .main_view {
             width: 80%;
         }
+
     </style>
 </head>
 <body>
@@ -78,27 +79,47 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>박승연</td>
-                    <td>yeon@gmail.com</td>
-                    <td>010-1111-1111</td>
+                <tr th:each="a : ${list}">
+                    <td th:text="${a.userName}">이름</td>
+                    <td th:text="${a.userEmail}">이메일</td>
+                    <td th:text="${a.userTel}">전화번호</td>
                 </tr>
                 </tbody>
             </table>
-            <nav  aria-label="Page navigation" class="text-center" >
-                <br><br>
-                <ul class="pagination">
-                    <li><a aria-label="Previous" href="/qna/ask?page=1">&laquo;</a></li>
-                    <li>
-                        <a>&lsaquo;</a>
+<!--            <nav aria-label="Page navigation" class="text-center">-->
+<!--                <br><br>-->
+<!--                <ul class="pagination">-->
+<!--                    <li><a aria-label="Previous" href="/qna/ask?page=1">&laquo;</a></li>-->
+<!--                    <li>-->
+<!--                        <a>&lsaquo;</a>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <a><span class="sr-only"></span></a>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <a>&rsaquo;</a>-->
+<!--                    </li>-->
+<!--                    <li><a aria-label="Next">&raquo;</a></li>-->
+<!--                </ul>-->
+<!--            </nav>-->
+            <nav class="input-box" aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item" th:classappend="${1 == list.pageable.pageNumber + 1} ? 'disabled'">
+                        <a class="page-link" href="#"
+                           th:href="@{/admin/members(page=${list.pageable.pageNumber - 1})}"
+                           tabindex="-1" aria-disabled="true">이전</a>
                     </li>
-                    <li>
-                        <a><span class="sr-only"></span></a>
+                    <li class="page-item" th:classappend="${i == list.pageable.pageNumber + 1} ? 'disabled'"
+                        th:each="i : ${#numbers.sequence(startPage, endPage)}">
+                        <a class="page-link" href="#"
+                           th:href="@{/admin/members(page=${i - 1})}"
+                           th:text="${i}"></a>
                     </li>
-                    <li>
-                        <a>&rsaquo;</a>
+                    <li class="page-item"
+                        th:classappend="${list.totalPages == list.pageable.pageNumber + 1} ? 'disabled'">
+                        <a class="page-link" href="#"
+                           th:href="@{/admin/members(page=${list.pageable.pageNumber + 1})}">다음</a>
                     </li>
-                    <li><a aria-label="Next">&raquo;</a></li>
                 </ul>
             </nav>
         </div>

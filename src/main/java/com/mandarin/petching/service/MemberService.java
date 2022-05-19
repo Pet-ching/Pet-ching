@@ -3,6 +3,9 @@ package com.mandarin.petching.service;
 import com.mandarin.petching.domain.Member;
 import com.mandarin.petching.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,6 +22,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class MemberService implements UserDetailsService {
 
+    @Autowired
     private final MemberRepository memberRepository;
 
     public Member saveMember(Member member){
@@ -70,4 +74,8 @@ public class MemberService implements UserDetailsService {
         memberRepository.deleteById(id);
     }
 
+
+    public Page<Member> memberList(Pageable pageable) {
+        return memberRepository.findAll(pageable);
+    }
 }
