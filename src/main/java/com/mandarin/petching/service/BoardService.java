@@ -33,7 +33,7 @@ public class BoardService {
        Member member =  memberRepository.findByUserEmail(userName);
        board.setMember(member);
        board.setHits(0);
-       board.setBoardType(BoardType.COMMUNITY);
+//       board.setBoardType(BoardType.COMMUNITY);
        return boardRepository.save(board);
     }
 

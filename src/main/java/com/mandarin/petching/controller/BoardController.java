@@ -56,6 +56,24 @@ public class BoardController {
         return "board/list";
     }
 
+    @GetMapping("/review")
+    public String review(Model model, @PageableDefault(size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
+                       @RequestParam(required = false, defaultValue = "") String searchText) {
+
+        Page<Board> boards = boardRepository.findByBoardTypeOrderByIdDesc(BoardType.REVIEW, pageable);
+
+//        int startPage = Math.max(1, boards.getPageable().getPageNumber() - 4);
+//        int endPage = Math.min(boards.getTotalPages(), boards.getPageable().getPageNumber() + 4);
+        int nowPage = boards.getPageable().getPageNumber()+1;
+        int startPage = Math.max(1, nowPage-2);
+        int endPage = Math.min(startPage+2, boards.getTotalPages());
+
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+        model.addAttribute("boards", boards);
+        return "board/review";
+    }
+
     @GetMapping("/read")
     public String read(Model model, @RequestParam(required = false) Long id , Authentication authentication) {
         if (id == null) {
@@ -99,6 +117,32 @@ public class BoardController {
         boardService.save(userName, board);
         //boardRepository.save(board);
         return "redirect:/board/list";
+    }
+
+    @GetMapping("/reviewform")
+    public String reviewform(Model model, @RequestParam(required = false) Long id ) {
+        if (id == null) {
+            model.addAttribute("board", new Board());
+            model.addAttribute("localDateTime", LocalDateTime.now());
+        } else {
+            Board board = boardRepository.findById(id).orElse(null);
+            model.addAttribute("board", board);
+        }
+
+        return "board/reviewform";
+    }
+
+    @PostMapping("/reviewform")
+    public String reviewformwrite(@Valid Board board, BindingResult bindingResult, Authentication authentication) {
+        if (bindingResult.hasErrors()) {
+            return "board/reviewform";
+        }
+
+        String userName = authentication.getName();
+//        Member member = memberRepository.findByUserEmail(userName);
+        boardService.save(userName, board);
+        //boardRepository.save(board);
+        return "redirect:/board/review";
     }
 
     @PostMapping("/reply/create")
