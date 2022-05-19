@@ -40,20 +40,21 @@ public class ListController {
         return "admin/members";
     }
 
-    @GetMapping("/reservations")
-    public String reservationList(Model model, @PageableDefault(page = 0, size = 5, sort = "startDate") Pageable pageable) {
+//    @GetMapping("/reservations")
+//    public String reservationList(Model model, @PageableDefault(page = 0, size = 5, sort = "startDate") Pageable pageable) {
+//
+//        Page<Reservation> list = reservationService.reservationList(pageable);
+//        int nowPage = list.getPageable().getPageNumber() + 1;
+//        int startPage = Math.max(nowPage - 2, 1);
+//        int endPage = Math.min(startPage+2, list.getTotalPages());
+//
+//        model.addAttribute("list", list);
+//        model.addAttribute("nowPage", nowPage);
+//        model.addAttribute("startPage", startPage);
+//        model.addAttribute("endPage", endPage);
+//        return "admin/reservations";
+//    }
 
-        Page<Reservation> list = reservationService.reservationList(pageable);
-        int nowPage = list.getPageable().getPageNumber() + 1;
-        int startPage = Math.max(nowPage - 2, 1);
-        int endPage = Math.min(startPage+2, list.getTotalPages());
-
-        model.addAttribute("list", list);
-        model.addAttribute("nowPage", nowPage);
-        model.addAttribute("startPage", startPage);
-        model.addAttribute("endPage", endPage);
-        return "admin/reservations";
-    }
 
     @GetMapping("/petchart")
     public String petChartList() {
