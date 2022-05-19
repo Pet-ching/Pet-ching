@@ -139,7 +139,7 @@ public class QnaController {
             imagesService.saveImage(imagesDto);
         }
 
-        return "redirect:/qna/ask";
+        return "redirect:/admin/reservations";
     }
 
 
@@ -157,7 +157,7 @@ public class QnaController {
         }
 
 
-        return "redirect:/qna/ask";
+        return "redirect:/admin/reservations";
 
     }
 

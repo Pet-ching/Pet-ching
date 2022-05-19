@@ -79,6 +79,8 @@ public class AdminKgyController {
     public String certificateInfo(Model model)
     {
         List<CertificateDTO> list = adminKgyService.getCountByCertificate();
+
+        model.addAttribute("certificateName", list.get(0).getName());
         model.addAttribute("certificate",list);
 
         return "/testAdmin/certificate";
@@ -93,7 +95,6 @@ public class AdminKgyController {
         model.addAttribute("age", age);
         model.addAttribute("residence", residence);
         model.addAttribute("count", count);
-
 
         return "/testAdmin/owner";
     }
@@ -111,5 +112,21 @@ public class AdminKgyController {
 
         return "/testAdmin/deny";
     }
+
+    @GetMapping("/cap")
+    public String countAboutPet(Model model)
+    {
+        List<CountByNumDTO> age = adminKgyService.getPetCountByAgeList();
+        model.addAttribute("numDTO",age);
+
+        List<CountByBooleanDTO> neu = adminKgyService.getPetCountByNeutralizationList();
+        model.addAttribute("boolDTO", neu);
+
+        List<CountByPetTypeDTO> type = adminKgyService.getPetCountByPetTypeList();
+        model.addAttribute("petTypeDTO",type);
+
+        return "/testAdmin/count";
+    }
+
 
 }

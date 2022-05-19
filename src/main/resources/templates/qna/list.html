@@ -61,23 +61,23 @@
     <!--    <nav  aria-label="Page navigation" style="text-align:center;" >-->
     <nav  aria-label="Page navigation" class="text-center" >
         <div class="pull-left">
-            <a href="/qna/ask" class="btn btn-default">목록으로</a>
+            <a href="/admin/reservations" class="btn btn-default">목록으로</a>
         </div>
         <br><br>
         <ul class="pagination" th:with="startNumber=${T(java.lang.Math).floor(boardList.number/10)}*10+1,
         endNumber=(${boardList.totalPages} > ${startNumber}+9) ? ${startNumber}+9 : ${boardList.totalPages},
         endNumber=(${endNumber} < ${startNumber}) ? ${startNumber} : ${endNumber}">
-            <li><a aria-label="Previous" href="/qna/ask?page=1">&laquo;</a></li>
+            <li><a aria-label="Previous" href="/admin/reservations?page=1">&laquo;</a></li>
             <li th:style="${boardList.first} ? 'display:none'">
-                <a th:href="@{/qna/ask(page=${boardList.number})}">&lsaquo;</a>
+                <a th:href="@{/admin/reservations(page=${boardList.number})}">&lsaquo;</a>
             </li>
             <li th:each="page :${#numbers.sequence(startNumber, endNumber)}" th:class="(${page} == ${boardList.number}+1) ? 'active'">
-                <a th:href="@{/qna/ask(page=${page})}" th:text="${page}"><span class="sr-only"></span></a>
+                <a th:href="@{/admin/reservations(page=${page})}" th:text="${page}"><span class="sr-only"></span></a>
             </li>
             <li th:style="${boardList.last} ? 'display:none'">
-                <a th:href="@{/qna/ask(page=${boardList.number}+2)}">&rsaquo;</a>
+                <a th:href="@{/admin/reservations(page=${boardList.number}+2)}">&rsaquo;</a>
             </li>
-            <li><a aria-label="Next" th:href="@{/qna/ask(page=${boardList.totalPages})}">&raquo;</a></li>
+            <li><a aria-label="Next" th:href="@{/admin/reservations(page=${boardList.totalPages})}">&raquo;</a></li>
         </ul>
 
         <!--        검색-->
@@ -119,7 +119,7 @@
             type: "DELETE",
             success: function () {
                 alert('삭제 성공!');
-                location.href = '/qna/ask';
+                location.href = '/admin/reservations';
                 },
             error: function () {
                 alert('삭제 실패!');

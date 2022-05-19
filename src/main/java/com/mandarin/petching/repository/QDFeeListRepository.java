@@ -110,7 +110,7 @@ public class QDFeeListRepository {
     //가격별로 수 세기
     public List<CountByNumDTO> getCountByPrice(NumberPath pet)
     {
-        List<CountByNumDTO> result = queryFactory.select(Projections.fields(CountByNumDTO.class, pet.as("price"), pet.count().as("count")))
+        List<CountByNumDTO> result = queryFactory.select(Projections.fields(CountByNumDTO.class, pet.as("num"), pet.count().as("count")))
                 .from(feeList)
                 .groupBy(pet)
                 .fetch();

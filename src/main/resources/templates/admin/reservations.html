@@ -71,38 +71,44 @@
         <div id="mainHide" class="main_view">
             <table class="table table-hover">
                 <thead>
-                <tr>
-                    <th class="col-md-1">예약 현황</th>
-                    <th class="col-md-1">반려동물 이름</th>
-                    <th class="col-md-1">시작일</th>
-                    <th class="col-md-1">종료일</th>
-                    <th class="col-md-1">요금</th>
-                </tr>
+                    <tr>
+                        <th class="col-md-1">예약 현황</th>
+                        <th class="col-md-1">반려동물 이름</th>
+                        <th class="col-md-1">보호자 이름</th>
+                        <th class="col-md-1">펫시터 이름</th>
+                        <th class="col-md-1">시작일</th>
+                        <th class="col-md-1">종료일</th>
+                        <th class="col-md-1">요금(원)</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>예약 승인</td>
-                    <td>멍멍이</td>
-                    <td>2022-05-09</td>
-                    <td>2022-05-10</td>
-                    <td>1000</td>
-                </tr>
+                    <tr th:each="board : ${boardList}">
+                        <td th:text="${board.approval}"></td>
+                        <td th:text="${board.petName}"></td>
+                        <td th:text="${board.petOwnerName}"></td>
+                        <td th:text="${board.petSitterName}"></td>
+                        <td th:text="${board.startDate}"></td>
+                        <td th:text="${board.endDate}"></td>
+                        <td th:text="${board.fee}"></td>
+                    </tr>
                 </tbody>
             </table>
             <nav  aria-label="Page navigation" class="text-center" >
                 <br><br>
-                <ul class="pagination">
-                    <li><a aria-label="Previous" href="/qna/ask?page=1">&laquo;</a></li>
-                    <li>
-                        <a>&lsaquo;</a>
+                <ul class="pagination" th:with="startNumber=${T(java.lang.Math).floor(boardList.number/10)}*10+1,
+                    endNumber=(${boardList.totalPages} > ${startNumber}+9) ? ${startNumber}+9 : ${boardList.totalPages},
+                    endNumber=(${endNumber} < ${startNumber}) ? ${startNumber} : ${endNumber}">
+                    <li><a aria-label="Previous" href="/admin/reservations?page=1">&laquo;</a></li>
+                    <li th:style="${boardList.first} ? 'display:none'">
+                        <a th:href="@{/admin/reservations(page=${boardList.number})}">&lsaquo;</a>
                     </li>
-                    <li>
-                        <a><span class="sr-only"></span></a>
+                    <li th:each="page :${#numbers.sequence(startNumber, endNumber)}" th:class="(${page} == ${boardList.number}+1) ? 'active'">
+                        <a th:href="@{/admin/reservations(page=${page})}" th:text="${page}"><span class="sr-only"></span></a>
                     </li>
-                    <li>
-                        <a>&rsaquo;</a>
+                    <li th:style="${boardList.last} ? 'display:none'">
+                        <a th:href="@{/admin/reservations(page=${boardList.number}+2)}">&rsaquo;</a>
                     </li>
-                    <li><a aria-label="Next">&raquo;</a></li>
+                    <li><a aria-label="Next" th:href="@{/admin/reservations(page=${boardList.totalPages})}">&raquo;</a></li>
                 </ul>
             </nav>
         </div>
