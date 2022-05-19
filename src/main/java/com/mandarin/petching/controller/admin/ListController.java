@@ -19,14 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 @RequestMapping("/admin")
 public class ListController {
-
-    @Autowired
-    private MemberService memberService;
-
-    @Autowired
-    private ReservationService reservationService;
-
+  
+    private final MemberService memberService;
+    private final ReservationService reservationService;
     private final MemberRepository memberRepository;
+
 
     @GetMapping("/members")
     public String list(Model model, @PageableDefault(page = 0, size = 5, sort = "userName") Pageable pageable) {
@@ -74,4 +71,6 @@ public class ListController {
     }
 
 
+
 }
+

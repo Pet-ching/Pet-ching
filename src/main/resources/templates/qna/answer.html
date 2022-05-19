@@ -113,7 +113,7 @@
 
 
     <div class="pull-left">
-        <a href="/qna/ask" class="btn btn-default">목록으로</a>
+        <a href="/admin/reservations" class="btn btn-default">목록으로</a>
     </div>
     <div class="pull-right">
         <button th:if="!${reply?.id}" type="button" class="btn btn-primary" id="insert">저장</button>
@@ -142,7 +142,7 @@
                        dataType: "json",
                            success: function () {
                                alert('저장 성공!');
-                               location.href = '/qna/ask';
+                               location.href = '/admin/reservations';
                        },
                    });
         });
@@ -154,7 +154,7 @@
                        type: "DELETE",
                        success: function () {
                            alert('삭제 성공!');
-                           location.href = '/qna/ask';
+                           location.href = '/admin/reservations';
                        },
                        error: function () {
                            alert('삭제 실패!');

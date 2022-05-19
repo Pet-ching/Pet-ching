@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>펫 카운트 하기</title>
+</head>
+<body>
+    <h1>펫 나이</h1>
+    <table>
+        <tr th:each="list : ${numDTO}">
+            <th>나이</th>
+            <td th:text="${list.getNum()}"></td>
+            <th>카운트</th>
+            <td th:text="${list.getCount()}"></td>
+        </tr>
+    </table>
+
+
+    <h1>중성화</h1>
+    <table>
+        <tr th:each="list : ${boolDTO}">
+            <th>중성화 여부</th>
+            <td th:text="${list.isBool()}"></td>
+            <th>카운트</th>
+            <td th:text="${list.getCount()}"></td>
+        </tr>
+    </table>
+
+    <h1>펫 종류</h1>
+    <table>
+        <tr th:each="list : ${petTypeDTO}">
+            <th>펫 종류</th>
+            <td th:text="${list.getPetType().getDescription()}"></td>
+            <th>카운트</th>
+            <td th:text="${list.getCount()}"></td>
+        </tr>
+    </table>
+
+</body>
+</html>

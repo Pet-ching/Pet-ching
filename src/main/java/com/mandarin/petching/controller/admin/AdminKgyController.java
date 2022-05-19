@@ -96,7 +96,8 @@ public class AdminKgyController {
         model.addAttribute("residence", residence);
         model.addAttribute("count", count);
 
-        return "/admin/petownerchart";
+
+        return "/testAdmin/owner";
     }
 
     @GetMapping("/pet")
@@ -112,5 +113,21 @@ public class AdminKgyController {
 
         return "/testAdmin/deny";
     }
+
+    @GetMapping("/cap")
+    public String countAboutPet(Model model)
+    {
+        List<CountByNumDTO> age = adminKgyService.getPetCountByAgeList();
+        model.addAttribute("numDTO",age);
+
+        List<CountByBooleanDTO> neu = adminKgyService.getPetCountByNeutralizationList();
+        model.addAttribute("boolDTO", neu);
+
+        List<CountByPetTypeDTO> type = adminKgyService.getPetCountByPetTypeList();
+        model.addAttribute("petTypeDTO",type);
+
+        return "/testAdmin/count";
+    }
+
 
 }
