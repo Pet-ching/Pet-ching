@@ -59,6 +59,7 @@
 <body>
 <div th:replace="fragments/header.html::header"></div>
 <div class="container">
+    <form action="" role="form" method="post" th:object="${member}" enctype="multipart/form-data">
     <div class="wrapper">
         <div class="sub_view">
             <ul class="list">
@@ -76,6 +77,8 @@
                     <th class="col-md-1">이름</th>
                     <th class="col-md-1">이메일</th>
                     <th class="col-md-1">전화번호</th>
+                    <th class="col-md-1">권한</th>
+                    <th class="col-md-1">권한선택</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -83,10 +86,24 @@
                     <td th:text="${a.userName}">이름</td>
                     <td th:text="${a.userEmail}">이메일</td>
                     <td th:text="${a.userTel}">전화번호</td>
+                    <td th:text="${a.role}">권한</td>
+                    <td>
+                        <select name="role" >
+                            <option value="none">권한 선택</option>
+                            <option value="ADMIN">관리자</option>
+                            <option value="USER">회원</option>
+                        </select>
+                    </td>
                 </tr>
                 </tbody>
             </table>
-<!--            <nav aria-label="Page navigation" class="text-center">-->
+
+<!--            <input type="text" list="role" th:field="*{role}" placeholder="권한입력" maxlength="13">-->
+<!--            <datalist id="role">-->
+<!--                <option value="ADMIN"></option>-->
+<!--                <option value="USER"></option>-->
+<!--            </datalist>-->
+            <!--            <nav aria-label="Page navigation" class="text-center">-->
 <!--                <br><br>-->
 <!--                <ul class="pagination">-->
 <!--                    <li><a aria-label="Previous" href="/qna/ask?page=1">&laquo;</a></li>-->
@@ -124,6 +141,10 @@
             </nav>
         </div>
     </div>
+        <div style="text-align: center">
+            <button type="submit" class="btn btn-primary" style="">Submit</button>
+        </div>
+    </form>
 </div>
 <div th:replace="fragments/footer.html::footer"></div>
 </body>

@@ -78,4 +78,13 @@ public class MemberService implements UserDetailsService {
     public Page<Member> memberList(Pageable pageable) {
         return memberRepository.findAll(pageable);
     }
+
+
+    // seol
+    public void updateRole(Long memberId, Member member) throws Exception{
+
+        Member findMember = memberRepository.findById(memberId).get();
+        findMember.setRole(member.getRole());
+
+    }
 }
