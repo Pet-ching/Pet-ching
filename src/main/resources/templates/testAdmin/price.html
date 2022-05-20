@@ -51,7 +51,7 @@
 
     <tr th:each="list : ${catCountByPrice}">
         <th>가격대</th>
-        <td th:text="${list.getPrice()}"></td>
+        <td th:text="${list.getNum()}"></td>
         <th>인원수</th>
         <td th:text="${list.getCount()}"></td>
         <td></td>

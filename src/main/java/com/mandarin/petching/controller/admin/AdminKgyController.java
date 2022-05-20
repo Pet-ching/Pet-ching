@@ -10,7 +10,10 @@ import com.mandarin.petching.service.AdminKgyService;
 import com.mandarin.petching.service.MemberService;
 import com.mandarin.petching.service.ReservationService;
 import lombok.RequiredArgsConstructor;
+<<<<<<< HEAD
 import org.springframework.beans.factory.annotation.Autowired;
+=======
+>>>>>>> d32852f74149d1a77d40c240501ab047dd8ce36d
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -141,7 +144,8 @@ public class AdminKgyController {
         model.addAttribute("residence", residence);
         model.addAttribute("count", count);
 
-        return "/admin/petownerchart";
+
+        return "/testAdmin/owner";
     }
 
     @GetMapping("/pet")
@@ -157,5 +161,30 @@ public class AdminKgyController {
 
         return "/testAdmin/deny";
     }
+
+    @GetMapping("/cap")
+    public String countAboutPet(Model model)
+    {
+        List<CountByNumDTO> age = adminKgyService.getPetCountByAgeList();
+        model.addAttribute("numDTO",age);
+
+        List<CountByBooleanDTO> neu = adminKgyService.getPetCountByNeutralizationList();
+        model.addAttribute("boolDTO", neu);
+
+        List<CountByPetTypeDTO> type = adminKgyService.getPetCountByPetTypeList();
+        model.addAttribute("petTypeDTO",type);
+
+        return "/testAdmin/count";
+    }
+
+    @GetMapping("/reservations")
+    public String reservations(Model model, @PageableDefault Pageable pageable)
+    {
+        Page<ReservationDTO> page = adminKgyService.getAllReservationPage(pageable);
+        model.addAttribute("boardList",page);
+
+        return "admin/reservations";
+    }
+
 
 }

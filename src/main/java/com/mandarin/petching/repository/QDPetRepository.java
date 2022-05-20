@@ -2,8 +2,7 @@ package com.mandarin.petching.repository;
 
 import com.mandarin.petching.domain.QMember;
 import com.mandarin.petching.domain.QPet;
-import com.mandarin.petching.dto.PetDTO;
-import com.mandarin.petching.dto.PetOwnerDTO;
+import com.mandarin.petching.dto.*;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +26,38 @@ public class QDPetRepository {
                 .innerJoin(member)
                 .on(member.id.eq(pet.member.id))
                 .fetch();
+
         return result;
+    }
+
+    public List<CountByNumDTO> findCountByAge(){
+        List<CountByNumDTO> result = queryFactory.select(Projections.bean(CountByNumDTO.class, pet.petAge.as("num") ,pet.petAge.count().as("count")))
+                .from(pet)
+                .groupBy(pet.petAge)
+                .fetch();
+
+        return result;
+    }
+
+    public List<CountByBooleanDTO> findCountByNeutralization()
+    {
+        List<CountByBooleanDTO> result = queryFactory.select(Projections.bean(CountByBooleanDTO.class, pet.neutralization.as("bool"), pet.neutralization.count().as("count")))
+                .from(pet)
+                .groupBy(pet.neutralization)
+                .fetch();
+
+        return result;
+
+
+    }
+    public List<CountByPetTypeDTO> findCountByPetType()
+    {
+        List<CountByPetTypeDTO> result = queryFactory.select(Projections.bean(CountByPetTypeDTO.class, pet.petType.as("petType"), pet.petType.count().as("count")))
+                .from(pet)
+                .groupBy(pet.petType)
+                .fetch();
+
+        return result;
+
     }
 }

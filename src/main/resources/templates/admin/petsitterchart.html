@@ -54,8 +54,7 @@
             width: 80%;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            place-items: center;
-            
+            place-items: center;            
         }
 
         .charts {
@@ -83,11 +82,11 @@
         canvas {
             width: 100%;
         }
-
     </style>
 </head>
 
 <body>
+
     <div th:replace="fragments/header.html::header"></div>
 
     <div class="container">
@@ -125,7 +124,9 @@
             </div>
         </div>
     </div>
+</div>
 
+<<<<<<< HEAD
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <script type="text/javascript" th:inline="javascript">
         var context = document
@@ -133,6 +134,17 @@
             .getContext('2d');
 
         var certificateList = [[${certificate}]];
+=======
+<div th:replace="fragments/footer.html::footer"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script type="text/javascript" th:inline="javascript">
+        var context = document
+            .getElementById('myChart')
+            .getContext('2d');
+        var certificateList = [[${certificate}]];
+        console.log(certificateList);
+>>>>>>> d32852f74149d1a77d40c240501ab047dd8ce36d
 
         var certificateName = new Array();
         var certificateCount = new Array();
@@ -141,6 +153,10 @@
             certificateCount.push(certificateList[i].count);
         }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> d32852f74149d1a77d40c240501ab047dd8ce36d
         var myChart = new Chart(context, {
             type: 'pie', // 차트의 형태
             data: { // 차트에 들어갈 데이터
@@ -148,8 +164,14 @@
                 datasets: [
                     { //데이터
                         label: '자격증 수', //차트 제목
+<<<<<<< HEAD
 <!--                        fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지-->
                         data: certificateCount,
+=======
+                        fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
+                        data: certificateCount,
+
+>>>>>>> d32852f74149d1a77d40c240501ab047dd8ce36d
                         backgroundColor: [
                             //색상
                             'rgba(255, 99, 132, 0.2)',

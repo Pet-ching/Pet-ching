@@ -1,11 +1,13 @@
 package com.mandarin.petching.service;
 
 import com.mandarin.petching.domain.Member;
-import com.mandarin.petching.domain.Pet;
 import com.mandarin.petching.domain.Reservation;
 import com.mandarin.petching.dto.*;
 import com.mandarin.petching.repository.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -17,10 +19,12 @@ import java.util.*;
 public class AdminKgyService {
 
     private final ReservationRepository reservationRepository;
+    private final QDReservationRepository qdReservationRepository;
     private final MemberRepository memberRepository;
     private final QDCertificateRepository certificateRepository;
     private final QDMemberRepository qdMemberRepository;
     private final QDPetRepository petRepository;
+
 
     private final QDFeeListRepository feeListRepository;
 
@@ -148,4 +152,31 @@ public class AdminKgyService {
     {
         return petRepository.findPetInfo();
     }
+
+
+    //예약정보 페이지
+    public Page<ReservationDTO> getAllReservationPage(Pageable pageable)
+    {
+        pageable = PageRequest.of(pageable.getPageNumber() <= 0 ? 0 : pageable.getPageNumber() - 1, pageable.getPageSize());
+        return  qdReservationRepository.findReservationPage(pageable);
+    }
+
+    public List<CountByNumDTO> getPetCountByAgeList()
+    {
+        List<CountByNumDTO> list = petRepository.findCountByAge();
+        return list;
+    }
+
+    public List<CountByBooleanDTO> getPetCountByNeutralizationList()
+    {
+        List<CountByBooleanDTO> list = petRepository.findCountByNeutralization();
+        return list;
+    }
+
+    public List<CountByPetTypeDTO> getPetCountByPetTypeList()
+    {
+        List<CountByPetTypeDTO> list = petRepository.findCountByPetType();
+        return list;
+    }
+
 }
