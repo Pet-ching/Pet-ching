@@ -1,6 +1,7 @@
 package com.mandarin.petching.service;
 
 import com.mandarin.petching.domain.Member;
+import com.mandarin.petching.domain.Role;
 import com.mandarin.petching.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,5 +78,12 @@ public class MemberService implements UserDetailsService {
 
     public Page<Member> memberList(Pageable pageable) {
         return memberRepository.findAll(pageable);
+    }
+
+    public void updateRole(Long memberId , Role role) throws Exception{
+
+        Member findMember = memberRepository.findById(memberId).get();
+        findMember.setRole(role);
+
     }
 }
