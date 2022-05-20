@@ -126,26 +126,30 @@
         </div>
     </div>
 
-    <div th:replace="fragments/footer.html::footer"></div>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <script type="text/javascript" th:inline="javascript">
         var context = document
             .getElementById('myChart')
             .getContext('2d');
-        var certificateList = [[${certificateName}]];
-        console.log(certificateList);
+
+        var certificateList = [[${certificate}]];
+
+        var certificateName = new Array();
+        var certificateCount = new Array();
+        for (var i = 0; i < certificateList.length; i++) {
+            certificateName.push(certificateList[i].name);
+            certificateCount.push(certificateList[i].count);
+        }
+
         var myChart = new Chart(context, {
-            type: 'bar', // 차트의 형태
+            type: 'pie', // 차트의 형태
             data: { // 차트에 들어갈 데이터
-                labels: [1,2,3,4,5,6,7,8,9,10],
+                labels: certificateName,
                 datasets: [
                     { //데이터
                         label: '자격증 수', //차트 제목
-                        fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
-                        data: [
-                            21,19,25,20,23,26,25 //x축 label에 대응되는 데이터 값
-                        ],
+<!--                        fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지-->
+                        data: certificateCount,
                         backgroundColor: [
                             //색상
                             'rgba(255, 99, 132, 0.2)',
@@ -164,7 +168,7 @@
                             'rgba(153, 102, 255, 1)',
                             'rgba(255, 159, 64, 1)'
                         ],
-                        borderWidth: 1 //경계선 굵기
+<!--                        borderWidth: 1 //경계선 굵기-->
                     }
                 ]
             },
