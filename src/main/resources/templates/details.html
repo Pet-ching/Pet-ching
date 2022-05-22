@@ -183,9 +183,51 @@
                     <div id="map" style="width:250px;height:200px;"> 맵보여주는곳</div>
                 </div>
             </div>
+            <!-- 리뷰 시작 -->
+
+
+            <br><br><br>
+            <div class="form-group">
+                <!-- 리뷰 -->
+                <form th:action="@{/matching/review/create(petSitterId = ${petSitter.id})}" method="post">
+                    <div>
+                        <label th:for="review">리뷰</label><br>
+                        <div><textarea class="form-control" rows="1" th:field="${review.reContent}"></textarea></div>
+                        <div class="invalid-feedback" th:errors="${review.reContent}"></div>
+                        <div><input type="submit" class="btn btn-success"></div>
+                    </div>
+                </form>
+                <!-- 리뷰 리스트 -->
+                <br>
+                <div>리뷰 리스트</div>
+                <form th:each="r : ${reviewList}" th:action="@{/matching/review/delete(reviewId = ${r.id}, petSitterId = ${petSitter.id})}" method="post">
+                    <div class="form-group">
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex">
+                                <div th:text="${r.reContent}" style="word-wrap: break-word; width:465px;">리뷰 내용 들어갈 자리</div>
+                                <div>
+                                    <br><label for="member_id">작성자</label>
+                                    <div th:text="${r.member?.userName}">작성자 &nbsp;</div>
+                                    <button th:if="${userEmail} == ${r.member?.userEmail}" class="btn btn-danger">삭제</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+    
+    
         </div>
+
+
+            
+            <!-- 리뷰 끝 -->
+        </div>  
     </div>
 </div>
+
+
+
 <script th:inline="javascript" th:src="@{//dapi.kakao.com/v2/maps/sdk.js?appkey=}+#{appkey}+@{&libraries=services}"></script>
 <script th:inline="javascript" th:src="@{/js/details.js}"></script>
 <script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>

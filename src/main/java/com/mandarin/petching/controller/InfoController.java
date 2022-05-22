@@ -1,10 +1,11 @@
 // code by. hyeok
 package com.mandarin.petching.controller;
 
-import com.mandarin.petching.domain.Member;
-import com.mandarin.petching.domain.PetSitter;
+import com.mandarin.petching.domain.*;
+import com.mandarin.petching.repository.InfoRepository;
 import com.mandarin.petching.repository.MemberRepository;
 import com.mandarin.petching.repository.PetSitterRepository;
+import com.mandarin.petching.repository.ReviewRepository;
 import com.mandarin.petching.service.InfoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,12 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.validation.Valid;
 
 
 @Controller
@@ -86,7 +92,50 @@ public class InfoController {
         model.addAttribute("petSitter", petSitterMember);
         model.addAttribute("petSitterMember", petSitterMember.getMember());
         model.addAttribute("loginMember", loginMember);
+        model.addAttribute("review", new Review());
+        model.addAttribute("userEmail", authentication.getName());
+        model.addAttribute("reviewList", petSitterMember.getReplies());
+        String userName = authentication.getName();
+        Member member = memberRepository.findByUserEmail(userName);
         return "details";
+    }
+
+    @PostMapping("/matching/review/create")
+    public String createReview(@Valid Review review, BindingResult bindingResult, Authentication authentication, @RequestParam Long petSitterId, Model model) {
+
+        PetSitter petSitter= petSitterRepository.findById(petSitterId).get();
+        String userEmail = authentication.getName();
+
+        model.addAttribute("petSitter", petSitter);
+        model.addAttribute("petSitterMember", petSitter.getId());
+        model.addAttribute("userEmail", userEmail);
+        model.addAttribute("reviewList", petSitter.getReplies());
+
+        if (bindingResult.hasErrors()) {
+            return "matching/details";
+        }
+
+        model.addAttribute("review", new Review());
+        infoService.saveReview(review, petSitter, userEmail);
+
+        return "redirect:/matching/details?id=" + petSitterId;
+    }
+
+    @PostMapping("/matching/review/delete")
+    public String deleteReview(@RequestParam Long reviewId, @RequestParam Long petSitterId, Authentication authentication, Model model) {
+
+        infoService.deleteReview(reviewId);
+
+        PetSitter petSitter= petSitterRepository.findById(petSitterId).get();
+        String userEmail = authentication.getName();
+
+        model.addAttribute("petSitter", petSitter);
+        model.addAttribute("petSitterMember", petSitter.getId());
+        model.addAttribute("userEmail", userEmail);
+        model.addAttribute("reviewList", petSitter.getReplies());
+        model.addAttribute("review", new Review());
+
+        return "redirect:/matching/details?id=" + petSitterId;
     }
 
 }

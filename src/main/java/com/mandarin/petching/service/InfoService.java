@@ -1,8 +1,12 @@
 // code by. hyeok
 package com.mandarin.petching.service;
 
+import com.mandarin.petching.domain.Member;
 import com.mandarin.petching.domain.PetSitter;
+import com.mandarin.petching.domain.Review;
 import com.mandarin.petching.repository.InfoRepository;
+import com.mandarin.petching.repository.MemberRepository;
+import com.mandarin.petching.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +17,12 @@ public class InfoService {
 
     @Autowired
     private InfoRepository infoRepository;
+
+    @Autowired
+    private MemberRepository memberRepository;
+
+    @Autowired
+    private ReviewRepository reviewRepository;
 
     public InfoService() {
     }
@@ -38,5 +48,18 @@ public class InfoService {
         return infoRepository.findByWorkingAreaAndAbleServiceContaining(searchKeyword, ableService, pageable);
     }
 
+    public void saveReview(Review review, PetSitter petsitter, String userEmail) {
 
+        Member member = memberRepository.findByUserEmail(userEmail);
+
+        review.setPetsitter(petsitter);
+        review.setMember(member);
+
+        reviewRepository.save(review);
+    }
+
+    public void deleteReview(Long reviewId) {
+        reviewRepository.deleteById(reviewId);
+    }
 }
+
