@@ -14,15 +14,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.security.core.parameters.P;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
+import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 
@@ -56,6 +54,21 @@ public class AdminKgyController {
         return "admin/members";
     }
 
+    @PostMapping("/members")
+    public String editMember(@RequestParam(value = "id") Long[] id, @RequestParam(value = "role") String[] role) throws Exception{
+
+        for(int i=0; i< id.length;i++) {
+            memberService.updateRole(id[i], Role.valueOf(role[i]));
+        }
+
+        return "redirect:/admin/members";
+    }
+
+    private Member getMember(Authentication authentication) {
+        String userName = authentication.getName();
+        return memberRepository.findByUserEmail(userName);
+    }
+
     @GetMapping("/reservations")
     public String reservationList(Model model, @PageableDefault(page = 0, size = 5, sort = "startDate") Pageable pageable) {
 
@@ -78,7 +91,7 @@ public class AdminKgyController {
     @GetMapping({"", "/"})
     public String choice() {
 
-        return "/qna/choice";
+        return "redirect:/admin/members";
     }
 
     //가격 통계 정보
@@ -161,4 +174,6 @@ public class AdminKgyController {
 
         return "/testAdmin/deny";
     }
+
+
 }
