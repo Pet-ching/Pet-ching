@@ -146,14 +146,14 @@
 
         var ageList = [[${numDTO}]];
 
-        var age = new Array();
-        var ageCount = new Array();
+        var age = new Array(21);
+        var ageCount = new Array(21).fill(0);
 
         for (var i = 0; i < 20; i++) {
+            age[i]=i;
             for(var j = 0; j<ageList.length;j++){
                 if (i==(ageList[j].num)){
-                age.push(ageList[j].num);
-                ageCount.push(ageList[j].count);
+                ageCount[i]=ageList[j].count;
                 }
             }
         }
