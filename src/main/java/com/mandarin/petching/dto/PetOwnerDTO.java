@@ -11,6 +11,7 @@ public class PetOwnerDTO {
     private String user_email;
     private String user_bth;
     private int age;
+    private Long count;
 
     private String user_address;
 }

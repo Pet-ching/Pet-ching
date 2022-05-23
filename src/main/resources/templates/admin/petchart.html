@@ -1,93 +1,99 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <title>관리자 페이지</title>
-  <link rel="stylesheet" th:href="@{/css/base.css}"/>
-  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
-  <style>
-        body {
-            margin: 0;
-            width: 1200px;
-        }
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>관리자 페이지</title>
+    <link rel="stylesheet" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <!-- 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+            body {
+                margin: 0;
+                width: 1200px;
+                font-family: "Noto Sans KR", sans-serif;
+            }
 
-        .wrapper {
-            display: flex;
-            justify-content: space-between;
-            margin: 0px;
-            padding: 0px;
-        }
+            .line {width: 250px; height: 1px; background-color: rgb(235, 235, 235); margin: 5px 0px;}
 
-        .list {
-            list-style-type: none;
-            background-color: #f1f1f1;
-            height: 100%;
-            overflow: auto;
-            margin: 0;
-            padding: 0;
-        }
+            .wrapper {
+                display: flex;
+                justify-content: space-between;
+                margin: 0px;
+                padding: 0px;
+            }
 
-        .list a {
-            display: block;
-            color: #000;
-            padding: 8px 16px;
-            text-decoration: none;
-        }
+            .list {
+                list-style-type: none;
+                background-color: #f1f1f1;
+                height: 100%;
+                overflow: auto;
+                margin: 0;
+                padding: 0;
+            }
 
-        .list a.active {
-            background-color: #555;
-            color: white;
-        }
+            .list a {
+                display: block;
+                color: #000;
+                padding: 8px 16px;
+                text-decoration: none;
+            }
 
-        .list a:hover:not(.active) {
-            background-color: #555;
-            color: white;
-        }
+            .list a.active {
+                background-color: #555;
+                color: white;
+            }
 
-        .sub_view {
-            width: 20%;
-            margin: 0;
-            padding: 0;
-        }
+            .list a:hover:not(.active) {
+                background-color: #555;
+                color: white;
+            }
 
-        .main_view {
-            width: 80%;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            place-items: center;
-            
-        }
+            .sub_view {
+                width: 20%;
+                margin: 0;
+                padding: 0;
+            }
 
-        .charts {
-            margin: 30px;
-            display:flex;
-            justify-content: center;
-            align-items: center;
-            border: #000 solid 1px;
-        }
+            .main_view {
+                width: 80%;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                place-items: center;            
+            }
 
-        #chart01 {
-            grid-column: 1; grid-row: 1;
-        }
+            .boxes {
+                margin: 30px;
+                padding:30px;
+                display:flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                border-radius: 8px; 
+                border: 1px solid rgb(223, 227, 234); 
+                box-shadow: rgba(0, 0, 0, 0.07) 1px 3px 7px; 
+            }
 
-        #chart02 {
-            grid-column: 2; grid-row: 1;
-        }
-        #chart03 {
-            grid-column:1; grid-row: 2;
-        }
-        #chart04 {
-            grid-column: 2; grid-row: 2;
-        }
+            #textBox {
+                grid-column: 1; grid-row: 1;
+            }
+            #chart01 {
+                grid-column: 2; grid-row: 1;
+            }
 
-        canvas {
-            width: 100%;
-        }
-
-    </style>
+            #chart02 {
+                grid-column: 1; grid-row: 2;
+            }
+            #chart03 {
+                grid-column:2; grid-row: 2;
+            }
+        </style>
 </head>
 
 <body>
+
     <div th:replace="fragments/header.html::header"></div>
 
     <div class="container">
@@ -102,139 +108,146 @@
             </ul>
             </div>
             <div id="mainHide" class="main_view">
-                <div class = "chartBoxs">
-                    <div id="chart01" class="charts" style="width: 420px; height: 420px;">
-                        <canvas id="myChart"></canvas>
-                    </div>
+                <div class="textBox boxes" style="width: 500px; height: 500px;">
+                    <h1><strong>반려동물 차트</strong></h1>
+                    <div class="line"></div>
+                    <h3>반려동물 차트를 통해 반려동물의 나이, <br>중성화 여부, 종류별 개체수 등을 파악할 수 있습니다.</h3>
                 </div>
-                <div class = "chartBoxs">
-                    <div id="chart02" class="charts" style="width: 420px; height: 420px;">
-                        <canvas id="myChart2"></canvas>
-                    </div>
+
+                <div id="chart01" class="charts boxes" style="width: 500px; height: 500px;">
+                    <h3>반려동물 나이</h3>
+                    <div class="line"></div>
+                    <canvas id="myChart"></canvas>
                 </div>
-                <div class = "chartBoxs">
-                    <div id="chart03" class="charts" style="width: 420px; height: 420px;">
-                        <canvas id="myChart3"></canvas>
-                    </div>
+
+                <div id="chart02" class="charts boxes" style="width: 500px; height: 500px;">
+                    <h3>중성화 여부</h3>
+                    <div class="line"></div>
+                    <canvas id="myChart2"></canvas>
                 </div>
-                <div class = "chartBoxs">
-                    <div id="chart04" class="charts" style="width: 420px; height: 420px;">
-                        <canvas id="myChart4"></canvas>
-                    </div>
+
+                <div id="chart03" class="charts boxes" style="width: 500px; height: 500px;">
+                    <h3>종류별 개체수</h3>
+                    <div class="line"></div>
+                    <canvas id="myChart3"></canvas>
                 </div>
+
             </div>
         </div>
     </div>
-
-    <div th:replace="fragments/footer.html::footer"></div>
+</div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <script type="text/javascript" th:inline="javascript">
+        // 나이
         var context = document
             .getElementById('myChart')
             .getContext('2d');
 
+        var ageList = [[${numDTO}]];
+
+        var age = new Array();
+        var ageCount = new Array();
+
+        for (var i = 0; i < 20; i++) {
+            for(var j = 0; j<ageList.length;j++){
+                if (i==(ageList[j].num)){
+                age.push(ageList[j].num);
+                ageCount.push(ageList[j].count);
+                }
+            }
+        }
+
         var myChart = new Chart(context, {
-            type: 'bar', // 차트의 형태
+            type: 'line', // 차트의 형태
             data: { // 차트에 들어갈 데이터
-                labels: [
-                    //x 축
-                    '1','2','3','4','5','6','7'
-                ],
+                labels: age,
                 datasets: [
                     { //데이터
-                        label: 'test1', //차트 제목
-                        fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
-                        data: [
-                            21,19,25,20,23,26,25 //x축 label에 대응되는 데이터 값
-                        ],
+                        label: '나이', 
+                        data: ageCount,
+                        fill: true,
                         backgroundColor: [
-                            //색상
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)'
+						'rgba(0, 0, 0, 0)'
                         ],
                         borderColor: [
-                            //경계선 색상
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
                         ],
-                        borderWidth: 1 //경계선 굵기
+                        borderWidth: 2
                     }
                 ]
             },
             options: {
-                scales: {
-                    yAxes: [
-                        {
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }
-                    ]
-                }
+                responsive: true,
+                maintainAspectRatio: false
             }
         });
+
+        // 중성화
+
+        var boolDTO = [[${boolDTO}]];
+
+        var boolList = new Array();
+        var countList = new Array();
+
+        for (var i = 0; i < boolDTO.length; i++) {
+            boolList.push(boolDTO[i].bool);
+            countList.push(boolDTO[i].count);
+        }
 
         var context2 = document
             .getElementById('myChart2')
             .getContext('2d');
 
         var myChart2 = new Chart(context2, {
-            type: 'bar', // 차트의 형태
-            data: { // 차트에 들어갈 데이터
-                labels: [
-                    //x 축
-                    '1','2','3','4','5','6','7'
-                ],
-                datasets: [
-                    { //데이터
-                        label: 'test2', //차트 제목
-                        fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
-                        data: [
-                            21,19,25,20,23,26,25 //x축 label에 대응되는 데이터 값
-                        ],
-                        backgroundColor: [
-                            //색상
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)'
-                        ],
-                        borderColor: [
-                            //경계선 색상
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1 //경계선 굵기
-                    }
-                ]
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: countList,
+                    label: '중성화 여부',
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ]
+                }],
+                labels: boolList
             },
             options: {
                 scales: {
-                    yAxes: [
-                        {
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }
-                    ]
+                    responsive: true,
+                    maintainAspectRatio: false
                 }
             }
         });
+
+        //반려동물 종류
+        var petTypeDTO = [[${petTypeDTO}]];
+
+        var typeList = new Array();
+        var typeCountList = new Array();
+
+        for (var i = 0; i < petTypeDTO.length; i++) {
+            typeList.push(petTypeDTO[i].petType);
+            typeCountList.push(petTypeDTO[i].count);
+        }
+
         var context3 = document
             .getElementById('myChart3')
             .getContext('2d');
@@ -242,17 +255,11 @@
         var myChart3 = new Chart(context3, {
             type: 'bar', // 차트의 형태
             data: { // 차트에 들어갈 데이터
-                labels: [
-                    //x 축
-                    '1','2','3','4','5','6','7'
-                ],
+                labels: typeList,
                 datasets: [
                     { //데이터
-                        label: 'test3', //차트 제목
-                        fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
-                        data: [
-                            21,19,25,20,23,26,25 //x축 label에 대응되는 데이터 값
-                        ],
+                        label: '종류별 개체수', //차트 제목
+                        data: typeCountList,
                         backgroundColor: [
                             //색상
                             'rgba(255, 99, 132, 0.2)',
@@ -284,59 +291,9 @@
                             }
                         }
                     ]
-                }
-            }
-        });
-        var context4 = document
-            .getElementById('myChart4')
-            .getContext('2d');
-
-        var myChart4 = new Chart(context4, {
-            type: 'bar', // 차트의 형태
-            data: { // 차트에 들어갈 데이터
-                labels: [
-                    //x 축
-                    '1','2','3','4','5','6','7'
-                ],
-                datasets: [
-                    { //데이터
-                        label: 'test4', //차트 제목
-                        fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
-                        data: [
-                            21,19,25,20,23,26,25 //x축 label에 대응되는 데이터 값
-                        ],
-                        backgroundColor: [
-                            //색상
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)'
-                        ],
-                        borderColor: [
-                            //경계선 색상
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1 //경계선 굵기
-                    }
-                ]
-            },
-            options: {
-                scales: {
-                    yAxes: [
-                        {
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }
-                    ]
-                }
+                },
+                responsive: true,
+                maintainAspectRatio: false
             }
         });
 
