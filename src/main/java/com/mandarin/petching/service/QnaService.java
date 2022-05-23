@@ -14,8 +14,8 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class QnaService {
-
+public class
+QnaService {
     private final BoardRepository boardRepository;
     private final ReplyRepository replyRepository;
     private final ImagesRepository imagesRepository;

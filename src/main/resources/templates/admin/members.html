@@ -59,72 +59,150 @@
 <body>
 <div th:replace="fragments/header.html::header"></div>
 <div class="container">
-    <div class="wrapper">
-        <div class="sub_view">
-            <ul class="list">
-                <li><a class="active" th:href="@{/admin/members}">회원 조회</a></li>
-                <li><a th:href="@{/admin/reservations}">예약 조회</a></li>
-                <li><a th:href="@{/admin/petchart}">펫 정보</a></li>
-                <li><a th:href="@{/admin/petsitterchart}">펫시터 정보</a></li>
-                <li><a th:href="@{/admin/petownerchart}">펫보호자 정보</a></li>
-            </ul>
-        </div>
-        <div id="mainHide" class="main_view">
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th class="col-md-1">이름</th>
-                    <th class="col-md-1">이메일</th>
-                    <th class="col-md-1">전화번호</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="a : ${list}">
-                    <td th:text="${a.userName}">이름</td>
-                    <td th:text="${a.userEmail}">이메일</td>
-                    <td th:text="${a.userTel}">전화번호</td>
-                </tr>
-                </tbody>
-            </table>
-<!--            <nav aria-label="Page navigation" class="text-center">-->
-<!--                <br><br>-->
-<!--                <ul class="pagination">-->
-<!--                    <li><a aria-label="Previous" href="/qna/ask?page=1">&laquo;</a></li>-->
-<!--                    <li>-->
-<!--                        <a>&lsaquo;</a>-->
-<!--                    </li>-->
-<!--                    <li>-->
-<!--                        <a><span class="sr-only"></span></a>-->
-<!--                    </li>-->
-<!--                    <li>-->
-<!--                        <a>&rsaquo;</a>-->
-<!--                    </li>-->
-<!--                    <li><a aria-label="Next">&raquo;</a></li>-->
-<!--                </ul>-->
-<!--            </nav>-->
-            <nav class="input-box" aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item" th:classappend="${1 == list.pageable.pageNumber + 1} ? 'disabled'">
-                        <a class="page-link" href="#"
-                           th:href="@{/admin/members(page=${list.pageable.pageNumber - 1})}"
-                           tabindex="-1" aria-disabled="true">이전</a>
-                    </li>
-                    <li class="page-item" th:classappend="${i == list.pageable.pageNumber + 1} ? 'disabled'"
-                        th:each="i : ${#numbers.sequence(startPage, endPage)}">
-                        <a class="page-link" href="#"
-                           th:href="@{/admin/members(page=${i - 1})}"
-                           th:text="${i}"></a>
-                    </li>
-                    <li class="page-item"
-                        th:classappend="${list.totalPages == list.pageable.pageNumber + 1} ? 'disabled'">
-                        <a class="page-link" href="#"
-                           th:href="@{/admin/members(page=${list.pageable.pageNumber + 1})}">다음</a>
-                    </li>
+<!--    <form action="admin/members" role="form" method="post" th:object="${member}" enctype="multipart/form-data">-->
+    <form onsubmit="submit()" action="/admin/members" method="post">
+        <div class="wrapper">
+            <div class="sub_view">
+                <ul class="list">
+                    <li><a class="active" th:href="@{/admin/members}">회원 조회</a></li>
+                    <li><a th:href="@{/admin/reservations}">예약 조회</a></li>
+                    <li><a th:href="@{/admin/petchart}">펫 정보</a></li>
+                    <li><a th:href="@{/admin/petsitterchart}">펫시터 정보</a></li>
+                    <li><a th:href="@{/admin/petownerchart}">펫보호자 정보</a></li>
                 </ul>
-            </nav>
+            </div>
+            <div id="mainHide" class="main_view">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th class="col-md-1">이름</th>
+                        <th class="col-md-1">이메일</th>
+                        <th class="col-md-1">전화번호</th>
+                        <th class="col-md-1">권한</th>
+                        <th class="col-md-1">권한선택</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="a : ${list}">
+                        <td th:text="${a.userName}">이름</td>
+                        <td th:text="${a.userEmail}">이메일</td>
+                        <td th:text="${a.userTel}">전화번호</td>
+                        <td th:text="${a.role}">권한</td>
+                        <input type="hidden" name="id" th:value="${a.id}"/>
+                        <td>
+                            <select name="role" id="role">
+                                <option th:each="role : ${T(com.mandarin.petching.domain.Role).values()}"
+                                        th:value="${role.name()}"
+                                        th:text="${role.getKorName()}"
+                                        th:selected="${role.name()} ==  ${a.role.name()}">
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <!--            <input type="text" list="role" th:field="*{role}" placeholder="권한입력" maxlength="13">-->
+                <!--            <datalist id="role">-->
+                <!--                <option value="ADMIN"></option>-->
+                <!--                <option value="USER"></option>-->
+                <!--            </datalist>-->
+                <!--            <nav aria-label="Page navigation" class="text-center">-->
+                <!--                <br><br>-->
+                <!--                <ul class="pagination">-->
+                <!--                    <li><a aria-label="Previous" href="/qna/ask?page=1">&laquo;</a></li>-->
+                <!--                    <li>-->
+                <!--                        <a>&lsaquo;</a>-->
+                <!--                    </li>-->
+                <!--                    <li>-->
+                <!--                        <a><span class="sr-only"></span></a>-->
+                <!--                    </li>-->
+                <!--                    <li>-->
+                <!--                        <a>&rsaquo;</a>-->
+                <!--                    </li>-->
+                <!--                    <li><a aria-label="Next">&raquo;</a></li>-->
+                <!--                </ul>-->
+                <!--            </nav>-->
+                <nav class="input-box" aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item" th:classappend="${1 == list.pageable.pageNumber + 1} ? 'disabled'">
+                            <a class="page-link" href="#"
+                               th:href="@{/admin/members(page=${list.pageable.pageNumber - 1})}"
+                               tabindex="-1" aria-disabled="true">이전</a>
+                        </li>
+                        <li class="page-item" th:classappend="${i == list.pageable.pageNumber + 1} ? 'disabled'"
+                            th:each="i : ${#numbers.sequence(startPage, endPage)}">
+                            <a class="page-link" href="#"
+                               th:href="@{/admin/members(page=${i - 1})}"
+                               th:text="${i}"></a>
+                        </li>
+                        <li class="page-item"
+                            th:classappend="${list.totalPages == list.pageable.pageNumber + 1} ? 'disabled'">
+                            <a class="page-link" href="#"
+                               th:href="@{/admin/members(page=${list.pageable.pageNumber + 1})}">다음</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </div>
-    </div>
+        <div style="text-align: center">
+            <button type="submit" class="btn btn-primary" style="">Submit</button>
+        </div>
+    </form>
+
 </div>
 <div th:replace="fragments/footer.html::footer"></div>
+
+
+<!--<script th:src="@{/js/jquery.min.js}"></script>-->
+<!--<script>-->
+<!--$(function submit(){-->
+<!--    alert("함수 진입!");-->
+<!--       var size = $("input[name='id']").length;-->
+<!--       var id = new Array();-->
+<!--       var role = new Array();-->
+<!--       for (var i = 0; i < size; i++) {-->
+<!--            id.push($("input[name='id']").eq(i).val();-->
+<!--            role.push($("input[name='role']").eq(i).val();-->
+<!--            }-->
+
+<!--     $.ajax({-->
+<!--        traditional: true,-->
+<!--        url: "/admin/members",-->
+<!--        type: "POST",-->
+<!--        data: {"id" : id, "role" : role },-->
+<!--        dataType: 'json',-->
+<!--        contentType: "application/x-www-form-urlencoded; charset=UTF-8;"-->
+<!--    });-->
+
+<!-- });-->
+
+
+
+<!--&lt;!&ndash;    $('#submitBtn').click(function () {&ndash;&gt;-->
+<!--&lt;!&ndash;           alert('함수 진입!');&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;           var size = $("input[name='id']").length;&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;           var id = new Array(size);&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;           var role = new Array(size);&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;           for (var i = 0; i < size; i++) {&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                id[i] = $("input[name=id]").eq(i).val();&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                role[i] = $("input[name=role]").eq(i).val();&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            }&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;       });&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;&lt;!&ndash;        $.ajax({&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            traditional: true,&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            url: "/admin/members",&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            type: "POST",&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            data: {"id" : id, "role" : role },&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            dataType: 'json',&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;            contentType: "application/json"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;        });&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;    });&ndash;&gt;-->
+
+
+
+</script>
 </body>
 </html>

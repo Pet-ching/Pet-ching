@@ -61,4 +61,8 @@ public class PetSitter {
     @CollectionTable(name = "images",
             joinColumns = @JoinColumn(name = "sitter_id"))
     private List<String> imgPaths = new ArrayList<>();
+
+    //    @JsonManagedReference
+    @OneToMany(mappedBy = "petsitter", cascade = CascadeType.REMOVE)
+    private List<Review> replies;
 }
