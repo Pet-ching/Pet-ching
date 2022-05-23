@@ -10,10 +10,7 @@ import com.mandarin.petching.service.AdminKgyService;
 import com.mandarin.petching.service.MemberService;
 import com.mandarin.petching.service.ReservationService;
 import lombok.RequiredArgsConstructor;
-<<<<<<< HEAD
 import org.springframework.beans.factory.annotation.Autowired;
-=======
->>>>>>> d32852f74149d1a77d40c240501ab047dd8ce36d
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -50,7 +47,7 @@ public class AdminKgyController {
         Page<Member> list = memberService.memberList(pageable);
         int nowPage = list.getPageable().getPageNumber() + 1;
         int startPage = Math.max(nowPage - 2, 1);
-        int endPage = Math.min(startPage+2, list.getTotalPages());
+        int endPage = Math.min(startPage + 2, list.getTotalPages());
 
         model.addAttribute("list", list);
         model.addAttribute("nowPage", nowPage);
@@ -65,12 +62,15 @@ public class AdminKgyController {
         Page<Reservation> list = reservationService.reservationList(pageable);
         int nowPage = list.getPageable().getPageNumber() + 1;
         int startPage = Math.max(nowPage - 2, 1);
-        int endPage = Math.min(startPage+2, list.getTotalPages());
+        int endPage = Math.min(startPage + 2, list.getTotalPages());
 
         model.addAttribute("list", list);
         model.addAttribute("nowPage", nowPage);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
+
+        Page<ReservationDTO> page = adminKgyService.getAllReservationPage(pageable);
+        model.addAttribute("boardList", page);
         return "admin/reservations";
     }
 
@@ -82,9 +82,8 @@ public class AdminKgyController {
     }
 
     //가격 통계 정보
-    @GetMapping("/price")
-    public String price(Model model)
-    {
+    @GetMapping("/petsitterchart")
+    public String petsitterchart(Model model) {
         //소-중-대(견) -> 고양이 -> 기타 동물 순
         //총 수, 최댓값, 최솟값, 평균
         MathDTO smallDog = adminKgyService.getPetSitterPrice().get(0);
@@ -107,36 +106,26 @@ public class AdminKgyController {
         List<CountByNumDTO> catCountByPrice = adminKgyService.getPetSitterCountByPrice().get(3);
         List<CountByNumDTO> etcCountByPrice = adminKgyService.getPetSitterCountByPrice().get(4);
 
-        model.addAttribute("smallDogCountByPrice",smallDogCountByPrice);
-        model.addAttribute("middleDogCountByPrice",middleDogCountByPrice);
-        model.addAttribute("largeDogCountByPrice",largeDogCountByPrice);
-        model.addAttribute("catCountByPrice",catCountByPrice);
-        model.addAttribute("etcCountByPrice",etcCountByPrice);
+        model.addAttribute("smallDogCountByPrice", smallDogCountByPrice);
+        model.addAttribute("middleDogCountByPrice", middleDogCountByPrice);
+        model.addAttribute("largeDogCountByPrice", largeDogCountByPrice);
+        model.addAttribute("catCountByPrice", catCountByPrice);
+        model.addAttribute("etcCountByPrice", etcCountByPrice);
 
-        return "/admin/petsitterchart";
-    }
-
-    //매칭지역 정보
-    @GetMapping("/area")
-    public String matchingArea(Model model)
-    {
+        // 지역별 매칭 정보
         List<AreaDTO> list = adminKgyService.getMatchingArea();
         model.addAttribute("area", list);
 
-        return "/admin/petsitterchart";
-    }
-
-    @GetMapping("/petsitterchart")
-    public String certificateInfo(Model model)
-    {
+        //자격증 정보
         List<CertificateDTO> certificateList = adminKgyService.getCountByCertificate();
-        model.addAttribute("certificate",certificateList);
+        model.addAttribute("certificate", certificateList);
+
         return "/admin/petsitterchart";
     }
 
-    @GetMapping("/owner")
-    public String petOwnerInfo(Model model)
-    {
+
+    @GetMapping("/petownerchart")
+    public String petOwnerInfo(Model model) {
         List<PetOwnerDTO> age = adminKgyService.getPetOwnerAgeList();
         List<PetOwnerDTO> residence = adminKgyService.getPetOwnerResidenceList();
         List<CountByStringDTO> count = adminKgyService.getPetCountByPetOwnerList();
@@ -144,47 +133,32 @@ public class AdminKgyController {
         model.addAttribute("residence", residence);
         model.addAttribute("count", count);
 
-
-        return "/testAdmin/owner";
+        return "/admin/petownerchart";
     }
 
-    @GetMapping("/pet")
+    @GetMapping("/petchart")
     public String petInfo(Model model) {
 
         List<PetDTO> pet = adminKgyService.getAllPetList();
         model.addAttribute("pet", pet);
-        return "/admin/petchart";
-    }
 
-    @GetMapping("/deny")
-    public String deny(){
-
-        return "/testAdmin/deny";
-    }
-
-    @GetMapping("/cap")
-    public String countAboutPet(Model model)
-    {
+        // 펫 카운드
         List<CountByNumDTO> age = adminKgyService.getPetCountByAgeList();
-        model.addAttribute("numDTO",age);
+        model.addAttribute("numDTO", age);
 
         List<CountByBooleanDTO> neu = adminKgyService.getPetCountByNeutralizationList();
         model.addAttribute("boolDTO", neu);
 
         List<CountByPetTypeDTO> type = adminKgyService.getPetCountByPetTypeList();
-        model.addAttribute("petTypeDTO",type);
+        model.addAttribute("petTypeDTO", type);
 
-        return "/testAdmin/count";
+
+        return "/admin/petchart";
     }
 
-    @GetMapping("/reservations")
-    public String reservations(Model model, @PageableDefault Pageable pageable)
-    {
-        Page<ReservationDTO> page = adminKgyService.getAllReservationPage(pageable);
-        model.addAttribute("boardList",page);
+    @GetMapping("/deny")
+    public String deny() {
 
-        return "admin/reservations";
+        return "/testAdmin/deny";
     }
-
-
 }
