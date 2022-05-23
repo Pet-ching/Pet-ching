@@ -5,11 +5,15 @@
     <title>관리자 페이지</title>
     <link rel="stylesheet" th:href="@{/css/base.css}"/>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
-        body {
-            margin: 0;
-            width: 1200px;
-        }
+            body {
+                margin: 0;
+                width: 1200px;
+                font-family: "Noto Sans KR", sans-serif;
+            }
 
         .wrapper {
             display: flex;
@@ -52,6 +56,12 @@
 
         .main_view {
             width: 80%;
+        }
+        .main_view {
+            display: flex;
+            align-items: center;
+            justify-items: center;
+            flex-direction: column;
         }
 
     </style>
@@ -144,11 +154,12 @@
                         </li>
                     </ul>
                 </nav>
-            </div>
+                <div style="text-align: center">
+                    <button type="submit" class="btn btn-primary" style="">Submit</button>
+                </div>
+            </div>       
         </div>
-        <div style="text-align: center">
-            <button type="submit" class="btn btn-primary" style="">Submit</button>
-        </div>
+        
     </form>
 
 </div>
